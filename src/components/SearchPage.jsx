@@ -4,7 +4,7 @@ import React from 'react';
 import AthletePreview from './AthletePreview';
 import $ from 'jquery';
 
-export default class IndexPage extends React.Component {
+export default class SearchPage extends React.Component {
 	constructor() {
 		super();
 		this.state = {
