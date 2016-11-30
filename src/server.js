@@ -8,15 +8,54 @@ import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import routes from './routes';
 import NotFoundPage from './components/NotFoundPage';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+
+const url = 'mongodb://localhost:27017/test';
+
+mongoose.connect(url);
+const db = mongoose.connection;
+db.on('error', (err) => {
+  console.error(`Connection error: ${err}`);
+  process.exit(1);
+});
+db.once('open', () => {
+  console.log('Connected to MongoDB server.');
+});
+
+const athleteSchema = new mongoose.Schema({
+  id: String,
+  name: String,
+  country: String,
+  birth: Number,
+  image: String,
+  cover: String,
+  link: String
+});
+const athleteModel = mongoose.model('athlete', athleteSchema);
+
+
 
 // initialize the server and configure support for ejs templates
 const app = new Express();
+app.use(bodyParser.json());
 const server = new Server(app);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // define the folder that will be used for static assets
 app.use(Express.static(path.join(__dirname, 'static')));
+
+app.get('/api/athletes', (req, res) => {
+  const filter = {};
+
+  athleteModel.find(filter, (err, athletes) => {
+    if (err) {
+      return console.error(err);
+    }
+    return res.json(athletes);
+  });
+});
 
 // universal routing and rendering
 app.get('*', (req, res) => {
