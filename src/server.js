@@ -35,7 +35,6 @@ const athleteSchema = new mongoose.Schema({
 const athleteModel = mongoose.model('athlete', athleteSchema);
 
 
-
 // initialize the server and configure support for ejs templates
 const app = new Express();
 app.use(bodyParser.json());
@@ -54,6 +53,17 @@ app.get('/api/athletes', (req, res) => {
       return console.error(err);
     }
     return res.json(athletes);
+  });
+});
+
+app.get('/api/athletes/:id', (req, res) => {
+  athleteModel.findOne({
+    id: req.params.id,
+  }, (err, athlete) => {
+    if (err) {
+      return console.error(err);
+    }
+    return res.json(athlete);
   });
 });
 

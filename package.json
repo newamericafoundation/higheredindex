@@ -9,7 +9,7 @@
     "start-dev": "npm run start-dev-hmr",
     "start-dev-single-page": "node_modules/.bin/http-server src/static",
     "start-dev-hmr": "node_modules/.bin/webpack-dev-server --progress --inline --hot",
-    "build": "NODE_ENV=production node_modules/.bin/webpack -p"
+    "build": "NODE_ENV=production node_modules/.bin/webpack -p --watch"
   },
   "author": "Luciano Mammino",
   "license": "MIT",
@@ -24,6 +24,7 @@
     "body-parser": "^1.15.2",
     "ejs": "^2.5.1",
     "express": "^4.14.0",
+    "jquery": "^3.1.1",
     "mongoose": "^4.7.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",

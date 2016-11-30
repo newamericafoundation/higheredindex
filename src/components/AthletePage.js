@@ -6,12 +6,41 @@ import NotFoundPage from './NotFoundPage';
 import AthletesMenu from './AthletesMenu';
 import Medal from './Medal';
 import Flag from './Flag';
-import athletes from '../data/athletes';
+import $ from 'jquery';
 
 export default class AthletePage extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+    };
+  }
+  componentDidMount() {
+      this.loadData();
+  }
+
+  loadData() {
+    console.log("loading data");
+      const query = this.props.location.query || {};
+      const filter = {
+        // priority: query.priority,
+        // status: query.status,
+      };
+      $.ajax({
+        url: '/api/athletes/' + this.props.params.id,
+        data: filter,
+        dataType: 'json',
+        cache: false,
+        success: function loadDataSuccess(data) {
+          console.log(data);
+          this.setState({ athlete: data });
+        }.bind(this),
+        error: function loadDataError(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+        }.bind(this),
+      });
+  }
   render() {
-    const id = this.props.params.id;
-    const athlete = athletes.filter((athlete) => athlete.id === id)[0];
+    const athlete = this.state.athlete;
     if (!athlete) {
       return <NotFoundPage/>;
     }
@@ -28,12 +57,6 @@ export default class AthletePage extends React.Component {
           <section className="description">
             Olympic medalist from <strong><Flag code={athlete.country} showName="true"/></strong>,
             born in {athlete.birth} (Find out more on <a href={athlete.link} target="_blank">Wikipedia</a>).
-          </section>
-          <section className="medals">
-            <p>Winner of <strong>{athlete.medals.length}</strong> medals:</p>
-            <ul>{
-              athlete.medals.map((medal, i) => <Medal key={i} {...medal}/>)
-            }</ul>
           </section>
         </div>
         <div className="navigateBack">
