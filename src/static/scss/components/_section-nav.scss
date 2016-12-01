@@ -1,0 +1,18 @@
+.section-nav {
+	width: 100%;
+	background-color: palette-get(na-black-10);
+
+	&__items {
+		margin: auto;
+		text-align: center;
+	}
+
+	&__item {
+		display: inline-block;
+		padding: 30px;
+		&__text {
+			font-size: 16px;
+			margin-bottom: 0px;
+		}
+	}
+}
