@@ -25,8 +25,10 @@ export default class StatePage extends React.Component {
         // priority: query.priority,
         // status: query.status,
       };
+
+      console.log(this.props.params);
       $.ajax({
-        url: 'http://localhost:3000/api/states/' + this.props.params.id,
+        url: 'http://localhost:3000/api/states/' + this.props.params.name,
         data: filter,
         dataType: 'json',
         cache: false,

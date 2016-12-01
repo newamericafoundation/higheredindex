@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 export default class StatePreview extends React.Component {
   render() {
     return (
-      <Link to={`/state/${this.props.id}`}>
+      <Link to={`/state/${this.props.path}`}>
         <div className="state-preview">
           <h2 className="name">{this.props.name}</h2>
         </div>
