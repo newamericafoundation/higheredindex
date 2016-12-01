@@ -1,6 +1,11 @@
 html, body {
 	background-color: white;
 	color: palette-get(na-black);
+	height: 100%;
+}
+
+#main {
+	height: 100%;
 }
 
 ul {

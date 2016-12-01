@@ -35,6 +35,7 @@ module.exports = {
         test: /\.scss$/,
         loaders: [ 'style', 'css', 'sass' ]
       },
+      { test: /\.jpg$/,    loader: "url-loader?limit=10000&minetype=image/jpg" }
     ]
   },
   plugins: debug ? [] : [

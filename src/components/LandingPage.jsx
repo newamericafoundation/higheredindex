@@ -8,14 +8,16 @@ export default class IndexPage extends React.Component {
   render() {
     return (
       <div className="landing-page">
-     	<a href={'https://www.newamerica.org/'}>New America Logo</a>
-      	<h1 className="landing-page__title">Ed-Index</h1>
-      	<SearchBox />
-      	<div>
-      		<Link to={'/search/states'}>Explore States</Link>
-      		<Link to={'/search/institutions'}>Explore Institutions</Link>
-      		<Link to={'/search/variables'}>Explore Variables</Link>
-      	</div>
+        <div className="landing-page__content">
+       	  <a href={'https://www.newamerica.org/'}>New America Logo</a>
+        	<h1 className="landing-page__title">Ed-Index</h1>
+        	<SearchBox />
+        	<div>
+        		<Link to={'/search/states'}>Explore States</Link>
+        		<Link to={'/search/institutions'}>Explore Institutions</Link>
+        		<Link to={'/search/variables'}>Explore Variables</Link>
+        	</div>
+        </div>
       </div>
     );
   }
