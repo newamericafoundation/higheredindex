@@ -1,0 +1,10 @@
+.location-profile {
+	&__title-container {
+		height: 300px;
+	}
+	&__title {
+		@include center-vertical;
+		text-align: center;
+		text-transform: uppercase;
+	}
+}

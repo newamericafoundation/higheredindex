@@ -3,9 +3,7 @@
 	position: relative;
 	&__content {
 		text-align: center;
-		position: relative;
-		transform: translateY(-50%);
-		top: 50%;
+		@include center-vertical;
 	}
 
 	&__explore-links {
