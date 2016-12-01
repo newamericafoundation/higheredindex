@@ -98,14 +98,16 @@ export default class SearchBox extends React.Component {
 
     // Finally, render it!
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-      />
+      <div className="search-box">
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
+        />
+      </div>
     );
   }
 }

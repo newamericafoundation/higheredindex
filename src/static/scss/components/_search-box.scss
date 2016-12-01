@@ -1,0 +1,47 @@
+.search-box {
+	position: relative;
+	.react-autosuggest__suggestions-container {
+		position: absolute;
+		width: 100%;
+		z-index: 50;
+		background-color: palette-get(na-black-05);
+		top: 46px;
+		color: palette-get(na-black);
+	}
+
+	.react-autosuggest__suggestions-list {
+	  margin: 0;
+	  padding: 0;
+	  list-style-type: none;
+	}
+
+	.react-autosuggest__suggestion {
+		display: flex;
+		cursor: pointer;
+		padding: 10px 20px;
+		width: 100%;
+	}
+
+	.react-autosuggest__suggestion:not(:first-child) {
+	  border-top: $standard-border;
+	}
+
+	.react-autosuggest__suggestion--focused {
+	  background-color: palette-get(na-turquoise);
+	  color: white;
+	}
+
+	.name {
+	  margin-left: 68px;
+	  line-height: 45px;
+	}
+
+	/*.highlight {
+	  color: palette-get(na-turquoise);
+	  font-weight: bold;
+	}
+
+	.react-autosuggest__suggestion--focused .highlight {
+	  color: palette-get(na-turquoise);
+	}*/
+}

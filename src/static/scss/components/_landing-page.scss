@@ -7,14 +7,40 @@
 		transform: translateY(-50%);
 		top: 50%;
 	}
-/*	width: 100%;
-	height: 100%;
-	position: relative;*/
+
+	&__explore-links {
+
+	}
+
+	&__explore-link {
+		display: inline-block;
+		padding: $desktop-padding;
+		&:first-child {
+			border-right: $standard-border;
+		}
+		&:last-child {
+			border-left: $standard-border;
+		}
+
+		&__secondary {
+			font-size: 13px;
+			margin-bottom: 0px;
+		}
+		&__primary {
+			font-weight: bold;
+			font-size: 20px;
+		}
+	}
 
 	&__title {
 		/*left: 50%;
 		font-size: 30px;
 		@include center-vertical;
 		text-align: center;*/
+	}
+
+	.search-box {
+		margin: auto;
+		max-width: 700px;
 	}
 }

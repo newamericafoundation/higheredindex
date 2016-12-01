@@ -12,10 +12,25 @@ export default class IndexPage extends React.Component {
        	  <a href={'https://www.newamerica.org/'}>New America Logo</a>
         	<h1 className="landing-page__title">Ed-Index</h1>
         	<SearchBox />
-        	<div>
-        		<Link to={'/search/states'}>Explore States</Link>
-        		<Link to={'/search/institutions'}>Explore Institutions</Link>
-        		<Link to={'/search/variables'}>Explore Variables</Link>
+        	<div className="landing-page__explore-links">
+            <div className="landing-page__explore-link">
+              <Link to={'/search/states'}>
+                <h5 className="landing-page__explore-link__secondary">Explore</h5>
+                <h3 className="landing-page__explore-link__primary">States</h3>
+              </Link>
+            </div>
+            <div className="landing-page__explore-link">
+              <Link to={'/search/institutions'}>
+                <h5 className="landing-page__explore-link__secondary">Explore</h5>
+                <h3 className="landing-page__explore-link__primary">Institutions</h3>
+              </Link>
+            </div>
+            <div className="landing-page__explore-link">
+              <Link to={'/search/variables'}>
+                <h5 className="landing-page__explore-link__secondary">Explore</h5>
+                <h3 className="landing-page__explore-link__primary">Variables</h3>
+              </Link>
+            </div>
         	</div>
         </div>
       </div>
