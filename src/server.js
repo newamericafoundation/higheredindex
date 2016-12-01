@@ -26,6 +26,7 @@ db.once('open', () => {
 const stateSchema = new mongoose.Schema({
   id: Number,
   name: String,
+  path: String,
   data_1999: Number,
   data_2000: Number,
   data_2001: Number,
@@ -97,9 +98,9 @@ app.get('/api/states', (req, res) => {
   });
 });
 
-app.get('/api/states/:id', (req, res) => {
+app.get('/api/states/:path', (req, res) => {
   stateModel.findOne({
-    id: req.params.id,
+    path: req.params.path,
   }, (err, state) => {
     if (err) {
       return console.error(err);

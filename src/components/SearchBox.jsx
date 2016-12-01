@@ -1,11 +1,12 @@
 import React from 'react';
+import { browserHistory } from 'react-router'
 import Autosuggest from 'react-autosuggest';
 import $ from 'jquery';
 
 // When suggestion is clicked, Autosuggest needs to populate the input element
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = suggestion => suggestion.path;
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
@@ -60,6 +61,8 @@ export default class SearchBox extends React.Component {
     this.setState({
       value: newValue
     });
+    console.log("changed!");
+    console.log(newValue);
   }
 
   // Autosuggest will call this function every time you need to update suggestions.
@@ -75,6 +78,11 @@ export default class SearchBox extends React.Component {
     this.setState({
       suggestions: []
     });
+  }
+
+  onSuggestionSelected(event, { suggestion, suggestionValue, sectionIndex, method }) {
+    console.log(suggestion, suggestionValue);
+    browserHistory.push('/state/' + suggestionValue);
   }
 
   getSuggestions(value) {
@@ -103,6 +111,7 @@ export default class SearchBox extends React.Component {
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
+          onSuggestionSelected={this.onSuggestionSelected.bind(this)}
           getSuggestionValue={getSuggestionValue}
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}

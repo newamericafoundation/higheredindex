@@ -13,7 +13,7 @@ const routes = (
     	<IndexRoute component={LandingPage}/>
     	<Route path="/" component={Layout}>
     		<Route path="search/:type" component={SearchPage}/>
-		    <Route path="state/:id" component={StatePage}/>
+		    <Route path="state/:name" component={StatePage}/>
 		    <Route path="*" component={NotFoundPage}/>
 		</Route>
   	</Route>

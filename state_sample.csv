@@ -1,11 +1,11 @@
-id,name,data_1999,data_2000,data_2001,data_2002,data_2003
-1,Alabama,9,6,10,1,9
-2,California,2,0,2,4,1
-3,Arkansas,9,6,5,9,8
-4,Ohio,4,6,3,5,9
-5,Florida,5,10,4,6,8
-6,Washington,4,3,3,10,7
-7,Oregon,7,0,4,5,0
-8,New Jersey,2,7,0,3,4
-9,New York,6,4,5,5,2
-10,Maine,7,2,2,4,9
+id,name,path,data_1999,data_2000,data_2001,data_2002,data_2003
+1,Alabama,alabama,1,4,9,9,6
+2,California,california,0,3,0,2,10
+3,Arkansas,arkansas,1,2,6,7,9
+4,Ohio,ohio,0,4,7,9,1
+5,Florida,florida,4,2,9,6,1
+6,Washington,washington,6,1,8,5,0
+7,Oregon,oregon,9,4,6,3,4
+8,New Jersey,new_jersey,8,8,1,6,2
+9,New York,new_york,1,10,10,6,8
+10,Maine,maine,1,8,6,3,8
