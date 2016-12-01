@@ -1,15 +1,16 @@
 "use strict"
 
 import React from 'react';
-// import SearchBox from './SearchBox';
+import SearchBox from './SearchBox.jsx';
 import { Link } from 'react-router';
 
 export default class IndexPage extends React.Component {
   render() {
     return (
       <div className="home">
-      	<a href={'https://www.newamerica.org/'}>New America Logo</a>
+     	<a href={'https://www.newamerica.org/'}>New America Logo</a>
       	<h1 className="title">Ed-Index</h1>
+      	<SearchBox />
       	<div>
       		<Link to={'/search/states'}>Explore States</Link>
       		<Link to={'/search/institutions'}>Explore Institutions</Link>
