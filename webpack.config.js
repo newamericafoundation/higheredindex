@@ -22,14 +22,20 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [{
-      test: path.join(__dirname, 'src'),
-      loader: ['babel-loader'],
-      query: {
-        cacheDirectory: 'babel_cache',
-        presets: debug ? ['react', 'es2015', 'react-hmre'] : ['react', 'es2015']
-      }
-    }]
+    loaders: [
+      {
+        test: path.join(__dirname, 'src'),
+        loader: ['babel-loader'],
+        query: {
+          cacheDirectory: 'babel_cache',
+          presets: debug ? ['react', 'es2015', 'react-hmre'] : ['react', 'es2015']
+        }
+      },
+      {
+        test: /\.scss$/,
+        loaders: [ 'style', 'css', 'sass' ]
+      },
+    ]
   },
   plugins: debug ? [] : [
     new webpack.DefinePlugin({
