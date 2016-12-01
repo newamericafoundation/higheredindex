@@ -7,9 +7,9 @@ import { Link } from 'react-router';
 export default class IndexPage extends React.Component {
   render() {
     return (
-      <div className="home">
+      <div className="landing-page">
      	<a href={'https://www.newamerica.org/'}>New America Logo</a>
-      	<h1 className="title">Ed-Index</h1>
+      	<h1 className="landing-page__title">Ed-Index</h1>
       	<SearchBox />
       	<div>
       		<Link to={'/search/states'}>Explore States</Link>
