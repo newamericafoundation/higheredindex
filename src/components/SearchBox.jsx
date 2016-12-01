@@ -41,7 +41,7 @@ export default class SearchBox extends React.Component {
         // status: query.status,
       };
       $.ajax({
-        url: '/api/athletes',
+        url: 'http://localhost:3000/api/states',
         data: filter,
         dataType: 'json',
         cache: false,
