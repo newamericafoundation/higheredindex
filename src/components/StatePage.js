@@ -6,8 +6,6 @@ import NotFoundPage from './NotFoundPage';
 import SectionNav from './SectionNav.jsx';
 import ProfileSection from './ProfileSection.jsx';
 
-import Medal from './Medal';
-import Flag from './Flag';
 import $ from 'jquery';
 
 export default class StatePage extends React.Component {
