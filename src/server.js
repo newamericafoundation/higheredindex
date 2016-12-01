@@ -23,16 +23,31 @@ db.once('open', () => {
   console.log('Connected to MongoDB server.');
 });
 
-const athleteSchema = new mongoose.Schema({
-  id: String,
+const stateSchema = new mongoose.Schema({
+  id: Number,
   name: String,
-  country: String,
-  birth: Number,
-  image: String,
-  cover: String,
-  link: String
+  data_1999: Number,
+  data_2000: Number,
+  data_2001: Number,
+  data_2002: Number,
+  data_2003: Number
 });
-const athleteModel = mongoose.model('athlete', athleteSchema);
+const stateModel = mongoose.model('state', stateSchema);
+
+const institutionSchema = new mongoose.Schema({
+  id: Number,
+  school: String,
+  address: String,
+  city: String,
+  postal: String,
+  zip: String, 
+  data_1999: Number,
+  data_2000: Number,
+  data_2001: Number,
+  data_2002: Number,
+  data_2003: Number
+});
+const institutionModel = mongoose.model('institution', institutionSchema);
 
 
 // initialize the server and configure support for ejs templates
@@ -45,25 +60,73 @@ app.set('views', path.join(__dirname, 'views'));
 // define the folder that will be used for static assets
 app.use(Express.static(path.join(__dirname, 'static')));
 
-app.get('/api/athletes', (req, res) => {
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+// app.get('/api/all', (req, res) => {
+//   const filter = {};
+//   let retArray = [];
+
+//   stateModel.find(filter, (err, states) => {
+//     if (err) {
+//       return console.error(err);
+//     }
+//     retArray = res.json(states);
+//   });
+
+//   institutionModel.find(filter, (err, institutions) => {
+//     if (err) {
+//       return console.error(err);
+//     }
+//     retArray.push(res.json(institutions));
+//   });
+
+//   return retArray;
+// });
+
+app.get('/api/states', (req, res) => {
   const filter = {};
 
-  athleteModel.find(filter, (err, athletes) => {
+  stateModel.find(filter, (err, states) => {
     if (err) {
       return console.error(err);
     }
-    return res.json(athletes);
+    return res.json(states);
   });
 });
 
-app.get('/api/athletes/:id', (req, res) => {
-  athleteModel.findOne({
+app.get('/api/states/:id', (req, res) => {
+  stateModel.findOne({
     id: req.params.id,
-  }, (err, athlete) => {
+  }, (err, state) => {
     if (err) {
       return console.error(err);
     }
-    return res.json(athlete);
+    return res.json(state);
+  });
+});
+
+app.get('/api/institutions', (req, res) => {
+  const filter = {};
+
+  institutionModel.find(filter, (err, institutions) => {
+    if (err) {
+      return console.error(err);
+    }
+    return res.json(institutions);
+  });
+});
+
+app.get('/api/institutions/:id', (req, res) => {
+  institutionModel.findOne({
+    id: req.params.id,
+  }, (err, institution) => {
+    if (err) {
+      return console.error(err);
+    }
+    return res.json(institution);
   });
 });
 

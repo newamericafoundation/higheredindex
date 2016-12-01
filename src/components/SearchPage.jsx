@@ -1,14 +1,15 @@
 'use strict';
 
 import React from 'react';
-import AthletePreview from './AthletePreview';
+import StatePreview from './StatePreview';
 import $ from 'jquery';
 
 export default class SearchPage extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-	      athletes: [],
+	      states: [],
+
 	    };
 	}
 	componentDidMount() {
@@ -23,13 +24,13 @@ export default class SearchPage extends React.Component {
 	      // status: query.status,
 	    };
 	    $.ajax({
-	      url: '/api/athletes',
+	      url: 'http://localhost:3000/api/states',
 	      data: filter,
 	      dataType: 'json',
 	      cache: false,
 	      success: function loadDataSuccess(data) {
 	      	console.log(data);
-	        this.setState({ athletes: data });
+	        this.setState({ states: data });
 	      }.bind(this),
 	      error: function loadDataError(xhr, status, err) {
 	        console.error(this.props.url, status, err.toString());
@@ -37,12 +38,12 @@ export default class SearchPage extends React.Component {
 	    });
 	}
 	render() {
-		const athletes = this.state.athletes;
-		console.log(athletes);
+		const states = this.state.states;
+		console.log(states);
 		return (
 			<div className="home">
-				<div className="athletes-selector">
-					{athletes.map(athleteData => <AthletePreview key={athleteData.id} {...athleteData} />)}
+				<div className="states-selector">
+					{states.map(stateData => <StatePreview key={stateData.id} {...stateData} />)}
 				</div>
 			</div>
 		);
