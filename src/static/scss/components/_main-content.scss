@@ -1,0 +1,5 @@
+.main-content {
+	&.with-header {
+		transform: translateY($top-nav-height);
+	}
+}

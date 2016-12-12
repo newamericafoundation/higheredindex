@@ -11,7 +11,7 @@ export default class Layout extends React.Component {
         <header>
           <TopNav />
         </header>
-        <div className="app-content">{this.props.children}</div>
+        <div className="main-content with-header">{this.props.children}</div>
         <footer>
           <p>
             This is a demo app to showcase universal rendering and routing with <strong>React</strong> and <strong>Express</strong>.

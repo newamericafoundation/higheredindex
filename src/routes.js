@@ -5,7 +5,7 @@ import { Route, IndexRoute } from 'react-router'
 import Layout from './components/Layout';
 import LandingPage from './components/LandingPage.jsx';
 import SearchPage from './components/SearchPage.jsx';
-import StatePage from './components/StatePage';
+import StPageContainer from './components/StPageContainer';
 import NotFoundPage from './components/NotFoundPage';
 
 const routes = (
@@ -13,7 +13,7 @@ const routes = (
     	<IndexRoute component={LandingPage}/>
     	<Route path="/" component={Layout}>
     		<Route path="search/:type" component={SearchPage}/>
-		    <Route path="state/:name" component={StatePage}/>
+		    <Route path="state/:name" component={StPageContainer}/>
 		    <Route path="*" component={NotFoundPage}/>
 		</Route>
   	</Route>

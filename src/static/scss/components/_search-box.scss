@@ -1,5 +1,28 @@
 .search-box {
+	
 	position: relative;
+	
+   	&.expandable {
+   		$transition: width .5s;
+   		-webkit-transition: $transition;
+	    -moz-transition: $transition;
+	    -ms-transition: $transition;
+	    -o-transition: $transition;
+	    transition: $transition;
+   		
+	    width: 300px;
+
+   		&.hidden {
+			width: 0px;
+			input {
+				padding: 0px;
+				border: none;
+			}
+		}
+
+   	}
+	
+
 	.react-autosuggest__suggestions-container {
 		position: absolute;
 		width: 100%;
@@ -34,6 +57,15 @@
 	.name {
 	  margin-left: 68px;
 	  line-height: 45px;
+	}
+
+	&__icon {
+		height: 30px;
+		width: 30px;
+		svg {
+			fill: white;
+			height: 30px;
+		}
 	}
 
 	/*.highlight {
