@@ -1,0 +1,138 @@
+
+State Tree
+
+{
+	currStateShown: {
+		id: 5,
+		name: California,
+		pellGrantPercent: {
+			2011: 57,
+			2012: 62,
+			2013: 75,
+			2014: 67,
+			2015: 32
+		},
+		numStudentsK12: {
+			2011: 57000,
+			2012: 62000,
+			2013: 75000,
+			2014: 67000,
+			2015: 32000
+		}
+		...
+	}
+	stateList:[
+		{
+			id: 1
+			name: California
+		},
+		{
+			id: 2
+			name: Alabama
+		},
+		{
+			id: 3
+			name: Louisiana
+		},
+	],
+	currInstitutionShown: {...}
+	
+	institutionList:[...],
+
+
+}
+
+Questions: 
+- should the actual data for each state or institution be stored in the state tree? 
+	-Yes: single api call instead of repeating same api call every time it needs the data
+	-No: that's gunna be so much data (10,000+ entries, each with 30+ properties) to store
+
+	Probably not, but it does make sense to store the stateList and institutionList so that there will be a single api call to get them all and can be prepopulated for all search boxes, when selected can then call api to load full data for single state/institution
+
+- does it make more sense to store multiyear data as flat entries - 
+	{
+		...
+		pellGrantPercent2011:30, 
+		pellGrantPercent2012:31, 
+		pellGrantPercent2013:40, 
+		...
+	}
+	or nested? - 
+	{
+		...
+		pellGrantPercent: {
+			2011: 57,
+			2012: 62,
+			2013: 75,
+			2014: 67,
+			2015: 32
+		},
+		...
+	}
+	-flat: all the tutorials talk about how much easier it is to manipulate flat state trees, but won't actually be manipulating at all (should probably not store except for the current state/inst anyway)
+	-nested: a bit more difficult to get the data in the database into this state -> lookup functions to manipulate the mongo db
+
+	Probably nested
+
+
+
+Actions
+	// called when first page (any type) is loaded, see redux async 
+	GetStateList
+	GetInstitutionList
+
+	// called when state or institution profile page is loaded, async api call to get single state/inst
+	ChangeCurrentStateShown
+	ChangeCurrentInstitutionShown
+
+
+
+
+Component Structure
+
+LandingPage
+	Menu
+	SearchBox
+
+TopNav
+	Menu
+	ExpandableSearchBox
+
+Footer
+
+StateProfile
+	SectionNav
+	ProfileSection
+	ProfileSection
+	ProfileSection
+	ProfileSection
+	ProfileSection
+
+InstitutionProfile
+	SectionNav
+	ProfileSection
+	ProfileSection
+	ProfileSection
+	ProfileSection
+	ProfileSection
+
+Profile Section(title, description)
+	DataBlock
+	DataBlock
+	...
+	DataBlock
+
+DataBlock(title)
+	Description
+	Graph
+
+Description(text - annotated somehow with data references?)
+	DataReference
+	DataReference
+	...
+	DataReference
+
+Graph(graphType, whichVariables)
+
+
+

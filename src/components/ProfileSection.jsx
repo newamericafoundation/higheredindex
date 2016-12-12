@@ -3,7 +3,6 @@
 import React from 'react';
 
 export default function ProfileSection(props) {
-	console.log(props);
 	return (
     	<section className="profile-section" id={props.title.toLowerCase()}>
     		<div className="profile-section__title-container">

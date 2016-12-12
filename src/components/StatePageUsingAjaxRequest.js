@@ -12,6 +12,7 @@ export default class StatePage extends React.Component {
   constructor() {
     super();
     this.state = {
+      stateName:{name:""}
     };
   }
   componentDidMount() {

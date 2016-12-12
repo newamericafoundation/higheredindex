@@ -16,7 +16,7 @@ const renderSuggestion = suggestion => (
 );
 
 export default class SearchBox extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
 
     // Autosuggest is a controlled component.
@@ -26,7 +26,8 @@ export default class SearchBox extends React.Component {
     // and they are initially empty because the Autosuggest is closed.
     this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
+      expanded: true
     };
   }
 
@@ -96,6 +97,9 @@ export default class SearchBox extends React.Component {
 
   render() {
     const { value, suggestions } = this.state;
+    let elementClass = this.props.expandable ? " expandable" : "";
+    elementClass += this.props.expandable && !this.props.expanded ? " hidden" : "";
+   
 
     // Autosuggest will pass through all these props to the input element.
     const inputProps = {
@@ -106,7 +110,7 @@ export default class SearchBox extends React.Component {
 
     // Finally, render it!
     return (
-      <div className="search-box">
+      <div className={"search-box" + elementClass}>
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
