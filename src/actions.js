@@ -9,6 +9,8 @@ export const CHANGE_CURR_INST = 'CHANGE_CURR_INST'
 
 export const REQUEST_ST = 'REQUEST_ST'
 export const RECEIVE_ST = 'RECEIVE_ST'
+export const REQUEST_ST_LIST = 'REQUEST_ST_LIST'
+export const RECEIVE_ST_LIST = 'RECEIVE_ST_LIST'
 
 /*
  * action creators
@@ -71,5 +73,32 @@ export function fetchSt(st) {
 
       // In a real world app, you also want to
       // catch any error in the network call.
+  }
+}
+
+export function requestStList() {
+	return { type: REQUEST_ST_LIST }
+}
+
+export function receiveStList(json) {
+	return { 
+		type: RECEIVE_ST_LIST,
+		stList: json
+	}
+}
+
+export function fetchStList() {
+  return function (dispatch) {
+
+    dispatch(requestStList())
+
+    return fetch('http://localhost:3000/api/state-list/')
+      .then(response => { return response.json()})
+      .then(json => {
+      	console.log("this is the json response")
+      	console.log(json);
+
+        dispatch(receiveStList(json))
+      })
   }
 }

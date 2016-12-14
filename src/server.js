@@ -37,7 +37,8 @@ const stateModel = mongoose.model('state', stateSchema);
 
 const institutionSchema = new mongoose.Schema({
   id: Number,
-  school: String,
+  name: String,
+  path: String,
   address: String,
   city: String,
   postal: String,
@@ -87,6 +88,18 @@ app.use(function(req, res, next) {
 //   return retArray;
 // });
 
+app.get('/api/state-list', (req, res) => {
+  const filter = {};
+
+  stateModel.find(filter, { name: 1, path: 1 }, (err, states) => {
+    if (err) {
+      return console.error(err);
+    }
+    console.log(states);
+    return res.json(states);
+  });
+});
+
 app.get('/api/states', (req, res) => {
   const filter = {};
 
@@ -94,6 +107,7 @@ app.get('/api/states', (req, res) => {
     if (err) {
       return console.error(err);
     }
+    console.log(states);
     return res.json(states);
   });
 });
@@ -109,27 +123,27 @@ app.get('/api/states/:path', (req, res) => {
   });
 });
 
-app.get('/api/institutions', (req, res) => {
-  const filter = {};
+// app.get('/api/institutions', (req, res) => {
+//   const filter = {};
 
-  institutionModel.find(filter, (err, institutions) => {
-    if (err) {
-      return console.error(err);
-    }
-    return res.json(institutions);
-  });
-});
+//   institutionModel.find(filter, (err, institutions) => {
+//     if (err) {
+//       return console.error(err);
+//     }
+//     return res.json(institutions);
+//   });
+// });
 
-app.get('/api/institutions/:id', (req, res) => {
-  institutionModel.findOne({
-    id: req.params.id,
-  }, (err, institution) => {
-    if (err) {
-      return console.error(err);
-    }
-    return res.json(institution);
-  });
-});
+// app.get('/api/institutions/:id', (req, res) => {
+//   institutionModel.findOne({
+//     id: req.params.id,
+//   }, (err, institution) => {
+//     if (err) {
+//       return console.error(err);
+//     }
+//     return res.json(institution);
+//   });
+// });
 
 // universal routing and rendering
 app.get('*', (req, res) => {
