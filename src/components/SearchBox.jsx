@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import Autosuggest from 'react-autosuggest';
 import $ from 'jquery';
+import { fetchStList } from '../actions'
 
 // When suggestion is clicked, Autosuggest needs to populate the input element
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
@@ -15,7 +17,7 @@ const renderSuggestion = suggestion => (
   </div>
 );
 
-export default class SearchBox extends React.Component {
+class SearchBox extends React.Component {
   constructor(props) {
     super();
 
@@ -31,31 +33,14 @@ export default class SearchBox extends React.Component {
     };
   }
 
-  componentDidMount() {
-      this.loadData();
-  }
+  componentWillMount() {
+    const { dispatch, stList } = this.props
+    console.log(stList);
+    if (stList.length == 0) {
+      dispatch(fetchStList())
+    }
 
-  loadData() {
-    console.log("loading data");
-      // const query = this.props.location.query || {};
-      const filter = {
-        // priority: query.priority,
-        // status: query.status,
-      };
-      $.ajax({
-        url: 'http://localhost:3000/api/states',
-        data: filter,
-        dataType: 'json',
-        cache: false,
-        success: function loadDataSuccess(data) {
-          console.log(data);
-          this.fullList = data;
-          this.setState({ suggestions: data });
-        }.bind(this),
-        error: function loadDataError(xhr, status, err) {
-          console.error(this.props.url, status, err.toString());
-        }.bind(this),
-      });
+    this.state.suggestions = stList;
   }
 
   onChange(event, { newValue }) {
@@ -90,7 +75,7 @@ export default class SearchBox extends React.Component {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
 
-    return inputLength === 0 ? [] : this.fullList.filter(listElem => 
+    return inputLength === 0 ? [] : this.props.stList.filter(listElem => 
       listElem.name.toLowerCase().slice(0, inputLength) === inputValue
     );
   }
@@ -99,8 +84,7 @@ export default class SearchBox extends React.Component {
     const { value, suggestions } = this.state;
     let elementClass = this.props.expandable ? " expandable" : "";
     elementClass += this.props.expandable && !this.props.expanded ? " hidden" : "";
-   
-
+    
     // Autosuggest will pass through all these props to the input element.
     const inputProps = {
       placeholder: 'Search',
@@ -124,3 +108,11 @@ export default class SearchBox extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    stList: state.stList
+  }
+}
+
+export default connect(mapStateToProps)(SearchBox)
