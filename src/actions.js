@@ -4,71 +4,62 @@ import fetch from 'isomorphic-fetch'
  * action types
  */
 
-export const CHANGE_CURR_ST = 'CHANGE_CURR_ST'
-export const CHANGE_CURR_INST = 'CHANGE_CURR_INST'
+export const CHANGE_CURR_PROFILE = 'CHANGE_CURR_PROFILE'
 
-export const REQUEST_ST = 'REQUEST_ST'
-export const RECEIVE_ST = 'RECEIVE_ST'
-export const REQUEST_ST_LIST = 'REQUEST_ST_LIST'
-export const RECEIVE_ST_LIST = 'RECEIVE_ST_LIST'
+export const REQUEST_PROFILE = 'REQUEST_PROFILE'
+export const RECEIVE_PROFILE = 'RECEIVE_PROFILE'
+export const REQUEST_PROFILE_LIST = 'REQUEST_PROFILE_LIST'
+export const RECEIVE_PROFILE_LIST = 'RECEIVE_PROFILE_LIST'
+
+// export const REQUEST_INST = 'REQUEST_INST'
+// export const RECEIVE_INST = 'RECEIVE_INST'
+// export const REQUEST_INST_LIST = 'REQUEST_INST_LIST'
+// export const RECEIVE_INST_LIST = 'RECEIVE_INST_LIST'
 
 /*
  * action creators
  */
 
-export function changeCurrSt(st) {
-  return { type: CHANGE_CURR_ST, st }
+export function changeCurrProfile(name, profileType) {
+  return { 
+  	type: CHANGE_CURR_PROFILE, 
+  	profileType, 
+  	name 
+  }
 }
 
-export function changeCurrInst(inst) {
-  return { type: CHANGE_CURR_INST, inst }
+export function requestProfile(name, profileType) {
+   return { 
+  	type: REQUEST_PROFILE, 
+  	profileType, 
+  	name 
+   }
 }
 
-export function requestSt(st) {
-  return { type: REQUEST_ST, st }
-}
-
-export function receiveSt(st, json) {
+export function receiveProfile(name, profileType, json) {
 	return { 
-	  	type: RECEIVE_ST, 
-	  	st,
-	  	stData: json
+	  	type: RECEIVE_PROFILE, 
+	  	name,
+	  	profileType, 
+	  	data: json
    	}
 }
 
-
-// Meet our first thunk action creator!
-// Though its insides are different, you would use it just like any other action creator:
-// store.dispatch(fetchPosts('reactjs'))
-
-export function fetchSt(st) {
-	console.log(st);
-  // Thunk middleware knows how to handle functions.
-  // It passes the dispatch method as an argument to the function,
-  // thus making it able to dispatch actions itself.
+export function fetchProfile(name, profileType) {
+	console.log(name);
 
   return function (dispatch) {
 
-    // First dispatch: the app state is updated to inform
-    // that the API call is starting.
-    dispatch(changeCurrSt(st))
-    dispatch(requestSt(st))
+    dispatch(changeCurrProfile(name, profileType))
+    dispatch(requestProfile(name, profileType))
 
-    // The function called by the thunk middleware can return a value,
-    // that is passed on as the return value of the dispatch method.
-
-    // In this case, we return a promise to wait for.
-    // This is not required by thunk middleware, but it is convenient for us.
-
-    return fetch('http://localhost:3000/api/states/' + st)
+    return fetch('http://localhost:3000/api/' + profileType + 's/' + name)
       .then(response => { return response.json()})
       .then(json => {
       	console.log("this is the json response")
       	console.log(json);
-        // We can dispatch many times!
-        // Here, we update the app state with the results of the API call.
-
-        dispatch(receiveSt(st, json))
+        
+        dispatch(receiveProfile(name, profileType, json))
       })
 
       // In a real world app, you also want to
@@ -76,29 +67,37 @@ export function fetchSt(st) {
   }
 }
 
-export function requestStList() {
-	return { type: REQUEST_ST_LIST }
+export function requestProfileList(listType) {
+	return { type: REQUEST_PROFILE_LIST }
 }
 
-export function receiveStList(json) {
+export function receiveProfileList(listType, json) {
 	return { 
-		type: RECEIVE_ST_LIST,
-		stList: json
+		type: RECEIVE_PROFILE_LIST,
+		listType: listType,
+		list: json
 	}
 }
 
-export function fetchStList() {
+export function fetchProfileList(type) {
   return function (dispatch) {
 
-    dispatch(requestStList())
+    dispatch(requestProfileList(type))
 
-    return fetch('http://localhost:3000/api/state-list/')
+    return fetch('http://localhost:3000/api/' + type + '-list/')
       .then(response => { return response.json()})
       .then(json => {
       	console.log("this is the json response")
       	console.log(json);
-
-        dispatch(receiveStList(json))
+      	json.map((d) => {
+      		d.type = type;
+      		return d;
+      	})
+        dispatch(receiveProfileList(type, json))
       })
   }
+}
+
+export function changeCurrInst(inst) {
+  return { type: CHANGE_CURR_INST, inst }
 }

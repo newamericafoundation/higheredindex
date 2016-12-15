@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { changeCurrSt, fetchSt } from '../actions'
+import { changeCurrProfile, fetchProfile } from '../actions'
 import StPage from './StPage'
 import NotFoundPage from './NotFoundPage';
 
@@ -15,9 +15,9 @@ class StPageContainer extends React.Component {
 
     if (fetchedSts[st]) {
       this.stData = fetchedSts[st]
-      dispatch(changeCurrSt(st))
+      dispatch(changeCurrProfile(st, "state"))
     } else {
-      dispatch(fetchSt(st))
+      dispatch(fetchProfile(st, "state"))
     }
   }
 
@@ -28,9 +28,9 @@ class StPageContainer extends React.Component {
 
       if (fetchedSts[st]) {
         this.stData = fetchedSts[st]
-        dispatch(changeCurrSt(st))
+        dispatch(changeCurrProfile(st, "state"))
       } else {
-        dispatch(fetchSt(st))
+        dispatch(fetchProfile(st, "state"))
       }
     }
   }
@@ -60,7 +60,6 @@ const mapStateToProps = (state, ownProps) => {
     fetchedSts: state.fetchedSts || {}
   }
 }
-
 
 
 export default connect(mapStateToProps)(StPageContainer)
