@@ -1,22 +1,27 @@
 .location-profile {
-	&__title-container {
+	&__title-container, &__pre-render__title-container {
 		height: 600px;
-		
-		/*background-repeat: no-repeat;
-		background-size: cover;
-		background-position: 50% 50%;*/
 	}
 	.react-parallax-bgimage {
 		width: 100% !important;
 		height: auto !important;
+		background-size: cover;
 	}
 	.react-parallax-content {
 		top: 50%;
 		transform: translateY(-50%);
 	}
-	&__title {
+	&__title, &__pre-render__title  {
 		/*@include center-vertical;*/
 		text-align: center;
 		text-transform: uppercase;
+		color: white;
+	}
+
+	&__pre-render__title {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+		color: palette-get(na-black);
 	}
 }

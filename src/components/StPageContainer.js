@@ -20,6 +20,9 @@ class StPageContainer extends React.Component {
       dispatch(fetchProfile(st, "state"))
     }
   }
+  componentWillUnmount() {
+    this.props.dispatch(changeCurrProfile(null))
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.st != this.props.st) {
