@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProfilePhoto } from '../actions'
+import { Parallax } from 'react-parallax';
 
 import $ from 'jquery';
 
@@ -14,18 +15,29 @@ class ProfileHeader extends React.Component {
 		}
 	}
 	render() {
-		console.log(this.props);
+		console.log(this);
 		const { fetchedPhotos, name, path } = this.props
-		this.photoUrl = fetchedPhotos[path].photoUrl
-		console.log(this.photoUrl);
-		var divStyle = {
-            backgroundImage: 'url(' + this.photoUrl + ')'
-        }
-		return (
-			<div className="location-profile__title-container" style={divStyle}>
-				<h2 className="location-profile__title">{name}</h2>
-			</div>
-		)
+		console.log(fetchedPhotos[path]);
+		
+
+  		if (fetchedPhotos[path] && !fetchedPhotos[path].isFetching) {
+  			this.photoUrl = fetchedPhotos[path].photoUrl || ""
+			console.log(this.photoUrl);
+			return (
+				<div>
+					<Parallax className="location-profile__title-container" bgImage={this.photoUrl} strength={300}>
+						<br/>
+						<h2 className="location-profile__title">{name}</h2>
+					</Parallax>
+				</div>
+			)
+		} else {
+			return (
+				<div>
+					<h2 className="location-profile__title">{name}</h2>
+				</div>
+			)
+		}
 	}
 }
 
