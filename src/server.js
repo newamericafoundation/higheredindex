@@ -100,6 +100,18 @@ app.get('/api/state-list', (req, res) => {
   });
 });
 
+app.get('/api/institution-list', (req, res) => {
+  const filter = {};
+
+  institutionModel.find(filter, { name: 1, path: 1 }, (err, institutions) => {
+    if (err) {
+      return console.error(err);
+    }
+    console.log(institutions);
+    return res.json(institutions);
+  });
+});
+
 app.get('/api/states', (req, res) => {
   const filter = {};
 
@@ -120,6 +132,29 @@ app.get('/api/states/:path', (req, res) => {
       return console.error(err);
     }
     return res.json(state);
+  });
+});
+
+app.get('/api/institutions', (req, res) => {
+  const filter = {};
+
+  institutionModel.find(filter, (err, institutions) => {
+    if (err) {
+      return console.error(err);
+    }
+    console.log(institutions);
+    return res.json(institutions);
+  });
+});
+
+app.get('/api/institutions/:path', (req, res) => {
+  institutionModel.findOne({
+    path: req.params.path,
+  }, (err, institution) => {
+    if (err) {
+      return console.error(err);
+    }
+    return res.json(institution);
   });
 });
 
@@ -146,37 +181,37 @@ app.get('/api/states/:path', (req, res) => {
 // });
 
 // universal routing and rendering
-app.get('*', (req, res) => {
-  match(
-    { routes, location: req.url },
-    (err, redirectLocation, renderProps) => {
+// app.get('*', (req, res) => {
+//   match(
+//     { routes, location: req.url },
+//     (err, redirectLocation, renderProps) => {
 
-      // in case of error display the error message
-      if (err) {
-        return res.status(500).send(err.message);
-      }
+//       // in case of error display the error message
+//       if (err) {
+//         return res.status(500).send(err.message);
+//       }
 
-      // in case of redirect propagate the redirect to the browser
-      if (redirectLocation) {
-        return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-      }
+//       // in case of redirect propagate the redirect to the browser
+//       if (redirectLocation) {
+//         return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
+//       }
 
-      // generate the React markup for the current route
-      let markup;
-      if (renderProps) {
-        // if the current route matched we have renderProps
-        markup = renderToString(<RouterContext {...renderProps}/>);
-      } else {
-        // otherwise we can render a 404 page
-        markup = renderToString(<NotFoundPage/>);
-        res.status(404);
-      }
+//       // generate the React markup for the current route
+//       let markup;
+//       if (renderProps) {
+//         // if the current route matched we have renderProps
+//         markup = renderToString(<RouterContext {...renderProps}/>);
+//       } else {
+//         // otherwise we can render a 404 page
+//         markup = renderToString(<NotFoundPage/>);
+//         res.status(404);
+//       }
 
-      // render the index template with the embedded React markup
-      return res.render('index', { markup });
-    }
-  );
-});
+//       // render the index template with the embedded React markup
+//       return res.render('index', { markup });
+//     }
+//   );
+// });
 
 // start the server
 const port = process.env.PORT || 3000;

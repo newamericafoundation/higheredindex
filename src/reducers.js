@@ -1,35 +1,70 @@
 import { combineReducers } from 'redux'
-import { CHANGE_CURR_ST, CHANGE_CURR_INST, REQUEST_ST, RECEIVE_ST, REQUEST_ST_LIST, RECEIVE_ST_LIST } from './actions'
+import { CHANGE_CURR_PROFILE, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST} from './actions'
 
 
-function currSt(state = 'undefined', action) {
+function currProfile(state = {}, action) {
   switch (action.type) {
-    case CHANGE_CURR_ST:
-      return action.st
+    case CHANGE_CURR_PROFILE:
+      return {
+        name: action.name,
+        type: action.profileType
+      }
     default:
       return state
   }
 }
 
 function fetchedSts(state = {}, action) {
-  console.log("curr state is ")
-  console.log(state)
-  console.log("curr action is ")
-  console.log(action)
   switch (action.type) {
-    case REQUEST_ST:
-      return Object.assign({}, state, {
-        [action.st] : {
-          isFetching: true
-        }
-      })
-    case RECEIVE_ST:
-      return Object.assign({}, state, {
-        [action.st] : {
-          isFetching: false,
-          data: action.stData
-        }
-      })
+    case REQUEST_PROFILE:
+      if (action.profileType == "state") {
+        return Object.assign({}, state, {
+          [action.name] : {
+            isFetching: true
+          }
+        })
+      } else {
+        return state
+      }
+    case RECEIVE_PROFILE:
+      if (action.profileType == "state") {
+        return Object.assign({}, state, {
+          [action.name] : {
+            isFetching: false,
+            data: action.data
+          }
+        })
+      } else {
+        return state
+      }
+    default:
+      return state
+  }
+}
+
+function fetchedInsts(state = {}, action) {
+  switch (action.type) {
+    case REQUEST_PROFILE:
+      if (action.profileType == "institution") {
+        return Object.assign({}, state, {
+          [action.name] : {
+            isFetching: true
+          }
+        })
+      } else {
+        return state
+      }
+    case RECEIVE_PROFILE:
+      if (action.profileType == "institution") {
+        return Object.assign({}, state, {
+          [action.name] : {
+            isFetching: false,
+            data: action.data
+          }
+        })
+      } else {
+        return state
+      }
     default:
       return state
   }
@@ -41,19 +76,36 @@ function stList(state = [], action) {
   console.log("curr action is ")
   console.log(action)
   switch (action.type) {
-    case REQUEST_ST_LIST:
+    case REQUEST_PROFILE_LIST:
       return []
-    case RECEIVE_ST_LIST:
-      return action.stList
+    case RECEIVE_PROFILE_LIST:
+      return action.listType == "state" ? action.list : state
+    default:
+      return state
+  }
+}
+
+function instList(state = [], action) {
+  console.log("curr state is ")
+  console.log(state)
+  console.log("curr action is ")
+  console.log(action)
+  switch (action.type) {
+    case REQUEST_PROFILE_LIST:
+      return []
+    case RECEIVE_PROFILE_LIST:
+      return action.listType == "institution" ? action.list : state
     default:
       return state
   }
 }
 
 const rootReducer = combineReducers({
-  currSt,
+  currProfile,
   fetchedSts,
+  fetchedInsts,
   stList,
+  instList
 })
 
 export default rootReducer
