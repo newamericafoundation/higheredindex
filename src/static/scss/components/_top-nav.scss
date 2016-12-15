@@ -25,6 +25,10 @@
 			height: 15px;
 			line-height: 15px;
 		}
+
+		&__left, &__right {
+			display: inline-block;
+		}
 	}
 
 	.search-box__icon {

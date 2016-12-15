@@ -21,6 +21,10 @@ class InstPageContainer extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.dispatch(changeCurrProfile(null))
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.inst != this.props.inst) {
       const { dispatch, fetchedInsts, inst } = nextProps

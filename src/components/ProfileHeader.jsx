@@ -33,8 +33,8 @@ class ProfileHeader extends React.Component {
 			)
 		} else {
 			return (
-				<div>
-					<h2 className="location-profile__title">{name}</h2>
+				<div className="location-profile__pre-render__title-container">
+					<h2 className="location-profile__pre-render__title">{name}</h2>
 				</div>
 			)
 		}
