@@ -7,27 +7,35 @@ import $ from 'jquery';
 class ProfileHeader extends React.Component {
 
 	componentWillMount() {
-		const { dispatch, fetchedStPhotos, name } = this.props
-
-		if (fetchedStPhotos[name]) {
-			this.photo = fetchedStPhotos[name]
-		} else {
-			dispatch(fetchProfilePhoto(name, "state"))
+		const { dispatch, fetchedPhotos, profileType, path } = this.props
+		
+		if (!fetchedPhotos[path]) {
+			dispatch(fetchProfilePhoto(path, profileType))
 		}
 	}
 	render() {
 		console.log(this.props);
+		const { fetchedPhotos, name, path } = this.props
+		this.photoUrl = fetchedPhotos[path].photoUrl
+		console.log(this.photoUrl);
+		var divStyle = {
+            backgroundImage: 'url(' + this.photoUrl + ')'
+        }
 		return (
-			<div className="location-profile__title-container">
-				<h2 className="location-profile__title">{this.props.name}</h2>
+			<div className="location-profile__title-container" style={divStyle}>
+				<h2 className="location-profile__title">{name}</h2>
 			</div>
 		)
 	}
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
+	console.log(state);
+	const profileType = state.currProfile.type;
+	const fetchedPhotos = profileType == "state" ? state.fetchedStPhotos : state.fetchedInstPhotos
   return {
-    fetchedStPhotos: state.fetchedStPhotos || {}
+  	profileType: profileType,
+    fetchedPhotos: fetchedPhotos || {},
   }
 }
 

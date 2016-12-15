@@ -1,6 +1,9 @@
 .location-profile {
 	&__title-container {
-		height: 300px;
+		height: 600px;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: 50% 50%;
 	}
 	&__title {
 		@include center-vertical;

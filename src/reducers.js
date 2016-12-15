@@ -87,7 +87,35 @@ function fetchedStPhotos(state = {}, action) {
         return Object.assign({}, state, {
           [action.name] : {
             isFetching: false,
-            data: action.data
+            photoUrl: action.photoUrl
+          }
+        })
+      } else {
+        return state
+      }
+    default:
+      return state
+  }
+}
+
+function fetchedInstPhotos(state = {}, action) {
+  switch (action.type) {
+    case REQUEST_PROFILE_PHOTO:
+      if (action.profileType == "institution") {
+        return Object.assign({}, state, {
+          [action.name] : {
+            isFetching: true
+          }
+        })
+      } else {
+        return state
+      }
+    case RECEIVE_PROFILE_PHOTO:
+      if (action.profileType == "institution") {
+        return Object.assign({}, state, {
+          [action.name] : {
+            isFetching: false,
+            photoUrl: action.photoUrl
           }
         })
       } else {
@@ -133,6 +161,7 @@ const rootReducer = combineReducers({
   fetchedSts,
   fetchedInsts,
   fetchedStPhotos,
+  fetchedInstPhotos,
   stList,
   instList
 })

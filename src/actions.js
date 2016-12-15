@@ -18,6 +18,8 @@ export const RECEIVE_PROFILE_PHOTO = 'RECEIVE_PROFILE_PHOTO'
 // export const REQUEST_INST_LIST = 'REQUEST_INST_LIST'
 // export const RECEIVE_INST_LIST = 'RECEIVE_INST_LIST'
 
+let googlePlacesService = new google.maps.places.PlacesService(document.createElement('div'));
+
 /*
  * action creators
  */
@@ -100,6 +102,30 @@ export function fetchProfileList(type) {
   }
 }
 
+  
+
+export function fetchProfilePhoto(name, profileType) {
+  console.log(name);
+
+  return function (dispatch) {
+
+    dispatch(requestProfilePhoto(name, profileType))
+    const params = {
+      query: name
+    }
+    return googlePlacesService.textSearch(params, (results, status) => {
+      console.log(results);
+      let photoUrl = results[0].photos[0].getUrl({'maxWidth': 1500, 'maxHeight': 1500});
+      console.log(photoUrl);
+      dispatch(receiveProfilePhoto(name, profileType, photoUrl))
+    });
+
+      // In a real world app, you also want to
+      // catch any error in the network call.
+  }
+}
+
+
 export function requestProfilePhoto(name, profileType) {
    return { 
 		type: REQUEST_PROFILE_PHOTO, 
@@ -108,33 +134,11 @@ export function requestProfilePhoto(name, profileType) {
    }
 }
 
-export function receiveProfilePhoto(name, profileType, photo) {
+export function receiveProfilePhoto(name, profileType, photoUrl) {
 	return { 
 	  	type: RECEIVE_PROFILE_PHOTO, 
 	  	name,
 	  	profileType, 
-	  	photo
+	  	photoUrl
    	}
-}
-
-export function fetchProfilePhoto(name, profileType) {
-  console.log(name);
-
-  return function (dispatch) {
-    dispatch(requestProfilePhoto(name, profileType))
-
-    const query = 'tufts+university';
-    
-    return fetch('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CoQBdwAAAOs74dO146kO2Tp-JXOIwLrACTDcAmRC2h7EZwHw-xtVTBzY8ksOqkL3lzjlViZzte1uQio66CuP-nXtroFF8cWdxsVofY4XO8w9Cyi1tIIlLsS8D9B48YieXpKD3xuu1fkCfJLIqZCaef6q06S-rfv71VsruTRGstrx5t4OoH9zEhA99CGYpv8rpH34gVUP5A-DGhSzg-cO_KA35lMJqktobXwr7UQ6vA&key=AIzaSyBwiCv57aVHoDiIaY-zTFfQTWLq4ForFuM')
-      .then(response => { return response.json()})
-      .then(json => {
-        console.log("this is the json response")
-        console.log(json);
-        
-        dispatch(receiveProfilePhoto(name, profileType, photo))
-      })
-
-      // In a real world app, you also want to
-      // catch any error in the network call.
-  }
 }
