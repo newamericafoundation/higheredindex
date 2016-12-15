@@ -16,7 +16,7 @@ const StPage = (props) => {
   }
   return (
     <div className="location-profile state">
-      <ProfileHeader name={ props.stData.name }/>
+      <ProfileHeader path={ props.stData.path } name={ props.stData.name }/>
       <SectionNav />
       <ProfileSection 
         title="Students" 

@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import NotFoundPage from './NotFoundPage';
 import SectionNav from './SectionNav.jsx';
 import ProfileSection from './ProfileSection.jsx';
+import ProfileHeader from './ProfileHeader.jsx';
 
 
 const InstPage = (props) => {
@@ -15,9 +16,7 @@ const InstPage = (props) => {
   }
   return (
     <div className="location-profile state">
-      <div className="location-profile__title-container">
-        <h2 className="location-profile__title">{ props.instData.name }</h2>
-      </div>
+      <ProfileHeader path={ props.instData.path } name={ props.instData.name }/>
       <SectionNav />
       <ProfileSection 
         title="Students" 
