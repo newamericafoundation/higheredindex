@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { CHANGE_CURR_PROFILE, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST} from './actions'
+import { CHANGE_CURR_PROFILE, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO} from './actions'
 
 
 function currProfile(state = {}, action) {
@@ -70,6 +70,34 @@ function fetchedInsts(state = {}, action) {
   }
 }
 
+function fetchedStPhotos(state = {}, action) {
+  switch (action.type) {
+    case REQUEST_PROFILE_PHOTO:
+      if (action.profileType == "state") {
+        return Object.assign({}, state, {
+          [action.name] : {
+            isFetching: true
+          }
+        })
+      } else {
+        return state
+      }
+    case RECEIVE_PROFILE_PHOTO:
+      if (action.profileType == "state") {
+        return Object.assign({}, state, {
+          [action.name] : {
+            isFetching: false,
+            data: action.data
+          }
+        })
+      } else {
+        return state
+      }
+    default:
+      return state
+  }
+}
+
 function stList(state = [], action) {
   console.log("curr state is ")
   console.log(state)
@@ -104,6 +132,7 @@ const rootReducer = combineReducers({
   currProfile,
   fetchedSts,
   fetchedInsts,
+  fetchedStPhotos,
   stList,
   instList
 })
