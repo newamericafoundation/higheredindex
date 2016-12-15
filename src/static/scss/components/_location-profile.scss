@@ -1,12 +1,21 @@
 .location-profile {
 	&__title-container {
 		height: 600px;
-		background-repeat: no-repeat;
+		
+		/*background-repeat: no-repeat;
 		background-size: cover;
-		background-position: 50% 50%;
+		background-position: 50% 50%;*/
+	}
+	.react-parallax-bgimage {
+		width: 100% !important;
+		height: auto !important;
+	}
+	.react-parallax-content {
+		top: 50%;
+		transform: translateY(-50%);
 	}
 	&__title {
-		@include center-vertical;
+		/*@include center-vertical;*/
 		text-align: center;
 		text-transform: uppercase;
 	}
