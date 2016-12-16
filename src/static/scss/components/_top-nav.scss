@@ -54,5 +54,35 @@
 			margin: 0px;
 		}
 	}
+
+	&__menu-container {
+		position: absolute;
+		top: 0px;
+		background-color: palette-get(na-black);
+		padding: 25px 40px;
+	}
+
+	&__menu-icon, &__menu-close-icon {
+		color: white;
+	}
+
+	&__menu-icon {
+		position: absolute;
+		top: 25px;
+		left: 25px;
+	}
+
+	&__menu-item {
+		display: block;
+		padding: 3px 0px;
+
+		& a {
+			color: white;
+			font-size: 20px;
+			&:hover {
+				color: palette-get(na-turquoise);
+			}
+		}
+	}
 	
 }

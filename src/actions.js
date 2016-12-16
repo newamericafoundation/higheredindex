@@ -115,9 +115,7 @@ export function fetchProfilePhoto(id, profileType) {
       query: id
     }
     return googlePlacesService.textSearch(params, (results, status) => {
-      console.log(results);
       let photoUrl = results[0].photos[0].getUrl({'maxWidth': 1500, 'maxHeight': 1500});
-      console.log(photoUrl);
       dispatch(receiveProfilePhoto(id, profileType, photoUrl))
     });
 

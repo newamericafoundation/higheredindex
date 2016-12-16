@@ -1,26 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import ExpandableSearchBox from './ExpandableSearchBox.jsx'
+import ExpandableSearchBox from './ExpandableSearchBox.jsx';
+import TopNavMenu from './TopNavMenu';
 
 class TopNav extends React.Component {
     constructor(props) {
         super(props);
+
+        this.handlerFunc = this.handleScroll.bind(this);
 
         this.state = {
           showDefault: true
         };
     }
     componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll.bind(this));
+        console.log("mounting!");
+        window.addEventListener('scroll', this.handlerFunc);
     }
 
     componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
+        console.log("unmounting!")
+        window.removeEventListener('scroll', this.handlerFunc);
     }
 
     handleScroll(event) {
+        // if (!this.isMounted()) {
+        //     return;
+        // }
+        console.log("handling scroll!");
         if (this.state.showDefault) {
             if (event.srcElement.body.scrollTop > 325) {
                 this.setState({
@@ -39,6 +48,7 @@ class TopNav extends React.Component {
     render() {
     	return (
         	<nav className="top-nav">
+                <TopNavMenu />
         		<div className="top-nav__title">
                     <div className="top-nav__title__left">
             			<Link to="/">

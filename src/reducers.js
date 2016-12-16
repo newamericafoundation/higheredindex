@@ -128,10 +128,6 @@ function fetchedInstPhotos(state = {}, action) {
 }
 
 function stList(state = [], action) {
-  console.log("curr state is ")
-  console.log(state)
-  console.log("curr action is ")
-  console.log(action)
   switch (action.type) {
     case REQUEST_PROFILE_LIST:
       return []
@@ -143,10 +139,6 @@ function stList(state = [], action) {
 }
 
 function instList(state = [], action) {
-  console.log("curr state is ")
-  console.log(state)
-  console.log("curr action is ")
-  console.log(action)
   switch (action.type) {
     case REQUEST_PROFILE_LIST:
       return []
