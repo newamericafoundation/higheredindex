@@ -9,20 +9,20 @@ class ProfileHeader extends React.Component {
 
 	componentWillMount() {
 		const { dispatch, fetchedPhotos, profileType, id } = this.props
-		console.log(id);
+		
 		if (!fetchedPhotos[id]) {
 			dispatch(fetchProfilePhoto(id, profileType))
 		}
 	}
 	render() {
-		console.log(this);
+		
 		const { fetchedPhotos, name, id } = this.props
-		console.log(fetchedPhotos[id]);
+		
 		
 
   		if (fetchedPhotos[id] && !fetchedPhotos[id].isFetching) {
   			this.photoUrl = fetchedPhotos[id].photoUrl || ""
-			console.log(this.photoUrl);
+			
 			return (
 				<div>
 					<Parallax className="location-profile__title-container" bgImage={this.photoUrl} strength={300}>
@@ -42,7 +42,7 @@ class ProfileHeader extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state);
+	
 	const profileType = state.currProfile.type;
 	const fetchedPhotos = profileType == "state" ? state.fetchedStPhotos : state.fetchedInstPhotos
   return {

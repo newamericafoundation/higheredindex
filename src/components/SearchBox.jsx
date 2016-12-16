@@ -34,8 +34,7 @@ class SearchBox extends React.Component {
 
   componentWillMount() {
     const { dispatch, stList, instList } = this.props
-    console.log(stList);
-    console.log(instList);
+    
     if (stList.length == 0) {
       dispatch(fetchProfileList("state"))
     }
@@ -66,7 +65,7 @@ class SearchBox extends React.Component {
   }
 
   onSuggestionSelected(event, { suggestion, suggestionValue, sectionIndex, method }) {
-    console.log(suggestion, suggestionValue);
+    
     browserHistory.push('/' + suggestion.type + '/' + suggestionValue);
   }
 
@@ -83,10 +82,7 @@ class SearchBox extends React.Component {
     const { value, suggestions } = this.state;
     let elementClass = this.props.expandable ? " expandable" : "";
     elementClass += this.props.expandable && !this.props.expanded ? " hidden" : "";
-    console.log("suggestions is ");
-    console.log(suggestions);
-    console.log("full list is ");
-    console.log(this.props.stList.concat(this.props.instList));
+
     // Autosuggest will pass through all these props to the input element.
     const inputProps = {
       placeholder: 'Search',
