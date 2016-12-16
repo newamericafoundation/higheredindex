@@ -6,6 +6,7 @@ function currProfile(state = {}, action) {
   switch (action.type) {
     case CHANGE_CURR_PROFILE:
       return {
+        id: action.id,
         name: action.name,
         type: action.profileType
       }
@@ -19,7 +20,7 @@ function fetchedSts(state = {}, action) {
     case REQUEST_PROFILE:
       if (action.profileType == "state") {
         return Object.assign({}, state, {
-          [action.name] : {
+          [action.id] : {
             isFetching: true
           }
         })
@@ -29,7 +30,7 @@ function fetchedSts(state = {}, action) {
     case RECEIVE_PROFILE:
       if (action.profileType == "state") {
         return Object.assign({}, state, {
-          [action.name] : {
+          [action.id] : {
             isFetching: false,
             data: action.data
           }
@@ -47,7 +48,7 @@ function fetchedInsts(state = {}, action) {
     case REQUEST_PROFILE:
       if (action.profileType == "institution") {
         return Object.assign({}, state, {
-          [action.name] : {
+          [action.id] : {
             isFetching: true
           }
         })
@@ -57,7 +58,7 @@ function fetchedInsts(state = {}, action) {
     case RECEIVE_PROFILE:
       if (action.profileType == "institution") {
         return Object.assign({}, state, {
-          [action.name] : {
+          [action.id] : {
             isFetching: false,
             data: action.data
           }
@@ -75,7 +76,7 @@ function fetchedStPhotos(state = {}, action) {
     case REQUEST_PROFILE_PHOTO:
       if (action.profileType == "state") {
         return Object.assign({}, state, {
-          [action.name] : {
+          [action.id] : {
             isFetching: true
           }
         })
@@ -85,7 +86,7 @@ function fetchedStPhotos(state = {}, action) {
     case RECEIVE_PROFILE_PHOTO:
       if (action.profileType == "state") {
         return Object.assign({}, state, {
-          [action.name] : {
+          [action.id] : {
             isFetching: false,
             photoUrl: action.photoUrl
           }
@@ -103,7 +104,7 @@ function fetchedInstPhotos(state = {}, action) {
     case REQUEST_PROFILE_PHOTO:
       if (action.profileType == "institution") {
         return Object.assign({}, state, {
-          [action.name] : {
+          [action.id] : {
             isFetching: true
           }
         })
@@ -113,7 +114,7 @@ function fetchedInstPhotos(state = {}, action) {
     case RECEIVE_PROFILE_PHOTO:
       if (action.profileType == "institution") {
         return Object.assign({}, state, {
-          [action.name] : {
+          [action.id] : {
             isFetching: false,
             photoUrl: action.photoUrl
           }

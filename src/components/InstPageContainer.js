@@ -11,13 +11,13 @@ class InstPageContainer extends React.Component {
   }
 
   componentWillMount() {
-    const { dispatch, fetchedInsts, inst } = this.props
+    const { dispatch, fetchedInsts, id } = this.props
 
-    if (fetchedInsts[inst]) {
-      this.instData = fetchedInsts[inst]
-      dispatch(changeCurrProfile(inst, "institution"))
+    if (fetchedInsts[id]) {
+      this.instData = fetchedInsts[id]
+      dispatch(changeCurrProfile(id, this.instData.name, "institution"))
     } else {
-      dispatch(fetchProfile(inst, "institution"))
+      dispatch(fetchProfile(id, "institution"))
     }
   }
 
@@ -26,22 +26,22 @@ class InstPageContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.inst != this.props.inst) {
-      const { dispatch, fetchedInsts, inst } = nextProps
+    if (nextProps.id != this.props.id) {
+      const { dispatch, fetchedInsts, id } = nextProps
       console.log(fetchedInsts);
 
-      if (fetchedInsts[inst]) {
-        this.instData = fetchedInsts[inst]
-        dispatch(changeCurrProfile(inst, "institution"))
+      if (fetchedInsts[id]) {
+        this.instData = fetchedInsts[id]
+        dispatch(changeCurrProfile(id, this.instData.name, "institution"))
       } else {
-        dispatch(fetchProfile(inst, "institution"))
+        dispatch(fetchProfile(id, "institution"))
       }
     }
   }
 
   render() {
-    const { fetchedInsts, inst } = this.props
-    this.instData = fetchedInsts[inst]
+    const { fetchedInsts, id } = this.props
+    this.instData = fetchedInsts[id]
 
     if (this.instData && !this.instData.isFetching) {
       if (this.instData.data) {
@@ -60,7 +60,7 @@ class InstPageContainer extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    inst: ownProps.params.name,
+    id: ownProps.params.id,
     fetchedInsts: state.fetchedInsts || {}
   }
 }

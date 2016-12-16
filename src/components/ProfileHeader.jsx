@@ -8,20 +8,20 @@ import $ from 'jquery';
 class ProfileHeader extends React.Component {
 
 	componentWillMount() {
-		const { dispatch, fetchedPhotos, profileType, path } = this.props
-		
-		if (!fetchedPhotos[path]) {
-			dispatch(fetchProfilePhoto(path, profileType))
+		const { dispatch, fetchedPhotos, profileType, id } = this.props
+		console.log(id);
+		if (!fetchedPhotos[id]) {
+			dispatch(fetchProfilePhoto(id, profileType))
 		}
 	}
 	render() {
 		console.log(this);
-		const { fetchedPhotos, name, path } = this.props
-		console.log(fetchedPhotos[path]);
+		const { fetchedPhotos, name, id } = this.props
+		console.log(fetchedPhotos[id]);
 		
 
-  		if (fetchedPhotos[path] && !fetchedPhotos[path].isFetching) {
-  			this.photoUrl = fetchedPhotos[path].photoUrl || ""
+  		if (fetchedPhotos[id] && !fetchedPhotos[id].isFetching) {
+  			this.photoUrl = fetchedPhotos[id].photoUrl || ""
 			console.log(this.photoUrl);
 			return (
 				<div>
