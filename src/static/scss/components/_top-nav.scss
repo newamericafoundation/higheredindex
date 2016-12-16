@@ -12,15 +12,18 @@
 			display: inline-block;
 			font-weight: normal;
 			color: white;
-			padding: 0px 7px;
 			margin-bottom: 0px;
+
+			.turquoise {
+				color: palette-get(na-turquoise);
+				text-transform: uppercase;
+			}
 		}
 		&__secondary {
 			display: inline-block;
 			font-weight: normal;
 			font-size: 13px;
 			color: white;
-			padding: 0px 7px;
 			margin-bottom: 0px;
 			height: 15px;
 			line-height: 15px;

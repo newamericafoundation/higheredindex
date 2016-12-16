@@ -11,13 +11,13 @@ class StPageContainer extends React.Component {
   }
 
   componentWillMount() {
-    const { dispatch, fetchedSts, st } = this.props
+    const { dispatch, fetchedSts, id } = this.props
 
-    if (fetchedSts[st]) {
-      this.stData = fetchedSts[st]
-      dispatch(changeCurrProfile(st, "state"))
+    if (fetchedSts[id]) {
+      this.stData = fetchedSts[id]
+      dispatch(changeCurrProfile(id, this.stData.name, "state"))
     } else {
-      dispatch(fetchProfile(st, "state"))
+      dispatch(fetchProfile(id, "state"))
     }
   }
   componentWillUnmount() {
@@ -25,22 +25,22 @@ class StPageContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.st != this.props.st) {
-      const { dispatch, fetchedSts, st } = nextProps
+    if (nextProps.id != this.props.id) {
+      const { dispatch, fetchedSts, id } = nextProps
       console.log(fetchedSts);
 
-      if (fetchedSts[st]) {
-        this.stData = fetchedSts[st]
-        dispatch(changeCurrProfile(st, "state"))
+      if (fetchedSts[id]) {
+        this.stData = fetchedSts[id]
+        dispatch(changeCurrProfile(id, this.stData.name, "state"))
       } else {
-        dispatch(fetchProfile(st, "state"))
+        dispatch(fetchProfile(id, "state"))
       }
     }
   }
 
   render() {
-    const { fetchedSts, st } = this.props
-    this.stData = fetchedSts[st]
+    const { fetchedSts, id } = this.props
+    this.stData = fetchedSts[id]
 
     if (this.stData && !this.stData.isFetching) {
       if (this.stData.data) {
@@ -59,7 +59,7 @@ class StPageContainer extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    st: ownProps.params.name,
+    id: ownProps.params.id,
     fetchedSts: state.fetchedSts || {}
   }
 }

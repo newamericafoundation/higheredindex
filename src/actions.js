@@ -24,46 +24,47 @@ let googlePlacesService = new google.maps.places.PlacesService(document.createEl
  * action creators
  */
 
-export function changeCurrProfile(name, profileType) {
+export function changeCurrProfile(id, name, profileType) {
   return { 
   	type: CHANGE_CURR_PROFILE, 
-  	profileType, 
-  	name 
+  	profileType,
+    id,
+  	name
   }
 }
 
-export function requestProfile(name, profileType) {
+export function requestProfile(id, profileType) {
    return { 
   	type: REQUEST_PROFILE, 
   	profileType, 
-  	name 
+  	id 
    }
 }
 
-export function receiveProfile(name, profileType, json) {
+export function receiveProfile(id, profileType, json) {
 	return { 
 	  	type: RECEIVE_PROFILE, 
-	  	name,
+	  	id,
 	  	profileType, 
 	  	data: json
    	}
 }
 
-export function fetchProfile(name, profileType) {
-	console.log(name);
+export function fetchProfile(id, profileType) {
+	console.log(id);
 
   return function (dispatch) {
 
-    dispatch(changeCurrProfile(name, profileType))
-    dispatch(requestProfile(name, profileType))
+    dispatch(requestProfile(id, profileType))
 
-    return fetch('http://localhost:3000/api/' + profileType + 's/' + name)
+    return fetch('http://localhost:3000/api/' + profileType + 's/' + id)
       .then(response => { return response.json()})
       .then(json => {
       	console.log("this is the json response")
       	console.log(json);
-        
-        dispatch(receiveProfile(name, profileType, json))
+
+        dispatch(changeCurrProfile(id, json.name, profileType))
+        dispatch(receiveProfile(id, profileType, json))
       })
 
       // In a real world app, you also want to
@@ -104,20 +105,20 @@ export function fetchProfileList(type) {
 
   
 
-export function fetchProfilePhoto(name, profileType) {
-  console.log(name);
+export function fetchProfilePhoto(id, profileType) {
+  console.log(id);
 
   return function (dispatch) {
 
-    dispatch(requestProfilePhoto(name, profileType))
+    dispatch(requestProfilePhoto(id, profileType))
     const params = {
-      query: name
+      query: id
     }
     return googlePlacesService.textSearch(params, (results, status) => {
       console.log(results);
       let photoUrl = results[0].photos[0].getUrl({'maxWidth': 1500, 'maxHeight': 1500});
       console.log(photoUrl);
-      dispatch(receiveProfilePhoto(name, profileType, photoUrl))
+      dispatch(receiveProfilePhoto(id, profileType, photoUrl))
     });
 
       // In a real world app, you also want to
@@ -126,18 +127,18 @@ export function fetchProfilePhoto(name, profileType) {
 }
 
 
-export function requestProfilePhoto(name, profileType) {
+export function requestProfilePhoto(id, profileType) {
    return { 
 		type: REQUEST_PROFILE_PHOTO, 
 		profileType, 
-		name 
+		id 
    }
 }
 
-export function receiveProfilePhoto(name, profileType, photoUrl) {
+export function receiveProfilePhoto(id, profileType, photoUrl) {
 	return { 
 	  	type: RECEIVE_PROFILE_PHOTO, 
-	  	name,
+	  	id,
 	  	profileType, 
 	  	photoUrl
    	}
