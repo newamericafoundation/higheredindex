@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SearchBox from "./SearchBox.jsx";
+import { browserHistory } from 'react-router'
 import $ from 'jquery';
 
 export default class ExpandableSearchBox extends React.Component {
@@ -10,9 +11,19 @@ export default class ExpandableSearchBox extends React.Component {
 	      expanded: false
 	    };
 	}
+
+	componentWillMount() {
+		this.unlisten = browserHistory.listen(() => { 
+		    this.setState({
+		      expanded: false,
+		    });
+		});
+	}
+
+	componentWillUnmount() {
+		this.unlisten();
+	}
 	expand() {
-		
-		console.log("expanding");
 		this.setState({ expanded:!this.state.expanded });
 	}
 	render() {

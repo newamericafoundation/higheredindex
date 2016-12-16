@@ -32,6 +32,8 @@ class SearchBox extends React.Component {
     };
   }
 
+
+
   componentWillMount() {
     const { dispatch, stList, instList } = this.props
     
@@ -41,9 +43,20 @@ class SearchBox extends React.Component {
     if (instList.length == 0) {
       dispatch(fetchProfileList("institution"))
     }
+
+    this.unlisten = browserHistory.listen(() => { 
+        this.setState({
+          value: '',
+        });
+    });
+  }
+
+  componentWillUnmount() {
+    this.unlisten();
   }
 
   onChange(event, { newValue }) {
+    console.log("in on change");
     this.setState({
       value: newValue
     });
@@ -52,6 +65,7 @@ class SearchBox extends React.Component {
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested({ value }) {
+    console.log("in suggestions fetch requested");
     this.setState({
       suggestions: this.getSuggestions(value)
     });
@@ -59,17 +73,19 @@ class SearchBox extends React.Component {
 
   // Autosuggest will call this function every time you need to clear suggestions.
   onSuggestionsClearRequested() {
+    console.log("in suggestions clear requested");
     this.setState({
       suggestions: []
     });
   }
 
   onSuggestionSelected(event, { suggestion, suggestionValue, sectionIndex, method }) {
-    
+    console.log("in on suggestions selected");
     browserHistory.push('/' + suggestion.type + '/' + suggestionValue);
   }
 
   getSuggestions(value) {
+    console.log("in get suggestions");
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
     const fullList = this.props.stList.concat(this.props.instList);
