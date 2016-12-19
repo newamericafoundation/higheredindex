@@ -24,7 +24,9 @@ const StPage = (props) => {
         subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
       <DataBlock title="Enrollment by Student Type" 
         paragraphText={['', 'institutions enrolled', 'undergraduate students and', 'graduate students;', 'full-time students and', 'part-time-students; and', 'adult education students in @year']}
-        paragraphFields={['name', 'data_1999', 'data_2000', 'data_2001', 'data_2002', 'data_2003']} 
+        paragraphFields={['name', 'data', 'other_data', 'data', 'other_data', 'data']}
+        vizType="line_chart"
+        vizVars={["data", "other_data"]}
         data={props.stData}/>
       <ProfileSectionTitle 
         title="Loans" 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import LineChart from "./LineChart";
+var d3 = require("d3");
 
 export default class DataBlock extends React.Component {
   render() {
@@ -13,8 +14,21 @@ export default class DataBlock extends React.Component {
 	paragraphText.map((text, i) => {
 		let field = paragraphFields[i],
 			fieldClass = field == 'name' ? '' : "data-block__paragraph__data";
+			
 		populatedText.push(<span> {text} </span>);
-		populatedText.push(<span className={fieldClass}>{data[field]}</span>);
+
+		console.log(typeof(data[field]) );
+		if (typeof(data[field]) == 'object') {
+			let keys = Object.keys(data[field]);
+			let maxYear = d3.max(keys, (d) => { console.log(d); return Number(d) });
+
+			console.log(maxYear);
+
+			populatedText.push(<span className={fieldClass}>{data[field][maxYear]}</span>);
+		} else {
+			populatedText.push(<span className={fieldClass}>{data[field]}</span>);
+		}
+		
     })
 
 	console.log(populatedText);
@@ -22,7 +36,7 @@ export default class DataBlock extends React.Component {
       <div className="data-block">
       	<h5 className="data-block__title">{this.props.title}</h5>
       	<p>{populatedText}</p>
-      	<LineChart />
+      	<LineChart data={this.props.data} variables={this.props.vizVars}/>
 
       </div>
     )
