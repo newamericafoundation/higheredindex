@@ -3,8 +3,12 @@ import ReactFauxDOM from 'react-faux-dom';
 var d3 = require("d3");
 
 export default class LineChart extends React.Component {
- 
+  
   render() {
+    console.log(this.props.data);
+    console.log(this.props.variables);
+
+    let { data, variables } = this.props;
     const div = new ReactFauxDOM.Element('div');
 
     var svg = d3.select(div).append("svg").attr("height",1000).attr("width",1000),
@@ -13,34 +17,35 @@ export default class LineChart extends React.Component {
         height = 1000 - margin.top - margin.bottom,
         g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var parseTime = d3.timeParse("%Y%m%d");
-
-    var x = d3.scaleTime().range([0, width]),
+    var x = d3.scaleLinear().range([0, width]),
         y = d3.scaleLinear().range([height, 0]),
         z = d3.scaleOrdinal(d3.schemeCategory10);
 
-    var line = d3.line()
-        .curve(d3.curveBasis)
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.temperature); });
+    const getLine = (dataObject) => {
+      let line = d3.line()
+        .x(d => {console.log(x(d)); return x(d); })
+        .y(d => {console.log(y(dataObject[d])); return y(dataObject[d]); });
 
-    var cities = ["New York", "San Francisco", "Austin"].map(function(id) {
-      return {
-        id: id,
-        values: data.map(function(d) {
-          return {date: d.date, temperature: d[id]};
-        })
-      };
-    });
+      return line(Object.keys(dataObject));
+    }
+    
+    let keyList = [],
+      valList = [];
+    for (let variable of variables) {
+      let keys = Object.keys(data[variable]);
+      let vals = Object.values(data[variable]);
 
-    x.domain(d3.extent(data, function(d) { return d.date; }));
+      keyList.push(...keys);
+      valList.push(...vals);
+    }
+    // de-duplication
+    keyList = Array.from(new Set(keyList));
+    x.domain(d3.extent(keyList));
 
-    y.domain([
-      d3.min(cities, function(c) { return d3.min(c.values, function(d) { return d.temperature; }); }),
-      d3.max(cities, function(c) { return d3.max(c.values, function(d) { return d.temperature; }); })
-    ]);
+    y.domain(d3.extent(valList));
 
-    z.domain(cities.map(function(c) { return c.id; }));
+    console.log(y.domain());
+    z.domain(variables);
 
     g.append("g")
         .attr("class", "axis axis--x")
@@ -55,25 +60,48 @@ export default class LineChart extends React.Component {
         .attr("y", 6)
         .attr("dy", "0.71em")
         .attr("fill", "#000")
-        .text("Temperature, ºF");
+        .text("Value");
 
-    var city = g.selectAll(".city")
-      .data(cities)
-      .enter().append("g")
-        .attr("class", "city");
+    for (let variable of variables) {
+      console.log(data[variable]);
+      g.append("path")
+        .attr("d", getLine(data[variable]))
+        .style("fill", "none")
+        .style("stroke", "steelblue")
+        .style("stroke-width", "1.5px");
 
-    city.append("path")
-        .attr("class", "line")
-        .attr("d", function(d) { return line(d.values); })
-        .style("stroke", function(d) { return z(d.id); });
+      for (let key in data[variable]) {
+        console.log(key)
+        g.append("circle")
+        .attr("r", 3)
+        .attr("cx", x(key))
+        .attr("cy", y(data[variable][key]))
+        .style("fill", "white")
+        .style("stroke", "steelblue")
+        .style("stroke-width", "1.5px");
+      }
 
-    city.append("text")
-        .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
-        .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
-        .attr("x", 3)
-        .attr("dy", "0.35em")
-        .style("font", "10px sans-serif")
-        .text(function(d) { return d.id; });
+      
+
+    }
+
+    // let dataGroup = g.selectAll(".dataGroup")
+    //   .data(data)
+    //   .enter().append("g")
+    //   .attr("class", "dataGroup");
+
+    // dataGroup.append("path")
+    //     .attr("class", "line")
+    //     .attr("d", function(d) { console.log(d) })
+        // .style("stroke", function(d) { return z(d.id); });
+
+    // city.append("text")
+    //     .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
+    //     .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
+    //     .attr("x", 3)
+    //     .attr("dy", "0.35em")
+    //     .style("font", "10px sans-serif")
+    //     .text(function(d) { return d.id; });
 
     function type(d, _, columns) {
       d.date = parseTime(d.date);
