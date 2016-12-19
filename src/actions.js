@@ -17,8 +17,14 @@ export const RECEIVE_PROFILE_PHOTO = 'RECEIVE_PROFILE_PHOTO'
 // export const RECEIVE_INST = 'RECEIVE_INST'
 // export const REQUEST_INST_LIST = 'REQUEST_INST_LIST'
 // export const RECEIVE_INST_LIST = 'RECEIVE_INST_LIST'
+let GoogleMapsLoader = require('google-maps');
+let googlePlacesService; 
+GoogleMapsLoader.LIBRARIES = ['places'];
+GoogleMapsLoader.KEY = 'AIzaSyBwiCv57aVHoDiIaY-zTFfQTWLq4ForFuM';
+GoogleMapsLoader.load(function(google) {
+  googlePlacesService = new google.maps.places.PlacesService(document.createElement('div'));
+});
 
-let googlePlacesService = new google.maps.places.PlacesService(document.createElement('div'));
 
 /*
  * action creators

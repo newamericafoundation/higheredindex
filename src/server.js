@@ -6,7 +6,7 @@ import Express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
-import routes from './routes';
+// import routes from './routes';
 import NotFoundPage from './components/NotFoundPage';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
@@ -31,7 +31,12 @@ const stateSchema = new mongoose.Schema({
   data_2000: Number,
   data_2001: Number,
   data_2002: Number,
-  data_2003: Number
+  data_2003: Number,
+  other_data_1999: Number,
+  other_data_2000: Number,
+  other_data_2001: Number,
+  other_data_2002: Number,
+  other_data_2003: Number
 });
 const stateModel = mongoose.model('state', stateSchema);
 
