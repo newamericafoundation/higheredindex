@@ -26,7 +26,6 @@ class ProfileHeader extends React.Component {
 			return (
 				<div>
 					<Parallax className="location-profile__title-container" bgImage={this.photoUrl} strength={300}>
-						<br/>
 						<h2 className="location-profile__title">{name}</h2>
 					</Parallax>
 				</div>
