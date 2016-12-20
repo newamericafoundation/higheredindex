@@ -2,4 +2,23 @@
 	&.with-header {
 		transform: translateY($top-nav-height);
 	}
+
+	&.shifted {
+		transform: translateX($sidemenu-width);
+		pointer-events: none;
+		overflow: hidden;
+
+		&::before {
+		    content:"";
+		    display: block;
+		    height: 100%;
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    background-color: rgba(0, 0, 0, .5);
+		    z-index: 100;
+		    overflow: hidden;
+		}
+	}
 }

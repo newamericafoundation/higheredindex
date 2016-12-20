@@ -4,8 +4,8 @@ import fetch from 'isomorphic-fetch'
  * action types
  */
 
+export const TOGGLE_MENU_EXPANSION = 'TOGGLE_MENU_EXPANSION'
 export const CHANGE_CURR_PROFILE = 'CHANGE_CURR_PROFILE'
-
 export const REQUEST_PROFILE = 'REQUEST_PROFILE'
 export const RECEIVE_PROFILE = 'RECEIVE_PROFILE'
 export const REQUEST_PROFILE_LIST = 'REQUEST_PROFILE_LIST'
@@ -29,6 +29,13 @@ GoogleMapsLoader.load(function(google) {
 /*
  * action creators
  */
+
+export function toggleMenuExpansion(setExpansionState) {
+  return { 
+    type: TOGGLE_MENU_EXPANSION, 
+    setExpansionState: setExpansionState
+  }
+}
 
 export function changeCurrProfile(id, name, profileType) {
   return { 
