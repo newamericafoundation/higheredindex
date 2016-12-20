@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 import ExpandableSearchBox from './ExpandableSearchBox.jsx';
-import TopNavMenu from './TopNavMenu';
 
 class TopNav extends React.Component {
     constructor(props) {
@@ -47,8 +46,8 @@ class TopNav extends React.Component {
 
     render() {
     	return (
+            <header>
         	<nav className="top-nav">
-                <TopNavMenu />
         		<div className="top-nav__title">
                     <div className="top-nav__title__left">
             			<Link to="/">
@@ -72,6 +71,7 @@ class TopNav extends React.Component {
         		</div>
         		<ExpandableSearchBox />
         	</nav>
+            </header>
         );
     }
 }

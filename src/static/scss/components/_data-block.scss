@@ -1,8 +1,33 @@
 .data-block {
+	max-width: 1050px;
+	margin: auto;
+	padding: 0px 25px;
+	&__title {
+		font-weight: bold;
+		margin-bottom: 25px;
+	}
+	&__content {
+		display: table;
+	}
+	&__paragraph, &__chart {
+		display: table-cell;
+	}
 	&__paragraph {
+		width: 40%;
+		vertical-align: top;
+		padding-right: 25px;
+		p {
+			line-height: 1.6;
+			color: palette-get(na-black-40);
+			font-size: 16px;
+		}
 		&__data {
 			font-weight: bold;
+			color: palette-get(na-black);
 		}
+	}
+	&__chart {
+		width: 60%;
 	}
 }
 

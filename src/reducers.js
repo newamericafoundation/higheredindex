@@ -1,6 +1,15 @@
 import { combineReducers } from 'redux'
-import { CHANGE_CURR_PROFILE, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO} from './actions'
+import { TOGGLE_MENU_EXPANSION, CHANGE_CURR_PROFILE, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO} from './actions'
 
+function menuExpanded(state = false, action) {
+  console.log(action.setExpansionState == null)
+  switch (action.type) {
+    case TOGGLE_MENU_EXPANSION:
+      return action.setExpansionState != null ? action.setExpansionState : !state
+    default:
+      return state
+  }
+}
 
 function currProfile(state = {}, action) {
   switch (action.type) {
@@ -150,6 +159,7 @@ function instList(state = [], action) {
 }
 
 const rootReducer = combineReducers({
+  menuExpanded,
   currProfile,
   fetchedSts,
   fetchedInsts,

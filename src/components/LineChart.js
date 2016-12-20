@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactFauxDOM from 'react-faux-dom';
 var d3 = require("d3");
+import $ from 'jquery';
 
 export default class LineChart extends React.Component {
   
@@ -10,11 +11,12 @@ export default class LineChart extends React.Component {
 
     let { data, variables } = this.props;
     const div = new ReactFauxDOM.Element('div');
+    console.log()
 
-    var svg = d3.select(div).append("svg").attr("height",1000).attr("width",1000),
-        margin = {top: 20, right: 80, bottom: 30, left: 50},
+    var svg = d3.select(div).append("svg").attr("height",300).attr("width",'100%'),
+        margin = {top: 10, right: 80, bottom: 30, left: 30},
         width = 1000 - margin.left - margin.right,
-        height = 1000 - margin.top - margin.bottom,
+        height = 300 - margin.top - margin.bottom,
         g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var x = d3.scaleLinear().range([0, width]),
