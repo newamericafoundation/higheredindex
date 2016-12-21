@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import $ from 'jquery';
 
 import ExpandableSearchBox from './ExpandableSearchBox.jsx';
 
@@ -15,28 +16,22 @@ class TopNav extends React.Component {
         };
     }
     componentDidMount() {
-        console.log("mounting!");
-        window.addEventListener('scroll', this.handlerFunc);
+        $('.app-container').scroll(this.handlerFunc);
     }
 
     componentWillUnmount() {
-        console.log("unmounting!")
-        window.removeEventListener('scroll', this.handlerFunc);
+        $('.app-container').off("scroll", this.handlerFunc);
     }
 
     handleScroll(event) {
-        // if (!this.isMounted()) {
-        //     return;
-        // }
-        console.log("handling scroll!");
         if (this.state.showDefault) {
-            if (event.srcElement.body.scrollTop > 325) {
+            if ($(".profile-header__text").offset().top < 30) {
                 this.setState({
                   showDefault: false
                 });
             }
         } else {
-            if (event.srcElement.body.scrollTop <= 325) {
+            if ($(".profile-header__text").offset().top >= 30) {
                 this.setState({
                   showDefault: true
                 });
