@@ -22,18 +22,18 @@ class ProfileHeader extends React.Component {
 
   		if (fetchedPhotos[id] && !fetchedPhotos[id].isFetching) {
   			this.photoUrl = fetchedPhotos[id].photoUrl || ""
-			
+			const divStyle ={
+	            backgroundImage: 'url(' + this.photoUrl + ')'
+	        }
 			return (
-				<div>
-					<Parallax className="location-profile__title-container" bgImage={this.photoUrl} strength={300}>
-						<h2 className="location-profile__title">{name}</h2>
-					</Parallax>
+				<div className="profile-header" style={divStyle}>
+					<h2 className="profile-header__text">{name}</h2>
 				</div>
 			)
 		} else {
 			return (
-				<div className="location-profile__pre-render__title-container">
-					<h2 className="location-profile__pre-render__title">{name}</h2>
+				<div className="profile-header">
+					<h2 className="profile-header__text black">{name}</h2>
 				</div>
 			)
 		}
