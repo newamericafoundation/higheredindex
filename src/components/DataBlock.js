@@ -1,24 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import LineChart from "./LineChart";
 import DataBlockParagraph from "./DataBlockParagraph";
-
+import DataBlockViz from "./DataBlockViz";
 
 export default class DataBlock extends React.Component {
   render() {
-  	console.log(this.props.paragraphText);
-  	let {paragraphText, paragraphFields, data} = this.props;
+  	console.log(this.props.settings);
+  	let {settings, data} = this.props,
+      {title, paragraphSettings, vizSettings} = settings;
 
     return (
       <div className="data-block">
-      	<h5 className="data-block__title">{this.props.title}</h5>
+      	<h5 className="data-block__title">{title}</h5>
       	<div className="data-block__content">
-	      	<DataBlockParagraph paragraphText={paragraphText} paragraphFields={paragraphFields} data={data}/>
-	      	<div className="data-block__chart">
-	      		<LineChart data={this.props.data} variables={this.props.vizVars}/>
-	      	</div>
-	    </div>
+	      	<DataBlockParagraph settings={paragraphSettings} data={data}/>
+          <DataBlockViz settings={vizSettings} data={data}/>
+        </div>
       </div>
     )
   }

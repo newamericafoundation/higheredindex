@@ -7,7 +7,7 @@ import SectionNav from './SectionNav.jsx';
 import ProfileSectionTitle from './ProfileSectionTitle.jsx';
 import ProfileHeader from './ProfileHeader.jsx';
 import DataBlock from './DataBlock';
-
+import stVizSettings from './stVizSettings';
 
 const StPage = (props) => {
   console.log("in stPage, parameter is: ");
@@ -22,25 +22,12 @@ const StPage = (props) => {
       <ProfileSectionTitle 
         title="Students" 
         subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
-      <DataBlock title="Enrollment by Student Type" 
-        paragraphText={['', 'institutions enrolled', 'undergraduate students and', 'graduate students;', 'full-time students and', 'part-time-students; and', 'adult education students in @year']}
-        paragraphFields={['name', 'data', 'other_data', 'data', 'other_data', 'data']}
-        vizType="line_chart"
-        vizVars={["data", "other_data"]}
-        data={props.stData}/>
-      <ProfileSectionTitle 
-        title="Loans" 
-        subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
-      <ProfileSectionTitle 
-        title="Grants" 
-        subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
-      <ProfileSectionTitle 
-        title="Schools" 
-        subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
-      <ProfileSectionTitle 
-        title="Outcomes" 
-        subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
-
+      <div>
+        {stVizSettings.map((settings, i) => {
+          console.log(i)
+          return <DataBlock key={i} settings={settings} data={props.stData} />;
+        })}
+      </div>
       <div className="navigateBack">
         <Link to="/">« Back to the index</Link>
       </div>

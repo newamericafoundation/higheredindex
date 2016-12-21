@@ -8,7 +8,7 @@
 		top: 70px;
 		height: 100%;
 		background-color: palette-get(na-black);
-		padding: 25px 40px;
+		padding: 0px 30px 25px;
 		width: $sidemenu-width;
 	}
 
@@ -18,8 +18,13 @@
 
 	&__menu-icon {
 		position: absolute;
-		top: 25px;
+		top: 22px;
 		left: 25px;
+
+		svg {
+			height: 25px;
+			width: 25px;
+		}
 	}
 
 	&__menu-item {

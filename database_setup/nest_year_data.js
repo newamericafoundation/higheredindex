@@ -5,7 +5,7 @@ cursor = db.states.find();
 example = db.states.findOne();
 printjson( example );
 originalKeys = Object.keys(example)
-dedupedKeys = Set();
+dedupedKeys = new Set();
 
 // originalKeys.map(function(key) {
 // 	dedupedKeys.add(key.replace(/_[0-9]{4}/i, ''));
@@ -18,7 +18,7 @@ while ( cursor.hasNext() ) {
 	curr = cursor.next();
 	id = curr._id
 
-	for (var key of originalKeys) {
+	for (let key of originalKeys) {
 		if (regEx.test(key)) {
 			variable = key.replace(/_[0-9]{4}/i, '');
 			year = key.match(/[0-9]{4}/i);
