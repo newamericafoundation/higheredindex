@@ -1,0 +1,15 @@
+.profile-header {
+	height: calc(100vh - #{$top-nav-height});
+	background-size: cover;
+	background-position: 50% 50%;
+
+	&__text {
+		@include center-vertical;
+		text-align: center;
+		color: white;
+
+		&.black {
+			color: black;
+		}
+	}
+}
