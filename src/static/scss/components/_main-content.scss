@@ -1,24 +1,34 @@
 .main-content {
+	height: 100%;
 	&.with-header {
 		transform: translateY($top-nav-height);
 	}
+
+	-webkit-transition: $sidemenu-transition;
+    -moz-transition: $sidemenu-transition;
+    -o-transition: $sidemenu-transition;
+    transition: $sidemenu-transition;
 
 	&.shifted {
 		transform: translateX($sidemenu-width);
 		pointer-events: none;
 		overflow: hidden;
 
-		&::before {
-		    content:"";
-		    display: block;
-		    height: 100%;
-		    position: absolute;
-		    top: 0;
-		    left: 0;
-		    width: 100%;
-		    background-color: rgba(0, 0, 0, .5);
-		    z-index: 100;
-		    overflow: hidden;
+		&+.main-content__overlay {
+			display: block;
 		}
+	}
+
+	&__overlay {
+		display: none;
+	    content:"";
+	    height: 100%;
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    background-color: rgba(0, 0, 0, .5);
+	    z-index: 100;
+	    overflow: hidden;
 	}
 }
