@@ -2,24 +2,25 @@ import React from 'react';
 var d3 = require("d3");
 
 export default function DataBlockParagraph(props) {
-	const {paragraphText, paragraphFields, data} = props;
-	console.log(paragraphText, paragraphFields, data)
+	const {settings, data} = props,
+		{textSections, variables} = settings;
+	console.log(textSections, variables, data);
+  	
   	let populatedText = [];
 
-	paragraphText.map((text, i) => {
-		let field = paragraphFields[i],
-			fieldClass = field == 'name' ? '' : "data-block__paragraph__data";
+	textSections.map((text, i) => {
+		let variable = variables[i],
+			variableClass = variable == 'name' ? '' : "data-block__paragraph__data";
 			
 		populatedText.push(<span> {text} </span>);
 
-		console.log(typeof(data[field]) );
-		if (typeof(data[field]) == 'object') {
-			let keys = Object.keys(data[field]);
+		if (typeof(data[variable]) == 'object') {
+			let keys = Object.keys(data[variable]);
 			let maxYear = d3.max(keys, (d) => { return Number(d) });
 
-			populatedText.push(<span className={fieldClass}>{data[field][maxYear]}</span>);
+			populatedText.push(<span className={variableClass}>{data[variable][maxYear]}</span>);
 		} else {
-			populatedText.push(<span className={fieldClass}>{data[field]}</span>);
+			populatedText.push(<span className={variableClass}>{data[variable]}</span>);
 		}
 		
     })

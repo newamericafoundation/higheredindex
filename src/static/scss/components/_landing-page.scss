@@ -1,9 +1,12 @@
 .landing-page {
 	height: 100%;
 	position: relative;
-	&__content {
+	.main-content {
 		text-align: center;
 		@include center-vertical;
+		&.shifted {
+			transform: translate($sidemenu-width, -50%);
+		}
 	}
 
 	&__explore-links {
