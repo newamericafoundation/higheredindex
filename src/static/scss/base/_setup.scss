@@ -79,5 +79,10 @@ input, select {
 }
 
 .app-container {
+	height: 100%;
 	overflow-x: hidden;
+}
+
+.top-nav-shifted-content {
+	transform: translateY($top-nav-height);
 }

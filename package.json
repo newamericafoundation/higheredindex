@@ -44,7 +44,7 @@
     "react-faux-dom": "^3.0.0",
     "react-icons": "^2.2.1",
     "react-inlinesvg": "^0.5.4",
-    "react-parallax": "^1.2.0",
+    "react-parallax": "^1.2.2",
     "react-redux": "^4.4.6",
     "react-router": "^2.6.1",
     "react-svg": "^2.1.1",
