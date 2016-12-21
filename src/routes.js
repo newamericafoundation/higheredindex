@@ -2,7 +2,8 @@
 
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
-import Layout from './components/Layout';
+import SideMenuLayout from './components/SideMenuLayout';
+import TopNavLayout from './components/TopNavLayout';
 import LandingPage from './components/LandingPage.jsx';
 import SearchPage from './components/SearchPage.jsx';
 import StPageContainer from './components/StPageContainer';
@@ -10,9 +11,9 @@ import InstPageContainer from './components/InstPageContainer';
 import NotFoundPage from './components/NotFoundPage';
 
 const routes = (
-	<Route path="/">
+	<Route path="/" component={SideMenuLayout}>
     	<IndexRoute component={LandingPage}/>
-    	<Route path="/" component={Layout}>
+    	<Route path="/" component={TopNavLayout}>
     		<Route path="search/:type" component={SearchPage}/>
 		    <Route path="state/:id" component={StPageContainer}/>
 		    <Route path="institution/:id" component={InstPageContainer}/>
