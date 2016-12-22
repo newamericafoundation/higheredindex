@@ -1,18 +1,54 @@
 .landing-page {
 	height: 100%;
 	position: relative;
+	color: white;
+	background-image: url('../img/school.jpg');
+	background-size: cover;
+	background-position: 50% 50%;
+
+	&::before {
+		display: block;
+	    content:"";
+	    height: 100%;
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    background-color: rgba(0, 0, 0, .5);
+	    z-index: 1;
+	    overflow: hidden;
+	}
 	&__content {
+		z-index: 2;
 		text-align: center;
+		padding: 0px 25px;
 		@include center-vertical;
+
+		.icon__new-america {
+			height: 30px;
+			width: auto;
+			fill: white;
+		}
 	}
 
-	&__explore-links {
+	&__explore-link, &__methodology-link {
+		display: inline-block;
+		.icon {
+			fill: white;
+		}
 
+		a:hover {
+			.landing-page__explore-link__secondary, .landing-page__explore-link__primary, .landing-page__methodology-link__primary {
+				color: palette-get(na-turquoise);
+			}
+			.icon {
+				fill: palette-get(na-turquoise);
+			}
+		}
 	}
 
 	&__explore-link {
-		display: inline-block;
-		padding: $desktop-padding;
+		padding: $desktop-padding 30px;
 		&:first-child {
 			border-right: $standard-border;
 		}
@@ -23,22 +59,38 @@
 		&__secondary {
 			font-size: 13px;
 			margin-bottom: 0px;
+			color: white;
 		}
 		&__primary {
 			font-weight: bold;
 			font-size: 20px;
+			color: white;
 		}
 	}
 
+	&__methodology-link {
+		padding: 15px 25px;
+		&__primary {
+			font-weight: bold;
+			font-size: 18px;
+			color: white;
+			padding-left: 15px;
+		}
+
+		&__primary, .icon {
+			display: inline-block;
+		}
+	}
+
+
 	&__title {
-		/*left: 50%;
-		font-size: 30px;
-		@include center-vertical;
-		text-align: center;*/
+		padding: 10px 0px;
+		font-weight: normal;
+		font-size: 55px;
 	}
 
 	.search-box {
 		margin: auto;
-		max-width: 700px;
+		max-width: 600px;
 	}
 }

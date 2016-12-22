@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProfilePhoto } from '../actions'
-import { Parallax } from 'react-parallax';
 
 import $ from 'jquery';
 
@@ -14,11 +13,8 @@ class ProfileHeader extends React.Component {
 			dispatch(fetchProfilePhoto(id, profileType))
 		}
 	}
-	render() {
-		
+	render() {	
 		const { fetchedPhotos, name, id } = this.props
-		
-		
 
   		if (fetchedPhotos[id] && !fetchedPhotos[id].isFetching) {
   			this.photoUrl = fetchedPhotos[id].photoUrl || ""
