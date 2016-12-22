@@ -18,6 +18,12 @@
 				color: palette-get(na-turquoise);
 				text-transform: uppercase;
 			}
+
+			.icon {
+				fill: white;
+				height: 22px;
+				width: auto;
+			}
 		}
 		&__secondary {
 			display: inline-block;

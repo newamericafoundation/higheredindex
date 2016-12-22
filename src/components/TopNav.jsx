@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
+import SvgIcon from './SvgIcon'
+
 import ExpandableSearchBox from './ExpandableSearchBox.jsx';
 
 class TopNav extends React.Component {
@@ -53,7 +55,7 @@ class TopNav extends React.Component {
                         <div className="top-nav__title__right">
                 			<h3 className="top-nav__title__secondary">&nbsp;&nbsp;by&nbsp;&nbsp;</h3>
                 			<a href="https://www.newamerica.org">
-                				<h3 className="top-nav__title__primary">New America</h3>
+                				<h3 className="top-nav__title__primary"><SvgIcon name='new-america' /></h3>
                 			</a>
                         </div>
                     }

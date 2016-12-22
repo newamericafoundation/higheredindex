@@ -2,19 +2,24 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import Autosuggest from 'react-autosuggest';
-import { fetchProfileList } from '../actions'
+import { fetchProfileList } from '../actions';
+import SvgIcon from './SvgIcon';
 
 // When suggestion is clicked, Autosuggest needs to populate the input element
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
 const getSuggestionValue = suggestion => suggestion.path;
 
-// Use your imagination to render suggestions.
-const renderSuggestion = suggestion => (
-  <div>
-    {suggestion.name}
-  </div>
-);
+const renderSuggestion = suggestion => {
+  const iconType = suggestion.type == "state" ? 'map-marker' : 'institution';
+  return (
+    <div>
+      <SvgIcon name={iconType} />
+      {suggestion.name}
+    </div>
+  );
+
+}
 
 class SearchBox extends React.Component {
   constructor(props) {
