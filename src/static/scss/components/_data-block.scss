@@ -7,13 +7,21 @@
 		margin-bottom: 25px;
 	}
 	&__content {
-		display: table;
+		@include breakpoint(medium) {
+			display: table;
+		}
 	}
-	&__paragraph, &__chart {
-		display: table-cell;
+	&__paragraph, &__viz {
+		@include breakpoint(medium) {
+			display: table-cell;
+		}
 	}
 	&__paragraph {
-		width: 40%;
+		width: 100%;
+		@include breakpoint(medium) {
+			width: 40%;
+		}
+		
 		vertical-align: top;
 		padding-right: 25px;
 		p {
@@ -27,7 +35,10 @@
 		}
 	}
 	&__viz {
-		width: 60%;
+		width: 100%;
+		@include breakpoint(medium) {
+			width: 60%;
+		}
 	}
 }
 

@@ -8,8 +8,8 @@ const stVizSettings = [
 		vizSettings: {
 			type: "line-chart",
 			variables: [
-				{variable:"data", displayName:"Data", format: "string", color: "#fff" },
-				{variable:"other_data", displayName:"Other Data", format: "string", color: "#fff"},
+				{variable:"data", displayName:"Data", format: "string", color: "green" },
+				{variable:"other_data", displayName:"Other Data", format: "string", color: "orange"},
 			]
 
 		}
@@ -23,12 +23,12 @@ const stVizSettings = [
 		vizSettings: {
 			type: "line-chart",
 			variables: [
-				{variable:"data", displayName:"Data", format: "string", color: "#fff" },
-				{variable:"other_data", displayName:"Other Data", format: "string", color: "#fff"},
+				{variable:"data", displayName:"Data", format: "string", color: "steelblue" },
+				{variable:"other_data", displayName:"Other Data", format: "string", color: "purple"},
 			]
 
 		}
-	}
+	},
 ]
 
 export default stVizSettings;
