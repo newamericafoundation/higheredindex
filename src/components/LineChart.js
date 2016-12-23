@@ -8,6 +8,8 @@ const margin = {top: 10, right: 80, bottom: 30, left: 30};
 export default class LineChart extends React.Component {
     constructor() {
         super();
+
+        this.resizeFunc = this.resize.bind(this);
         
         this.state = {
             width: 0,
@@ -16,7 +18,7 @@ export default class LineChart extends React.Component {
     }
     componentDidMount() {
         console.log("calling component did mount");
-        $(window).bind("resize", this.resize.bind(this));
+        $(window).resize(this.resizeFunc);
 
         const chart = this.initializeChart();
 
@@ -29,7 +31,8 @@ export default class LineChart extends React.Component {
     }
 
     componentWillUnmount() {
-        $(window).unbind("resize", this.resize.bind(this));
+        console.log("unmounting!!!");
+        $(window).off("resize", this.resizeFunc);
     }
 
     resize() {

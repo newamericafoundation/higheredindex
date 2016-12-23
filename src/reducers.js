@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { TOGGLE_MENU_EXPANSION, CHANGE_CURR_PROFILE, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO} from './actions'
+import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO} from './actions'
 
 function menuExpanded(state = false, action) {
   console.log(action.setExpansionState == null)
@@ -12,6 +12,7 @@ function menuExpanded(state = false, action) {
 }
 
 function currProfile(state = {}, action) {
+  console.log(action.name);
   switch (action.type) {
     case CHANGE_CURR_PROFILE:
       return {
@@ -19,6 +20,16 @@ function currProfile(state = {}, action) {
         name: action.name,
         type: action.profileType
       }
+    default:
+      return state
+  }
+}
+
+function topNavProfileNameShown(state = false, action) {
+  console.log(action.setExpansionState == null)
+  switch (action.type) {
+    case TOGGLE_TOP_NAV_PROFILE_NAME:
+      return action.newSetting
     default:
       return state
   }
@@ -161,6 +172,7 @@ function instList(state = [], action) {
 const rootReducer = combineReducers({
   menuExpanded,
   currProfile,
+  topNavProfileNameShown,
   fetchedSts,
   fetchedInsts,
   fetchedStPhotos,

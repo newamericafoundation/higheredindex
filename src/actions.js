@@ -12,6 +12,7 @@ export const REQUEST_PROFILE_LIST = 'REQUEST_PROFILE_LIST'
 export const RECEIVE_PROFILE_LIST = 'RECEIVE_PROFILE_LIST'
 export const REQUEST_PROFILE_PHOTO = 'REQUEST_PROFILE_PHOTO'
 export const RECEIVE_PROFILE_PHOTO = 'RECEIVE_PROFILE_PHOTO'
+export const TOGGLE_TOP_NAV_PROFILE_NAME = 'TOGGLE_TOP_NAV_PROFILE_NAME'
 
 // export const REQUEST_INST = 'REQUEST_INST'
 // export const RECEIVE_INST = 'RECEIVE_INST'
@@ -38,11 +39,19 @@ export function toggleMenuExpansion(setExpansionState) {
 }
 
 export function changeCurrProfile(id, name, profileType) {
+  console.log(name);
   return { 
   	type: CHANGE_CURR_PROFILE, 
   	profileType,
     id,
   	name
+  }
+}
+
+export function toggleTopNavProfileName(newSetting) {
+  return {
+    type: TOGGLE_TOP_NAV_PROFILE_NAME,
+    newSetting: newSetting
   }
 }
 
