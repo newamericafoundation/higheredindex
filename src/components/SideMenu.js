@@ -8,7 +8,6 @@ import SvgIcon from './SvgIcon'
 
 class SideMenu extends React.Component {
   componentWillMount() {
-    console.log("will mount!");
     this.unlisten = browserHistory.listen(() => { 
         this.props.loadUnloadHandler(false);
     });
@@ -28,7 +27,7 @@ class SideMenu extends React.Component {
 
     let containerClass = "side-menu__menu-container";
     containerClass += expanded ? " visible" : "";
-    console.log(this.props);
+
     return (
       <div className="side-menu">
         <a className="side-menu__menu-icon" onClick={clickHandler}>
