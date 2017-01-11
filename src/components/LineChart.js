@@ -3,7 +3,7 @@ import ReactFauxDOM from 'react-faux-dom';
 var d3 = require("d3");
 import $ from 'jquery';
 
-const margin = {top: 10, right: 80, bottom: 30, left: 30};
+const margin = {top: 10, right: 0, bottom: 30, left: 40};
 
 export default class LineChart extends React.Component {
     constructor() {
@@ -13,7 +13,9 @@ export default class LineChart extends React.Component {
         
         this.state = {
             width: 0,
-            height: 0
+            height: 0,
+            currHovered: null,
+            tooltipSettings: null
         }
     }
     componentDidMount() {
@@ -26,7 +28,7 @@ export default class LineChart extends React.Component {
         this.setState({
             chart: chart,
             width: w,
-            height: 250
+            height: w/2
         })
     }
 
@@ -39,47 +41,16 @@ export default class LineChart extends React.Component {
         let w = this.getCurrWidth();
         this.setState({
           width: w,
-          height: 250
+          height: w/2
         })
         console.log("resizing!");
     }
 
     getCurrWidth() {
-        return $(this.refs.renderingArea).width();
+        return $(this.refs.renderingArea).width() - margin.left - margin.right;
     }
 
-    // componentDidMount() {
-    //     let w = this.props.resizeFunc();
-    //     console.log(w);
-    //     window.onresize = this.resize.bind(this);
-    // }
-    // resize() {
-    //     console.log("in line chart calling resize");
-    //     let w = this.props.resizeFunc();
-    //     console.log(w);
-    //     this.setState({
-    //         width: w
-    //     });
-    // }
-    render() {
-        console.log("calling render");
-        let content;
-
-        const { data, settings } = this.props,
-            {variables} = settings;
-
-        if (this.state.chart) {
-            this.updateChart();
-            content = this.state.chart.toReact();
-        } else {
-            content = "loading chart";
-        }
-        return (
-            <div ref="renderingArea">
-                {content}
-            </div>
-        )
-    }
+    
 
     initializeChart() {
         const { data, settings } = this.props,
@@ -93,20 +64,19 @@ export default class LineChart extends React.Component {
         this.x = d3.scaleLinear();
         this.y = d3.scaleLinear();
         this.z = d3.scaleOrdinal(d3.schemeCategory10);
-
-
-        this.xAxis = this.g.append("g")
-            .attr("class", "axis axis--x");
         
         this.yAxis = this.g.append("g")
             .attr("class", "axis axis--y");
 
-        this.yAxis.append("text")
+        this.yAxisLabel = this.yAxis.append("text")
+            .attr("class", "data-block__viz__y-axis-label")
             .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("dy", "0.71em")
+            .attr("y", -30)
             .attr("fill", "#000")
             .text("Value");
+
+        this.xAxis = this.g.append("g")
+            .attr("class", "axis axis--x");
 
         let keyList = [],
             valList = [];
@@ -122,7 +92,9 @@ export default class LineChart extends React.Component {
         }
         // de-duplication
         keyList = Array.from(new Set(keyList));
-        this.x.domain(d3.extent(keyList));
+
+        let xExtents = d3.extent(keyList)
+        this.x.domain([Number(xExtents[0]) - .15 , Number(xExtents[1]) + .15]);
 
         this.y.domain(d3.extent(valList));
 
@@ -137,19 +109,45 @@ export default class LineChart extends React.Component {
           
             this.dataLines[varName].path = this.g.append("path")
                 .style("fill", "none")
-                .style("stroke", variable.color)
                 .style("stroke-width", "1.5px");
 
             this.dataLines[varName].circles = {};
 
             for (let key in data[varName]) {
-                this.dataLines[varName].circles[key] = this.g.append("circle")
-                    .attr("r", 3)
-                    .style("fill", "white")
-                    .style("stroke", variable.color)
-                    .style("stroke-width", "1.5px");
+                let currCircle = this.g.append("circle")
+                    .attr("r", 4)
+                    .style("stroke-width", "1.5px")
+                    .on("mouseover", () => {
+                        console.log(d3.event);
+                        this.setState({
+                            currHovered: currCircle,
+                            tooltipSettings: {
+                                x: d3.event.pageX + 10,
+                                y: d3.event.pageY - 30,
+                                title: key,
+                                value: String(data[varName][key])
+                            }
+                        })
+                    })
+                    .on("mouseout", () => {
+                        this.setState({
+                            currHovered: null,
+                            tooltipSettings: null
+                        })
+                    });
+
+                this.dataLines[varName].circles[key] = currCircle;
             }
         }
+
+        this.tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip");
+
+        this.tooltipTitle = this.tooltip.append("h5")
+            .attr("class", "tooltip__title");
+
+        this.tooltipValue = this.tooltip.append("h5")
+            .attr("class", "tooltip__value");
 
         return div;
     }
@@ -159,61 +157,109 @@ export default class LineChart extends React.Component {
             {variables} = settings;
 
         let width = this.state.width,
-                height = this.state.height;
+            height = this.state.height;
 
-            this.svg
-                .attr("width", "100%")
-                .attr("height", height + margin.top + margin.bottom);
+        this.svg
+            .attr("width", "100%")
+            .attr("height", height + margin.top + margin.bottom);
 
-            // console.log(data, variables);
+        this.g
+            .attr("width", width - margin.left - margin.right)
+            .attr("height", height);
 
-            this.x.range([0, width]);
-            this.y.range([height, 0]);
+        // console.log(data, variables);
 
-            const getLine = (dataObject) => {
-              let line = d3.line()
-                .x(d => {return this.x(d); })
-                .y(d => {return this.y(dataObject[d]); });
+        this.x.range([0, width]);
+        this.y.range([height, 0]);
 
-              return line(Object.keys(dataObject));
+        const getLine = (dataObject) => {
+          let line = d3.line()
+            .x(d => {return this.x(d); })
+            .y(d => {return this.y(dataObject[d]); });
+
+          return line(Object.keys(dataObject));
+        }
+
+        this.yAxis
+            .call(d3.axisLeft(this.y).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10));
+
+        this.yAxisLabel
+            .attr("x", -this.state.height/2)
+
+        this.xAxis
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(this.x).tickSize(0).tickPadding(10)
+                .tickFormat(function(e){
+                    if(Math.floor(e) != e)
+                    {
+                        return;
+                    }
+                    return e;
+                })
+            );
+
+        for (let varName in this.dataLines) {
+            this.dataLines[varName].path
+                .attr("d", getLine(data[varName]));
+
+            for (let key in this.dataLines[varName].circles) {
+                this.dataLines[varName].circles[key]
+                    .attr("cx", this.x(key))
+                    .attr("cy", this.y(data[varName][key]))
             }
+        }
 
-            this.xAxis
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(this.x));
+        for (let variable of variables) {
+            let varName = variable.variable
+            this.dataLines[varName].path
+                .style("stroke", variable.color);
 
-            this.yAxis
-                .call(d3.axisLeft(this.y));
-
-            for (let varName in this.dataLines) {
-                this.dataLines[varName].path
-                    .attr("d", getLine(data[varName]));
-
-                for (let key in this.dataLines[varName].circles) {
-                    this.dataLines[varName].circles[key]
-                        .attr("cx", this.x(key))
-                        .attr("cy", this.y(data[varName][key]))
-                }
+            let fillColor;
+            for (let key in this.dataLines[varName].circles) {
+                let dataCircle = this.dataLines[varName].circles[key];
+                fillColor = this.state.currHovered == dataCircle ? variable.color : "white";
+                dataCircle
+                    .style("fill", fillColor)
+                    .style("stroke", variable.color)
             }
-            
-        
-        // let dataGroup = g.selectAll(".dataGroup")
-        //   .data(data)
-        //   .enter().append("g")
-        //   .attr("class", "dataGroup");
+        }
 
-        // dataGroup.append("path")
-        //     .attr("class", "line")
-        //     .attr("d", function(d) { console.log(d) })
-            // .style("stroke", function(d) { return z(d.id); });
+        if (this.state.tooltipSettings) {
+            console.log(this.state.tooltipSettings);
+            this.tooltip
+                .style("display", "block")
+                .style("left", this.state.tooltipSettings.x + "px")
+                .style("top", this.state.tooltipSettings.y + "px")
 
-        // city.append("text")
-        //     .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
-        //     .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
-        //     .attr("x", 3)
-        //     .attr("dy", "0.35em")
-        //     .style("font", "10px sans-serif")
-        //     .text(function(d) { return d.id; });
+            this.tooltipTitle
+                .text(this.state.tooltipSettings.title);
+
+             this.tooltipValue
+                .text(this.state.tooltipSettings.value);
+
+        } else {
+            this.tooltip.style("display", "none");
+        }
+    }
+
+    render() {
+        console.log("calling render");
+        let content;
+
+        const { data, settings } = this.props,
+            {variables} = settings;
+
+        if (this.state.chart) {
+            this.updateChart();
+            content = this.state.chart.toReact();
+        } else {
+            content = "loading chart";
+        }
+        return (
+            <div className="data-block__viz__rendering-area" ref="renderingArea">
+                {content}
+            </div>
+        )
     }
 
 }
