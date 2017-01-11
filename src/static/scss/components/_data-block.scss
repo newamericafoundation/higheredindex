@@ -42,8 +42,12 @@
 	}
 }
 
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
+.tick {
+	& > line {
+		stroke: palette-get(na-black-10) !important;
+		stroke-dasharray: 5, 5;
+	}
+	& > path {
+		stroke-width: 0;
+	}
 }

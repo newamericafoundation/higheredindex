@@ -3,7 +3,7 @@ import ReactFauxDOM from 'react-faux-dom';
 var d3 = require("d3");
 import $ from 'jquery';
 
-const margin = {top: 10, right: 80, bottom: 30, left: 30};
+const margin = {top: 10, right: 30, bottom: 30, left: 30};
 
 export default class LineChart extends React.Component {
     constructor() {
@@ -13,7 +13,8 @@ export default class LineChart extends React.Component {
         
         this.state = {
             width: 0,
-            height: 0
+            height: 0,
+            currHovered: null
         }
     }
     componentDidMount() {
@@ -35,6 +36,15 @@ export default class LineChart extends React.Component {
         $(window).off("resize", this.resizeFunc);
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        console.log(this.state);
+        console.log(nextState);
+        if (this.state.currHovered) {
+            this.dataLines[this.state.currHovered.varName].circles[this.state.currHovered.key]
+                .style("fill", "white")
+        }
+    }
+
     resize() {
         let w = this.getCurrWidth();
         this.setState({
@@ -45,22 +55,9 @@ export default class LineChart extends React.Component {
     }
 
     getCurrWidth() {
-        return $(this.refs.renderingArea).width();
+        return $(this.refs.renderingArea).width() - margin.left - margin.right;
     }
 
-    // componentDidMount() {
-    //     let w = this.props.resizeFunc();
-    //     console.log(w);
-    //     window.onresize = this.resize.bind(this);
-    // }
-    // resize() {
-    //     console.log("in line chart calling resize");
-    //     let w = this.props.resizeFunc();
-    //     console.log(w);
-    //     this.setState({
-    //         width: w
-    //     });
-    // }
     render() {
         console.log("calling render");
         let content;
@@ -93,10 +90,6 @@ export default class LineChart extends React.Component {
         this.x = d3.scaleLinear();
         this.y = d3.scaleLinear();
         this.z = d3.scaleOrdinal(d3.schemeCategory10);
-
-
-        this.xAxis = this.g.append("g")
-            .attr("class", "axis axis--x");
         
         this.yAxis = this.g.append("g")
             .attr("class", "axis axis--y");
@@ -107,6 +100,9 @@ export default class LineChart extends React.Component {
             .attr("dy", "0.71em")
             .attr("fill", "#000")
             .text("Value");
+
+        this.xAxis = this.g.append("g")
+            .attr("class", "axis axis--x");
 
         let keyList = [],
             valList = [];
@@ -122,7 +118,9 @@ export default class LineChart extends React.Component {
         }
         // de-duplication
         keyList = Array.from(new Set(keyList));
-        this.x.domain(d3.extent(keyList));
+
+        let xExtents = d3.extent(keyList)
+        this.x.domain([Number(xExtents[0]) - .15 , Number(xExtents[1]) + .15]);
 
         this.y.domain(d3.extent(valList));
 
@@ -143,11 +141,27 @@ export default class LineChart extends React.Component {
             this.dataLines[varName].circles = {};
 
             for (let key in data[varName]) {
-                this.dataLines[varName].circles[key] = this.g.append("circle")
-                    .attr("r", 3)
-                    .style("fill", "white")
+                let currCircle = this.g.append("circle")
+                    .attr("r", 4)
+                    .style("fill", key == this.state.currHovered ? variable.color : "white")
                     .style("stroke", variable.color)
-                    .style("stroke-width", "1.5px");
+                    .style("stroke-width", "1.5px")
+                    .on("mouseover", () => {
+                        this.setState({
+                            currHovered:{
+                                varName: varName,
+                                key: key,
+                                color: variable.color
+                            }
+                        })
+                    })
+                    .on("mouseout", () => {
+                        this.setState({
+                            currHovered:null
+                        })
+                    });
+
+                this.dataLines[varName].circles[key] = currCircle;
             }
         }
 
@@ -159,44 +173,59 @@ export default class LineChart extends React.Component {
             {variables} = settings;
 
         let width = this.state.width,
-                height = this.state.height;
+            height = this.state.height;
 
-            this.svg
-                .attr("width", "100%")
-                .attr("height", height + margin.top + margin.bottom);
+        this.svg
+            .attr("width", "100%")
+            .attr("height", height + margin.top + margin.bottom);
 
-            // console.log(data, variables);
+        this.g
+            .attr("width", width - margin.left - margin.right)
+            .attr("height", height);
 
-            this.x.range([0, width]);
-            this.y.range([height, 0]);
+        // console.log(data, variables);
 
-            const getLine = (dataObject) => {
-              let line = d3.line()
-                .x(d => {return this.x(d); })
-                .y(d => {return this.y(dataObject[d]); });
+        this.x.range([0, width]);
+        this.y.range([height, 0]);
 
-              return line(Object.keys(dataObject));
+        const getLine = (dataObject) => {
+          let line = d3.line()
+            .x(d => {return this.x(d); })
+            .y(d => {return this.y(dataObject[d]); });
+
+          return line(Object.keys(dataObject));
+        }
+
+        this.yAxis
+            .call(d3.axisLeft(this.y).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10));
+
+        this.xAxis
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(this.x).tickSize(0).tickPadding(10)
+                .tickFormat(function(e){
+                    if(Math.floor(e) != e)
+                    {
+                        return;
+                    }
+                    return e;
+                })
+            );
+
+        for (let varName in this.dataLines) {
+            this.dataLines[varName].path
+                .attr("d", getLine(data[varName]));
+
+            for (let key in this.dataLines[varName].circles) {
+                this.dataLines[varName].circles[key]
+                    .attr("cx", this.x(key))
+                    .attr("cy", this.y(data[varName][key]))
             }
-
-            this.xAxis
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(this.x));
-
-            this.yAxis
-                .call(d3.axisLeft(this.y));
-
-            for (let varName in this.dataLines) {
-                this.dataLines[varName].path
-                    .attr("d", getLine(data[varName]));
-
-                for (let key in this.dataLines[varName].circles) {
-                    this.dataLines[varName].circles[key]
-                        .attr("cx", this.x(key))
-                        .attr("cy", this.y(data[varName][key]))
-                }
-            }
-            
+        }
         
+        if (this.state.currHovered) {
+            this.dataLines[this.state.currHovered.varName].circles[this.state.currHovered.key]
+                .style("fill", this.state.currHovered.color)
+        }
         // let dataGroup = g.selectAll(".dataGroup")
         //   .data(data)
         //   .enter().append("g")
