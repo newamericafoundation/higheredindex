@@ -14,7 +14,8 @@ export default class LineChart extends React.Component {
         this.state = {
             width: 0,
             height: 0,
-            currHovered: null
+            currHovered: null,
+            tooltipSettings: null
         }
     }
     componentDidMount() {
@@ -36,15 +37,6 @@ export default class LineChart extends React.Component {
         $(window).off("resize", this.resizeFunc);
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        console.log(this.state);
-        console.log(nextState);
-        if (this.state.currHovered) {
-            this.dataLines[this.state.currHovered.varName].circles[this.state.currHovered.key]
-                .style("fill", "white")
-        }
-    }
-
     resize() {
         let w = this.getCurrWidth();
         this.setState({
@@ -58,25 +50,7 @@ export default class LineChart extends React.Component {
         return $(this.refs.renderingArea).width() - margin.left - margin.right;
     }
 
-    render() {
-        console.log("calling render");
-        let content;
-
-        const { data, settings } = this.props,
-            {variables} = settings;
-
-        if (this.state.chart) {
-            this.updateChart();
-            content = this.state.chart.toReact();
-        } else {
-            content = "loading chart";
-        }
-        return (
-            <div ref="renderingArea">
-                {content}
-            </div>
-        )
-    }
+    
 
     initializeChart() {
         const { data, settings } = this.props,
@@ -135,7 +109,6 @@ export default class LineChart extends React.Component {
           
             this.dataLines[varName].path = this.g.append("path")
                 .style("fill", "none")
-                .style("stroke", variable.color)
                 .style("stroke-width", "1.5px");
 
             this.dataLines[varName].circles = {};
@@ -143,27 +116,38 @@ export default class LineChart extends React.Component {
             for (let key in data[varName]) {
                 let currCircle = this.g.append("circle")
                     .attr("r", 4)
-                    .style("fill", key == this.state.currHovered ? variable.color : "white")
-                    .style("stroke", variable.color)
                     .style("stroke-width", "1.5px")
                     .on("mouseover", () => {
+                        console.log(d3.event);
                         this.setState({
-                            currHovered:{
-                                varName: varName,
-                                key: key,
-                                color: variable.color
+                            currHovered: currCircle,
+                            tooltipSettings: {
+                                x: d3.event.pageX + 10,
+                                y: d3.event.pageY - 30,
+                                title: key,
+                                value: String(data[varName][key])
                             }
                         })
                     })
                     .on("mouseout", () => {
                         this.setState({
-                            currHovered:null
+                            currHovered: null,
+                            tooltipSettings: null
                         })
                     });
 
                 this.dataLines[varName].circles[key] = currCircle;
             }
         }
+
+        this.tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip");
+
+        this.tooltipTitle = this.tooltip.append("h5")
+            .attr("class", "tooltip__title");
+
+        this.tooltipValue = this.tooltip.append("h5")
+            .attr("class", "tooltip__value");
 
         return div;
     }
@@ -221,28 +205,58 @@ export default class LineChart extends React.Component {
                     .attr("cy", this.y(data[varName][key]))
             }
         }
-        
-        if (this.state.currHovered) {
-            this.dataLines[this.state.currHovered.varName].circles[this.state.currHovered.key]
-                .style("fill", this.state.currHovered.color)
+
+        for (let variable of variables) {
+            let varName = variable.variable
+            this.dataLines[varName].path
+                .style("stroke", variable.color);
+
+            let fillColor;
+            for (let key in this.dataLines[varName].circles) {
+                let dataCircle = this.dataLines[varName].circles[key];
+                fillColor = this.state.currHovered == dataCircle ? variable.color : "white";
+                dataCircle
+                    .style("fill", fillColor)
+                    .style("stroke", variable.color)
+            }
         }
-        // let dataGroup = g.selectAll(".dataGroup")
-        //   .data(data)
-        //   .enter().append("g")
-        //   .attr("class", "dataGroup");
 
-        // dataGroup.append("path")
-        //     .attr("class", "line")
-        //     .attr("d", function(d) { console.log(d) })
-            // .style("stroke", function(d) { return z(d.id); });
+        if (this.state.tooltipSettings) {
+            console.log(this.state.tooltipSettings);
+            this.tooltip
+                .style("display", "block")
+                .style("left", this.state.tooltipSettings.x + "px")
+                .style("top", this.state.tooltipSettings.y + "px")
 
-        // city.append("text")
-        //     .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
-        //     .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
-        //     .attr("x", 3)
-        //     .attr("dy", "0.35em")
-        //     .style("font", "10px sans-serif")
-        //     .text(function(d) { return d.id; });
+            this.tooltipTitle
+                .text(this.state.tooltipSettings.title);
+
+             this.tooltipValue
+                .text(this.state.tooltipSettings.value);
+
+        } else {
+            this.tooltip.style("display", "none");
+        }
+    }
+
+    render() {
+        console.log("calling render");
+        let content;
+
+        const { data, settings } = this.props,
+            {variables} = settings;
+
+        if (this.state.chart) {
+            this.updateChart();
+            content = this.state.chart.toReact();
+        } else {
+            content = "loading chart";
+        }
+        return (
+            <div className="data-block__viz__rendering-area" ref="renderingArea">
+                {content}
+            </div>
+        )
     }
 
 }
