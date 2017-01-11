@@ -3,7 +3,7 @@ import ReactFauxDOM from 'react-faux-dom';
 var d3 = require("d3");
 import $ from 'jquery';
 
-const margin = {top: 10, right: 30, bottom: 30, left: 30};
+const margin = {top: 10, right: 0, bottom: 30, left: 40};
 
 export default class LineChart extends React.Component {
     constructor() {
@@ -28,7 +28,7 @@ export default class LineChart extends React.Component {
         this.setState({
             chart: chart,
             width: w,
-            height: 250
+            height: w/2
         })
     }
 
@@ -41,7 +41,7 @@ export default class LineChart extends React.Component {
         let w = this.getCurrWidth();
         this.setState({
           width: w,
-          height: 250
+          height: w/2
         })
         console.log("resizing!");
     }
@@ -68,10 +68,10 @@ export default class LineChart extends React.Component {
         this.yAxis = this.g.append("g")
             .attr("class", "axis axis--y");
 
-        this.yAxis.append("text")
+        this.yAxisLabel = this.yAxis.append("text")
+            .attr("class", "data-block__viz__y-axis-label")
             .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("dy", "0.71em")
+            .attr("y", -30)
             .attr("fill", "#000")
             .text("Value");
 
@@ -182,6 +182,9 @@ export default class LineChart extends React.Component {
 
         this.yAxis
             .call(d3.axisLeft(this.y).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10));
+
+        this.yAxisLabel
+            .attr("x", -this.state.height/2)
 
         this.xAxis
             .attr("transform", "translate(0," + height + ")")

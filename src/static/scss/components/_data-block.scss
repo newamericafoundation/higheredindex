@@ -43,6 +43,13 @@
 		&__rendering-area {
 			position: relative;
 		}
+
+		&__y-axis-label {
+			font-weight: bold;
+			font-size: 14px;
+			color: palette-get(na-black);
+			text-anchor: middle;
+		}
 	}
 }
 
