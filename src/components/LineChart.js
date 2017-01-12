@@ -2,20 +2,27 @@ import React from 'react';
 import ReactFauxDOM from 'react-faux-dom';
 var d3 = require("d3");
 import $ from 'jquery';
+import Legend from "./Legend.js";
 
 const margin = {top: 10, right: 0, bottom: 30, left: 40};
 
 export default class LineChart extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.resizeFunc = this.resize.bind(this);
         
+        let fullValList = [];
+        for (let variable of props.settings.variables) {
+            fullValList.push(variable.variable);
+        }
+
         this.state = {
             width: 0,
             height: 0,
             currHovered: null,
-            tooltipSettings: null
+            tooltipSettings: null,
+            valsShown: fullValList
         }
     }
     componentDidMount() {
@@ -30,6 +37,8 @@ export default class LineChart extends React.Component {
             width: w,
             height: w/2
         })
+
+        
     }
 
     componentWillUnmount() {
@@ -108,6 +117,7 @@ export default class LineChart extends React.Component {
             this.dataLines[varName] = {};
           
             this.dataLines[varName].path = this.g.append("path")
+                .attr("class", "line-chart__data-line")
                 .style("fill", "none")
                 .style("stroke-width", "1.5px");
 
@@ -116,6 +126,7 @@ export default class LineChart extends React.Component {
             for (let key in data[varName]) {
                 let currCircle = this.g.append("circle")
                     .attr("r", 4)
+                    .attr("class", "line-chart__data-circle")
                     .style("stroke-width", "1.5px")
                     .on("mouseover", () => {
                         console.log(d3.event);
@@ -151,6 +162,9 @@ export default class LineChart extends React.Component {
 
         return div;
     }
+
+
+    
 
     updateChart() {
         const { data, settings } = this.props,
@@ -212,7 +226,8 @@ export default class LineChart extends React.Component {
         for (let variable of variables) {
             let varName = variable.variable
             this.dataLines[varName].path
-                .style("stroke", variable.color);
+                .style("stroke", variable.color)
+                .classed("disabled", this.state.valsShown.indexOf(varName) == -1)
 
             let fillColor;
             for (let key in this.dataLines[varName].circles) {
@@ -221,6 +236,7 @@ export default class LineChart extends React.Component {
                 dataCircle
                     .style("fill", fillColor)
                     .style("stroke", variable.color)
+                    .classed("disabled", this.state.valsShown.indexOf(varName) == -1)
             }
         }
 
@@ -242,6 +258,15 @@ export default class LineChart extends React.Component {
         }
     }
 
+    toggleVals(valsShown) {
+        console.log("toggling values");
+        console.log(this);
+        console.log(valsShown);
+        this.setState({
+            valsShown: valsShown
+        });
+    }
+
     render() {
         console.log("calling render");
         let content;
@@ -258,6 +283,7 @@ export default class LineChart extends React.Component {
         return (
             <div className="data-block__viz__rendering-area" ref="renderingArea">
                 {content}
+                <Legend variables={variables} toggleChartVals={this.toggleVals.bind(this)}/>
             </div>
         )
     }
