@@ -1,0 +1,7 @@
+.line-chart {
+	&__data-line, &__data-circle {
+		&.disabled {
+			stroke: palette-get(na-black-10) !important;
+		}
+	}
+}

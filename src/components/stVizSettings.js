@@ -7,6 +7,7 @@ const stVizSettings = [
 		},
 		vizSettings: {
 			type: "line-chart",
+			yAxisLabel: "Students",
 			variables: [
 				{variable:"data", displayName:"Data", format: "string", color: "green" },
 				{variable:"other_data", displayName:"Other Data", format: "string", color: "orange"},
@@ -22,6 +23,7 @@ const stVizSettings = [
 		},
 		vizSettings: {
 			type: "line-chart",
+			yAxisLabel: "Students",
 			variables: [
 				{variable:"data", displayName:"Data", format: "string", color: "steelblue" },
 				{variable:"other_data", displayName:"Other Data", format: "string", color: "purple"},
