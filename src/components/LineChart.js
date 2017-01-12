@@ -26,7 +26,6 @@ export default class LineChart extends React.Component {
         }
     }
     componentDidMount() {
-        console.log("calling component did mount");
         $(window).resize(this.resizeFunc);
 
         const chart = this.initializeChart();
@@ -37,12 +36,9 @@ export default class LineChart extends React.Component {
             width: w,
             height: w/2
         })
-
-        
     }
 
     componentWillUnmount() {
-        console.log("unmounting!!!");
         $(window).off("resize", this.resizeFunc);
     }
 
@@ -59,20 +55,25 @@ export default class LineChart extends React.Component {
         return $(this.refs.renderingArea).width() - margin.left - margin.right;
     }
 
-    
-
     initializeChart() {
-        const { data, settings } = this.props,
-            {variables} = settings;
-
         const div = new ReactFauxDOM.Element('div');
 
         this.svg = d3.select(div).append("svg");
         this.g = this.svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+        this.initializeAxes();
+        this.initializeDataLines();
+        this.initializeTooltip();
+
+        return div;
+    }
+
+    initializeAxes() {
+        const { data, settings } = this.props,
+            {variables} = settings;
+
         this.x = d3.scaleLinear();
         this.y = d3.scaleLinear();
-        this.z = d3.scaleOrdinal(d3.schemeCategory10);
         
         this.yAxis = this.g.append("g")
             .attr("class", "axis axis--y");
@@ -106,11 +107,13 @@ export default class LineChart extends React.Component {
         this.x.domain([Number(xExtents[0]) - .15 , Number(xExtents[1]) + .15]);
 
         this.y.domain(d3.extent(valList));
+    }
 
-        this.z.domain(variables);
+    initializeDataLines() {
+        const { data, settings } = this.props,
+            {variables} = settings;
 
         this.dataLines = {};
-
         for (let variable of variables) {
             console.log(variable);
             let varName = variable.variable
@@ -150,7 +153,9 @@ export default class LineChart extends React.Component {
                 this.dataLines[varName].circles[key] = currCircle;
             }
         }
+    }
 
+    initializeTooltip() {
         this.tooltip = d3.select("body").append("div")
             .attr("class", "tooltip");
 
@@ -159,19 +164,11 @@ export default class LineChart extends React.Component {
 
         this.tooltipValue = this.tooltip.append("h5")
             .attr("class", "tooltip__value");
-
-        return div;
     }
-
-
     
 
     updateChart() {
-        const { data, settings } = this.props,
-            {variables} = settings;
-
-        let width = this.state.width,
-            height = this.state.height;
+        let {width, height} = this.state;
 
         this.svg
             .attr("width", "100%")
@@ -181,24 +178,21 @@ export default class LineChart extends React.Component {
             .attr("width", width - margin.left - margin.right)
             .attr("height", height);
 
-        // console.log(data, variables);
+        this.updateAxes();
+        this.updateDataLines();
+        this.updateTooltip();
+    }
 
+    updateAxes() {
+        let {width, height} = this.state;
         this.x.range([0, width]);
         this.y.range([height, 0]);
-
-        const getLine = (dataObject) => {
-          let line = d3.line()
-            .x(d => {return this.x(d); })
-            .y(d => {return this.y(dataObject[d]); });
-
-          return line(Object.keys(dataObject));
-        }
-
+        
         this.yAxis
             .call(d3.axisLeft(this.y).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10));
 
         this.yAxisLabel
-            .attr("x", -this.state.height/2)
+            .attr("x", -height/2)
 
         this.xAxis
             .attr("transform", "translate(0," + height + ")")
@@ -211,6 +205,19 @@ export default class LineChart extends React.Component {
                     return e;
                 })
             );
+    }
+
+    updateDataLines() {
+        const { data, settings } = this.props,
+            {variables} = settings;
+
+        const getLine = (dataObject) => {
+          let line = d3.line()
+            .x(d => {return this.x(d); })
+            .y(d => {return this.y(dataObject[d]); });
+
+          return line(Object.keys(dataObject));
+        }
 
         for (let varName in this.dataLines) {
             this.dataLines[varName].path
@@ -239,19 +246,22 @@ export default class LineChart extends React.Component {
                     .classed("disabled", this.state.valsShown.indexOf(varName) == -1)
             }
         }
+    }
 
-        if (this.state.tooltipSettings) {
-            console.log(this.state.tooltipSettings);
+    updateTooltip() {
+        const {tooltipSettings} = this.state;
+        if (tooltipSettings) {
+            console.log(tooltipSettings);
             this.tooltip
                 .style("display", "block")
-                .style("left", this.state.tooltipSettings.x + "px")
-                .style("top", this.state.tooltipSettings.y + "px")
+                .style("left", tooltipSettings.x + "px")
+                .style("top", tooltipSettings.y + "px")
 
             this.tooltipTitle
-                .text(this.state.tooltipSettings.title);
+                .text(tooltipSettings.title);
 
              this.tooltipValue
-                .text(this.state.tooltipSettings.value);
+                .text(tooltipSettings.value);
 
         } else {
             this.tooltip.style("display", "none");
