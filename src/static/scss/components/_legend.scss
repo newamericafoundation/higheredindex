@@ -1,0 +1,38 @@
+.legend {
+	margin: auto;
+	text-align: center;
+	padding-left: 40px;
+
+	&__cell {
+		cursor: pointer;
+		padding: 0px 8px;
+
+		&-list {
+			text-align: center;
+		}
+
+		&__color-swatch-container, &__label, &__val-count {
+			float: left;
+		}
+
+		&__color-swatch-container {
+			margin-top: 5px;
+		}
+
+		&__label {
+			padding-left: 10px;
+			margin-bottom: 5px;
+			font-size: 14px;
+			color: palette-get(na-black);
+		}
+
+		&.disabled {
+			.legend__cell__color-swatch {
+				fill: palette-get(na-black-10);
+			}
+			.legend__cell__label {
+				color: palette-get(na-black-10) !important;
+			}
+		}
+	}
+}
