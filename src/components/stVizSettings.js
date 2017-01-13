@@ -41,6 +41,7 @@ const stVizSettings = [
 			type: "bar-chart",
 			variables: [
 				{variable:"data", displayName:"Data", format: "string", color: "steelblue" },
+				{variable:"other_data", displayName:"Other Data", format: "string", color: "purple"},
 			]
 
 		}

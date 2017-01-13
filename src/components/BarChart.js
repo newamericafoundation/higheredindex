@@ -62,8 +62,8 @@ export default class BarChart extends React.Component {
         this.g = this.svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         this.initializeAxes();
-        // this.initializeDataLines();
-        // this.initializeTooltip();
+        this.initializeDataBars();
+        this.initializeTooltip();
 
         return div;
     }
@@ -72,7 +72,7 @@ export default class BarChart extends React.Component {
         const { data, settings } = this.props,
             {variables} = settings;
 
-        this.x = d3.scaleLinear();
+        this.x = d3.scaleBand();
         this.y = d3.scaleLinear();
         
         this.yAxis = this.g.append("g")
@@ -103,38 +103,37 @@ export default class BarChart extends React.Component {
         // de-duplication
         keyList = Array.from(new Set(keyList));
 
-        let xExtents = d3.extent(keyList)
-        this.x.domain([Number(xExtents[0]) - .15 , Number(xExtents[1]) + .15]);
+        // let xExtents = d3.extent(keyList)
+        this.x.domain(keyList);
 
         this.y.domain(d3.extent(valList));
     }
 
-    initializeDataLines() {
+    initializeDataBars() {
         const { data, settings } = this.props,
             {variables} = settings;
 
-        this.dataLines = {};
+        this.dataBars = {};
         for (let variable of variables) {
             console.log(variable);
             let varName = variable.variable
-            this.dataLines[varName] = {};
+            this.dataBars[varName] = {};
           
-            this.dataLines[varName].path = this.g.append("path")
-                .attr("class", "line-chart__data-line")
-                .style("fill", "none")
-                .style("stroke-width", "1.5px");
+            // this.dataBars[varName].path = this.g.append("path")
+            //     .attr("class", "line-chart__data-line")
+            //     .style("fill", "none")
+            //     .style("stroke-width", "1.5px");
 
-            this.dataLines[varName].circles = {};
+            this.dataBars[varName].bars = {};
 
             for (let key in data[varName]) {
-                let currCircle = this.g.append("circle")
-                    .attr("r", 4)
-                    .attr("class", "line-chart__data-circle")
+                let currBar = this.g.append("rect")
+                    .attr("class", "bar-chart__data-bar")
                     .style("stroke-width", "1.5px")
                     .on("mouseover", () => {
                         console.log(d3.event);
                         this.setState({
-                            currHovered: currCircle,
+                            currHovered: currBar,
                             tooltipSettings: {
                                 x: d3.event.pageX + 10,
                                 y: d3.event.pageY - 30,
@@ -150,7 +149,7 @@ export default class BarChart extends React.Component {
                         })
                     });
 
-                this.dataLines[varName].circles[key] = currCircle;
+                this.dataBars[varName].bars[key] = currBar;
             }
         }
     }
@@ -179,13 +178,13 @@ export default class BarChart extends React.Component {
             .attr("height", height);
 
         this.updateAxes();
-        // this.updateDataLines();
-        // this.updateTooltip();
+        this.updateDataBars();
+        this.updateTooltip();
     }
 
     updateAxes() {
         let {width, height} = this.state;
-        this.x.range([0, width]);
+        this.x.rangeRound([0, width]).padding(0.5);
         this.y.range([height, 0]);
         
         this.yAxis
@@ -207,40 +206,42 @@ export default class BarChart extends React.Component {
             );
     }
 
-    updateDataLines() {
+    updateDataBars() {
         const { data, settings } = this.props,
             {variables} = settings;
 
-        const getLine = (dataObject) => {
-          let line = d3.line()
-            .x(d => {return this.x(d); })
-            .y(d => {return this.y(dataObject[d]); });
+        // const getLine = (dataObject) => {
+        //   let line = d3.line()
+        //     .x(d => {return this.x(d); })
+        //     .y(d => {return this.y(dataObject[d]); });
 
-          return line(Object.keys(dataObject));
-        }
+        //   return line(Object.keys(dataObject));
+        // }
 
-        for (let varName in this.dataLines) {
-            this.dataLines[varName].path
-                .attr("d", getLine(data[varName]));
+        for (let varName in this.dataBars) {
+            // this.dataBars[varName].path
+            //     .attr("d", getLine(data[varName]));
 
-            for (let key in this.dataLines[varName].circles) {
-                this.dataLines[varName].circles[key]
-                    .attr("cx", this.x(key))
-                    .attr("cy", this.y(data[varName][key]))
+            for (let key in this.dataBars[varName].bars) {
+                this.dataBars[varName].bars[key]
+                    .attr("x", this.x(key))
+                    .attr("y", this.y(data[varName][key]))
+                    .attr("width", this.x.bandwidth())
+                    .attr("height", this.state.height - this.y(data[varName][key]))
             }
         }
 
         for (let variable of variables) {
             let varName = variable.variable
-            this.dataLines[varName].path
-                .style("stroke", variable.color)
-                .classed("disabled", this.state.valsShown.indexOf(varName) == -1)
+            // this.dataBars[varName].path
+            //     .style("stroke", variable.color)
+            //     .classed("disabled", this.state.valsShown.indexOf(varName) == -1)
 
             let fillColor;
-            for (let key in this.dataLines[varName].circles) {
-                let dataCircle = this.dataLines[varName].circles[key];
-                fillColor = this.state.currHovered == dataCircle ? variable.color : "white";
-                dataCircle
+            for (let key in this.dataBars[varName].bars) {
+                let dataBar = this.dataBars[varName].bars[key];
+                fillColor = this.state.currHovered == dataBar ? variable.color : "white";
+                dataBar
                     .style("fill", fillColor)
                     .style("stroke", variable.color)
                     .classed("disabled", this.state.valsShown.indexOf(varName) == -1)
@@ -293,7 +294,7 @@ export default class BarChart extends React.Component {
         return (
             <div className="data-block__viz__rendering-area" ref="renderingArea">
                 {content}
-                // <Legend variables={variables} toggleChartVals={this.toggleVals.bind(this)}/>
+                <Legend variables={variables} toggleChartVals={this.toggleVals.bind(this)}/>
             </div>
         )
     }
