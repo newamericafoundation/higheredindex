@@ -3,11 +3,13 @@ var d3 = require("d3");
 export default class LineChart {
 	constructor(settings) {
 		console.log(settings);
-		let {data, variables, domElem} = settings;
+		let {data, variables, domElem, mouseoverFunc, mouseoutFunc} = settings;
 
 		this.data = data;
 		this.variables = variables;
 		this.domElem = domElem;
+		this.mouseoverFunc = mouseoverFunc;
+		this.mouseoutFunc = mouseoutFunc;
 
 		this.initializeXAxis();
 		this.initializeDataLines();
@@ -55,12 +57,14 @@ export default class LineChart {
 
             this.dataCircles[varName] = this.domElem.selectAll("circle#" + varName)
             	.data(dataArray)
-            	.enter().append("circle")
-                .attr("r", (d) => { console.log(d); return 4})
-                .style("stroke", "black")
-                .attr("id", varName)
-                .attr("class", "line-chart__data-circle")
-                .style("stroke-width", "1.5px");
+              .enter().append("circle")
+              	.attr("id", varName)
+              	.attr("class", "line-chart__data-circle")
+                .attr("r", 4)
+                .style("stroke", variable.color)
+                .style("stroke-width", "1.5px")
+                .on("mouseover", (d, index, paths) => { return this.mouseoverFunc(d, paths[index], d3.event, varName); })
+                .on("mouseout", () => this.mouseoutFunc());
 		}
 
 		console.log(this.dataCircles);
@@ -93,8 +97,9 @@ export default class LineChart {
     }
 
     updateDataLines(updateParams) {
-        const {y, width, height} = updateParams;
+        const {y, width, height, currHovered} = updateParams;
 
+        console.log(currHovered);
         const getLine = (dataObject) => {
           let line = d3.line()
             .x(d => {return this.x(d); })
@@ -111,6 +116,18 @@ export default class LineChart {
                 this.dataCircles[varName]
                 	.attr("cx", (d) => { console.log(d); return this.x(d.year)})
                 	.attr("cy", (d) => { console.log(d); return y(d.value)})
+                	.attr("fill", (d) => {
+                		if (currHovered) {
+                			if (varName == currHovered.varName && d.year == currHovered.year) {
+                				return variable.color;
+                			}
+                		} 
+                		return "white";
+                	})
         }
+        if (currHovered && currHovered.component) {
+	        d3.select(currHovered.component)
+	        	.attr("fill", "green")
+	    }
     }
 }
