@@ -15,11 +15,17 @@ export default class SimpleChart extends React.Component {
 		this.chartType = props.settings.type;
 		this.resizeFunc = this.resize.bind(this);
 
+		let fullValList = [];
+        for (let variable of props.settings.variables) {
+            fullValList.push(variable.variable);
+        }
+
 		this.state = {
             width: 0,
             height: 0,
             currHovered: null,
-            tooltipSettings: null
+            tooltipSettings: null,
+            valsShown: fullValList,
         }
 	}
 
@@ -45,7 +51,6 @@ export default class SimpleChart extends React.Component {
 
         this.initializeYAxis();
         this.initializeDataElements();
-        // this.initializeTooltip();
 
         return div;
     }
@@ -86,17 +91,6 @@ export default class SimpleChart extends React.Component {
 	    }
     }
 
-    // initializeTooltip() {
-    //     this.tooltip = d3.select("body").append("div")
-    //         .attr("class", "tooltip");
-
-    //     this.tooltipTitle = this.tooltip.append("h5")
-    //         .attr("class", "tooltip__title");
-
-    //     this.tooltipValue = this.tooltip.append("h5")
-    //         .attr("class", "tooltip__value");
-    // }
-
     updateChart() {
         const {width, height} = this.state;
 
@@ -129,41 +123,26 @@ export default class SimpleChart extends React.Component {
     		y: this.y,
     		width: this.state.width,
     		height: this.state.height,
-    		currHovered: this.state.currHovered
+    		currHovered: this.state.currHovered,
+    		valsShown: this.state.valsShown
     	}
 
     	this.dataElement.update(updateParams);
     }
 
-    // updateTooltip() {
-    //     const {tooltipSettings} = this.state;
-    //     if (tooltipSettings) {
-    //         console.log(tooltipSettings);
-    //         this.tooltip
-    //             .style("display", "block")
-    //             .style("left", tooltipSettings.x + "px")
-    //             .style("top", tooltipSettings.y + "px")
-
-    //         this.tooltipTitle
-    //             .text(tooltipSettings.title);
-
-    //          this.tooltipValue
-    //             .text(tooltipSettings.value);
-
-    //     } else {
-    //         this.tooltip.style("display", "none");
-    //     }
-    // }
-
-    toggleVals() {
-
+    toggleVals(valsShown) {
+    	console.log("toggling values");
+        console.log(this);
+        console.log(valsShown);
+    	this.setState({
+            valsShown: valsShown
+        });
     }
 
 	render() {
 		const { data, settings } = this.props,
             {variables} = settings;
 
-		console.log("calling render");
         let content, legend, tooltip;
 
 		if (this.state.chart) {
@@ -196,10 +175,9 @@ export default class SimpleChart extends React.Component {
         $(window).off("resize", this.resizeFunc);
     }
 
+    // callback functions
+
     mouseoverFunc(datum, path, eventObject, varName) {
-    	console.log(datum, path, eventObject, varName);
-    	console.log(this);
-    	console.log(this.tooltip);
     	this.setState({
             currHovered: {varName: varName, year:datum.year},
             tooltipSettings: {
