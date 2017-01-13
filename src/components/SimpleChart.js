@@ -3,6 +3,7 @@ import ReactFauxDOM from 'react-faux-dom';
 var d3 = require("d3");
 import $ from 'jquery';
 import Legend from "./Legend.js";
+import LineChart from "../chart_modules/LineChart.js"
 
 const margin = {top: 10, right: 0, bottom: 30, left: 40};
 
@@ -10,6 +11,7 @@ export default class SimpleChart extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.chartType = props.settings.type;
 		this.resizeFunc = this.resize.bind(this);
 
 		this.state = {
@@ -40,7 +42,6 @@ export default class SimpleChart extends React.Component {
 
         this.initializeYAxis();
         this.initializeDataElements();
-        // this.initializeDataLines();
         // this.initializeTooltip();
 
         return div;
@@ -61,6 +62,25 @@ export default class SimpleChart extends React.Component {
         	.domain(this.getYExtents());
     }
 
+    initializeDataElements() {
+    	const { data, settings } = this.props,
+            {variables} = settings;
+
+        let params = {
+        	data: data,
+        	variables: variables,
+        	domElem: this.g
+        };
+
+    	switch (this.chartType) {
+	      case "line-chart":
+	        this.dataElement = new LineChart(params);
+	        break;
+	      default:
+	        console.log("No Chart Type");
+	    }
+    }
+
     updateChart() {
         const {width, height} = this.state;
 
@@ -73,7 +93,7 @@ export default class SimpleChart extends React.Component {
             .attr("height", height);
 
         this.updateYAxis();
-        
+        this.updateDataElements();
     }
 
     updateYAxis() {
@@ -88,19 +108,38 @@ export default class SimpleChart extends React.Component {
             .attr("x", -height/2);
     }
 
+    updateDataElements() {
+    	let updateParams = {
+    		y: this.y,
+    		width: this.state.width,
+    		height: this.state.height
+    	}
+
+    	this.dataElement.update(updateParams);
+    }
+
+    toggleVals() {
+
+    }
+
 	render() {
+		const { data, settings } = this.props,
+            {variables} = settings;
+
 		console.log("calling render");
-        let content;
+        let content, legend;
 
 		if (this.state.chart) {
             this.updateChart();
             content = this.state.chart.toReact();
+            legend = <Legend variables={variables} toggleChartVals={this.toggleVals.bind(this)}/>;
         } else {
             content = "loading chart";
         }
 		return (
             <div className="data-block__viz__rendering-area" ref="renderingArea">
                 {content}
+                {legend}
             </div>
         )
 	}
@@ -120,7 +159,7 @@ export default class SimpleChart extends React.Component {
 
 	// helper functions
 	getCurrWidth() {
-        return $(this.refs.renderingArea).width();
+        return $(this.refs.renderingArea).width() - margin.left - margin.right;
     }
 
     getYExtents() {
