@@ -3,6 +3,7 @@ import ReactFauxDOM from 'react-faux-dom';
 var d3 = require("d3");
 import $ from 'jquery';
 import Legend from "./Legend.js";
+import Tooltip from "./Tooltip.js";
 import LineChart from "../chart_modules/LineChart.js"
 
 const margin = {top: 10, right: 0, bottom: 30, left: 40};
@@ -18,6 +19,7 @@ export default class SimpleChart extends React.Component {
             width: 0,
             height: 0,
             currHovered: null,
+            tooltipSettings: null
         }
 	}
 
@@ -43,7 +45,7 @@ export default class SimpleChart extends React.Component {
 
         this.initializeYAxis();
         this.initializeDataElements();
-        this.initializeTooltip();
+        // this.initializeTooltip();
 
         return div;
     }
@@ -84,16 +86,16 @@ export default class SimpleChart extends React.Component {
 	    }
     }
 
-    initializeTooltip() {
-        this.tooltip = d3.select("body").append("div")
-            .attr("class", "tooltip");
+    // initializeTooltip() {
+    //     this.tooltip = d3.select("body").append("div")
+    //         .attr("class", "tooltip");
 
-        this.tooltipTitle = this.tooltip.append("h5")
-            .attr("class", "tooltip__title");
+    //     this.tooltipTitle = this.tooltip.append("h5")
+    //         .attr("class", "tooltip__title");
 
-        this.tooltipValue = this.tooltip.append("h5")
-            .attr("class", "tooltip__value");
-    }
+    //     this.tooltipValue = this.tooltip.append("h5")
+    //         .attr("class", "tooltip__value");
+    // }
 
     updateChart() {
         const {width, height} = this.state;
@@ -133,25 +135,25 @@ export default class SimpleChart extends React.Component {
     	this.dataElement.update(updateParams);
     }
 
-    updateTooltip() {
-        const {tooltipSettings} = this.state;
-        if (tooltipSettings) {
-            console.log(tooltipSettings);
-            this.tooltip
-                .style("display", "block")
-                .style("left", tooltipSettings.x + "px")
-                .style("top", tooltipSettings.y + "px")
+    // updateTooltip() {
+    //     const {tooltipSettings} = this.state;
+    //     if (tooltipSettings) {
+    //         console.log(tooltipSettings);
+    //         this.tooltip
+    //             .style("display", "block")
+    //             .style("left", tooltipSettings.x + "px")
+    //             .style("top", tooltipSettings.y + "px")
 
-            this.tooltipTitle
-                .text(tooltipSettings.title);
+    //         this.tooltipTitle
+    //             .text(tooltipSettings.title);
 
-             this.tooltipValue
-                .text(tooltipSettings.value);
+    //          this.tooltipValue
+    //             .text(tooltipSettings.value);
 
-        } else {
-            this.tooltip.style("display", "none");
-        }
-    }
+    //     } else {
+    //         this.tooltip.style("display", "none");
+    //     }
+    // }
 
     toggleVals() {
 
@@ -162,12 +164,13 @@ export default class SimpleChart extends React.Component {
             {variables} = settings;
 
 		console.log("calling render");
-        let content, legend;
+        let content, legend, tooltip;
 
 		if (this.state.chart) {
             this.updateChart();
             content = this.state.chart.toReact();
             legend = <Legend variables={variables} toggleChartVals={this.toggleVals.bind(this)}/>;
+            tooltip = <Tooltip settings={this.state.tooltipSettings} />
         } else {
             content = "loading chart";
         }
@@ -175,6 +178,7 @@ export default class SimpleChart extends React.Component {
             <div className="data-block__viz__rendering-area" ref="renderingArea">
                 {content}
                 {legend}
+                {tooltip}
             </div>
         )
 	}
@@ -197,20 +201,20 @@ export default class SimpleChart extends React.Component {
     	console.log(this);
     	console.log(this.tooltip);
     	this.setState({
-            currHovered: {varName: varName, year:datum.year}
-            // tooltipSettings: {
-            //     x: d3.event.pageX + 10,
-            //     y: d3.event.pageY - 30,
-            //     title: key,
-            //     value: String(data[varName][key])
-            // }
+            currHovered: {varName: varName, year:datum.year},
+            tooltipSettings: {
+                x: eventObject.offsetX + 10,
+                y: eventObject.offsetY - 30,
+                title: datum.year,
+                value: datum.value
+            }
         })
     }
 
     mouseoutFunc() {
     	this.setState({
             currHovered: null,
-            // tooltipSettings: null
+            tooltipSettings: null
         })
     }
 
