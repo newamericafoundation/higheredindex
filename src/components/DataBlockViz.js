@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import LineChart from "./LineChart";
+import BarChart from "./BarChart";
 import $ from 'jquery';
 
 
@@ -12,6 +13,9 @@ export default class DataBlockViz extends React.Component {
 
     let viz;
     switch (type) {
+      case "bar-chart":
+        viz = <BarChart settings={settings} data={data} />
+        break;
       case "line-chart":
         viz = <LineChart settings={settings} data={data} />
         break;
