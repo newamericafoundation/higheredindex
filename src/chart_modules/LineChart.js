@@ -40,11 +40,10 @@ export default class LineChart {
 
 		for (let variable of this.variables) {
 			let varName = variable.variable;
-			console.log(varName);
 			this.dataLines[varName] = this.domElem.append("path")
                 .attr("class", "line-chart__data-line")
                 .style("fill", "none")
-                .style("stroke", "black")
+                .style("stroke", variable.color)
                 .style("stroke-width", "1.5px");
 
             let dataArray = Object.keys(this.data[varName]).map(
@@ -66,13 +65,10 @@ export default class LineChart {
                 .on("mouseover", (d, index, paths) => { return this.mouseoverFunc(d, paths[index], d3.event, varName); })
                 .on("mouseout", () => this.mouseoutFunc());
 		}
-
-		console.log(this.dataCircles);
     }
 
     update(updateParams) {
     	// const {y, width, height} = updateParams;
-    	console.log(updateParams);
 
  		this.updateXAxis(updateParams);
  		this.updateDataLines(updateParams);
@@ -97,9 +93,8 @@ export default class LineChart {
     }
 
     updateDataLines(updateParams) {
-        const {y, width, height, currHovered} = updateParams;
+        const {y, width, height, currHovered, valsShown} = updateParams;
 
-        console.log(currHovered);
         const getLine = (dataObject) => {
           let line = d3.line()
             .x(d => {return this.x(d); })
@@ -111,11 +106,13 @@ export default class LineChart {
         for (let variable of this.variables) {
         	let varName = variable.variable;
 				this.dataLines[varName]
-                	.attr("d", getLine(this.data[varName]));
+                	.attr("d", getLine(this.data[varName]))
+                	.classed("disabled", valsShown.indexOf(varName) == -1)
 
                 this.dataCircles[varName]
-                	.attr("cx", (d) => { console.log(d); return this.x(d.year)})
-                	.attr("cy", (d) => { console.log(d); return y(d.value)})
+                	.attr("cx", (d) => { return this.x(d.year)})
+                	.attr("cy", (d) => { return y(d.value)})
+                	.classed("disabled", valsShown.indexOf(varName) == -1)
                 	.attr("fill", (d) => {
                 		if (currHovered) {
                 			if (varName == currHovered.varName && d.year == currHovered.year) {
