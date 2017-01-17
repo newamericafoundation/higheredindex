@@ -76,7 +76,10 @@ export default class LineChart {
 
     updateXAxis(updateParams) {
     	const {width, height} = updateParams;
+        console.log(width, height);
 
+        this.x.range([0, width]);
+        
     	this.xAxis
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(this.x).tickSize(0).tickPadding(10)
@@ -89,7 +92,7 @@ export default class LineChart {
                 })
             );
 
-        this.x.range([0, width]);
+        
     }
 
     updateDataLines(updateParams) {
