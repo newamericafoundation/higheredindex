@@ -5,6 +5,7 @@ import $ from 'jquery';
 import Legend from "./Legend.js";
 import Tooltip from "./Tooltip.js";
 import LineChart from "../chart_modules/LineChart.js"
+import BarChart from "../chart_modules/BarChart.js"
 
 const margin = {top: 10, right: 0, bottom: 30, left: 40};
 
@@ -86,6 +87,9 @@ export default class SimpleChart extends React.Component {
 	      case "line-chart":
 	        this.dataElement = new LineChart(params);
 	        break;
+	      case "bar-chart":
+	        this.dataElement = new BarChart(params);
+	        break;
 	      default:
 	        console.log("No Chart Type");
 	    }
@@ -131,9 +135,6 @@ export default class SimpleChart extends React.Component {
     }
 
     toggleVals(valsShown) {
-    	console.log("toggling values");
-        console.log(this);
-        console.log(valsShown);
     	this.setState({
             valsShown: valsShown
         });
