@@ -6,3 +6,6 @@ Loading data from csv into Mongo
 
 from command line (not mongo shell)
 - mongoimport --db test --collection institutions --type csv --headerline --file febp_higher_ed_sample.csv
+
+to nest year data:
+mongo ./database_setup/nest_year_data.js 
