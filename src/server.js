@@ -11,7 +11,7 @@ import NotFoundPage from './components/NotFoundPage';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
-const url = 'mongodb://localhost:27017/test';
+const url = 'mongodb://localhost:27017/live';
 
 mongoose.connect(url);
 const db = mongoose.connection;
@@ -108,7 +108,7 @@ app.get('/api/state-list', (req, res) => {
 app.get('/api/institution-list', (req, res) => {
   const filter = {};
 
-  institutionModel.find(filter, { name: 1, path: 1 }, (err, institutions) => {
+  institutionModel.find(filter, { name: 1, path: 1}, (err, institutions) => {
     if (err) {
       return console.error(err);
     }

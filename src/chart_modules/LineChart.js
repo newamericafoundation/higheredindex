@@ -6,6 +6,7 @@ export default class LineChart {
 		let {data, variables, domElem, mouseoverFunc, mouseoutFunc} = settings;
 
 		this.data = data;
+        console.log(data);
 		this.variables = variables;
 		this.domElem = domElem;
 		this.mouseoverFunc = mouseoverFunc;
@@ -50,9 +51,11 @@ export default class LineChart {
             	(key) => {
             		let year = key,
             			value = this.data[varName][key];
-            		return {year: year, value: value};
+            		return isNaN(value) ? null : {year: year, value: value};
 				}
 			)
+            dataArray = dataArray.filter((d) => { return d != null; });
+
 
             this.dataCircles[varName] = this.domElem.selectAll("circle#" + varName)
             	.data(dataArray)
