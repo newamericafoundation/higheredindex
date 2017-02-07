@@ -1,8 +1,8 @@
 conn = new Mongo();
-db = conn.getDB("test");
-cursor = db.states.find();
+db = conn.getDB("live");
+cursor = db.institutions.find();
 
-example = db.states.findOne();
+example = db.institutions.findOne();
 printjson( example );
 originalKeys = Object.keys(example)
 dedupedKeys = new Set();
@@ -21,13 +21,11 @@ while ( cursor.hasNext() ) {
 	print(id)
 	for (var i = 0; i < keyArray.length; i++) {
 		var key = keyArray[i];
-		print(key);
 		if (regEx.test(key)) {
-			print("regex matched")
 			variable = key.replace(/_[0-9]{4}/i, '');
 			year = key.match(/[0-9]{4}/i);
 			fullFieldRef = variable + "." + year;
-			db.states.updateOne(
+			db.institutions.updateOne(
 				{"_id": id},
 				{ $set: { [fullFieldRef] : curr[key] },
 				  $unset: { [key] : ""}

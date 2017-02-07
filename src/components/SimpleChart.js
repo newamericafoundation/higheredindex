@@ -6,6 +6,7 @@ import Legend from "./Legend.js";
 import Tooltip from "./Tooltip.js";
 import LineChart from "../chart_modules/LineChart.js"
 import BarChart from "../chart_modules/BarChart.js"
+import GroupedBarChart from "../chart_modules/GroupedBarChart.js"
 
 const margin = {top: 10, right: 0, bottom: 30, left: 40};
 
@@ -84,14 +85,17 @@ export default class SimpleChart extends React.Component {
         };
 
     	switch (this.chartType) {
-	      case "line-chart":
-	        this.dataElement = new LineChart(params);
-	        break;
-	      case "bar-chart":
-	        this.dataElement = new BarChart(params);
-	        break;
-	      default:
-	        console.log("No Chart Type");
+    		case "bar-chart":
+		        this.dataElement = new BarChart(params);
+		        break;
+		    case "grouped-bar-chart":
+		        this.dataElement = new GroupedBarChart(params);
+		        break;
+	      	case "line-chart":
+		        this.dataElement = new LineChart(params);
+		        break;
+	      	default:
+	        	console.log("No Chart Type");
 	    }
     }
 
@@ -143,6 +147,8 @@ export default class SimpleChart extends React.Component {
 	render() {
 		const { data, settings } = this.props,
             {variables} = settings;
+
+        console.log(data);
 
         let content, legend, tooltip;
 
@@ -209,7 +215,9 @@ export default class SimpleChart extends React.Component {
     	let valList = [];
         for (let variable of variables) {
             let vals = Object.values(data[variable.variable]);
+            vals = vals.filter((d) => { return !isNaN(d);})
             valList.push(...vals);
+            console.log(valList);
         }
 
         return d3.extent(valList);
