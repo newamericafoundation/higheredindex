@@ -1,23 +1,23 @@
 const instVizSettings = [
-	{
-		title: "Enrollment by Student Type",
-		paragraphSettings: {
-			textSections: ['In @year ', ' enrolled ', ' undergraduate students and ', ' graduate students; ', ' full-time students and ', ' part-time-students;'],
-			variables: ['name', 'ugenroll', 'gradenroll', 'ftenroll', 'ptenroll']
-		},
-		vizSettings: {
-			type: "line-chart",
-			yAxisLabel: "Students",
-			variables: [
-				{variable:"ugenroll", displayName:"Undergraduate", format: "number", color: "turquoise" },
-				{variable:"gradenroll", displayName:"Graduate", format: "number", color: "green"},
-				{variable:"ftenroll", displayName:"Full-time", format: "number", color: "orange"},
-				{variable:"ptenroll", displayName:"part-time", format: "number", color: "purple"},
-				{variable:"enroll", displayName:"Total", format: "number", color: "red"},
-			]
+	// {
+	// 	title: "Enrollment by Student Type",
+	// 	paragraphSettings: {
+	// 		textSections: ['In @year ', ' enrolled ', ' undergraduate students and ', ' graduate students; ', ' full-time students and ', ' part-time-students;'],
+	// 		variables: ['name', 'ugenroll', 'gradenroll', 'ftenroll', 'ptenroll']
+	// 	},
+	// 	vizSettings: {
+	// 		type: "line-chart",
+	// 		yAxisLabel: "Students",
+	// 		variables: [
+	// 			{variable:"ugenroll", displayName:"Undergraduate", format: "number", color: "turquoise" },
+	// 			{variable:"gradenroll", displayName:"Graduate", format: "number", color: "green"},
+	// 			{variable:"ftenroll", displayName:"Full-time", format: "number", color: "orange"},
+	// 			{variable:"ptenroll", displayName:"part-time", format: "number", color: "purple"},
+	// 			{variable:"enroll", displayName:"Total", format: "number", color: "red"},
+	// 		]
 
-		}
-	},
+	// 	}
+	// },
 	// {
 	// 	title: "Enrollment by Race",
 	// 	paragraphSettings: {
@@ -40,22 +40,22 @@ const instVizSettings = [
 
 	// 	}
 	// },
-	// {
-	// 	title: "Enrollment by Gender",
-	// 	paragraphSettings: {
-	// 		textSections: ["In @year, ", "% of student identified as male and ", "% as female at"],
-	// 		variables: ['fem', 'men']
-	// 	},
-	// 	vizSettings: {
-	// 		type: "bar-chart",
-	// 		yAxisLabel: "Students",
-	// 		variables: [
-	// 			{variable:"fem", displayName:"Female", format: "percent", color: "steelblue" },
-	// 			{variable:"men", displayName:"Male", format: "percent", color: "purple"},
-	// 		]
+	{
+		title: "Enrollment by Gender",
+		paragraphSettings: {
+			textSections: ["In @year, ", "% of student identified as male and ", "% as female at"],
+			variables: ['fem', 'men']
+		},
+		vizSettings: {
+			type: "bar-chart",
+			yAxisLabel: "Students",
+			variables: [
+				{variable:"fem", displayName:"Female", format: "percent", color: "steelblue" },
+				{variable:"men", displayName:"Male", format: "percent", color: "purple"},
+			]
 
-	// 	}
-	// },
+		}
+	},
 	// {
 	// 	title: "Enrollment by Financial Need",
 	// 	paragraphSettings: {

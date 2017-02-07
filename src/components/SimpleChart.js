@@ -209,6 +209,9 @@ export default class SimpleChart extends React.Component {
     }
 
     getYExtents() {
+        if (this.chartType == "bar-chart") {
+            return [0,1];
+        }
     	const { data, settings } = this.props,
             {variables} = settings;
 
