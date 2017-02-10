@@ -70,6 +70,7 @@
 	border: 1px solid palette-get(na-black-10);
 	z-index: 100;
 	padding: 7px 10px;
+	pointer-events: none;
 
 	&__title, &__value {
 		text-align: center;

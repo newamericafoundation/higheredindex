@@ -107,6 +107,7 @@ export function receiveProfileList(listType, json) {
 }
 
 export function fetchProfileList(type) {
+  console.log("fetching " + type);
   return function (dispatch) {
 
     dispatch(requestProfileList(type))
