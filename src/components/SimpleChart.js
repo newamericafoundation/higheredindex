@@ -6,20 +6,28 @@ import Legend from "./Legend.js";
 import Tooltip from "./Tooltip.js";
 import LineChart from "../chart_modules/LineChart.js"
 import BarChart from "../chart_modules/BarChart.js"
-import GroupedBarChart from "../chart_modules/GroupedBarChart.js"
 
-const margin = {top: 10, right: 0, bottom: 30, left: 40};
+let margin = {top: 10, right: 0, bottom: 30, left: 40};
 
 export default class SimpleChart extends React.Component {
 	constructor(props) {
 		super(props);
+        let { chart1Settings, chart2Settings } = props.settings;
 
 		this.chartType = props.settings.type;
 		this.resizeFunc = this.resize.bind(this);
 
 		let fullValList = [];
-        for (let variable of props.settings.variables) {
-            fullValList.push(variable.variable);
+        chart1Settings.variables.map((d) => {
+            fullValList.push(d.variable);
+        });
+
+        if (chart2Settings) {
+            chart2Settings.variables.map((d) => {
+                fullValList.push(d.variable);
+            });
+
+            margin.right = 40
         }
 
 		this.state = {
@@ -51,52 +59,109 @@ export default class SimpleChart extends React.Component {
         this.g = this.svg.append("g")
         	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        this.initializeYAxis();
+        this.initializeYAxes();
+        this.initializeXAxis();
         this.initializeDataElements();
 
         return div;
     }
 
-    initializeYAxis() {
-    	this.yAxis = this.g.append("g")
+    initializeYAxes() {
+        let {chart1Settings, chart2Settings} = this.props.settings;
+    	this.yAxis1 = this.g.append("g")
             .attr("class", "axis axis--y");
 
-        this.yAxisLabel = this.yAxis.append("text")
+        this.yAxis1Label = this.yAxis1.append("text")
             .attr("class", "data-block__viz__y-axis-label")
             .attr("transform", "rotate(-90)")
             .attr("y", -30)
             .attr("fill", "#000")
             .text("Value");
 
-        this.y = d3.scaleLinear()
-        	.domain(this.getYExtents());
+        this.y1 = d3.scaleLinear()
+        	.domain(this.getYExtents(chart1Settings));
+
+        if (chart2Settings) {
+            this.yAxis2 = this.g.append("g")
+                .attr("class", "axis axis--y");
+
+            this.yAxis2Label = this.yAxis2.append("text")
+                .attr("class", "data-block__viz__y-axis-label")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 30)
+                .attr("fill", "#000")
+                .text("Value");
+
+            this.y2 = d3.scaleLinear()
+                .domain(this.getYExtents(chart2Settings));
+        }
+    }
+
+    initializeXAxis() {
+        let { chart1Settings, chart2Settings } = this.props.settings;
+
+        this.xAxis = this.g.append("g")
+            .attr("class", "axis axis--x");
+
+        this.x = d3.scaleBand()
+            .paddingInner(0.3)
+            .paddingOuter(0.4);
+
+        let keyList = [];
+
+        chart1Settings.variables.map((d) => {
+            let keys = Object.keys(this.props.data[d.variable]);
+            keyList.push(...keys);
+        });
+
+        if (chart2Settings) {
+            chart2Settings.variables.map((d) => {
+                let keys = Object.keys(this.props.data[d.variable]);
+                keyList.push(...keys);
+            });
+        }
+
+        keyList = Array.from(new Set(keyList)).sort(d3.ascending);
+
+        console.log(keyList);
+        this.x.domain(keyList);
     }
 
     initializeDataElements() {
     	const { data, settings } = this.props,
-            {variables} = settings;
+            {chart1Settings, chart2Settings} = settings;
+
+        if (chart2Settings) {
+            this.dataElement2 = this.initializeChartModule(data, chart2Settings);
+        }
+        this.dataElement1 = this.initializeChartModule(data, chart1Settings);
+    }
+
+    initializeChartModule(data, chart) {
+        console.log(chart);
+        const {variables} = chart;
+        let retVal;
 
         let params = {
-        	data: data,
-        	variables: variables,
-        	domElem: this.g,
-        	mouseoverFunc: this.mouseoverFunc.bind(this),
-        	mouseoutFunc: this.mouseoutFunc.bind(this)
+            data: data,
+            variables: variables,
+            domElem: this.g,
+            mouseoverFunc: this.mouseoverFunc.bind(this),
+            mouseoutFunc: this.mouseoutFunc.bind(this)
         };
 
-    	switch (this.chartType) {
-    		case "bar-chart":
-		        this.dataElement = new BarChart(params);
-		        break;
-		    case "grouped-bar-chart":
-		        this.dataElement = new GroupedBarChart(params);
-		        break;
-	      	case "line-chart":
-		        this.dataElement = new LineChart(params);
-		        break;
-	      	default:
-	        	console.log("No Chart Type");
-	    }
+        switch (chart.type) {
+            case "bar-chart":
+                retVal = new BarChart(params);
+                break;
+            case "line-chart":
+                retVal = new LineChart(params);
+                break;
+            default:
+                console.log("No Chart Type");
+        }
+
+        return retVal
     }
 
     updateChart() {
@@ -110,35 +175,71 @@ export default class SimpleChart extends React.Component {
             .attr("width", width - margin.left - margin.right)
             .attr("height", height);
 
-        this.updateYAxis();
+        this.updateYAxes();
+        this.updateXAxis();
         this.updateDataElements();
     }
 
-    updateYAxis() {
+    updateYAxes() {
         const {width, height} = this.state;
         
-        this.y.range([height, 0]);
+        this.y1.range([height, 0]);
         
-        this.yAxis
-            .call(d3.axisLeft(this.y).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10));
+        this.yAxis1
+            .call(d3.axisLeft(this.y1).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10));
 
-        this.yAxisLabel
+        this.yAxis1Label
             .attr("x", -height/2);
+
+        if (this.y2) {
+            this.y2.range([height, 0]);
+
+            this.yAxis2
+                .attr("transform", "translate(" + width + ")")
+                .call(d3.axisRight(this.y2).tickSizeOuter(0).tickPadding(10));
+
+            this.yAxis2Label
+                .attr("x", -height/2);
+        }
+    }
+
+    updateXAxis() {
+        const {width, height} = this.state;
+        this.x.rangeRound([0, width]);
+
+        this.xAxis
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(this.x).tickSize(0).tickPadding(10)
+                .tickFormat(function(e){
+                    if(Math.floor(e) != e)
+                    {
+                        return;
+                    }
+                    return e;
+                })
+            );
     }
 
     updateDataElements() {
+        this.updateChartModule(this.dataElement1, this.y1);
+        this.y2 ? this.updateChartModule(this.dataElement2, this.y2) : null;
+    }
+
+    updateChartModule(dataElement, yScale) {
     	let updateParams = {
-    		y: this.y,
+    		y: yScale,
+            x: this.x,
     		width: this.state.width,
     		height: this.state.height,
     		currHovered: this.state.currHovered,
     		valsShown: this.state.valsShown
     	}
 
-    	this.dataElement.update(updateParams);
+    	dataElement.update(updateParams);
     }
 
     toggleVals(valsShown) {
+        console.log(valsShown)
     	this.setState({
             valsShown: valsShown
         });
@@ -146,11 +247,14 @@ export default class SimpleChart extends React.Component {
 
 	render() {
 		const { data, settings } = this.props,
-            {variables} = settings;
-
-        console.log(data);
+            {chart1Settings, chart2Settings} = settings;
 
         let content, legend, tooltip;
+        let variables = chart1Settings.variables;
+
+        if (chart2Settings) {
+            variables = variables.concat(chart2Settings.variables);
+        }
 
 		if (this.state.chart) {
             this.updateChart();
@@ -208,12 +312,13 @@ export default class SimpleChart extends React.Component {
         return $(this.refs.renderingArea).width() - margin.left - margin.right;
     }
 
-    getYExtents() {
-        if (this.chartType == "bar-chart") {
+    getYExtents(chart) {
+        console.log(chart)
+        if (chart.chartType == "bar-chart") {
             return [0,1];
         }
-    	const { data, settings } = this.props,
-            {variables} = settings;
+    	const { data } = this.props;
+        const variables = chart.variables;
 
     	let valList = [];
         for (let variable of variables) {
