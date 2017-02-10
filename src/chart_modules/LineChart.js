@@ -12,27 +12,7 @@ export default class LineChart {
 		this.mouseoverFunc = mouseoverFunc;
 		this.mouseoutFunc = mouseoutFunc;
 
-		this.initializeXAxis();
 		this.initializeDataLines();
-	}
-
-	initializeXAxis() {
-		this.xAxis = this.domElem.append("g")
-            .attr("class", "axis axis--x");
-
-        this.x = d3.scaleLinear();
-
-        let keyList = [];
-
-        for (let variable of this.variables) {
-            let keys = Object.keys(this.data[variable.variable]);
-            keyList.push(...keys);
-        }
-        // de-duplication
-        keyList = Array.from(new Set(keyList));
-
-        let xExtents = d3.extent(keyList)
-        this.x.domain([Number(xExtents[0]) - .15 , Number(xExtents[1]) + .15]);
 	}
 
 	initializeDataLines() {
@@ -73,37 +53,16 @@ export default class LineChart {
     update(updateParams) {
     	// const {y, width, height} = updateParams;
 
- 		this.updateXAxis(updateParams);
+ 		// this.updateXAxis(updateParams);
  		this.updateDataLines(updateParams);
     }
 
-    updateXAxis(updateParams) {
-    	const {width, height} = updateParams;
-        console.log(width, height);
-
-        this.x.range([0, width]);
-        
-    	this.xAxis
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(this.x).tickSize(0).tickPadding(10)
-                .tickFormat(function(e){
-                    if(Math.floor(e) != e)
-                    {
-                        return;
-                    }
-                    return e;
-                })
-            );
-
-        
-    }
-
     updateDataLines(updateParams) {
-        const {y, width, height, currHovered, valsShown} = updateParams;
+        const {y, x, width, height, currHovered, valsShown} = updateParams;
 
         const getLine = (dataObject) => {
           let line = d3.line()
-            .x(d => {return this.x(d); })
+            .x(d => {return x(d) + x.bandwidth()/2; })
             .y(d => {return y(dataObject[d]); });
 
           return line(Object.keys(dataObject));
@@ -116,7 +75,7 @@ export default class LineChart {
                 	.classed("disabled", valsShown.indexOf(varName) == -1)
 
                 this.dataCircles[varName]
-                	.attr("cx", (d) => { return this.x(d.year)})
+                	.attr("cx", (d) => { return x(d.year) + x.bandwidth()/2})
                 	.attr("cy", (d) => { return y(d.value)})
                 	.classed("disabled", valsShown.indexOf(varName) == -1)
                 	.attr("fill", (d) => {

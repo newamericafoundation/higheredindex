@@ -1,5 +1,34 @@
 const instVizSettings = {
 	"students": [
+		{
+			title: "Enrollment by Student Type",
+			paragraphSettings: {
+				textSections: ['In @year ', ' enrolled ', ' undergraduate students and ', ' graduate students; ', ' full-time students and ', ' part-time-students;'],
+				variables: ['name', 'ugenroll', 'gradenroll', 'ftenroll', 'ptenroll']
+			},
+			vizSettings: {
+				type: "multi-chart",
+				chart1: {
+					type: "line-chart",
+					yAxisLabel: "Students",
+					variables: [
+						{variable:"ugenroll", displayName:"Undergraduate", format: "number", color: "turquoise" },
+						{variable:"gradenroll", displayName:"Graduate", format: "number", color: "green"},
+						{variable:"ftenroll", displayName:"Full-time", format: "number", color: "orange"},
+					]
+
+				},
+				chart2: {
+					type: "bar-chart",
+					yAxisLabel: "Students",
+					variables: [
+						{variable:"white", displayName:"White", format: "percent", color: "steelblue" },
+						{variable:"afam", displayName:"Black", format: "percent", color: "purple"},
+					]
+				}
+
+			},
+		}
 		// {
 		// 	title: "Enrollment by Student Type",
 		// 	paragraphSettings: {

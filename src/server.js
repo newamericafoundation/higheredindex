@@ -95,7 +95,7 @@ app.get('/api/state-list', (req, res) => {
   //   console.log(states);
   //   return res.json(states);
   // });
-  return [];
+  return [{}];
 });
 
 app.get('/api/institution-list', (req, res) => {
@@ -105,7 +105,6 @@ app.get('/api/institution-list', (req, res) => {
     if (err) {
       return console.error(err);
     }
-    console.log(institutions);
     return res.json(institutions);
   });
 });
@@ -117,7 +116,6 @@ app.get('/api/states', (req, res) => {
     if (err) {
       return console.error(err);
     }
-    console.log(states);
     return res.json(states);
   });
 });
@@ -140,7 +138,6 @@ app.get('/api/institutions', (req, res) => {
     if (err) {
       return console.error(err);
     }
-    console.log(institutions);
     return res.json(institutions);
   });
 });
