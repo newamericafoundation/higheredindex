@@ -11,7 +11,7 @@ import NotFoundPage from './components/NotFoundPage';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
-const url = 'mongodb://localhost:27017/live';
+const url = 'mongodb://localhost:27017/live_test';
 
 mongoose.connect(url);
 const db = mongoose.connection;
@@ -23,38 +23,30 @@ db.once('open', () => {
   console.log('Connected to MongoDB server.');
 });
 
-const stateSchema = new mongoose.Schema({
-  id: Number,
-  name: String,
-  path: String,
-  data_1999: Number,
-  data_2000: Number,
-  data_2001: Number,
-  data_2002: Number,
-  data_2003: Number,
-  other_data_1999: Number,
-  other_data_2000: Number,
-  other_data_2001: Number,
-  other_data_2002: Number,
-  other_data_2003: Number
-});
-const stateModel = mongoose.model('state', stateSchema);
+// const stateSchema = new mongoose.Schema({
+//   id: Number,
+//   name: String,
+//   path: String,
+//   data_1999: Number,
+//   data_2000: Number,
+//   data_2001: Number,
+//   data_2002: Number,
+//   data_2003: Number,
+//   other_data_1999: Number,
+//   other_data_2000: Number,
+//   other_data_2001: Number,
+//   other_data_2002: Number,
+//   other_data_2003: Number
+// });
+// const stateModel = mongoose.model('state', stateSchema, "final_test");
 
 const institutionSchema = new mongoose.Schema({
-  id: Number,
+  _id: Number,
   name: String,
   path: String,
-  address: String,
-  city: String,
-  postal: String,
-  zip: String, 
-  data_1999: Number,
-  data_2000: Number,
-  data_2001: Number,
-  data_2002: Number,
-  data_2003: Number
+
 });
-const institutionModel = mongoose.model('institution', institutionSchema);
+const institutionModel = mongoose.model('institution', institutionSchema, "final_test");
 
 
 // initialize the server and configure support for ejs templates
@@ -94,15 +86,16 @@ app.use(function(req, res, next) {
 // });
 
 app.get('/api/state-list', (req, res) => {
-  const filter = {};
+  // const filter = {};
 
-  stateModel.find(filter, { name: 1, path: 1 }, (err, states) => {
-    if (err) {
-      return console.error(err);
-    }
-    console.log(states);
-    return res.json(states);
-  });
+  // stateModel.find(filter, { name: 1, path: 1 }, (err, states) => {
+  //   if (err) {
+  //     return console.error(err);
+  //   }
+  //   console.log(states);
+  //   return res.json(states);
+  // });
+  return [];
 });
 
 app.get('/api/institution-list', (req, res) => {

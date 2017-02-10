@@ -1,13 +1,14 @@
 conn = new Mongo();
-db = conn.getDB("testjoin");
+db = conn.getDB("live_test");
 
-sections = ["outcomes"]
+sections = ["students"]
+
+// nest year data
 
 for (i = 0; i < sections.length; i++) {
 	print("nesting " + sections[i]);
 	nest(sections[i]);
 }
-
 
 function nest(collection) {
 	cursor = db[collection].find();
@@ -28,9 +29,7 @@ function nest(collection) {
 
 	keyArray = Array.from(keysToReplace)
 
-	counter = 0;
 	while ( cursor.hasNext()) {
-		print(counter);
 		curr = cursor.next();
 		id = curr._id
 		finalValObject = {}
@@ -54,9 +53,10 @@ function nest(collection) {
 			{"_id": id},
 			{ $set: finalValObject }
 		);
-		counter++;
 	}
 
-	
+	//remove original/now obsolete year categories
 	db[collection].updateMany({}, { $unset: keysToUnset })
 }
+
+

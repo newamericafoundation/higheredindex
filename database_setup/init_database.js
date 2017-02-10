@@ -3,13 +3,12 @@ sections = ["schools", "students", "outcomes", "grants", "loans"];
 conn = new Mongo();
 db = conn.getDB("live_test");
 
-
 // nest year data
 
-// for (i = 0; i < sections.length; i++) {
-// 	print("nesting " + sections[i]);
-// 	nest(sections[i]);
-// }
+for (i = 0; i < sections.length; i++) {
+	print("nesting " + sections[i]);
+	nest(sections[i]);
+}
 
 function nest(collection) {
 	cursor = db[collection].find();
@@ -62,16 +61,23 @@ function nest(collection) {
 
 //add sections to final collection
 
-db.schools.find({}, { opeidstring: 1, school: 1 }).forEach(function(doc){ db.final.insert(doc); });
+db.schools.find({}, { opeidstring: 1, school: 1 }).forEach(function(doc){ db.final_test.insert(doc); });
 
-print("adding schools to final collection");
-db.final.aggregate([{ $lookup: { from:"schools", localField:"opeidstring", foreignField:"opeidstring", as:"schools" }},{$project:{_id:0}},{ $unwind:"$schools" },{ $out: "final"}]);
-print("adding students to final collection");
-db.final.aggregate([{ $lookup: { from:"students", localField:"opeidstring", foreignField:"opeidstring", as:"students" }},{$project:{_id:0}},{ $unwind:"$students" },{ $out: "final"}]);
-print("adding loans to final collection");
-db.final.aggregate([{ $lookup: { from:"loans", localField:"opeidstring", foreignField:"opeidstring", as:"loans" }},{$project:{_id:0}},{ $unwind:"$loans" },{ $out: "final"}]);
-print("adding grants to final collection");
-db.final.aggregate([{ $lookup: { from:"grants", localField:"opeidstring", foreignField:"opeidstring", as:"grants" }},{$project:{_id:0}},{ $unwind:"$grants" },{ $out: "final"}]);
-print("adding outcomes to final collection");
-db.final.aggregate([{ $lookup: { from:"outcomes", localField:"opeidstring", foreignField:"opeidstring", as:"outcomes" }},{$project:{_id:0}},{ $unwind:"$outcomes" },{ $out: "final"}]);
+print("adding schools to final_test collection");
+db.final_test.aggregate([{ $lookup: { from:"schools", localField:"opeidstring", foreignField:"opeidstring", as:"schools" }},{ $out: "final_test"}]);
+print(db.final_test.count({}));
+print("adding students to final_test collection");
+db.final_test.aggregate([{ $lookup: { from:"students", localField:"opeidstring", foreignField:"opeidstring", as:"students" }},{ $out: "final_test"}]);
+print(db.final_test.count({}));
+print("adding loans to final_test collection");
+db.final_test.aggregate([{ $lookup: { from:"loans", localField:"opeidstring", foreignField:"opeidstring", as:"loans" }},{ $out: "final_test"}]);
+print(db.final_test.count({}));
+print("adding grants to final_test collection");
+db.final_test.aggregate([{ $lookup: { from:"grants", localField:"opeidstring", foreignField:"opeidstring", as:"grants" }},{ $out: "final_test"}]);
+print(db.final_test.count({}));
+print("adding outcomes to final_test collection");
+db.final_test.aggregate([{ $lookup: { from:"outcomes", localField:"opeidstring", foreignField:"opeidstring", as:"outcomes" }},{ $out: "final_test"}]);
+print(db.final_test.count({}));
 
+
+db.final_test.updateMany( {}, { $rename: { "school": "name"}});

@@ -1,6 +1,6 @@
 conn = new Mongo();
-db = conn.getDB("live");
-cursor = db.institutions.find();
+db = conn.getDB("live_test");
+cursor = db.final_test.find();
 
 // example = db.institutions.findOne();
 // printjson( example );
@@ -13,8 +13,10 @@ cursor = db.institutions.find();
 
 valList = []
 
-i = 0;
-while ( cursor.hasNext() && i < 20 ) {
+db.final_test.updateMany( {}, { $rename: { "school": "name"}});
+
+while ( cursor.hasNext()) {
+
 	curr = cursor.next();
 	name = curr.name
 	id = curr._id
@@ -26,12 +28,12 @@ while ( cursor.hasNext() && i < 20 ) {
 		print(name)
 		print(path)
 	}
-	
 
-	db.institutions.updateOne(
+	db.final_test.updateOne(
 		{"_id": id},
 		{ $set: { path : path }}
 	);
-	// i++;
 
 }
+
+

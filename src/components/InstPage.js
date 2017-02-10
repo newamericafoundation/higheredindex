@@ -55,9 +55,10 @@ class InstPage extends React.Component {
           title="Students" 
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
         <div>
-          {instVizSettings.map((settings, i) => {
+          {instVizSettings.students.map((settings, i) => {
+            console.log(this.props.instData)
             console.log(i)
-            return <DataBlock key={i} settings={settings} data={this.props.instData} />;
+            return <DataBlock key={i} settings={settings} data={this.props.instData.students[0]} />;
           })}
         </div>
         <div className="navigateBack">
