@@ -82,7 +82,6 @@ class SearchBox extends React.Component {
   }
 
   onSuggestionSelected(event, { suggestion, suggestionValue, sectionIndex, method }) {
-    console.log("going to ", suggestion);
     browserHistory.push('/' + suggestion.type + '/' + suggestionValue);
   }
 

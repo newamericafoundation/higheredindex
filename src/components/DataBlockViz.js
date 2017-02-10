@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import SimpleChart from "./SimpleChart";
+=======
+import LineChart from "./LineChart";
+import BarChart from "./BarChart";
+>>>>>>> 99372b3f6c02031f7122f26d5340c39a4f86bc8a
 import $ from 'jquery';
 
 

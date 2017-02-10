@@ -58,5 +58,3 @@ function nest(collection) {
 	//remove original/now obsolete year categories
 	db[collection].updateMany({}, { $unset: keysToUnset })
 }
-
-

@@ -1,3 +1,4 @@
+
 id,name,path,data_1999,data_2000,data_2001,data_2002,data_2003,other_data_1999,other_data_2000,other_data_2001,other_data_2002,other_data_2003,dem1_1999,dem1_2000,dem1_2001,dem1_2002,dem1_2003,dem2_1999,dem2_2000,dem2_2001,dem2_2002,dem2_2003
 1,Alabama,alabama,1,4,9,9,6,1,5,0,9,9,0.8,0.65,0.6,0.11,0.34,0.2,0.35,0.4,0.89,0.66
 2,California,california,0,3,0,2,10,2,8,0,3,5,0.7,0.75,0.5,0.34,0.3534,0.3,0.25,0.5,0.66,0.6466

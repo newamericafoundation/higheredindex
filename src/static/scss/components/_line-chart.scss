@@ -4,13 +4,5 @@
 			stroke: palette-get(na-black-10) !important;
 		}
 	}
-}
 
-.bar-chart {
-	&__data-bar {
-		&.disabled {
-			stroke: palette-get(na-black-10) !important;
-			fill: palette-get(na-black-10) !important;
-		}
-	}
 }
