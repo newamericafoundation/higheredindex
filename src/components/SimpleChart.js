@@ -314,7 +314,7 @@ export default class SimpleChart extends React.Component {
 
     getYExtents(chart) {
         console.log(chart)
-        if (chart.chartType == "bar-chart") {
+        if (chart.variables[0].format == "percent") {
             return [0,1];
         }
     	const { data } = this.props;
