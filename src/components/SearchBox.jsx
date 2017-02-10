@@ -106,18 +106,29 @@ class SearchBox extends React.Component {
       onChange: this.onChange.bind(this)
     };
 
+    let loading = this.props.instList.length == 0 && this.props.stList.length == 0
+
     // Finally, render it!
     return (
       <div className={"search-box" + elementClass}>
-        <Autosuggest
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-          onSuggestionSelected={this.onSuggestionSelected.bind(this)}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          inputProps={inputProps}
-        />
+        {loading && 
+          <div className='react-autosuggest__container'>
+            <input type="text" className="search-box__loading-placeholder" disabled placeholder="Loading..."></input>
+          </div>
+
+        }
+        {!loading &&
+          <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
+            onSuggestionSelected={this.onSuggestionSelected.bind(this)}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            focusFirstSuggestion = {true}
+            inputProps={inputProps}
+          />
+        }
       </div>
     );
   }
