@@ -7,8 +7,7 @@ const instVizSettings = {
 				variables: ['name', 'ugenroll', 'gradenroll', 'ftenroll', 'ptenroll']
 			},
 			vizSettings: {
-				type: "multi-chart",
-				chart1: {
+				chart1Settings: {
 					type: "line-chart",
 					yAxisLabel: "Students",
 					variables: [
@@ -18,7 +17,7 @@ const instVizSettings = {
 					]
 
 				},
-				chart2: {
+				chart2Settings: {
 					type: "bar-chart",
 					yAxisLabel: "Students",
 					variables: [

@@ -6,3 +6,12 @@
 	}
 
 }
+
+.bar-chart {
+	&__data-bar {
+		&.disabled {
+			fill: palette-get(na-black-10) !important;
+		}
+	}
+
+}

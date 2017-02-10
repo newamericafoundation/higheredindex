@@ -50,7 +50,7 @@ export default class BarChart {
     updateDataBars(updateParams) {
         const {y, x, width, height, currHovered, valsShown} = updateParams;
 
-        console.log(currHovered);
+        console.log(valsShown);
 
         let barHeights = {};
         for (let year of x.domain()) {

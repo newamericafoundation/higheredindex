@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 import SimpleChart from "./SimpleChart";
-import MultiChart from "./MultiChart";
 
 import $ from 'jquery';
 
@@ -24,7 +23,7 @@ export default class DataBlockViz extends React.Component {
 
     return (
     	<div className="data-block__viz">
-    		<MultiChart settings={settings} data={data} />
+    		<SimpleChart settings={settings} data={data} />
     	</div>
     )
   }
