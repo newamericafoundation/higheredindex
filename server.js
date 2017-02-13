@@ -11,7 +11,7 @@ import NotFoundPage from './components/NotFoundPage';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
-const url = 'mongodb://localhost:27017/live_test';
+const url = process.env.MONGODB_URI ? process.env.MONGODB_URI : 'mongodb://localhost:27017/live_test';
 
 mongoose.connect(url);
 const db = mongoose.connection;
@@ -53,8 +53,8 @@ const institutionModel = mongoose.model('institution', institutionSchema, "final
 const app = new Express();
 app.use(bodyParser.json());
 const server = new Server(app);
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
 
 // define the folder that will be used for static assets
 app.use(Express.static(path.join(__dirname, 'static')));
