@@ -107,7 +107,7 @@ class SearchBox extends React.Component {
     };
 
     let loading = this.props.instList.length == 0 && this.props.stList.length == 0
-
+    console.log(this.props.alwaysRenderSuggestions);
     // Finally, render it!
     return (
       <div className={"search-box" + elementClass}>
@@ -126,6 +126,7 @@ class SearchBox extends React.Component {
             getSuggestionValue={getSuggestionValue}
             renderSuggestion={renderSuggestion}
             focusFirstSuggestion = {true}
+            alwaysRenderSuggestions = {this.props.alwaysRenderSuggestions}
             inputProps={inputProps}
           />
         }
