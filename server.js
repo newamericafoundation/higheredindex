@@ -1,26 +1,38 @@
-'use strict';
+var express = require("express");
+var bodyParser = require("body-parser");
+var mongodb = require("mongodb");
+var mongoose = require("mongoose");
 
-import path from 'path';
-import { Server } from 'http';
-import Express from 'express';
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import { match, RouterContext } from 'react-router';
-// import routes from './routes';
-// import NotFoundPage from './components/NotFoundPage';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
+var CONTACTS_COLLECTION = "contacts";
 
-const url = process.env.MONGODB_URI ? process.env.MONGODB_URI : 'mongodb://localhost:27017/live_test';
+var app = express();
+app.use(bodyParser.json());
 
-mongoose.connect(url);
-const db = mongoose.connection;
-db.on('error', (err) => {
-  console.error(`Connection error: ${err}`);
-  process.exit(1);
+// Create a database variable outside of the database connection callback to reuse the connection pool in your app.
+var db;
+
+// Connect to the database before starting the application server.
+mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/live_test', function (err, database) {
+  if (err) {
+    console.log(err);
+    process.exit(1);
+  }
+
+  // Save database object from the callback for reuse.
+  db = database;
+  console.log("Database connection ready");
+
+  // Initialize the app.
+  var server = app.listen(process.env.PORT || 3000, function () {
+    var port = server.address().port;
+    console.log("App now running on port", port);
+  });
 });
-db.once('open', () => {
-  console.log('Connected to MongoDB server.');
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
 });
 
 // const stateSchema = new mongoose.Schema({
@@ -47,23 +59,6 @@ const institutionSchema = new mongoose.Schema({
 
 });
 const institutionModel = mongoose.model('institution', institutionSchema, "final_test");
-
-
-// initialize the server and configure support for ejs templates
-const app = new Express();
-app.use(bodyParser.json());
-const server = new Server(app);
-// app.set('view engine', 'ejs');
-// app.set('views', path.join(__dirname, 'views'));
-
-// define the folder that will be used for static assets
-app.use(Express.static(path.join(__dirname, 'static')));
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 // app.get('/api/all', (req, res) => {
 //   const filter = {};
 //   let retArray = [];
@@ -99,28 +94,16 @@ app.get('/api/state-list', (req, res) => {
 });
 
 app.get('/api/institution-list', (req, res) => {
-  const filter = {};
-
-  institutionModel.find(filter, { name: 1, path: 1}, (err, institutions) => {
+  db.collection('final_test').find({}, { name: 1, path: 1 }).toArray(function(err, docs) {
     if (err) {
-      return console.error(err);
+      handleError(res, err.message, "Failed to get institutions.");
+    } else {
+      res.status(200).json(docs);
     }
-    return res.json(institutions);
   });
 });
 
-app.get('/api/states', (req, res) => {
-  const filter = {};
-
-  stateModel.find(filter, (err, states) => {
-    if (err) {
-      return console.error(err);
-    }
-    return res.json(states);
-  });
-});
-
-app.get('/api/states/:path', (req, res) => {
+app.get('/api/state/:path', (req, res) => {
   stateModel.findOne({
     path: req.params.path,
   }, (err, state) => {
@@ -131,25 +114,13 @@ app.get('/api/states/:path', (req, res) => {
   });
 });
 
-app.get('/api/institutions', (req, res) => {
-  const filter = {};
-
-  institutionModel.find(filter, (err, institutions) => {
+app.get('/api/institution/:path', (req, res) => {
+  db.collection('final_test').findOne({path:req.params.path}, function(err, docs) {
     if (err) {
-      return console.error(err);
+      handleError(res, err.message, "Failed to get institutions.");
+    } else {
+      res.status(200).json(docs);
     }
-    return res.json(institutions);
-  });
-});
-
-app.get('/api/institutions/:path', (req, res) => {
-  institutionModel.findOne({
-    path: req.params.path,
-  }, (err, institution) => {
-    if (err) {
-      return console.error(err);
-    }
-    return res.json(institution);
   });
 });
 
@@ -207,13 +178,3 @@ app.get('/api/institutions/:path', (req, res) => {
 //     }
 //   );
 // });
-
-// start the server
-const port = process.env.PORT || 3000;
-const env = process.env.NODE_ENV || 'production';
-server.listen(port, err => {
-  if (err) {
-    return console.error(err);
-  }
-  console.info(`Server running on http://localhost:${port} [${env}]`);
-});
