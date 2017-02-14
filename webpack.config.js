@@ -31,7 +31,7 @@ module.exports = {
           presets: debug ? ['react', 'es2015', 'react-hmre'] : ['react', 'es2015']
         }
       },
-      { test: /\.jpg$/,    loader: "url-loader?limit=10000&minetype=image/jpg" },
+      { test: /\.jpg$/,    loader: "url-loader?minetype=image/jpg" },
       {
         test: /\.scss$/,
         loaders: [ 'style', 'css', 'sass' ]
