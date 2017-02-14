@@ -26,6 +26,9 @@ GoogleMapsLoader.load(function(google) {
   googlePlacesService = new google.maps.places.PlacesService(document.createElement('div'));
 });
 
+const dbPath = process.env.NODE_ENV == 'production' ? 'https://febp-backend.herokuapp.com/api/' : 'http://localhost:3000/api/';
+console.log(dbPath);
+
 
 /*
  * action creators
@@ -79,7 +82,7 @@ export function fetchProfile(id, profileType) {
 
     dispatch(requestProfile(id, profileType))
 
-    return fetch('http://localhost:3000/api/' + profileType + 's/' + id)
+    return fetch(dbPath + profileType + '/' + id)
       .then(response => { return response.json()})
       .then(json => {
       	console.log("this is the json response")
@@ -112,7 +115,7 @@ export function fetchProfileList(type) {
 
     dispatch(requestProfileList(type))
 
-    return fetch('http://localhost:3000/api/' + type + '-list/')
+    return fetch(dbPath + type + '-list/')
       .then(response => { return response.json()})
       .then(json => {
       	console.log("this is the json response")
