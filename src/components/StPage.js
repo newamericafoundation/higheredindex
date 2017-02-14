@@ -3,9 +3,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 import NotFoundPage from './NotFoundPage';
-import SectionNav from './SectionNav.jsx';
-import ProfileSectionTitle from './ProfileSectionTitle.jsx';
-import ProfileHeader from './ProfileHeader.jsx';
+import SectionNav from './SectionNav';
+import ProfileSectionTitle from './ProfileSectionTitle';
+import ProfileHeader from './ProfileHeader';
 import DataBlock from './DataBlock';
 import stVizSettings from './stVizSettings';
 import { connect } from 'react-redux'

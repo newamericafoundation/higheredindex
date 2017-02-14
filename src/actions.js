@@ -79,7 +79,7 @@ export function fetchProfile(id, profileType) {
 
     dispatch(requestProfile(id, profileType))
 
-    return fetch('http://localhost:3000/api/' + profileType + 's/' + id)
+    return fetch('http://localhost:3000/api/' + profileType + '/' + id)
       .then(response => { return response.json()})
       .then(json => {
       	console.log("this is the json response")

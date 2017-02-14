@@ -2,10 +2,10 @@ import React from 'react';
 import ReactFauxDOM from 'react-faux-dom';
 var d3 = require("d3");
 import $ from 'jquery';
-import Legend from "./Legend.js";
+import Legend from "./Legend";
 import Tooltip from "./Tooltip.js";
-import LineChart from "../chart_modules/LineChart.js"
-import BarChart from "../chart_modules/BarChart.js"
+import LineChart from "../chart_modules/LineChart"
+import BarChart from "../chart_modules/BarChart"
 
 let margin = {top: 10, right: 0, bottom: 30, left: 40};
 

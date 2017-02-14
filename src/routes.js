@@ -4,8 +4,8 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 import SideMenuLayout from './components/SideMenuLayout';
 import TopNavLayout from './components/TopNavLayout';
-import LandingPage from './components/LandingPage.jsx';
-import SearchPage from './components/SearchPage.jsx';
+import LandingPage from './components/LandingPage';
+import SearchPage from './components/SearchPage';
 import StPageContainer from './components/StPageContainer';
 import InstPageContainer from './components/InstPageContainer';
 import NotFoundPage from './components/NotFoundPage';

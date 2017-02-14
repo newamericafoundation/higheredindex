@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
-import TopNav from './TopNav.jsx';
+import TopNav from './TopNav';
 import SideMenu from './SideMenu';
 
 class TopNavLayout extends React.Component {
