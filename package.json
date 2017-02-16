@@ -12,7 +12,8 @@
     "start-dev": "npm run start-dev-hmr",
     "start-dev-single-page": "node_modules/.bin/http-server src/static",
     "start-dev-hmr": "node_modules/.bin/webpack-dev-server --progress --inline --hot",
-    "build": "NODE_ENV=production node_modules/.bin/webpack"
+    "build": "NODE_ENV=production node_modules/.bin/webpack",
+    "heroku-postbuild": "NODE_ENV=production node_modules/.bin/webpack"
   },
   "author": "Kirk Jackson",
   "license": "MIT",
