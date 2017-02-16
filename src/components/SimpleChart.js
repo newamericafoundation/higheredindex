@@ -97,12 +97,12 @@ export default class SimpleChart extends React.Component {
     	this.yAxis1 = this.g.append("g")
             .attr("class", "axis axis--y");
 
-        this.yAxis1Label = this.yAxis1.append("text")
-            .attr("class", "data-block__viz__y-axis-label")
-            .attr("transform", "rotate(-90)")
-            .attr("y", -30)
-            .attr("fill", "#000")
-            .text("Value");
+        // this.yAxis1Label = this.yAxis1.append("text")
+        //     .attr("class", "data-block__viz__y-axis-label")
+        //     .attr("transform", "rotate(-90)")
+        //     .attr("y", -30)
+        //     .attr("fill", "#000")
+        //     .text("Value");
 
         this.y1 = d3.scaleLinear()
         	.domain(this.getYExtents(chart1Settings));
@@ -113,12 +113,12 @@ export default class SimpleChart extends React.Component {
             this.yAxis2 = this.g.append("g")
                 .attr("class", "axis axis--y");
 
-            this.yAxis2Label = this.yAxis2.append("text")
-                .attr("class", "data-block__viz__y-axis-label")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 30)
-                .attr("fill", "#000")
-                .text("Value");
+            // this.yAxis2Label = this.yAxis2.append("text")
+            //     .attr("class", "data-block__viz__y-axis-label")
+            //     .attr("transform", "rotate(-90)")
+            //     .attr("y", 30)
+            //     .attr("fill", "#000")
+            //     .text("Value");
 
             this.y2 = d3.scaleLinear()
                 .domain(this.getYExtents(chart2Settings));
@@ -216,8 +216,8 @@ export default class SimpleChart extends React.Component {
         this.yAxis1
             .call(d3.axisLeft(this.y1).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10));
 
-        this.yAxis1Label
-            .attr("x", -height/2);
+        // this.yAxis1Label
+        //     .attr("x", -height/2);
 
         if (this.y2) {
             this.y2.range([height, 0]);
@@ -226,8 +226,8 @@ export default class SimpleChart extends React.Component {
                 .attr("transform", "translate(" + width + ")")
                 .call(d3.axisRight(this.y2).tickSizeOuter(0).tickPadding(10));
 
-            this.yAxis2Label
-                .attr("x", -height/2);
+            // this.yAxis2Label
+            //     .attr("x", -height/2);
         }
     }
 
