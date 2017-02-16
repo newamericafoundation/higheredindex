@@ -320,14 +320,15 @@ export default class SimpleChart extends React.Component {
 
     // callback functions
 
-    mouseoverFunc(datum, path, eventObject, varName) {
+    mouseoverFunc(datum, path, eventObject, variable) {
     	this.setState({
-            currHovered: {varName: varName, year:datum.year},
+            currHovered: {varName: variable.variable, year: datum.year},
             tooltipSettings: {
                 x: eventObject.offsetX + 10,
                 y: eventObject.offsetY - 30,
                 title: datum.year,
-                value: datum.value
+                value: datum.value,
+                format: variable.format
             }
         })
     }
