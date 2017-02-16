@@ -4,10 +4,11 @@ var d3 = require("d3");
 import $ from 'jquery';
 import Legend from "./Legend.js";
 import Tooltip from "./Tooltip.js";
-import LineChart from "../chart_modules/LineChart.js"
-import BarChart from "../chart_modules/BarChart.js"
+import LineChart from "../chart_modules/LineChart.js";
+import BarChart from "../chart_modules/BarChart.js";
+import { formatValue } from "../helper_functions/format_value.js";
 
-let margin = {top: 10, right: 0, bottom: 30, left: 40};
+let margin = {top: 10, right: 0, bottom: 30, left: 60};
 
 export default class SimpleChart extends React.Component {
 	constructor(props) {
@@ -48,7 +49,7 @@ export default class SimpleChart extends React.Component {
                 }
             }
 
-            margin.right = 40
+            margin.right = 60;
         }
 
         console.log(fullValList);
@@ -214,7 +215,7 @@ export default class SimpleChart extends React.Component {
         this.y1.range([height, 0]);
         
         this.yAxis1
-            .call(d3.axisLeft(this.y1).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10));
+            .call(d3.axisLeft(this.y1).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10).tickFormat((d) => { return formatValue(d, this.props.settings.chart1Settings.variables[0].format); }));
 
         // this.yAxis1Label
         //     .attr("x", -height/2);
@@ -224,7 +225,7 @@ export default class SimpleChart extends React.Component {
 
             this.yAxis2
                 .attr("transform", "translate(" + width + ")")
-                .call(d3.axisRight(this.y2).tickSizeOuter(0).tickPadding(10));
+                .call(d3.axisRight(this.y2).tickSizeOuter(0).tickPadding(10).tickFormat((d) => { return formatValue(d, this.props.settings.chart2Settings.variables[0].format); }));
 
             // this.yAxis2Label
             //     .attr("x", -height/2);
