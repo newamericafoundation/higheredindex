@@ -24,4 +24,4 @@ db.final.aggregate([{ $lookup: { from:"grants", localField:"opeidstring", foreig
 db.final.aggregate([{ $lookup: { from:"outcomes", localField:"opeidstring", foreignField:"opeidstring", as:"outcomes" }},{$project:{_id:0}},{ $unwind:"$outcomes" },{ $out: "final"}]);
 
  mongodump --db live_test
- mongorestore -h ds151909.mlab.com:51909 -d heroku_2l5qrfnd -u 'kjackson' -p 'theSEA!17' dump/live_test
+ mongorestore -h ds151909.mlab.com:51909 -d heroku_2l5qrfnd -u 'kjackson' -p '<password>' dump/live_test
