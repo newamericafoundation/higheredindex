@@ -4,7 +4,7 @@ export default class BarChart {
 	constructor(settings) {
 		console.log(settings);
 		let {data, variables, domElem, mouseoverFunc, mouseoutFunc} = settings;
-
+    console.log(data);
 		this.data = data;
 		this.variables = variables;
 		this.domElem = domElem;

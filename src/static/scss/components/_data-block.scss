@@ -50,6 +50,11 @@
 			color: palette-get(na-black);
 			text-anchor: middle;
 		}
+
+		&__debugging-list {
+			word-break: break-all;
+			font-size: 14px;
+		}
 	}
 }
 

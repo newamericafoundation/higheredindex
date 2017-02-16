@@ -12,23 +12,49 @@ let margin = {top: 10, right: 0, bottom: 30, left: 40};
 export default class SimpleChart extends React.Component {
 	constructor(props) {
 		super(props);
+        let { data } = props;
         let { chart1Settings, chart2Settings } = props.settings;
 
 		this.chartType = props.settings.type;
 		this.resizeFunc = this.resize.bind(this);
 
 		let fullValList = [];
-        chart1Settings.variables.map((d) => {
-            fullValList.push(d.variable);
-        });
+
+        this.missingVars = [];
+        console.log(data);
+
+        for (let i = 0; i < chart1Settings.variables.length; i++) {
+            let varName = chart1Settings.variables[i].variable;
+            if (data[varName]) {
+                fullValList.push(varName);
+            } else {
+                this.missingVars.push(varName);
+                chart1Settings.variables.splice(i, 1);
+                i--;
+            }
+        }
+
+        console.log(chart1Settings.variables);
 
         if (chart2Settings) {
-            chart2Settings.variables.map((d) => {
-                fullValList.push(d.variable);
-            });
+            for (let i = 0; i < chart2Settings.variables.length; i++) {
+                let varName = chart2Settings.variables[i].variable;
+                if (data[varName]) {
+                    fullValList.push(varName);
+                } else {
+                    this.missingVars.push(varName);
+                    chart2Settings.variables.splice(i, 1);
+                    i--;
+                }
+            }
 
             margin.right = 40
         }
+
+        console.log(fullValList);
+
+        //for development only
+        this.fullValList = fullValList;
 
 		this.state = {
             width: 0,
@@ -80,6 +106,8 @@ export default class SimpleChart extends React.Component {
 
         this.y1 = d3.scaleLinear()
         	.domain(this.getYExtents(chart1Settings));
+
+        console.log(this.y1.domain());
 
         if (chart2Settings) {
             this.yAxis2 = this.g.append("g")
@@ -249,7 +277,7 @@ export default class SimpleChart extends React.Component {
 		const { data, settings } = this.props,
             {chart1Settings, chart2Settings} = settings;
 
-        let content, legend, tooltip;
+        let content, legend, tooltip, missingVarsList, presentVarsList;
         let variables = chart1Settings.variables;
 
         if (chart2Settings) {
@@ -261,6 +289,8 @@ export default class SimpleChart extends React.Component {
             content = this.state.chart.toReact();
             legend = <Legend variables={variables} toggleChartVals={this.toggleVals.bind(this)}/>;
             tooltip = <Tooltip settings={this.state.tooltipSettings} />
+            presentVarsList = this.fullValList.length > 0 ? <h5 className="data-block__viz__debugging-list">Using variables: {this.fullValList.toString()}</h5> : null;
+            missingVarsList = this.missingVars.length > 0 ? <h5 className="data-block__viz__debugging-list">Missing variables: {this.missingVars.toString()}</h5> : null;
         } else {
             content = "loading chart";
         }
@@ -269,6 +299,8 @@ export default class SimpleChart extends React.Component {
                 {content}
                 {legend}
                 {tooltip}
+                {presentVarsList}
+                {missingVarsList}
             </div>
         )
 	}
@@ -314,7 +346,7 @@ export default class SimpleChart extends React.Component {
 
     getYExtents(chart) {
         console.log(chart)
-        if (chart.variables[0].format == "percent") {
+        if (chart.variables[0] && chart.variables[0].format == "percent") {
             return [0,1];
         }
     	const { data } = this.props;
@@ -326,6 +358,10 @@ export default class SimpleChart extends React.Component {
             vals = vals.filter((d) => { return !isNaN(d);})
             valList.push(...vals);
             console.log(valList);
+        }
+
+        if (Array.from(new Set(valList)).length == 1) {
+            return [0, valList[0]];
         }
 
         return d3.extent(valList);
