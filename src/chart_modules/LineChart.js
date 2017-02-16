@@ -45,7 +45,7 @@ export default class LineChart {
                 .attr("r", 4)
                 .style("stroke", variable.color)
                 .style("stroke-width", "1.5px")
-                .on("mouseover", (d, index, paths) => { return this.mouseoverFunc(d, paths[index], d3.event, varName); })
+                .on("mouseover", (d, index, paths) => { return this.mouseoverFunc(d, paths[index], d3.event, variable); })
                 .on("mouseout", () => this.mouseoutFunc());
 		}
     }

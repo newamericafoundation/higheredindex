@@ -37,7 +37,7 @@ export default class BarChart {
                 .style("fill", variable.color)
                 .style("stroke", "white")
                 .style("stroke-width", "1px")
-                .on("mouseover", (d, index, paths) => { return this.mouseoverFunc(d, paths[index], d3.event, varName); })
+                .on("mouseover", (d, index, paths) => { return this.mouseoverFunc(d, paths[index], d3.event, variable); })
                 .on("mouseout", () => this.mouseoutFunc());
         }
     }
