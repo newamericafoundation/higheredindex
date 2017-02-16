@@ -30,6 +30,8 @@
 		background-color: palette-get(na-black-05);
 		top: 46px;
 		color: palette-get(na-black);
+		overflow: scroll;
+		max-height: calc(100vh/2);
 	}
 
 	.react-autosuggest__suggestions-list {
@@ -43,6 +45,27 @@
 		cursor: pointer;
 		padding: 10px 20px;
 		width: 100%;
+
+		&-div {
+			display: table;
+		}
+
+		h5, svg {
+			display: table-cell;
+			vertical-align: middle;
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+
+		svg {
+			margin-right: 15px;
+			height: 25px;
+			width: 25px;
+		}
+
+		h5 {
+			font-size: 15px;
+		}
 	}
 
 	.react-autosuggest__suggestion:not(:first-child) {
@@ -52,6 +75,10 @@
 	.react-autosuggest__suggestion--focused {
 	  background-color: palette-get(na-turquoise);
 	  color: white;
+
+	  .icon {
+	  	fill: white;
+	  }
 	}
 
 	.name {
@@ -60,24 +87,15 @@
 	}
 
 	&__icon {
-		height: 30px;
-		width: 30px;
+		height: 25px;
+		width: 25px;
 		svg {
 			fill: white;
-			height: 30px;
+			height: 25px;
 		}
 	}
 
 	&__loading-placeholder {
 		width: 100%;
 	}
-
-	/*.highlight {
-	  color: palette-get(na-turquoise);
-	  font-weight: bold;
-	}
-
-	.react-autosuggest__suggestion--focused .highlight {
-	  color: palette-get(na-turquoise);
-	}*/
 }

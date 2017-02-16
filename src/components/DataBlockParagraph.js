@@ -23,6 +23,10 @@ export default function DataBlockParagraph(props) {
   	let populatedText = [],
   		totalMaxYear = getMaxYear(variables, data);
 
+  	if (textSections.length == 0 || variables.length == 0) {
+  		return (<div className="data-block__paragraph"></div>);
+  	}
+
 	textSections.map((text, i) => {
 		let variable = variables[i],
 			variableClass = variable == 'name' ? '' : "data-block__paragraph__data";

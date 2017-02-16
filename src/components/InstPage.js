@@ -56,9 +56,39 @@ class InstPage extends React.Component {
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
         <div>
           {instVizSettings.students.map((settings, i) => {
-            console.log(this.props.instData)
-            console.log(i)
             return <DataBlock key={i} settings={settings} data={this.props.instData.students[0]} />;
+          })}
+        </div>
+        <ProfileSectionTitle 
+          title="Loans" 
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
+        <div>
+          {instVizSettings.loans.map((settings, i) => {
+            return <DataBlock key={i} settings={settings} data={this.props.instData.loans[0]} />;
+          })}
+        </div>
+        <ProfileSectionTitle 
+          title="Grants" 
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
+        <div>
+          {instVizSettings.grants.map((settings, i) => {
+            return <DataBlock key={i} settings={settings} data={this.props.instData.grants[0]} />;
+          })}
+        </div>
+        <ProfileSectionTitle 
+          title="Schools" 
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
+        <div>
+          {instVizSettings.schools.map((settings, i) => {
+            return <DataBlock key={i} settings={settings} data={this.props.instData.schools[0]} />;
+          })}
+        </div>
+        <ProfileSectionTitle 
+          title="Outcomes" 
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
+        <div>
+          {instVizSettings.outcomes.map((settings, i) => {
+            return <DataBlock key={i} settings={settings} data={this.props.instData.outcomes[0]} />;
           })}
         </div>
         <div className="navigateBack">

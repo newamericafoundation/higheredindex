@@ -10,6 +10,7 @@ export default class DataBlock extends React.Component {
 
     console.log("THIS is the Data!")
     console.log(data);
+    console.log(paragraphSettings);
 
     return (
       <div className="data-block">

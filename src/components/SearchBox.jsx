@@ -13,9 +13,9 @@ const getSuggestionValue = suggestion => suggestion.path;
 const renderSuggestion = suggestion => {
   const iconType = suggestion.type == "state" ? 'map-marker' : 'institution';
   return (
-    <div>
+    <div className="react-autosuggest__suggestion-div">
       <SvgIcon name={iconType} />
-      {suggestion.name}
+      <h5>{suggestion.name}</h5>
     </div>
   );
 
