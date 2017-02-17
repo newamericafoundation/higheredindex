@@ -14,21 +14,21 @@ const LandingPage = () => {
       	<SearchBox />
       	<div className="landing-page__explore-links">
           <div className="landing-page__explore-link">
-            <Link to={'/search/states'}>
+            <Link to={'/search#state'}>
               <SvgIcon name='map-marker' />
               <h5 className="landing-page__explore-link__secondary">Explore</h5>
               <h3 className="landing-page__explore-link__primary">States</h3>
             </Link>
           </div>
           <div className="landing-page__explore-link">
-            <Link to={'/search/institutions'}>
+            <Link to={'/search#institution'}>
               <SvgIcon name='institution' />
               <h5 className="landing-page__explore-link__secondary">Explore</h5>
               <h3 className="landing-page__explore-link__primary">Institutions</h3>
             </Link>
           </div>
           <div className="landing-page__explore-link">
-            <Link to={'/search/indicators'}>
+            <Link to={'/search#indicator'}>
               <SvgIcon name='bar-chart' />
               <h5 className="landing-page__explore-link__secondary">Explore</h5>
               <h3 className="landing-page__explore-link__primary">Indicators</h3>

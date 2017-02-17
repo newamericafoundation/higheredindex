@@ -1,5 +1,53 @@
 .listings-page {
+	/*display: table;*/
 	input {
 		position: fixed;
+	}
+
+	.react-autosuggest__suggestions-container {
+		max-height: calc(100vh);
+	}
+
+	&__filter-container, &__results-container {
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	&__filter-container {
+		width: 20%;
+	}
+
+	&__results-container {
+		width: 80%;
+	}
+
+	&__filter {
+		opacity: .3;
+		&:hover {
+			opacity: 1;
+			fill: palette-get(na-turquoise);
+		}
+		.active & {
+			opacity: 1 !important;
+			color: black !important;
+			fill: palette-get(na-black) !important;
+		}
+		&__label {
+			display: inline-block;
+			font-weight: bold;
+			padding-right: 3px;
+		}
+
+		&__value {
+			display: inline-block;
+		}
+	}
+
+	&__filter-link {
+
+		&.active {
+			cursor: default;
+			
+		}
 	}
 }

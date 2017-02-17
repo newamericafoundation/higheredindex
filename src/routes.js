@@ -14,7 +14,7 @@ const routes = (
 	<Route path="/" component={SideMenuLayout}>
     	<IndexRoute component={LandingPage}/>
     	<Route path="/" component={TopNavLayout}>
-    		<Route path="search/:type" component={ListingsPage}/>
+    		<Route path="search/" component={ListingsPage}/>
 		    <Route path="state/:id" component={StPageContainer}/>
 		    <Route path="institution/:id" component={InstPageContainer}/>
 		    <Route path="*" component={NotFoundPage}/>
