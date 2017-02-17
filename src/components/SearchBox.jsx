@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router'
 import Autosuggest from 'react-autosuggest';
 import { fetchProfileList } from '../actions';
 import SvgIcon from './SvgIcon';
+import { sortAlpha } from "../helper_functions/sort_alpha.js";
 var d3 = require("d3");
 
 // When suggestion is clicked, Autosuggest needs to populate the input element
@@ -24,8 +25,8 @@ const renderSuggestion = suggestion => {
 
 class SearchBox extends React.Component {
   constructor(props) {
-    super();
-
+    super(props);
+    console.log(props);
     // Autosuggest is a controlled component.
     // This means that you need to provide an input value
     // and an onChange handler that updates this value (see below).
@@ -33,12 +34,13 @@ class SearchBox extends React.Component {
     // and they are initially empty because the Autosuggest is closed.
     this.state = {
       value: '',
-      suggestions: [''],
-      expanded: true
+      suggestions: [],
+      expanded: true,
+      stList: [],
+      instList: [],
+      filter: "all"
     };
   }
-
-
 
   componentWillMount() {
     const { dispatch, stList, instList } = this.props
@@ -83,7 +85,7 @@ class SearchBox extends React.Component {
   // Autosuggest will call this function every time you need to clear suggestions.
   onSuggestionsClearRequested() {
     this.setState({
-      suggestions: this.props.stList.concat(this.props.instList)
+      suggestions: this.getSuggestions("")
     });
   }
 
@@ -94,19 +96,30 @@ class SearchBox extends React.Component {
   getSuggestions(value) {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
-    const fullList = this.props.stList.concat(this.props.instList);
+    const currList = this.getCurrList();
+
     if (inputLength === 0) {
       if (this.props.alwaysRenderSuggestions) {
-        return fullList.filter(listElem => 
-          listElem.name.toLowerCase().slice(0, 1) === 'a'
-        );
+        return currList
       } else {
-        return [''];
+        return [];
       }
     } else {
-      return fullList.filter(listElem => 
+      return currList.filter(listElem => 
         listElem.name.toLowerCase().slice(0, inputLength) === inputValue
       );
+    }
+  }
+
+  getCurrList() {
+    const {filter, stList, instList} = this.state;
+    if (filter == "state") {
+      return stList;
+    } else if (filter == "institution") {
+      return instList;
+    } else {
+      let fullList = [...stList, ...instList]
+      return fullList.sort(sortAlpha);
     }
   }
 
@@ -115,6 +128,27 @@ class SearchBox extends React.Component {
       .key((d) => { return d.type; })
       .rollup((v) => { return v.length; })
       .entries(suggestions);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let {stList, instList} = this.state;
+    let shouldUpdateState = false;
+
+    if (stList.length == 0 && nextProps.stList.length != 0) {
+      stList = nextProps.stList;
+      shouldUpdateState = true;
+    } else if (instList.length == 0 && nextProps.instList.length != 0) {
+      instList = nextProps.instList;
+      shouldUpdateState = true
+    }
+
+    if (shouldUpdateState) {
+      this.setState({
+        stList: stList,
+        instList: instList,
+        suggestions: this.getSuggestions("")
+      })
+    }
   }
 
   render() {
@@ -129,11 +163,9 @@ class SearchBox extends React.Component {
       onChange: this.onChange.bind(this)
     };
 
-    console.log(inputProps);
-    console.log(suggestions);
+    console.log(this.state);
 
     let loading = this.props.instList.length == 0 && this.props.stList.length == 0
-    console.log(this.props.alwaysRenderSuggestions);
     // Finally, render it!
     return (
       <div className={"search-box" + elementClass}>
