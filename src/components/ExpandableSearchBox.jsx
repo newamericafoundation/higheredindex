@@ -41,7 +41,7 @@ export default class ExpandableSearchBox extends React.Component {
 						</g>
 					</svg>
 				</div>
-				<SearchBox expandable expanded={this.state.expanded}/>
+				<SearchBox expandable expanded={this.state.expanded} filter={this.props.filter} />
 			</div>
 		)
 	}

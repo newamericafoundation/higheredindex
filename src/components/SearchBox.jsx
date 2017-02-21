@@ -26,30 +26,50 @@ const renderSuggestion = suggestion => {
 class SearchBox extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    console.log(props.filter);
     // Autosuggest is a controlled component.
     // This means that you need to provide an input value
     // and an onChange handler that updates this value (see below).
     // Suggestions also need to be provided to the Autosuggest,
     // and they are initially empty because the Autosuggest is closed.
+    let filter = props.filter == null ? "all" : props.filter;
+    console.log(filter)
     this.state = {
       value: '',
       suggestions: [],
       expanded: true,
-      stList: [],
-      instList: [],
-      filter: props.filter || "all"
+      stList: props.stList,
+      instList: props.instList,
+      filter: filter,
+      currList: []
     };
+
   }
 
   componentWillMount() {
-    const { dispatch, stList, instList } = this.props
+    const { dispatch, stList, instList, filter } = this.props
     
     if (stList.length == 0) {
       dispatch(fetchProfileList("state"))
+    } else {
+      if (filter == "states" || filter == "all") {
+        let currList = this.getCurrList(filter, this.state);
+        this.setState({
+          currList: currList,
+          suggestions: this.getSuggestions("", currList),
+        })
+      }
     }
     if (instList.length == 0) {
       dispatch(fetchProfileList("institution"))
+    } else {
+      if (filter == "institutions" || filter == "all") {
+        let currList = this.getCurrList(filter, this.state);
+        this.setState({
+          currList: currList,
+          suggestions: this.getSuggestions("", currList),
+        })
+      }
     }
 
     this.unlisten = browserHistory.listen(() => { 
@@ -72,26 +92,21 @@ class SearchBox extends React.Component {
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested({ value }) {
-    const currList = this.getCurrList();
+    const { currList } = this.state;
     let suggestions = this.getSuggestions(value, currList);
     this.setState({
       suggestions: suggestions
     });
 
     if (this.props.suggestionsChangedCallback) {
-      const { stList, instList } = this.state;
-      let counts = {
-        "states": this.getSuggestions(value, stList).length,
-        "institutions": this.getSuggestions(value, instList).length,
-        "indicators": this.getSuggestions(value, stList).length,
-      }
+      let counts = this.getSuggestionCounts(value, this.state);
       this.props.suggestionsChangedCallback(counts);
     }
   }
 
   // Autosuggest will call this function every time you need to clear suggestions.
   onSuggestionsClearRequested() {
-    const currList = this.getCurrList();
+    const { currList } = this.state;
     this.setState({
       suggestions: this.getSuggestions("", currList)
     });
@@ -104,7 +119,6 @@ class SearchBox extends React.Component {
   getSuggestions(value, list) {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
-    
 
     if (inputLength === 0) {
       if (this.props.alwaysRenderSuggestions) {
@@ -119,11 +133,12 @@ class SearchBox extends React.Component {
     }
   }
 
-  getCurrList() {
-    const {filter, stList, instList} = this.state;
-    if (filter == "state") {
+  getCurrList(filter, listContainer) {
+    const {stList, instList} = listContainer;
+    console.log(" in get curr list, filter is ", filter)
+    if (filter == "states") {
       return stList;
-    } else if (filter == "institution") {
+    } else if (filter == "institutions") {
       return instList;
     } else {
       let fullList = [...stList, ...instList]
@@ -131,32 +146,70 @@ class SearchBox extends React.Component {
     }
   }
 
-  countSuggestionTypes(suggestions) {
-    return d3.nest()
-      .key((d) => { return d.type; })
-      .rollup((v) => { return v.length; })
-      .entries(suggestions);
+  getSuggestionCounts(value, listContainer) {
+    const { stList, instList } = listContainer;
+    console.log(stList, instList);
+    return {
+      "states": this.getSuggestions(value, stList).length,
+      "institutions": this.getSuggestions(value, instList).length,
+      "indicators": this.getSuggestions(value, stList).length,
+    };
   }
 
   componentWillReceiveProps(nextProps) {
-    let {stList, instList} = this.state;
-    let shouldUpdateState = false;
+    let {stList, instList, currList} = this.state;
+    console.log("in component will receive props");
 
-    if (stList.length == 0 && nextProps.stList.length != 0) {
-      stList = nextProps.stList;
-      shouldUpdateState = true;
-    } else if (instList.length == 0 && nextProps.instList.length != 0) {
-      instList = nextProps.instList;
-      shouldUpdateState = true
+    if (this.props.stList.length == 0 && nextProps.stList.length != 0) {
+      this.updateListsInState("stList", nextProps);
+    } else if (this.props.instList.length == 0 && nextProps.instList.length != 0) {
+      this.updateListsInState("instList", nextProps);
     }
 
-    if (shouldUpdateState) {
-      const currList = this.getCurrList();
+    console.log(this.props.filter, nextProps.filter);
+
+    if (this.props.filter != nextProps.filter || currList.length == 0) {
+      let currList = this.getCurrList(nextProps.filter, this.state);
       this.setState({
-        stList: stList,
-        instList: instList,
-        suggestions: this.getSuggestions("", currList)
+        filter: nextProps.filter,
+        currList: currList,
+        suggestions: this.getSuggestions("", currList),
       })
+    }
+    
+  }
+
+  updateListsInState(type, nextProps) {
+    let { currList, filter } = this.state;
+
+    if (type == "stList") {
+      if (this.props.filter != nextProps.filter || currList.length == 0) {
+        filter = nextProps.filter;
+        currList = this.getCurrList(nextProps.filter, nextProps);
+      }
+      this.setState({
+        stList: nextProps.stList,
+        suggestions: this.getSuggestions("", currList),
+        filter: filter,
+        currList: currList
+      })
+    } else {
+      if (this.props.filter != nextProps.filter || currList.length == 0) {
+        filter = nextProps.filter;
+        currList = this.getCurrList(nextProps.filter, nextProps);
+      }
+      this.setState({
+        instList: nextProps.instList,
+        suggestions: this.getSuggestions("", currList),
+        filter: filter,
+        currList: currList
+      })
+    }
+
+    if (this.props.suggestionsChangedCallback) {
+      console.log("calling get suggestion counts");
+      let counts = this.getSuggestionCounts("", nextProps);
+      this.props.suggestionsChangedCallback(counts);
     }
   }
 

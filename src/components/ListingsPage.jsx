@@ -26,7 +26,7 @@ class ListingsPage extends React.Component {
 
 	getListingsIcon(type) {
 		let iconName;
-		if (type == "state") {
+		if (type == "states") {
 			iconName = "map-marker";
 		} else {
 			iconName = "institution";
@@ -35,6 +35,7 @@ class ListingsPage extends React.Component {
 	}
 
 	changeFilter(newFilter) {
+		console.log(newFilter);
 		console.log(window.location);
 		this.setState({
 			type: newFilter
@@ -44,6 +45,7 @@ class ListingsPage extends React.Component {
 
 	renderCountBox(type) {
 		let className = "listings-page__filter-link";
+
 		className += type === this.state.type ? " active" : "";
 		let value = this.state.counts && this.state.counts[type] ? this.state.counts[type] : 0;
 		
@@ -51,7 +53,7 @@ class ListingsPage extends React.Component {
 			<a key={type} onClick={() => {return this.changeFilter(type)}} className={className} >
 				<div className="listings-page__filter">
 					{this.getListingsIcon(type)}
-					<h5 className="listings-page__filter__label">{type}</h5>
+					<h5 className="listings-page__filter__label">{type}:</h5>
 					<h5 className="listings-page__filter__value">{value}</h5>
 				</div>
 			</a>
@@ -59,7 +61,7 @@ class ListingsPage extends React.Component {
 	}
 
 	render() {
-		
+		console.log(this.state);
 		return (
 			<div className="listings-page">
 				<div className="listings-page__filter-container">
@@ -68,7 +70,7 @@ class ListingsPage extends React.Component {
 					{this.renderCountBox("indicators")}
 				</div>
 				<div className="listings-page__results-container">
-					<SearchBox alwaysRenderSuggestions={true} suggestionsChangedCallback={this.listingsChangedCallback.bind(this)} filter={this.props.type}/>
+					<SearchBox alwaysRenderSuggestions={true} suggestionsChangedCallback={this.listingsChangedCallback.bind(this)} filter={this.state.type}/>
 				</div>
 				
 			</div>
