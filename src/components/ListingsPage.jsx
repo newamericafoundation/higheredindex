@@ -40,7 +40,22 @@ class ListingsPage extends React.Component {
 			type: newFilter
 		});
 		window.location.hash = "#" + newFilter;
+	}
 
+	renderCountBox(type) {
+		let className = "listings-page__filter-link";
+		className += type === this.state.type ? " active" : "";
+		let value = this.state.counts && this.state.counts[type] ? this.state.counts[type] : 0;
+		
+		return(
+			<a key={type} onClick={() => {return this.changeFilter(type)}} className={className} >
+				<div className="listings-page__filter">
+					{this.getListingsIcon(type)}
+					<h5 className="listings-page__filter__label">{type}</h5>
+					<h5 className="listings-page__filter__value">{value}</h5>
+				</div>
+			</a>
+		)
 	}
 
 	render() {
@@ -48,26 +63,12 @@ class ListingsPage extends React.Component {
 		return (
 			<div className="listings-page">
 				<div className="listings-page__filter-container">
-					{this.state.counts && this.state.counts.map((count, i) => {
-						let className = "listings-page__filter-link";
-						console.log(this.state.type);
-						if (count.key === this.state.type ) {
-							className += " active";
-						}
-						
-						return(
-							<a key={count.key} onClick={() => {return this.changeFilter(count.key)}} className={className} >
-								<div className="listings-page__filter">
-									{this.getListingsIcon(count.key)}
-									<h5 className="listings-page__filter__label">{count.key + "s:"}</h5>
-									<h5 className="listings-page__filter__value">{count.value}</h5>
-								</div>
-							</a>
-						)
-					})}
+					{this.renderCountBox("states")}
+					{this.renderCountBox("institutions")}
+					{this.renderCountBox("indicators")}
 				</div>
 				<div className="listings-page__results-container">
-					<SearchBox alwaysRenderSuggestions={true} suggestionsChangedCallback={this.listingsChangedCallback.bind(this)}/>
+					<SearchBox alwaysRenderSuggestions={true} suggestionsChangedCallback={this.listingsChangedCallback.bind(this)} filter={this.props.type}/>
 				</div>
 				
 			</div>

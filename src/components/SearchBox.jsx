@@ -38,7 +38,7 @@ class SearchBox extends React.Component {
       expanded: true,
       stList: [],
       instList: [],
-      filter: "all"
+      filter: props.filter || "all"
     };
   }
 
@@ -72,20 +72,28 @@ class SearchBox extends React.Component {
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested({ value }) {
-    let suggestions = this.getSuggestions(value);
+    const currList = this.getCurrList();
+    let suggestions = this.getSuggestions(value, currList);
     this.setState({
       suggestions: suggestions
     });
+
     if (this.props.suggestionsChangedCallback) {
-      let counts = this.countSuggestionTypes(suggestions);
+      const { stList, instList } = this.state;
+      let counts = {
+        "states": this.getSuggestions(value, stList).length,
+        "institutions": this.getSuggestions(value, instList).length,
+        "indicators": this.getSuggestions(value, stList).length,
+      }
       this.props.suggestionsChangedCallback(counts);
     }
   }
 
   // Autosuggest will call this function every time you need to clear suggestions.
   onSuggestionsClearRequested() {
+    const currList = this.getCurrList();
     this.setState({
-      suggestions: this.getSuggestions("")
+      suggestions: this.getSuggestions("", currList)
     });
   }
 
@@ -93,19 +101,19 @@ class SearchBox extends React.Component {
     browserHistory.push('/' + suggestion.type + '/' + suggestionValue);
   }
 
-  getSuggestions(value) {
+  getSuggestions(value, list) {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
-    const currList = this.getCurrList();
+    
 
     if (inputLength === 0) {
       if (this.props.alwaysRenderSuggestions) {
-        return currList
+        return list
       } else {
         return [];
       }
     } else {
-      return currList.filter(listElem => 
+      return list.filter(listElem => 
         listElem.name.toLowerCase().slice(0, inputLength) === inputValue
       );
     }
@@ -143,10 +151,11 @@ class SearchBox extends React.Component {
     }
 
     if (shouldUpdateState) {
+      const currList = this.getCurrList();
       this.setState({
         stList: stList,
         instList: instList,
-        suggestions: this.getSuggestions("")
+        suggestions: this.getSuggestions("", currList)
       })
     }
   }
@@ -196,7 +205,7 @@ class SearchBox extends React.Component {
 const mapStateToProps = (state) => {
   return {
     stList: state.stList,
-    instList: state.instList
+    instList: state.instList,
   }
 }
 
