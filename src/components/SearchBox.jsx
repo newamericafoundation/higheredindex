@@ -39,7 +39,7 @@ class SearchBox extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { stList, instList, filter } = this.props;
+		const { stList, instList, filter, suggestionsChangedCallback } = this.props;
 		console.log("in component will receive props");
 		let newSuggestions = [];
 
@@ -56,6 +56,10 @@ class SearchBox extends React.Component {
 		}
 
 		if (newSuggestions.length > 0) {
+			if (suggestionsChangedCallback) {
+		      let counts = this.getSuggestionCounts(this.state.value, nextProps);
+		      this.props.suggestionsChangedCallback(counts);
+		    }
 			this.setState({
 				suggestions: newSuggestions
 			})
@@ -119,6 +123,10 @@ class SearchBox extends React.Component {
 		// You already implemented this logic above, so just use it.
 	onSuggestionsFetchRequested({ value }) {
 		console.log("onSuggestionsFetchRequested")
+		if (this.props.suggestionsChangedCallback) {
+	      let counts = this.getSuggestionCounts(value, this.props);
+	      this.props.suggestionsChangedCallback(counts);
+	    }
 
 	    this.setState({
 	      suggestions: this.getSuggestions(value, this.props)
@@ -142,7 +150,7 @@ class SearchBox extends React.Component {
 
 	    return currList.filter(listElem => 
 	        listElem.name.toLowerCase().slice(0, inputLength) === inputValue
-	    );
+	    ).slice(0, 100);
 	}
 
 	getCurrList(propContainer) {
@@ -171,6 +179,25 @@ class SearchBox extends React.Component {
 	    </div>
 	  );
 
+	}
+
+	getSuggestionCounts(value, propContainer) {
+		console.log("getSuggestionCounts")
+		const inputValue = value.trim().toLowerCase();
+	    const inputLength = inputValue.length;
+	    const { stList, instList} = propContainer;
+	    let counts = {};
+
+	    counts.states = stList.filter(listElem => 
+		        listElem.name.toLowerCase().slice(0, inputLength) === inputValue
+		    ).length;
+	   	counts.institutions = instList.filter(listElem => 
+		        listElem.name.toLowerCase().slice(0, inputLength) === inputValue
+		    ).length;
+
+	   	console.log("counts!", counts);
+
+	    return counts;
 	}
 }
 
