@@ -21,15 +21,36 @@ class SearchBox extends React.Component {
   	}
 
   	componentWillMount() {
-		const { dispatch, stList, instList } = this.props
+  		console.log("in component will mount");
+		const { dispatch, stList, instList, filter, suggestionsChangedCallback } = this.props;
+		let newSuggestions = [];
 
 		if (stList.length == 0) {
-		  dispatch(fetchProfileList("state"))
-		} 
+			dispatch(fetchProfileList("state"))
+		} else {
+			if (filter == "states" || filter == "all") {
+				newSuggestions = this.getSuggestions(this.state.value, this.props); 
+			}
+		}
 
 		if (instList.length == 0) {
-		  dispatch(fetchProfileList("institution"))
-		} 
+			dispatch(fetchProfileList("institution"))
+		} else {
+			if (filter == "institutions" || filter == "all") {
+				newSuggestions = [...newSuggestions, ...this.getSuggestions(this.state.value, this.props)]; 
+			}
+		}
+
+		if (newSuggestions.length > 0) {
+			if (suggestionsChangedCallback) {
+		      let counts = this.getSuggestionCounts(this.state.value, this.props);
+		      this.props.suggestionsChangedCallback(counts);
+		    }
+			this.setState({
+				suggestions: newSuggestions
+			})
+		}
+
 
 		// this.unlisten = browserHistory.listen(() => { 
 		//     this.setState({
@@ -70,7 +91,7 @@ class SearchBox extends React.Component {
   		console.log("rendering", this.props);
   		console.log(this.state);
   		const { value, suggestions } = this.state;
-  		const { stList, instList } = this.props;
+  		const { stList, instList, alwaysRenderSuggestions } = this.props;
 
   		const inputProps = {
 	      placeholder: 'Search',
@@ -81,6 +102,8 @@ class SearchBox extends React.Component {
 	    let elementClass = "";
 
 	    let loading = stList.length == 0 && instList.length == 0;
+
+	    let suggestionRenderer = alwaysRenderSuggestions ? this.renderSuggestion : this.renderSuggestionSimple;
 
   		return (
 	      <div className={"search-box" + elementClass}>
@@ -97,9 +120,9 @@ class SearchBox extends React.Component {
 	            onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
 	            onSuggestionSelected={this.onSuggestionSelected.bind(this)}
 	            getSuggestionValue={this.getSuggestionValue}
-	            renderSuggestion={this.renderSuggestion}
+	            renderSuggestion={suggestionRenderer}
 	            focusFirstSuggestion = {true}
-	            alwaysRenderSuggestions = {true}
+	            alwaysRenderSuggestions = {alwaysRenderSuggestions}
 	            inputProps={inputProps}
 	          />
 	        }
@@ -174,8 +197,21 @@ class SearchBox extends React.Component {
 	  const iconType = suggestion.type == "state" ? 'map-marker' : 'institution';
 	  return (
 	    <div className="react-autosuggest__suggestion-div">
+	    	<div className="react-autosuggest__suggestion__label">
+	      		<SvgIcon name={iconType} />
+	      		<h5 className="react-autosuggest__suggestion__label__text">{suggestion.type}</h5>
+	      	</div>
+	      	<h5 className="react-autosuggest__suggestion__text">{suggestion.name}</h5>
+	    </div>
+	  );
+	}
+
+	renderSuggestionSimple(suggestion) {
+	  const iconType = suggestion.type == "state" ? 'map-marker' : 'institution';
+	  return (
+	    <div className="react-autosuggest__suggestion-div">
 	      <SvgIcon name={iconType} />
-	      <h5>{suggestion.name}</h5>
+	      <h5 className="react-autosuggest__suggestion__text">{suggestion.name}</h5>
 	    </div>
 	  );
 

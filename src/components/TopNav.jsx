@@ -38,7 +38,7 @@ class TopNav extends React.Component {
                     }
                    
         		</div>
-        		
+        		<ExpandableSearchBox filter="all"/>
         	</nav>
             </header>
         );

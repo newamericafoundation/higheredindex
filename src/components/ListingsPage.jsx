@@ -64,15 +64,27 @@ class ListingsPage extends React.Component {
 		console.log(this.state);
 		return (
 			<div className="listings-page">
-				<div className="listings-page__filter-container">
-					{this.renderCountBox("states")}
-					{this.renderCountBox("institutions")}
-					{this.renderCountBox("indicators")}
+				<div className="listings-page__top-bar">
+					<div className="listings-page__top-bar__container">
+						<div className="listings-page__top-bar__filter-label">
+							<h5 className="listings-page__top-bar__filter-label__text">Filters</h5>
+						</div>
+						<SearchBox alwaysRenderSuggestions={true} suggestionsChangedCallback={this.listingsChangedCallback.bind(this)} filter={this.state.type}/>
+						<SvgIcon name="search" />
+					</div>
 				</div>
-				<div className="listings-page__results-container">
-					<SearchBox alwaysRenderSuggestions={true} suggestionsChangedCallback={this.listingsChangedCallback.bind(this)} filter={this.state.type}/>
+				<div className="listings-page__main">
+					<div className="listings-page__overlay" />
+					<div className="listings-page__content">
+						<div className="listings-page__filter-container">
+							{this.renderCountBox("states")}
+							{this.renderCountBox("institutions")}
+							{this.renderCountBox("indicators")}
+						</div>
+						<div className="listings-page__results-container">
+						</div>
+					</div>
 				</div>
-				
 			</div>
 		);
 	}
