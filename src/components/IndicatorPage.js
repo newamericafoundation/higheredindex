@@ -53,7 +53,7 @@ class IndicatorPage extends React.Component {
     return (
       <div className="location-profile indicator">
         <ProfileHeader id={ id } name={ title } customImage={image}/>
-        <SectionNav />
+        <SectionNav type="indicator"/>
       </div>
     )
   }
