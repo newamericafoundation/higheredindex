@@ -8,6 +8,7 @@ import LandingPage from './components/LandingPage.jsx';
 import ListingsPage from './components/ListingsPage.jsx';
 import StPageContainer from './components/StPageContainer';
 import InstPageContainer from './components/InstPageContainer';
+import IndicatorPageContainer from './components/IndicatorPageContainer';
 import NotFoundPage from './components/NotFoundPage';
 
 const routes = (
@@ -17,6 +18,7 @@ const routes = (
     		<Route path="search" component={ListingsPage}/>
 		    <Route path="state/:id" component={StPageContainer}/>
 		    <Route path="institution/:id" component={InstPageContainer}/>
+		    <Route path="indicator/:id" component={IndicatorPageContainer}/>
 		    <Route path="*" component={NotFoundPage}/>
 		</Route>
   	</Route>
