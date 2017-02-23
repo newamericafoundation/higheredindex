@@ -7,7 +7,7 @@ import ProfileSectionTitle from './ProfileSectionTitle.jsx';
 import ProfileHeader from './ProfileHeader.jsx';
 import DataBlock from './DataBlock';
 import indicatorVizSettings from './indicatorVizSettings';
-import UsMap from '../chart_modules/UsMap';
+import RankingsDashboard from '../chart_modules/RankingsDashboard';
 import { connect } from 'react-redux'
 import { toggleTopNavProfileName } from '../actions'
 import $ from 'jquery';
@@ -61,7 +61,7 @@ class IndicatorPage extends React.Component {
         </div>
 
         <ProfileSectionTitle title="Rankings" />
-        <UsMap filters={filters} />
+        <RankingsDashboard filters={filters} />
 
         <ProfileSectionTitle title="Trends" />
       </div>
