@@ -11,7 +11,7 @@
     "start": "NODE_ENV=production node server.js",
     "start-dev": "npm run start-dev-hmr",
     "start-dev-single-page": "node_modules/bin/http-server src/static",
-    "start-dev-hmr": "node_modules/bin/webpack-dev-server --progress --inline --hot",
+    "start-dev-hmr": "node_modules/.bin/webpack-dev-server --progress --inline --hot",
     "build": "NODE_ENV=production webpack",
     "heroku-postbuild": "NODE_ENV=production webpack"
   },
@@ -37,6 +37,7 @@
     "google-maps": "^3.2.1",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.1.1",
+    "json2csv": "^3.7.3",
     "mongodb": "^2.2.23",
     "mongoose": "^4.7.0",
     "node-sass": "^3.13.0",
