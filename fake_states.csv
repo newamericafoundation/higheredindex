@@ -1,0 +1,52 @@
+state,state_id,abbreviation,value
+Alabama,1,AL,28
+Alaska,2,AK,22
+Arizona,4,AZ,19
+Arkansas,5,AR,26
+California,6,CA,16
+Colorado,8,CO,23
+Connecticut,9,CT,23
+Delaware,10,DE,11
+District of Columbia,11,DC,21
+Florida,12,FL,3
+Georgia,13,GA,18
+Hawaii,15,HI,14
+Idaho,16,ID,23
+Illinois,17,IL,4
+Indiana,18,IN,17
+Iowa,19,IA,1
+Kansas,20,KS,19
+Kentucky,21,KY,20
+Louisiana,22,LA,4
+Maine,23,ME,30
+Maryland,24,MD,4
+Massachusetts,25,MA,22
+Michigan,26,MI,4
+Minnesota,27,MN,26
+Mississippi,28,MS,14
+Missouri,29,MO,15
+Montana,30,MT,19
+Nebraska,31,NE,23
+Nevada,32,NV,30
+New Hampshire,33,NH,1
+New Jersey,34,NJ,28
+New Mexico,35,NM,29
+New York,36,NY,22
+North Carolina,37,NC,4
+North Dakota,38,ND,30
+Ohio,39,OH,6
+Oklahoma,40,OK,4
+Oregon,41,OR,26
+Pennsylvania,42,PA,27
+Rhode Island,44,RI,10
+South Carolina,45,SC,18
+South Dakota,46,SD,29
+Tennessee,47,TN,13
+Texas,48,TX,27
+Utah,49,UT,24
+Vermont,50,VT,5
+Virginia,51,VA,4
+Washington,53,WA,16
+West Virginia,54,WV,22
+Wisconsin,55,WI,19
+Wyoming,56,WY,28

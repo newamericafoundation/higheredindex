@@ -1,13 +1,13 @@
 'use strict';
 
 import React from 'react';
-import { Link } from 'react-router';
 import NotFoundPage from './NotFoundPage';
 import SectionNav from './SectionNav.jsx';
 import ProfileSectionTitle from './ProfileSectionTitle.jsx';
 import ProfileHeader from './ProfileHeader.jsx';
 import DataBlock from './DataBlock';
 import indicatorVizSettings from './indicatorVizSettings';
+import UsMap from '../chart_modules/UsMap';
 import { connect } from 'react-redux'
 import { toggleTopNavProfileName } from '../actions'
 import $ from 'jquery';
@@ -49,11 +49,21 @@ class IndicatorPage extends React.Component {
     if (!this.props.settings) {
       return <NotFoundPage/>;
     }
-    const {id, title, image} = this.props.settings;
+    const {id, title, image, description, filters} = this.props.settings;
     return (
       <div className="location-profile indicator">
         <ProfileHeader id={ id } name={ title } customImage={image}/>
         <SectionNav type="indicator"/>
+
+        <ProfileSectionTitle title="About" />
+        <div className="location-profile__body-paragraph">
+          <p>{ description }</p>
+        </div>
+
+        <ProfileSectionTitle title="Rankings" />
+        <UsMap filters={filters} />
+
+        <ProfileSectionTitle title="Trends" />
       </div>
     )
   }

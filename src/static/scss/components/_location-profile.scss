@@ -25,4 +25,10 @@
 		transform: translateY(-50%);
 		color: palette-get(na-black);
 	}
+
+	&__body-paragraph {
+		max-width: $max-body-width;
+		margin: auto;
+		
+	}
 }
