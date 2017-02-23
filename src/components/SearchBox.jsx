@@ -91,7 +91,7 @@ class SearchBox extends React.Component {
   		console.log("rendering", this.props);
   		console.log(this.state);
   		const { value, suggestions } = this.state;
-  		const { stList, instList, alwaysRenderSuggestions } = this.props;
+  		const { stList, instList, alwaysRenderSuggestions, expandable, expanded } = this.props;
 
   		const inputProps = {
 	      placeholder: 'Search',
@@ -99,7 +99,8 @@ class SearchBox extends React.Component {
 	      onChange: this.onChange.bind(this)
 	    };
 
-	    let elementClass = "";
+	    let elementClass = expandable ? " expandable" : "";
+    		elementClass += expandable && !expanded ? " hidden" : "";
 
 	    let loading = stList.length == 0 && instList.length == 0;
 
@@ -162,7 +163,7 @@ class SearchBox extends React.Component {
 	}
 
 	onSuggestionSelected(event, { suggestion, suggestionValue, sectionIndex, method }) {
-		console.log("onSuggestionSelected")
+	    browserHistory.push('/' + suggestion.type + '/' + suggestionValue);
 	}
 
 	getSuggestions(value, propContainer) {
