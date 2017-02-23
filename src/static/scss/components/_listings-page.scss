@@ -1,0 +1,217 @@
+$top-bar-height: 55px;
+.listings-page {
+	background-image: url('../img/school.jpg');
+	background-size: cover;
+	background-position: 50% 50%;
+	height: calc(100vh - #{$top-nav-height});
+	overflow: hidden;
+
+	&__top-bar {
+		height: $top-bar-height;
+		width: 100%;
+		background-color: rgb(89, 91, 96);
+		position: fixed;
+		z-index: 5;
+
+		&__container {
+			margin: auto;
+			max-width: 900px;
+			position: relative;
+			/*display: table;*/
+
+			.search-box {
+				width: 70%;
+				position: absolute;
+				right: 0px;
+				display: inline-block;
+
+				input {
+					background-color: rgb(89, 91, 96);
+					border: none;
+					/*border: 2px solid palette-get(na-black-30);*/
+					color: white;
+					height: $top-bar-height;
+
+					&::-webkit-input-placeholder {
+						color: white;
+					}
+				}
+
+				.react-autosuggest__suggestions-container {
+					top: $top-bar-height;
+				}
+
+				.react-autosuggest__suggestion {
+					/*display: flex;
+					cursor: pointer;
+					padding: 10px 20px;
+					width: 100%;*/
+					color: white;
+					background-color: rgba(59, 61, 67, .95);
+					padding: 20px 25px;
+					border-top: none;
+					border-bottom: 2px solid rgba(255, 255, 255, .2);
+
+					&:hover {
+						background-color: rgba(46, 188, 179, .9);
+					}
+
+					&:last-child {
+						border-bottom: none;
+					}
+
+					&-div {
+						display: block;
+					}
+
+					&__label {
+						svg {
+							fill: palette-get(na-black-10);
+							display: inline-block;
+							height: 15px;
+							width: 15px;
+							margin-right: 5px;
+						}
+						&__text {
+							color: palette-get(na-black-10);
+							display: inline-block;
+							font-size: 12px;
+							text-transform: uppercase;
+							letter-spacing: .05rem;
+						}
+					}
+
+					&__text {
+						font-size: 20px;
+						font-weight: bold;
+					}
+				}
+			}
+
+			.listings-page__top-bar__filter-label {
+				width: 30%;
+				display: inline-block;
+				height: $top-bar-height;
+				background-color: rgba(59, 61, 67, .9);
+				padding-left: 25px;
+
+				&__text {
+					vertical-align: middle;
+					color: white;
+					position: relative;
+					top: 50%;
+					transform: translateY(-50%);
+					font-size: 18px;
+				}
+			}
+
+			& > .icon {
+				fill: white;
+			    height: 20px;
+			    width: 20px;
+			    position: absolute;
+			    right: 10px;
+			    top: 50%;
+				transform: translateY(-50%);
+			}
+		}
+
+
+	}
+
+	&__main {
+		
+		position: relative;
+		top: 55px;
+	}
+
+	&__overlay {
+		$gradient-top: rgba(44,47,53,1);
+		$gradient-bottom: rgba(44,47,53,.8);
+		position: absolute;
+		height: 100vh;
+		width: 100%;
+		z-index: 1;
+
+		 /* fallback color if gradients are not supported */
+		background-image: -webkit-linear-gradient(top, $gradient-top, $gradient-bottom); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+		background-image:    -moz-linear-gradient(top, $gradient-top, $gradient-bottom); /* For Firefox (3.6 to 15) */
+		background-image:      -o-linear-gradient(top, $gradient-top, $gradient-bottom); /* For old Opera (11.1 to 12.0) */ 
+		background-image:         linear-gradient(to bottom, $gradient-top, $gradient-bottom); /* Standard syntax; must be last */
+	}
+
+	&__content {
+		position: relative;
+		z-index: 2;
+		margin: auto;
+		max-width: 900px;
+	}
+
+	input {
+		/*position: fixed;*/
+	}
+
+	.react-autosuggest__suggestions-container {
+		max-height: calc(100vh);
+	}
+
+	&__filter-container, &__results-container {
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	&__filter-container {
+		width: 30%;
+		background-color: rgba(59, 61, 67, .9);
+		padding: 15px 25px;
+	}
+
+	&__results-container {
+		width: 70%;
+
+	}
+
+	&__filter {
+		opacity: .3;
+		fill: white;
+		margin: 15px 0px;
+
+		&:hover {
+			opacity: 1;
+			fill: white;
+		}
+		.active & {
+			opacity: 1 !important;
+			color: white !important;
+			fill: white !important;
+		}
+		.icon {
+			vertical-align: middle;
+			height: 20px;
+			width: 20px;
+		}
+		&__label, &__value {
+			display: inline-block;
+			font-size: 18px;
+			color: white;
+			margin-bottom: 0px;
+			vertical-align: middle;
+		}
+		&__label {
+			padding-left: 10px;
+			padding-right: 3px;
+		}
+
+		&__value {
+			font-weight: bold;
+		}
+	}
+
+	&__filter-link {
+
+		&.active {
+			cursor: default;
+			
+		}
+	}
+}
