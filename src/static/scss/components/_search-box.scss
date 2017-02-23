@@ -50,7 +50,7 @@
 			display: table;
 		}
 
-		h5, svg {
+		&__text, svg {
 			display: table-cell;
 			vertical-align: middle;
 			margin-top: 5px;
@@ -63,7 +63,7 @@
 			width: 25px;
 		}
 
-		h5 {
+		&__text {
 			font-size: 15px;
 		}
 	}
