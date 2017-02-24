@@ -11,7 +11,8 @@ export default class RankingsDashboard extends React.Component {
 		super(props);
 
 		this.state = {
-			currFilter: props.filters[0]
+			currFilter: props.filters[0],
+			currHovered: null
 		}
 
 		this.colorScale = getColorScale(fakeData, props.filters[0]);
@@ -26,13 +27,20 @@ export default class RankingsDashboard extends React.Component {
 		this.colorScale = getColorScale(fakeData, this.props.filters[newValue]);
 	}
 
+	setCurrHovered(id) {
+		console.log("hovered!", id);
+		this.setState({
+			currHovered: id
+		})
+	}
+
 	render() {
 
 		return (
 			<div className="rankings-dashboard">
 				<FilterGroup filters={this.props.filters} filterChangedFunc={this.filterChanged.bind(this)}/>
-				<UsMap filter={this.state.currFilter} data={fakeData} colorScale={this.colorScale}/>
-				<RankChart filter={this.state.currFilter} data={fakeData} />
+				<UsMap filter={this.state.currFilter} data={fakeData} colorScale={this.colorScale} currHovered={this.state.currHovered} hoverChangeFunc={this.setCurrHovered.bind(this)}/>
+				<RankChart filter={this.state.currFilter} data={fakeData} colorScale={this.colorScale} currHovered={this.state.currHovered} hoverChangeFunc={this.setCurrHovered.bind(this)}/>
 			</div>
 		)
 	}

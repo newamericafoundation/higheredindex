@@ -1,0 +1,23 @@
+.filter-group {
+	margin: auto;
+	text-align: center;
+	&__filter {
+		padding: 15px;
+		border-top: 2px solid palette-get(na-black-10);
+		border-bottom: 2px solid palette-get(na-black-10);
+		border-left: 2px solid palette-get(na-black-10);
+		color: palette-get(na-black-70);
+		cursor: pointer;
+		text-align: center;
+
+		&:last-child {
+			border-right: 2px solid palette-get(na-black-10);
+		}
+
+		&.active {
+			background-color: palette-get(na-black);
+			border: 2px solid palette-get(na-black);
+			color: white;
+		}
+	}
+}

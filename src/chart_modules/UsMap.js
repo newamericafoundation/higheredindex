@@ -5,8 +5,8 @@ import $ from 'jquery';
 import Legend from "../components/Legend.js";
 import Tooltip from "../components/Tooltip.js";
 import { formatValue } from "../helper_functions/format_value.js";
+import { colors } from "../helper_functions/colors.js";
 import { usStates } from './us-states.js';
-import { getColorScale } from "../helper_functions/get_color_scale.js";
 
 let margin = {top: 10, right: 0, bottom: 30, left: 60};
 
@@ -23,7 +23,6 @@ export default class UsMap extends React.Component {
 		this.state = {
             width: 0,
             height: 0,
-            currHovered: null,
             tooltipSettings: null,
         }
 	}
@@ -169,22 +168,23 @@ export default class UsMap extends React.Component {
     // callback functions
 
     mouseover(datum, path, eventObject) {
-        console.log(datum);
+        const {filter, hoverChangeFunc} = this.props;
+        hoverChangeFunc(datum.data.state_id);
     	this.setState({
-            currHovered: {varName: datum.state_id, year: datum.year},
             tooltipSettings: {
                 x: eventObject.offsetX + 10,
                 y: eventObject.offsetY - 30,
                 title: datum.data.state,
-                value: datum.data[this.props.filter.variable],
-                format: this.props.filter.format
+                value: datum.data[filter.variable],
+                format: filter.format
             }
         })
     }
 
     mouseout() {
+        const {hoverChangeFunc} = this.props;
+        hoverChangeFunc(null);
     	this.setState({
-            currHovered: null,
             tooltipSettings: null
         })
     }
@@ -195,11 +195,17 @@ export default class UsMap extends React.Component {
     }
 
     setFill(d) {
+        const {currHovered, colorScale, filter} = this.props;
+        
         if (d.data) {
-            var value = d.data[this.props.filter.variable];
-            return value ? this.colorScale(value) : "green";
+            if ((currHovered && currHovered == d.data.state_id) || !currHovered) {
+                var value = d.data[filter.variable];
+                return value ? colorScale(value) : "white";
+            }
         } else {
-            return "green";
+            return "white";
         }
+
+        return colors.grey.light;
     }
 }
