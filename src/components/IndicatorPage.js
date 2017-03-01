@@ -15,32 +15,32 @@ import $ from 'jquery';
 class IndicatorPage extends React.Component {
   constructor() {
     super();
-    // this.handlerFunc = this.handleScroll.bind(this);
+    this.handlerFunc = this.handleScroll.bind(this);
   }
   componentDidMount() {
-    // $(".app-container").scroll(this.handlerFunc);
+    $(".app-container").scroll(this.handlerFunc);
   }
 
   componentWillUnmount() {
-    // $(".app-container").off("scroll", this.handlerFunc);
+    $(".app-container").off("scroll", this.handlerFunc);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // return this.props.currProfileName === nextProps.currProfileName ? false : true;
+    return this.props.currProfileName === nextProps.currProfileName ? false : true;
   }
 
   handleScroll(event) {
-    // const {topNavProfileNameShown, toggleTopNavProfileDisplay} = this.props;
+    const {topNavProfileNameShown, toggleTopNavProfileDisplay} = this.props;
 
-    // if (!topNavProfileNameShown) {
-    //     if ($(".profile-header__text").offset().top < 30) {
-    //         toggleTopNavProfileDisplay(true)
-    //     }
-    // } else {
-    //     if ($(".profile-header__text").offset().top >= 30) {
-    //         toggleTopNavProfileDisplay(false)
-    //     }
-    // }
+    if (!topNavProfileNameShown) {
+        if ($(".profile-header__text").offset().top < 30) {
+            toggleTopNavProfileDisplay(true)
+        }
+    } else {
+        if ($(".profile-header__text").offset().top >= 30) {
+            toggleTopNavProfileDisplay(false)
+        }
+    }
   }
 
   render() {
