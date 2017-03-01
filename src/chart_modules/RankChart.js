@@ -182,13 +182,6 @@ export default class RankChart extends React.Component {
             .style("fill", (d) => { return this.setFill(d); })
     }
 
-    toggleVals(valsShown) {
-        console.log(valsShown)
-    	this.setState({
-            valsShown: valsShown
-        });
-    }
-
 	render() {
 		// const { data, settings } = this.props,
 
@@ -263,12 +256,16 @@ export default class RankChart extends React.Component {
     }
 
     setFill(d) {
-    	const {currHovered, colorScale, filter} = this.props;
+    	const {currHovered, colorScale, filter, valsShown} = this.props;
 
-    	if (currHovered) {
-    		return currHovered == d.state_id ? colorScale(d[filter.variable]) : colors.grey.light; 
-    	}
+        if (!currHovered || (currHovered && currHovered == d.state_id)) {
+            let value = d[filter.variable];
+            let binIndex = colorScale.range().indexOf(colorScale(value));
+            if (valsShown.indexOf(binIndex) > -1) {
+                return colorScale(value);
+            }
+        }
 
-    	return colorScale(d[filter.variable]); 	
+        return colors.grey.light;
     }
 }

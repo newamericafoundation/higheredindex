@@ -23,7 +23,6 @@ export default class UsMap extends React.Component {
 		this.state = {
             width: 0,
             height: 0,
-            valsShown: Array.from(Array(props.filter.numBins).keys()),
             tooltipSettings: null,
         }
 	}
@@ -126,13 +125,6 @@ export default class UsMap extends React.Component {
             });
     }
 
-    toggleVals(valsShown) {
-        console.log(valsShown)
-    	this.setState({
-            valsShown: valsShown
-        });
-    }
-
 	render() {
 		// const { data, settings } = this.props,
   //           {chart1Settings, chart2Settings} = settings;
@@ -147,7 +139,6 @@ export default class UsMap extends React.Component {
 		if (this.state.chart) {
             this.update();
             content = this.state.chart.toReact();
-            legend = <LegendQuantize colorScale={this.props.colorScale} numBins={this.props.filter.numBins} format={this.props.filter.format} toggleChartVals={this.toggleVals.bind(this)}/>;
             tooltip = <Tooltip settings={this.state.tooltipSettings} />
         } else {
             content = "loading chart";
@@ -155,7 +146,6 @@ export default class UsMap extends React.Component {
 		return (
             <div className="data-block__viz__rendering-area" ref="renderingArea">
                 {content}
-                {legend}
                 {tooltip}
             </div>
         )
@@ -204,12 +194,12 @@ export default class UsMap extends React.Component {
     }
 
     setFill(d) {
-        const {currHovered, colorScale, filter} = this.props;
+        const {currHovered, valsShown, colorScale, filter} = this.props;
         
         if (d.data) {
-            var value = d.data[filter.variable];
+            let value = d.data[filter.variable];
             let binIndex = colorScale.range().indexOf(colorScale(value));
-            if (this.state.valsShown.indexOf(binIndex) > -1) {
+            if (valsShown.indexOf(binIndex) > -1) {
                 return value ? colorScale(value) : "white";
             } 
         } else {

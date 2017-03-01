@@ -6,7 +6,10 @@ export default class LegendQuantize extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.fullValList = Array.from(Array(props.numBins).keys());
+		console.log("in legend quantize!");
+		console.log(props);
+
+		this.fullValList = Array.from(Array(props.filter.numBins).keys());
 
 		this.state = {
 			valsShown: this.fullValList
@@ -14,7 +17,7 @@ export default class LegendQuantize extends React.Component {
 	}
 
 	toggleVals(valToggled) {
-		const {numBins} = this.props;
+		const {numBins} = this.props.filter;
 		const {valsShown} = this.state;
 		let newValsShownList = [];
 
@@ -44,7 +47,8 @@ export default class LegendQuantize extends React.Component {
 	}
 
 	renderCells() {
-		const {colorScale, numBins, format, toggleVals} = this.props;
+		const {colorScale, filter, toggleVals} = this.props;
+		const {numBins, format} = filter;
 		const {valsShown} = this.state;
 		let [dataMin, dataMax] = colorScale.domain();
 		let dataSpread = dataMax - dataMin;
@@ -83,7 +87,8 @@ export default class LegendQuantize extends React.Component {
 	}
 
 	render() {
-		const {colorScale, numBins, toggleVals} = this.props;
+		const {colorScale, filter, toggleVals} = this.props;
+		const {numBins} = filter;
 
 		return (
 			<div className="legend">
