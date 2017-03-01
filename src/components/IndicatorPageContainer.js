@@ -13,12 +13,20 @@ class IndicatorPageContainer extends React.Component {
 
   componentWillMount() {
     const { dispatch, id } = this.props;
-
-    dispatch(changeCurrProfile(id, indicatorVizSettings[id].title, "indicator"))
+    if (indicatorVizSettings[id] && indicatorVizSettings[id].title) {
+      dispatch(changeCurrProfile(id, indicatorVizSettings[id].title, "indicator"))
+    }
   }
 
   componentWillUnmount() {
     this.props.dispatch(changeCurrProfile(null))
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.id != this.props.id) {
+      const { dispatch, id } = nextProps
+      dispatch(changeCurrProfile(id, indicatorVizSettings[nextProps.id].title, "indicator"))
+    }
   }
 
   render() {
