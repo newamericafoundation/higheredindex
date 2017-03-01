@@ -55,6 +55,7 @@
 			color: palette-get(na-black);
 			outline: 0;
 			border: none;
+			-webkit-appearance: none;
 
 			.active & {
 				display: table-cell;
