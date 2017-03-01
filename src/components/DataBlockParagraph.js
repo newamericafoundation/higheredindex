@@ -18,7 +18,6 @@ function getMaxYear(variables, data) {
 export default function DataBlockParagraph(props) {
 	const {settings, data} = props,
 		{textSections, variables} = settings;
-	console.log(textSections, variables, data);
   	
   	let populatedText = [],
   		totalMaxYear = getMaxYear(variables, data);
@@ -42,7 +41,6 @@ export default function DataBlockParagraph(props) {
 		}
     })
 
-    console.log(populatedText);
     return (
       <div className="data-block__paragraph">
       	<p>{populatedText}</p>

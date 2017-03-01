@@ -2,11 +2,10 @@ var d3 = require("d3");
 
 export default class LineChart {
 	constructor(settings) {
-		console.log(settings);
 		let {data, variables, domElem, mouseoverFunc, mouseoutFunc} = settings;
 
 		this.data = data;
-        console.log(data);
+
 		this.variables = variables;
 		this.domElem = domElem;
 		this.mouseoverFunc = mouseoverFunc;

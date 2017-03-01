@@ -9,7 +9,16 @@ import React from 'react';
 class IndicatorPageContainer extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props.id);
+  }
+
+  componentWillMount() {
+    const { dispatch, id } = this.props;
+
+    dispatch(changeCurrProfile(id, indicatorVizSettings[id].title, "indicator"))
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(changeCurrProfile(null))
   }
 
   render() {
