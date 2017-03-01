@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { changeCurrProfile, fetchProfile } from '../actions'
 import IndicatorPage from './IndicatorPage'
 import NotFoundPage from './NotFoundPage';
-import indicatorVizSettings from './indicatorVizSettings';
+import { indicatorVizSettings } from './indicatorVizSettings';
 
 import React from 'react';
 

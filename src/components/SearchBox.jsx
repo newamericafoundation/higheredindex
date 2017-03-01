@@ -231,7 +231,14 @@ class SearchBox extends React.Component {
 	}
 
 	renderSuggestionSimple(suggestion) {
-	  const iconType = suggestion.type == "state" ? 'map-marker' : 'institution';
+	  let iconType;
+	  if (suggestion.type == "state") { 
+	  	iconType = 'map-marker'; 
+	  } else if (suggestion.type == "institution") { 
+	  	iconType = "institution";
+	  } else {
+	  	iconType = "bar-chart";
+	  }
 	  return (
 	    <div className="react-autosuggest__suggestion-div">
 	      <SvgIcon name={iconType} />
@@ -257,6 +264,7 @@ class SearchBox extends React.Component {
 	   	counts.indicators = indicatorList.filter(listElem => 
 		        listElem.name.toLowerCase().slice(0, inputLength) === inputValue
 		    ).length;
+	   	counts.all = counts.states + counts.institutions + counts.indicators;
 
 	   	console.log("counts!", counts);
 
