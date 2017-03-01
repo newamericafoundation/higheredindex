@@ -25,11 +25,16 @@ class ListingsPage extends React.Component {
 	}
 
 	getListingsIcon(type) {
+
 		let iconName;
-		if (type == "states") {
-			iconName = "map-marker";
+		if (type == "states") { 
+		  	iconName = 'map-marker'; 
+		} else if (type == "institutions") { 
+		  	iconName = "institution";
+		} else if (type == "indicators") {
+		  	iconName = "bar-chart";
 		} else {
-			iconName = "institution";
+			return null;
 		}
 		return <SvgIcon name={iconName} />
 	}
@@ -80,6 +85,7 @@ class ListingsPage extends React.Component {
 							{this.renderCountBox("states")}
 							{this.renderCountBox("institutions")}
 							{this.renderCountBox("indicators")}
+							{this.renderCountBox("all")}
 						</div>
 						<div className="listings-page__results-container">
 						</div>

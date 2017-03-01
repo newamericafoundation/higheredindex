@@ -50,7 +50,7 @@ class InstPage extends React.Component {
     return (
       <div className="location-profile state" ref="stProfile">
         <ProfileHeader id={ this.props.instData.path } name={ this.props.instData.name }/>
-        <SectionNav />
+        <SectionNav type="location" />
         <ProfileSectionTitle 
           title="Students" 
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>

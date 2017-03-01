@@ -200,6 +200,11 @@ $top-bar-height: 55px;
 		&__label {
 			padding-left: 10px;
 			padding-right: 3px;
+			text-transform: capitalize;
+
+			&:first-child {
+				margin-left: 20px;
+			}
 		}
 
 		&__value {

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactFauxDOM from 'react-faux-dom';
 var d3 = require("d3");
 import $ from 'jquery';
-import Legend from "./Legend.js";
+import LegendCategorical from "./LegendCategorical.js";
 import Tooltip from "./Tooltip.js";
 import LineChart from "../chart_modules/LineChart.js";
 import BarChart from "../chart_modules/BarChart.js";
@@ -288,7 +288,7 @@ export default class SimpleChart extends React.Component {
 		if (this.state.chart) {
             this.updateChart();
             content = this.state.chart.toReact();
-            legend = <Legend variables={variables} toggleChartVals={this.toggleVals.bind(this)}/>;
+            legend = <LegendCategorical variables={variables} toggleChartVals={this.toggleVals.bind(this)}/>;
             tooltip = <Tooltip settings={this.state.tooltipSettings} />
             presentVarsList = this.fullValList.length > 0 ? <h5 className="data-block__viz__debugging-list">Using variables: {this.fullValList.toString()}</h5> : null;
             missingVarsList = this.missingVars.length > 0 ? <h5 className="data-block__viz__debugging-list">Missing variables: {this.missingVars.toString()}</h5> : null;

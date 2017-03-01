@@ -5,6 +5,7 @@ import Autosuggest from 'react-autosuggest';
 import { fetchProfileList } from '../actions';
 import SvgIcon from './SvgIcon';
 import { sortAlpha } from "../helper_functions/sort_alpha.js";
+import { indicatorList } from './indicatorVizSettings'
 var d3 = require("d3");
 
 class SearchBox extends React.Component {
@@ -23,7 +24,8 @@ class SearchBox extends React.Component {
   	componentWillMount() {
   		console.log("in component will mount");
 		const { dispatch, stList, instList, filter, suggestionsChangedCallback } = this.props;
-		let newSuggestions = [];
+		let newSuggestions = [],
+			forceUpdate = false;
 
 		if (stList.length == 0) {
 			dispatch(fetchProfileList("state"))
@@ -31,6 +33,11 @@ class SearchBox extends React.Component {
 			if (filter == "states" || filter == "all") {
 				newSuggestions = this.getSuggestions(this.state.value, this.props); 
 			}
+		}
+
+		if (filter == "indicators" || filter == "all") {
+			newSuggestions = [...newSuggestions, ...indicatorList];
+			forceUpdate = true;
 		}
 
 		if (instList.length == 0) {
@@ -41,7 +48,7 @@ class SearchBox extends React.Component {
 			}
 		}
 
-		if (newSuggestions.length > 0) {
+		if (newSuggestions.length > 0 || forceUpdate) {
 			if (suggestionsChangedCallback) {
 		      let counts = this.getSuggestionCounts(this.state.value, this.props);
 		      this.props.suggestionsChangedCallback(counts);
@@ -62,25 +69,39 @@ class SearchBox extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		const { stList, instList, filter, suggestionsChangedCallback } = this.props;
 		console.log("in component will receive props");
-		let newSuggestions = [];
+		let newSuggestions = [],
+			updateCounts = false,
+			updateState = false;
 
 		if (stList != nextProps.stList || filter != nextProps.filter) {
 			if (nextProps.filter == "states" || nextProps.filter == "all") {
-				newSuggestions = this.getSuggestions(this.state.value, nextProps); 
+				newSuggestions = this.getSuggestions(this.state.value, nextProps);
+				updateState = true;
 			}
+			updateCounts = true;
+		}
+
+		if (filter != nextProps.filter) {
+			if (nextProps.filter == "indicators" || nextProps.filter == "all") {
+				newSuggestions = [...newSuggestions, ...this.getSuggestions(this.state.value, nextProps)];
+			}
+			updateState = true;
 		}
 
 		if (instList != nextProps.instList || filter != nextProps.filter) {
 			if (nextProps.filter == "institutions" || nextProps.filter == "all") {
-				newSuggestions = [...newSuggestions, ...this.getSuggestions(this.state.value, nextProps)]; 
+				newSuggestions = [...newSuggestions, ...this.getSuggestions(this.state.value, nextProps)];
+				updateState = true;
 			}
+			updateCounts = true;
 		}
 
-		if (newSuggestions.length > 0) {
-			if (suggestionsChangedCallback) {
-		      let counts = this.getSuggestionCounts(this.state.value, nextProps);
-		      this.props.suggestionsChangedCallback(counts);
-		    }
+		if (updateCounts && suggestionsChangedCallback) {
+	        let counts = this.getSuggestionCounts(this.state.value, nextProps);
+	        this.props.suggestionsChangedCallback(counts);
+	    }
+
+		if (updateState) {
 			this.setState({
 				suggestions: newSuggestions
 			})
@@ -184,8 +205,10 @@ class SearchBox extends React.Component {
 			return stList;
 		} else if (filter == "institutions") {
 			return instList;
+		} else if (filter == "indicators") {
+			return indicatorList;
 		} else {
-			return [...stList, ...instList];
+			return [...stList, ...indicatorList, ...instList];
 		}
 	}
 
@@ -208,7 +231,14 @@ class SearchBox extends React.Component {
 	}
 
 	renderSuggestionSimple(suggestion) {
-	  const iconType = suggestion.type == "state" ? 'map-marker' : 'institution';
+	  let iconType;
+	  if (suggestion.type == "state") { 
+	  	iconType = 'map-marker'; 
+	  } else if (suggestion.type == "institution") { 
+	  	iconType = "institution";
+	  } else {
+	  	iconType = "bar-chart";
+	  }
 	  return (
 	    <div className="react-autosuggest__suggestion-div">
 	      <SvgIcon name={iconType} />
@@ -231,6 +261,10 @@ class SearchBox extends React.Component {
 	   	counts.institutions = instList.filter(listElem => 
 		        listElem.name.toLowerCase().slice(0, inputLength) === inputValue
 		    ).length;
+	   	counts.indicators = indicatorList.filter(listElem => 
+		        listElem.name.toLowerCase().slice(0, inputLength) === inputValue
+		    ).length;
+	   	counts.all = counts.states + counts.institutions + counts.indicators;
 
 	   	console.log("counts!", counts);
 

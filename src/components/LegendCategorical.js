@@ -1,7 +1,7 @@
 import React from 'react';
 var d3 = require("d3");
 
-export default class Legend extends React.Component {
+export default class LegendCategorical extends React.Component {
 	constructor(props) {
 		super(props);
 
