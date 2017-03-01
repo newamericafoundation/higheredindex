@@ -2,7 +2,7 @@ import React from 'react';
 import ReactFauxDOM from 'react-faux-dom';
 var d3 = require("d3");
 import $ from 'jquery';
-import Legend from "../components/Legend.js";
+import LegendQuantize from "../components/LegendQuantize.js";
 import Tooltip from "../components/Tooltip.js";
 import LineChart from "../chart_modules/LineChart.js";
 import BarChart from "../chart_modules/BarChart.js";
@@ -197,7 +197,6 @@ export default class RankChart extends React.Component {
 		if (this.state.chart) {
             this.updateChart();
             content = this.state.chart.toReact();
-            // legend = <Legend variables={variables} toggleChartVals={this.toggleVals.bind(this)}/>;
             tooltip = <Tooltip settings={this.state.tooltipSettings} />
         } else {
             content = "loading chart";

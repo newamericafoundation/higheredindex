@@ -2,7 +2,7 @@ import React from 'react';
 import ReactFauxDOM from 'react-faux-dom';
 var d3 = require("d3");
 import $ from 'jquery';
-import Legend from "../components/Legend.js";
+import LegendQuantize from "../components/LegendQuantize.js";
 import Tooltip from "../components/Tooltip.js";
 import { formatValue } from "../helper_functions/format_value.js";
 import { colors } from "../helper_functions/colors.js";
@@ -23,6 +23,7 @@ export default class UsMap extends React.Component {
 		this.state = {
             width: 0,
             height: 0,
+            valsShown: Array.from(Array(props.filter.numBins).keys()),
             tooltipSettings: null,
         }
 	}
@@ -68,6 +69,7 @@ export default class UsMap extends React.Component {
             .enter()
             .append("path")
             .attr("class", "us-map__state")
+            .attr("stroke", "white")
             .on("mouseover", (d, index, paths) => { return this.mouseover(d, paths[index], d3.event) })
             .on("mouseout", (d, index, paths) => { return this.mouseout(paths[index]) });
     }
@@ -110,13 +112,19 @@ export default class UsMap extends React.Component {
     }
 
     updateMap() {
+        const {currHovered} = this.props;
         this.paths
             .attr("d", (d) => { return this.pathGenerator(d); })
-            .attr("fill", (d) => { return this.setFill(d); });
+            .attr("fill", (d) => { return this.setFill(d); })
+            .attr("stroke-width", (d) => { 
+                if (d.data) {
+                    if (currHovered && currHovered == d.data.state_id) {
+                        return "5px";
+                    }
+                }
+                return "1px";
+            });
     }
-
-
-
 
     toggleVals(valsShown) {
         console.log(valsShown)
@@ -139,7 +147,7 @@ export default class UsMap extends React.Component {
 		if (this.state.chart) {
             this.update();
             content = this.state.chart.toReact();
-            // legend = <Legend variables={variables} toggleChartVals={this.toggleVals.bind(this)}/>;
+            legend = <LegendQuantize colorScale={this.props.colorScale} numBins={this.props.filter.numBins} format={this.props.filter.format} toggleChartVals={this.toggleVals.bind(this)}/>;
             tooltip = <Tooltip settings={this.state.tooltipSettings} />
         } else {
             content = "loading chart";
@@ -147,6 +155,7 @@ export default class UsMap extends React.Component {
 		return (
             <div className="data-block__viz__rendering-area" ref="renderingArea">
                 {content}
+                {legend}
                 {tooltip}
             </div>
         )
@@ -198,10 +207,11 @@ export default class UsMap extends React.Component {
         const {currHovered, colorScale, filter} = this.props;
         
         if (d.data) {
-            if ((currHovered && currHovered == d.data.state_id) || !currHovered) {
-                var value = d.data[filter.variable];
+            var value = d.data[filter.variable];
+            let binIndex = colorScale.range().indexOf(colorScale(value));
+            if (this.state.valsShown.indexOf(binIndex) > -1) {
                 return value ? colorScale(value) : "white";
-            }
+            } 
         } else {
             return "white";
         }

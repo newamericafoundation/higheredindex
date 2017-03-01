@@ -49,7 +49,7 @@ class IndicatorPage extends React.Component {
     if (!this.props.settings) {
       return <NotFoundPage/>;
     }
-    const {id, title, image, description, filters} = this.props.settings;
+    const {id, title, image, description, filterCategories} = this.props.settings;
     return (
       <div className="location-profile indicator">
         <ProfileHeader id={ id } name={ title } customImage={image}/>
@@ -61,7 +61,7 @@ class IndicatorPage extends React.Component {
         </div>
 
         <ProfileSectionTitle title="Rankings" />
-        <RankingsDashboard filters={filters} />
+        <RankingsDashboard filterCategories={filterCategories} />
 
         <ProfileSectionTitle title="Trends" />
       </div>
