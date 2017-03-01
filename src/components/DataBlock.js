@@ -4,13 +4,8 @@ import DataBlockViz from "./DataBlockViz";
 
 export default class DataBlock extends React.Component {
   render() {
-  	console.log(this.props.settings);
   	let {settings, data} = this.props,
       {title, paragraphSettings, vizSettings} = settings;
-
-    console.log("THIS is the Data!")
-    console.log(data);
-    console.log(paragraphSettings);
 
     return (
       <div className="data-block">

@@ -14,7 +14,7 @@ class InstPageContainer extends React.Component {
     const { dispatch, fetchedInsts, id } = this.props
 
     if (fetchedInsts[id]) {
-      this.instData = fetchedInsts[id]
+      this.instData = fetchedInsts[id].data;
       dispatch(changeCurrProfile(id, this.instData.name, "institution"))
     } else {
       dispatch(fetchProfile(id, "institution"))
@@ -28,7 +28,6 @@ class InstPageContainer extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.id != this.props.id) {
       const { dispatch, fetchedInsts, id } = nextProps
-      console.log(fetchedInsts);
 
       if (fetchedInsts[id]) {
         this.instData = fetchedInsts[id]

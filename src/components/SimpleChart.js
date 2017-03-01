@@ -22,7 +22,6 @@ export default class SimpleChart extends React.Component {
 		let fullValList = [];
 
         this.missingVars = [];
-        console.log(data);
 
         for (let i = 0; i < chart1Settings.variables.length; i++) {
             let varName = chart1Settings.variables[i].variable;
@@ -34,8 +33,6 @@ export default class SimpleChart extends React.Component {
                 i--;
             }
         }
-
-        console.log(chart1Settings.variables);
 
         if (chart2Settings) {
             for (let i = 0; i < chart2Settings.variables.length; i++) {
@@ -51,8 +48,6 @@ export default class SimpleChart extends React.Component {
 
             margin.right = 60;
         }
-
-        console.log(fullValList);
 
         //for development only
         this.fullValList = fullValList;
@@ -108,8 +103,6 @@ export default class SimpleChart extends React.Component {
         this.y1 = d3.scaleLinear()
         	.domain(this.getYExtents(chart1Settings));
 
-        console.log(this.y1.domain());
-
         if (chart2Settings) {
             this.yAxis2 = this.g.append("g")
                 .attr("class", "axis axis--y");
@@ -152,7 +145,6 @@ export default class SimpleChart extends React.Component {
 
         keyList = Array.from(new Set(keyList)).sort(d3.ascending);
 
-        console.log(keyList);
         this.x.domain(keyList);
     }
 
@@ -167,7 +159,6 @@ export default class SimpleChart extends React.Component {
     }
 
     initializeChartModule(data, chart) {
-        console.log(chart);
         const {variables} = chart;
         let retVal;
 
@@ -268,7 +259,6 @@ export default class SimpleChart extends React.Component {
     }
 
     toggleVals(valsShown) {
-        console.log(valsShown)
     	this.setState({
             valsShown: valsShown
         });
@@ -312,7 +302,6 @@ export default class SimpleChart extends React.Component {
           width: w,
           height: w/2
         })
-        console.log("resizing!");
     }
 
     componentWillUnmount() {
@@ -347,7 +336,6 @@ export default class SimpleChart extends React.Component {
     }
 
     getYExtents(chart) {
-        console.log(chart)
         if (chart.variables[0] && chart.variables[0].format == "percent") {
             return [0,1];
         }
@@ -359,7 +347,6 @@ export default class SimpleChart extends React.Component {
             let vals = Object.values(data[variable.variable]);
             vals = vals.filter((d) => { return !isNaN(d);})
             valList.push(...vals);
-            console.log(valList);
         }
 
         if (Array.from(new Set(valList)).length == 1) {

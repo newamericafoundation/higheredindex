@@ -2,9 +2,7 @@ var d3 = require("d3");
 
 export default class BarChart {
 	constructor(settings) {
-		console.log(settings);
 		let {data, variables, domElem, mouseoverFunc, mouseoutFunc} = settings;
-    console.log(data);
 		this.data = data;
 		this.variables = variables;
 		this.domElem = domElem;
@@ -32,7 +30,7 @@ export default class BarChart {
             this.dataBars[varName] = this.domElem.selectAll("rect#" + varName)
             	.data(dataArray)
               .enter().append("rect")
-              	.attr("id", (d) => { console.log(d); return varName; })
+              	.attr("id", (d) => { return varName; })
               	.attr("class", "bar-chart__data-bar")
                 .style("fill", variable.color)
                 .style("stroke", "white")
@@ -49,8 +47,6 @@ export default class BarChart {
 
     updateDataBars(updateParams) {
         const {y, x, width, height, currHovered, valsShown} = updateParams;
-
-        console.log(valsShown);
 
         let barHeights = {};
         for (let year of x.domain()) {
