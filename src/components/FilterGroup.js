@@ -12,13 +12,24 @@ export default class FilterGroup extends React.Component {
 
 	}
 
-	changeFilter(newCategory) {
-		console.log(this.refs.select1.value);
-		this.props.filterChangedFunc(newCategory, newFilter);
+	changeCategory(categoryIndex) {
+		let selectRef = this.refs["select" + categoryIndex];
+		let filterIndex = selectRef ? selectRef.value : 0;
+		
+		this.props.filterChangedFunc(categoryIndex, filterIndex);
+
 		this.setState({
-			currCategory: newCategory,
-			currFilter: newValue
-		})
+			currCategory: categoryIndex,
+			currFilter: filterIndex
+		});
+	}
+
+	changeFilter(categoryIndex) {
+		let filterIndex = this.refs["select" + categoryIndex].value;
+		this.props.filterChangedFunc(categoryIndex, filterIndex);
+		this.setState({
+			currFilter: filterIndex
+		});
 	}
 
 	renderFilter(filterCategory, i) {
@@ -27,19 +38,25 @@ export default class FilterGroup extends React.Component {
 		console.log(filterCategory);
 		if (filterCategory.filters.length > 1) {
 			return (<li key={i} className={className}>
-				<select ref={"select" + i} onChange={() => { this.changeFilter(i); }}>
-					<option selected hidden>{filterCategory.label}</option>
-					{filterCategory.filters.map((filter, j) => {
-						return (
-							<option key={j} value={j}>{filter.displayName}</option>
-						)
-					})}
+				<div className="filter-group__category__contents">
+					<div className="filter-group__category__toggle" onClick={() => { this.changeCategory(i); } }>{ filterCategory.label }</div>
+					<select className="filter-group__category__select" ref={"select" + i} onChange={() => { this.changeFilter(i); }}>
+						{filterCategory.filters.map((filter, j) => {
+							return (
+								<option key={j} value={j}>{filter.displayName}</option>
+							)
+						})}
 
-				</select>
+					</select>
+				</div>
 			</li>)
 				
 		} else {
-			return <li key={filter.displayName} className={className} onClick={() => this.changeFilter(i)}></li>
+			return (<li key={i} className={className}>
+				<div className="filter-group__category__contents">
+					<div className="filter-group__category__toggle" onClick={() => { this.changeCategory(i); } }>{ filterCategory.label }</div>
+				</div>
+			</li>)
 		}
 	}
 

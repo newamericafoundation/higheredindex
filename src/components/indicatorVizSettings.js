@@ -52,7 +52,13 @@ export const indicatorVizSettings = {
 					{variable:"value3", displayName:"Value3", format:"number", scaleType:"quantize", numBins:5, customRange:[colors.white, colors.turquoise.light, colors.turquoise.dark]},
 					{variable:"value4", displayName:"Value4", format:"number", scaleType:"quantize", numBins:5, customRange:[colors.white, colors.blue.light, colors.blue.dark]},
 				],
-			}
+			},
+			{
+				label:"Category3",
+				filters:[
+					{variable:"value", displayName:"Value", format:"number", scaleType:"quantize", numBins:5, customRange:[colors.white, colors.turquoise.light, colors.turquoise.dark]},
+				],
+			},
 		]
 	}
 }
