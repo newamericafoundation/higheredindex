@@ -5,6 +5,7 @@ import Autosuggest from 'react-autosuggest';
 import { fetchProfileList } from '../actions';
 import SvgIcon from './SvgIcon';
 import { sortAlpha } from "../helper_functions/sort_alpha.js";
+import { indicatorList } from './indicatorVizSettings'
 var d3 = require("d3");
 
 class SearchBox extends React.Component {
