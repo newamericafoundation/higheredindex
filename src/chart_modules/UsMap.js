@@ -171,7 +171,7 @@ export default class UsMap extends React.Component {
         hoverChangeFunc(datum.data.state_id);
     	this.setState({
             tooltipSettings: {
-                x: eventObject.offsetX + 10,
+                x: eventObject.offsetX + 20,
                 y: eventObject.offsetY - 30,
                 title: datum.data.state,
                 value: datum.data[filter.variable],

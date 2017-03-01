@@ -108,7 +108,7 @@ export default class RankChart extends React.Component {
             .attr("class", "axis axis--x");
 
         this.x = d3.scaleBand()
-            .paddingInner(0.3)
+            .paddingInner(0)
     }
 
     initializeDataElements() {
@@ -222,9 +222,8 @@ export default class RankChart extends React.Component {
     	const {filter, hoverChangeFunc} = this.props;
     	hoverChangeFunc(datum.state_id);
     	this.setState({
-
             tooltipSettings: {
-                x: eventObject.offsetX + 10,
+                x: eventObject.offsetX + 20,
                 y: eventObject.offsetY - 30,
                 title: datum.state,
                 value: datum[filter.variable],
