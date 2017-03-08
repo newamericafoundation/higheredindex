@@ -12,8 +12,7 @@ export default class LineChart {
 		this.mouseoutFunc = mouseoutFunc;
 
         this.hoverLine = this.domElem.append("line")
-            .attr("class", "line-chart__hover-line")
-            .style("stroke", "grey");
+            .attr("class", "line-chart__hover-line");
 
 		this.initializeDataLines();
 	}
@@ -48,13 +47,8 @@ export default class LineChart {
                 .attr("r", 4)
                 .style("stroke", variable.color)
                 .style("stroke-width", "1.5px")
-                .on("mouseover", (d, index, paths) => { 
-                    let valArray = [];
-                    for (let variable of this.variables) {
-                        valArray.push({ variable: variable, value: this.data[variable.variable][d.year] });
-                        console.log(valArray);
-                    }
-                    return this.mouseoverFunc(d.year, valArray, paths[index], d3.event, variable); 
+                .on("mouseover", (d, index, paths) => {
+                  return this.mouseoverFunc(d.year, d3.event); 
                 })
                 .on("mouseout", () => this.mouseoutFunc());
 		}
@@ -112,5 +106,13 @@ export default class LineChart {
             .attr("y1", y.range()[0])
             .attr("y2", y.range()[1])
 
+    }
+
+    getValArray(year) {
+      let valArray = [];
+      for (let variable of this.variables) {
+        valArray.push({ variable: variable, value: this.data[variable.variable][year] });
+      }
+      return valArray;
     }
 }

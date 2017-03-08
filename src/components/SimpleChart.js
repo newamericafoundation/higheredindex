@@ -314,7 +314,11 @@ export default class SimpleChart extends React.Component {
 
     // callback functions
 
-    mouseoverFunc(year, valArray, path, eventObject, variable) {
+    mouseoverFunc(year, eventObject) {
+        let valArray = this.dataElement1.getValArray(year);
+        if (this.dataElement2) {
+            valArray = [...valArray, ...this.dataElement2.getValArray(year)];
+        }
     	this.setState({
             currHovered: year,
             tooltipSettings: {

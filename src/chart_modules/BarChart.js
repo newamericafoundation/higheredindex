@@ -39,13 +39,7 @@ export default class BarChart {
                 .style("stroke", "white")
                 .style("stroke-width", "1px")
                 .on("mouseover", (d, index, paths) => {
-                  let valArray = [];
-                  for (let variable of this.variables) {
-
-                    valArray.push({ variable: variable, value: this.data[variable.variable][d.year] });
-                    console.log(valArray);
-                  }
-                  return this.mouseoverFunc(d.year, valArray, paths[index], d3.event, variable); 
+                  return this.mouseoverFunc(d.year, d3.event); 
                 })
                 .on("mouseout", () => this.mouseoutFunc());
         }
@@ -53,7 +47,7 @@ export default class BarChart {
 
     update(updateParams) {
         const {width, height} = updateParams;
- 		this.updateDataBars(updateParams);
+ 		   this.updateDataBars(updateParams);
     }
 
     updateDataBars(updateParams) {
@@ -83,5 +77,13 @@ export default class BarChart {
                 })
                 .classed("disabled", valsShown.indexOf(varName) == -1)
         }
+    }
+
+    getValArray(year) {
+      let valArray = [];
+      for (let variable of this.variables) {
+        valArray.push({ variable: variable, value: this.data[variable.variable][year] });
+      }
+      return valArray;
     }
 }
