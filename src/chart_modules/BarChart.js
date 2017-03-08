@@ -24,8 +24,11 @@ export default class BarChart {
             		let year = key,
             			value = this.data[varName][key];
             		return {year: year, value: value};
-				}
-			)
+      				}
+      			)
+
+            console.log(dataArray);
+            console.log(this.data);
 
             this.dataBars[varName] = this.domElem.selectAll("rect#" + varName)
             	.data(dataArray)
@@ -35,7 +38,15 @@ export default class BarChart {
                 .style("fill", variable.color)
                 .style("stroke", "white")
                 .style("stroke-width", "1px")
-                .on("mouseover", (d, index, paths) => { return this.mouseoverFunc(d, paths[index], d3.event, variable); })
+                .on("mouseover", (d, index, paths) => {
+                  let valArray = [];
+                  for (let variable of this.variables) {
+
+                    valArray.push({ variable: variable, value: this.data[variable.variable][d.year] });
+                    console.log(valArray);
+                  }
+                  return this.mouseoverFunc(d.year, valArray, paths[index], d3.event, variable); 
+                })
                 .on("mouseout", () => this.mouseoutFunc());
         }
     }
@@ -65,10 +76,8 @@ export default class BarChart {
                 .attr("height", (d) => { return height - y(d.value); })
                 .attr("width", x.bandwidth())
                 .attr("opacity", (d) => {
-                     if (currHovered) {
-                         if (varName == currHovered.varName && d.year == currHovered.year) {
+                     if (currHovered && d.year == currHovered) {
                              return .7;
-                         }
                      } 
                      return 1;
                 })
