@@ -187,6 +187,10 @@ export default class SimpleChart extends React.Component {
     updateChart() {
         const {width, height} = this.state;
 
+        // var t = d3.transition()
+        //     .duration(750)
+        //     .ease(d3.easeLinear);
+
         this.svg
             .attr("width", "100%")
             .attr("height", height + margin.top + margin.bottom);
@@ -310,15 +314,18 @@ export default class SimpleChart extends React.Component {
 
     // callback functions
 
-    mouseoverFunc(datum, path, eventObject, variable) {
+    mouseoverFunc(year, eventObject) {
+        let valArray = this.dataElement1.getValArray(year);
+        if (this.dataElement2) {
+            valArray = [...valArray, ...this.dataElement2.getValArray(year)];
+        }
     	this.setState({
-            currHovered: {varName: variable.variable, year: datum.year},
+            currHovered: year,
             tooltipSettings: {
                 x: eventObject.offsetX + 10,
                 y: eventObject.offsetY - 30,
-                title: datum.year,
-                value: datum.value,
-                format: variable.format
+                title: year,
+                valArray: valArray,
             }
         })
     }

@@ -11,6 +11,9 @@ export default class LineChart {
 		this.mouseoverFunc = mouseoverFunc;
 		this.mouseoutFunc = mouseoutFunc;
 
+        this.hoverLine = this.domElem.append("line")
+            .attr("class", "line-chart__hover-line");
+
 		this.initializeDataLines();
 	}
 
@@ -44,7 +47,9 @@ export default class LineChart {
                 .attr("r", 4)
                 .style("stroke", variable.color)
                 .style("stroke-width", "1.5px")
-                .on("mouseover", (d, index, paths) => { return this.mouseoverFunc(d, paths[index], d3.event, variable); })
+                .on("mouseover", (d, index, paths) => {
+                  return this.mouseoverFunc(d.year, d3.event); 
+                })
                 .on("mouseout", () => this.mouseoutFunc());
 		}
     }
@@ -78,17 +83,36 @@ export default class LineChart {
                 	.attr("cy", (d) => { return y(d.value)})
                 	.classed("disabled", valsShown.indexOf(varName) == -1)
                 	.attr("fill", (d) => {
-                		if (currHovered) {
-                			if (varName == currHovered.varName && d.year == currHovered.year) {
-                				return variable.color;
-                			}
+                		if (currHovered && d.year == currHovered) {
+                			return variable.color;
                 		} 
                 		return "white";
                 	})
         }
-        if (currHovered && currHovered.component) {
-	        d3.select(currHovered.component)
-	        	.attr("fill", "green")
-	    }
+        if (currHovered) {
+            this.setHoverLine(updateParams);
+	    } else {
+            this.hoverLine.classed("hidden", true);
+        }
+    }
+
+    setHoverLine(updateParams) {
+        const {y, x, currHovered} = updateParams;
+
+        this.hoverLine
+            .classed("hidden", false)
+            .attr("x1", x(currHovered) + x.bandwidth()/2)
+            .attr("x2", x(currHovered) + x.bandwidth()/2)
+            .attr("y1", y.range()[0])
+            .attr("y2", y.range()[1])
+
+    }
+
+    getValArray(year) {
+      let valArray = [];
+      for (let variable of this.variables) {
+        valArray.push({ variable: variable, value: this.data[variable.variable][year] });
+      }
+      return valArray;
     }
 }
