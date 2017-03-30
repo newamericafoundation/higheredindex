@@ -6,6 +6,8 @@ export default class DataBlock extends React.Component {
   render() {
   	let {settings, data} = this.props,
       {title, paragraphSettings, vizSettings} = settings;
+    console.log("DATA!");
+    console.log(data);
 
     return (
       <div className="data-block">
