@@ -13,6 +13,8 @@ export const RECEIVE_PROFILE_LIST = 'RECEIVE_PROFILE_LIST'
 export const REQUEST_PROFILE_PHOTO = 'REQUEST_PROFILE_PHOTO'
 export const RECEIVE_PROFILE_PHOTO = 'RECEIVE_PROFILE_PHOTO'
 export const TOGGLE_TOP_NAV_PROFILE_NAME = 'TOGGLE_TOP_NAV_PROFILE_NAME'
+export const UPDATE_INDICATOR = 'UPDATE_INDICATOR'
+export const SET_INDICATOR_UPDATE_STATUS = 'SET_INDICATOR_UPDATE_STATUS'
 
 // export const REQUEST_INST = 'REQUEST_INST'
 // export const RECEIVE_INST = 'RECEIVE_INST'
@@ -129,7 +131,7 @@ export function fetchProfileList(type) {
   }
 }
 
-  
+
 
 export function fetchProfilePhoto(id, profileType) {
   console.log(id);
@@ -176,3 +178,42 @@ export function receiveProfilePhoto(id, profileType, photoUrl) {
 	  	photoUrl
    	}
 }
+
+export function updateIndicator(newData) {
+  console.log(newData);
+
+  return function (dispatch) {
+    dispatch(setIndicatorUpdateStatus("in progress"))
+    
+    fetch(dbPath + 'update_indicator/', { 
+        method: "POST", 
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        }),
+        body: JSON.stringify(newData)
+      })
+      .then((res) => {
+        dispatch(setIndicatorUpdateStatus(res.status))
+      })
+    
+    return { 
+        type: UPDATE_INDICATOR, 
+    }
+  }
+}
+
+export function setIndicatorUpdateStatus(status) {
+   return { 
+      type: SET_INDICATOR_UPDATE_STATUS, 
+      status: status
+   }
+}
+
+// export function sentUpdateIndicator(id, profileType) {
+//    return { 
+//     type: REQUEST_PROFILE_PHOTO, 
+//     profileType, 
+//     id 
+//    }
+// }
