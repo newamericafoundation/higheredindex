@@ -50,19 +50,51 @@ class StPage extends React.Component {
     return (
       <div className="location-profile state" ref="stProfile">
         <ProfileHeader id={ this.props.stData.path } name={ this.props.stData.name }/>
-        <SectionNav />
+        <SectionNav type="location" />
         <ProfileSectionTitle 
           title="Students" 
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
         <div>
-          {stVizSettings.map((settings, i) => {
-            console.log(i)
-            return <DataBlock key={i} settings={settings} data={this.props.stData} />;
+          {stVizSettings.students.map((settings, i) => {
+            return <DataBlock key={i} settings={settings} data={this.props.stData.students} />;
+          })}
+        </div>
+        <ProfileSectionTitle 
+          title="Loans" 
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
+        <div>
+          {stVizSettings.loans.map((settings, i) => {
+            return <DataBlock key={i} settings={settings} data={this.props.stData.loans} />;
+          })}
+        </div>
+        <ProfileSectionTitle 
+          title="Grants" 
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
+        <div>
+          {stVizSettings.grants.map((settings, i) => {
+            return <DataBlock key={i} settings={settings} data={this.props.stData.grants} />;
+          })}
+        </div>
+        <ProfileSectionTitle 
+          title="Schools" 
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
+        <div>
+          {stVizSettings.schools.map((settings, i) => {
+            return <DataBlock key={i} settings={settings} data={this.props.stData.schools} />;
+          })}
+        </div>
+        <ProfileSectionTitle 
+          title="Outcomes" 
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
+        <div>
+          {stVizSettings.outcomes.map((settings, i) => {
+            return <DataBlock key={i} settings={settings} data={this.props.stData.outcomes} />;
           })}
         </div>
         <div className="navigateBack">
           <Link to="/">« Back to the index</Link>
         </div>
+        
       </div>
     );
   }

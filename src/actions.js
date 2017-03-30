@@ -141,7 +141,16 @@ export function fetchProfilePhoto(id, profileType) {
       query: id
     }
     return googlePlacesService.textSearch(params, (results, status) => {
-      let photoUrl = results[0].photos[0].getUrl({'maxWidth': 1500, 'maxHeight': 1500});
+      console.log(results);
+      let photoUrl;
+      if (results && results[0] && results[0].photos) {
+        let photo = results[0].photos[0];
+        if (photo.height > 500 && photo.width > 750) {
+          photoUrl = photo.getUrl({'maxWidth': 1500, 'maxHeight': 1500});
+        }
+      } else {
+        photoUrl = null;
+      }
       dispatch(receiveProfilePhoto(id, profileType, photoUrl))
     });
 

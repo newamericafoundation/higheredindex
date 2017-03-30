@@ -56,7 +56,7 @@ class InstPage extends React.Component {
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
         <div>
           {instVizSettings.students.map((settings, i) => {
-            return <DataBlock key={i} settings={settings} data={this.props.instData.students[0]} />;
+            return <DataBlock key={i} settings={settings} data={this.props.instData.students} />;
           })}
         </div>
         <ProfileSectionTitle 
@@ -64,7 +64,7 @@ class InstPage extends React.Component {
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
         <div>
           {instVizSettings.loans.map((settings, i) => {
-            return <DataBlock key={i} settings={settings} data={this.props.instData.loans[0]} />;
+            return <DataBlock key={i} settings={settings} data={this.props.instData.loans} />;
           })}
         </div>
         <ProfileSectionTitle 
@@ -72,7 +72,7 @@ class InstPage extends React.Component {
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
         <div>
           {instVizSettings.grants.map((settings, i) => {
-            return <DataBlock key={i} settings={settings} data={this.props.instData.grants[0]} />;
+            return <DataBlock key={i} settings={settings} data={this.props.instData.grants} />;
           })}
         </div>
         <ProfileSectionTitle 
@@ -80,7 +80,7 @@ class InstPage extends React.Component {
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
         <div>
           {instVizSettings.schools.map((settings, i) => {
-            return <DataBlock key={i} settings={settings} data={this.props.instData.schools[0]} />;
+            return <DataBlock key={i} settings={settings} data={this.props.instData.schools} />;
           })}
         </div>
         <ProfileSectionTitle 
@@ -88,12 +88,13 @@ class InstPage extends React.Component {
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
         <div>
           {instVizSettings.outcomes.map((settings, i) => {
-            return <DataBlock key={i} settings={settings} data={this.props.instData.outcomes[0]} />;
+            return <DataBlock key={i} settings={settings} data={this.props.instData.outcomes} />;
           })}
         </div>
         <div className="navigateBack">
           <Link to="/">« Back to the index</Link>
         </div>
+        
       </div>
     );
   }

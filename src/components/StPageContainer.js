@@ -14,12 +14,13 @@ class StPageContainer extends React.Component {
     const { dispatch, fetchedSts, id } = this.props
 
     if (fetchedSts[id]) {
-      this.stData = fetchedSts[id];
+      this.stData = fetchedSts[id].data;
       dispatch(changeCurrProfile(id, this.stData.data.name, "state"))
     } else {
       dispatch(fetchProfile(id, "state"))
     }
   }
+
   componentWillUnmount() {
     this.props.dispatch(changeCurrProfile(null))
   }
@@ -41,6 +42,8 @@ class StPageContainer extends React.Component {
     const { fetchedSts, id } = this.props
     this.stData = fetchedSts[id]
 
+    console.log("ID is: ")
+    console.log(id);
     if (this.stData && !this.stData.isFetching) {
       if (this.stData.data) {
         return <StPage stData={ this.stData.data } />
@@ -57,6 +60,7 @@ class StPageContainer extends React.Component {
 
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(ownProps.params.id)
   return {
     id: ownProps.params.id,
     fetchedSts: state.fetchedSts || {}
