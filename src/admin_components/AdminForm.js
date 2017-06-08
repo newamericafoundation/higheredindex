@@ -47,24 +47,32 @@ class AdminForm extends React.Component {
         }
         <h5 className="admin-form__title">Edit Indicator</h5>
         <ul>
-          {Object.keys(item).map((key, i) => {
-            if (key != "_id" && key != "type") {
-              return (
-                <li className="admin-form__field" key={key}>
-                  <h5 className="admin-form__field__label">{key}</h5>
-                  <input 
-                    className="admin-form__field__input" 
-                    type="text" 
-                    value={ this.state[key] } 
-                    onChange={ (evt) => { return this.inputChanged(evt, key); } }>
-                  </input>
-                </li>
-              )
-            }
-          })}
-          <input type="submit" onClick={this.handleSubmit.bind(this)}></input>
+          <li className="admin-form__field">
+            <h5 className="admin-form__field__label">Name</h5>
+            <input className="admin-form__field__input" type="text" value={ this.state["name"] } onChange={ (evt) => { return this.inputChanged(evt, "name"); } }></input>
+          </li>
+          <li className="admin-form__field">
+            <h5 className="admin-form__field__label">Path</h5>
+            <input className="admin-form__field__input" type="text" value={ this.state["path"] } onChange={ (evt) => { return this.inputChanged(evt, "path"); } }></input>
+          </li>
+          <li className="admin-form__field">
+            <h5 className="admin-form__field__label">Section</h5>
+            <select className="admin-form__field__select" value={ this.state["section"] } onChange={ (evt) => { return this.inputChanged(evt, "section"); } }>
+              <option>students</option>
+              <option>loans</option>
+              <option>outcomes</option>
+              <option>grants</option>
+              <option>schools</option>
+            </select>
+          </li>
+          <li className="admin-form__field">
+            <h5 className="admin-form__field__label">Description</h5>
+            <input className="admin-form__field__input" type="text" value={ this.state["description"] } onChange={ (evt) => { return this.inputChanged(evt, "description"); } }></input>
+          </li>
+          
 
         </ul>
+        <input type="submit" onClick={this.handleSubmit.bind(this)}></input>
         
       </div>
     );
