@@ -205,6 +205,15 @@ function indicatorList(state = [], action) {
   }
 }
 
+function dataFileUploadStatus(state = "completed", action) {
+  switch (action.type) {
+    case SET_DATA_FILE_UPLOAD_STATUS:
+      return action.status
+    default:
+      return state
+  }
+}
+
 function indicatorUpdateStatus(state = "inactive", action) {
   switch (action.type) {
     case SET_INDICATOR_UPDATE_STATUS:

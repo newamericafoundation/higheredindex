@@ -3,6 +3,7 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router';
 import AdminHome from './admin_components/AdminHome';
+import AdminDataUpload from './admin_components/AdminDataUpload';
 import AdminIndicatorEditor from './admin_components/AdminIndicatorEditor';
 import SideMenuLayout from './components/SideMenuLayout';
 import TopNavLayout from './components/TopNavLayout';
@@ -22,6 +23,7 @@ const routes = (
 		    <Route path="institution/:id" component={InstPageContainer}/>
 		    <Route path="indicator/:id" component={IndicatorPageContainer}/>
 		    <Route path="admin" component={AdminHome}/>
+		    <Route path="admin/data-upload/:type" component={AdminDataUpload}/>
 		    <Route path="admin/indicators/:id" component={AdminIndicatorEditor}/>
 		    <Route path="*" component={NotFoundPage}/>
 		</Route>

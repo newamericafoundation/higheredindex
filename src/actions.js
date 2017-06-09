@@ -15,6 +15,8 @@ export const RECEIVE_PROFILE_PHOTO = 'RECEIVE_PROFILE_PHOTO'
 export const TOGGLE_TOP_NAV_PROFILE_NAME = 'TOGGLE_TOP_NAV_PROFILE_NAME'
 export const UPDATE_INDICATOR = 'UPDATE_INDICATOR'
 export const SET_INDICATOR_UPDATE_STATUS = 'SET_INDICATOR_UPDATE_STATUS'
+export const UPLOAD_DATA_FILE = 'UPLOAD_DATA_FILE'
+export const SET_DATA_FILE_UPLOAD_STATUS = 'SET_DATA_FILE_UPLOAD_STATUS'
 
 // export const REQUEST_INST = 'REQUEST_INST'
 // export const RECEIVE_INST = 'RECEIVE_INST'
@@ -179,6 +181,32 @@ export function receiveProfilePhoto(id, profileType, photoUrl) {
    	}
 }
 
+export function uploadDataFile(collection, newFile) {
+  console.log(newFile);
+
+  return function (dispatch) {
+    dispatch(setDataFileUploadStatus("in progress"))
+
+    console.log(JSON.stringify(newFile));
+    
+    fetch(dbPath + 'update_data/' + collection, { 
+        method: "POST", 
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        }),
+        body: JSON.stringify(newFile)
+      })
+      .then((res) => {
+        dispatch(setDataFileUploadStatus(res.status))
+      })
+    
+    return { 
+        type: UPLOAD_DATA_FILE, 
+    }
+  }
+}
+
 export function updateIndicator(newData) {
   console.log(newData);
 
@@ -206,6 +234,13 @@ export function updateIndicator(newData) {
 export function setIndicatorUpdateStatus(status) {
    return { 
       type: SET_INDICATOR_UPDATE_STATUS, 
+      status: status
+   }
+}
+
+export function setDataFileUploadStatus(status) {
+   return { 
+      type: SET_DATA_FILE_UPLOAD_STATUS, 
       status: status
    }
 }
