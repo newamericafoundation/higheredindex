@@ -1,4 +1,8 @@
 node_modules
 babel_cache
 
-src/static/js
+src/static/js/
+
+npm-debug.log
+
+.env

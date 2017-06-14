@@ -4,4 +4,31 @@
 			stroke: palette-get(na-black-10) !important;
 		}
 	}
+
+	&__data-circle {
+		cursor: pointer;
+	}
+
+	&__hover-line {
+		display: block;
+		stroke: palette-get(na-black-10);
+		stroke-opacity: .7;
+		stroke-width: 1.5px;
+
+
+		&.hidden {
+			display: none;
+		}
+	}
+
+}
+
+.bar-chart {
+	&__data-bar {
+		cursor: pointer;
+		&.disabled {
+			fill: palette-get(na-black-10) !important;
+		}
+	}
+
 }

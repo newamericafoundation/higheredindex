@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import LineChart from "./LineChart";
-import BarChart from "./BarChart";
+
+import SimpleChart from "./SimpleChart";
+
 import $ from 'jquery';
 
 
@@ -11,21 +12,18 @@ export default class DataBlockViz extends React.Component {
   	const {settings, data} = this.props,
       {type} = settings;
 
-    let viz;
-    switch (type) {
-      case "bar-chart":
-        viz = <BarChart settings={settings} data={data} />
-        break;
-      case "line-chart":
-        viz = <LineChart settings={settings} data={data} />
-        break;
-      default:
-        viz = "No Chart Type";
-    }
+    // let viz;
+    // switch (type) {
+    //   case "line-chart":
+    //     viz = <LineChart settings={settings} data={data} />
+    //     break;
+    //   default:
+    //     viz = "No Chart Type";
+    // }
 
     return (
     	<div className="data-block__viz">
-    		{viz}
+    		<SimpleChart settings={settings} data={data} />
     	</div>
     )
   }
