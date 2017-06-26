@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO, SET_INDICATOR_UPDATE_STATUS} from './actions'
+import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO, SET_INDICATOR_UPDATE_STATUS, SET_DATA_FILE_UPLOAD_STATUS} from './actions'
 
 function menuExpanded(state = false, action) {
   switch (action.type) {
@@ -205,7 +205,7 @@ function indicatorList(state = [], action) {
   }
 }
 
-function dataFileUploadStatus(state = "completed", action) {
+function dataFileUploadStatus(state = "inactive", action) {
   switch (action.type) {
     case SET_DATA_FILE_UPLOAD_STATUS:
       return action.status
@@ -235,6 +235,7 @@ const rootReducer = combineReducers({
   stList,
   instList,
   indicatorList,
+  dataFileUploadStatus,
   indicatorUpdateStatus
 })
 

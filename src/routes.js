@@ -23,7 +23,7 @@ const routes = (
 		    <Route path="institution/:id" component={InstPageContainer}/>
 		    <Route path="indicator/:id" component={IndicatorPageContainer}/>
 		    <Route path="admin" component={AdminHome}/>
-		    <Route path="admin/data-upload/:type" component={AdminDataUpload}/>
+		    <Route path="admin/data-upload" component={AdminDataUpload}/>
 		    <Route path="admin/indicators/:id" component={AdminIndicatorEditor}/>
 		    <Route path="*" component={NotFoundPage}/>
 		</Route>

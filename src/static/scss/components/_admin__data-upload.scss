@@ -1,0 +1,13 @@
+.admin__data-upload {
+	&__submit {
+		&.disabled {
+			color: palette-get(na-black-40);
+			pointer-events: none;
+		}
+	}
+	&__confirmation {
+		&.disabled {
+			display: none;
+		}
+	}
+}

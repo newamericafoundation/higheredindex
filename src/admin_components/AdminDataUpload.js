@@ -6,10 +6,10 @@ import Dropzone from 'react-dropzone';
 
 const Papa = require("papaparse");
 
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-import { uploadDataFile } from '../actions';
-import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form'
+import { uploadDataFile, setDataFileUploadStatus } from '../actions';
+import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError, submitForm } from 'react-form'
 
 
 class AdminDataUpload extends React.Component {
@@ -17,18 +17,18 @@ class AdminDataUpload extends React.Component {
     super(props);
     console.log(props.dataType);
     this.state = { 
-      files: [] 
+      file: null
     }
   }
 
   onDrop(files) {
     console.log(files);
     this.setState({
-      files
+      file: files[0]
     });
   }
 
-  onSubmit() {
+  onSubmit(type, granularity) {
     const {uploadFile} = this.props;
 
     var reader = new FileReader();
@@ -40,53 +40,103 @@ class AdminDataUpload extends React.Component {
         dynamicTyping: true
       });
 
-      uploadFile("states_students", data.data);
+      console.log(data);
+
+      uploadFile(granularity + "_" + type, data.data);
 
     };
-    reader.readAsText(this.state.files[0]);
+    reader.readAsText(this.state.file);
     
   }
 
   render() {
-    const { dataType } = this.props;
+    const { fileUploadStatus } = this.props;
+    const { file } = this.state;
+
+    console.log(fileUploadStatus)
+    if (fileUploadStatus === 200) {
+      browserHistory.push("/admin/")
+    }
 
     let submitButtonClass = "admin__data-upload__submit";
-    submitButtonClass += this.state.files.length > 0 ? "" : " disabled";
+    submitButtonClass += this.state.file ? "" : " disabled";
+
+    let dropConfirmationClass = "admin__data-upload__confirmation";
+    dropConfirmationClass += this.state.file ? "" : " disabled";
+
+    console.log(submitForm);
     return (
       <div className="admin__data-upload">
-        <Form onSubmit={this.onSubmit.bind(this)}>
-          <Text
-            field='street'
-            placeholder='Street'
-          />
-          <br />
-          <Text
-            field='city'
-            placeholder='City'
-          />
-          <br />
-          <Text
-            field='state'
-            placeholder='State'
-          />
-          <button type='submit'>Submit</button>
-        </Form>
-        <section>
-        <div className="dropzone">
-          <Dropzone onDrop={this.onDrop.bind(this)}>
-            <p>Try dropping some files here, or click to select files to upload.</p>
-          </Dropzone>
-        </div>
-        <aside>
-          <h2>Dropped files</h2>
-          <ul>
-            {
-              this.state.files.map(f => <li>{f.name} - {f.size} bytes</li>)
+        <Form
+          onSubmit={({type, granularity}) => {
+            
+            if (!type && !granularity) {
+              alert("Please select a data level and type");
+            } else if (!type) {
+              alert("Please select a data type");
+            } else if (!granularity) {
+              alert("Please select a data level");
+            } else {
+              console.log('Success!')
+              this.onSubmit(type, granularity);
             }
-          </ul>
-        </aside>
-      </section>
-      <div className="{submitButtonClass}" onClick={this.onSubmit.bind(this)}>Upload</div>
+          }}
+        >
+          {({submitForm}) => {
+            return (
+              <form onSubmit={submitForm}>
+                <h5 className="admin__form__field-label">Data Level</h5>
+                <Select
+                  field='granularity'
+                  options={[{
+                    label: 'States',
+                    value: 'states'
+                  }, {
+                    label: 'Institutions',
+                    value: 'inst'
+                  }]} />
+                <h5 className="admin__form__field-label">Data Type</h5>
+                <Select
+                  field='type'
+                  options={[{
+                    label: 'Grants',
+                    value: 'grants'
+                  }, {
+                    label: 'Loans',
+                    value: 'loans'
+                  }, {
+                    label: 'Outcomes',
+                    value: 'outcomes'
+                  }, {
+                    label: 'Schools',
+                    value: 'schools'
+                  }, {
+                    label: 'Students',
+                    value: 'students'
+                  }]} />
+
+                  <section>
+                    <div className="dropzone">
+                      <Dropzone onDrop={this.onDrop.bind(this)} multiple={false}>
+                        <p>Drop CSV data file here, or click to select file to upload.</p>
+                      </Dropzone>
+                    </div>
+                    {file &&
+                      <aside>
+                        <h5>File to Upload</h5>
+                        <p>{file.name} - {file.size} bytes</p>
+                      </aside>
+                    }
+                  </section>
+
+              
+                <button type='submit' className={submitButtonClass}>Submit</button>
+                {fileUploadStatus === "in progress" &&
+                  <h5 className="admin__data-upload__status">uploading file...</h5>}
+              </form>
+            )
+          }}
+        </Form>
       </div>
     );
   }
@@ -94,7 +144,7 @@ class AdminDataUpload extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    dataType: ownProps.params.type
+    fileUploadStatus: state.dataFileUploadStatus
   }
 }
 
@@ -102,6 +152,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
       uploadFile: (collection, file) => {
         dispatch(uploadDataFile(collection, file));
+      },
+      resetFileUploadStatus: () => {
+        dispatch(setDataFileUploadStatus("inactive"));
       }
   }
 }
