@@ -36,9 +36,18 @@ class AdminHome extends React.Component {
         <Link to={'/admin/data-upload/'}>
           <h5 className="admin-home__option__text">Upload New Data File</h5>
         </Link>
-        <Link to={'/admin/update-indicator-settings/'}>
-          <h5 className="admin-home__option__text">Update Indicator Settings</h5>
-        </Link>
+        <h5 className="admin-home__option-heading">Update Indicator Settings</h5>
+        <ul className="admin-home__options-list">
+          {indicatorList.map((d, i) => {
+            return (
+              <li className="admin-home__option">
+                <Link to={'/admin/indicators/' + d.path}>
+                  <h5 className="admin-home__option__text">{ d.name }</h5>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
       </div>
     );
   }

@@ -9,7 +9,7 @@ const Papa = require("papaparse");
 import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { uploadDataFile, setDataFileUploadStatus } from '../actions';
-import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError, submitForm } from 'react-form'
+import { Form, Select } from 'react-form'
 
 
 class AdminDataUpload extends React.Component {
@@ -64,7 +64,6 @@ class AdminDataUpload extends React.Component {
     let dropConfirmationClass = "admin__data-upload__confirmation";
     dropConfirmationClass += this.state.file ? "" : " disabled";
 
-    console.log(submitForm);
     return (
       <div className="admin__data-upload">
         <Form

@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { fetchProfile, setIndicatorUpdateStatus } from '../actions';
-import AdminForm from './AdminForm';
+import AdminIndicatorEditorForm from './AdminIndicatorEditorForm';
+import  AdminStatusBar  from './AdminStatusBar';
 
 class AdminIndicatorEditor extends React.Component {
   constructor(props) {
@@ -38,12 +39,21 @@ class AdminIndicatorEditor extends React.Component {
   }
 
   render() {
-    const { fetchedIndicators, id } = this.props
+    const { fetchedIndicators, id, updateStatus } = this.props
     this.indicatorData = fetchedIndicators[id]
 
     if (this.indicatorData && !this.indicatorData.isFetching) {
       if (this.indicatorData.data) {
-        return <AdminForm item={ this.indicatorData.data } />
+        return (
+          <div>
+            <Link to={'/admin/'}>
+              <h5 className="admin-home__option__text">Return to Admin Home</h5>
+            </Link>
+            <AdminStatusBar status={updateStatus} />
+            <AdminIndicatorEditorForm item={ this.indicatorData.data } />
+
+          </div>
+        )
       }
       else {
         return <NotFoundPage/>
@@ -59,7 +69,8 @@ class AdminIndicatorEditor extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     id: ownProps.params.id,
-    fetchedIndicators: state.fetchedIndicators || {}
+    fetchedIndicators: state.fetchedIndicators || {},
+    updateStatus: state.indicatorUpdateStatus
   }
 }
 
