@@ -46,13 +46,16 @@ class IndicatorPage extends React.Component {
   render() {
     console.log(this.props);
     
-    if (!this.props.settings) {
+    if (!this.props.indicatorData) {
       return <NotFoundPage/>;
     }
-    const {id, title, image, description, filterCategories} = this.props.settings;
+    // ad these to render return when ready
+    // <ProfileHeader id={ path } name={ name } customImage={image}/>
+    // <RankingsDashboard filterCategories={filterCategories} />
+
+    const {path, name, image, description, filterCategories} = this.props.indicatorData;
     return (
       <div className="location-profile indicator">
-        <ProfileHeader id={ id } name={ title } customImage={image}/>
         <SectionNav type="indicator"/>
 
         <ProfileSectionTitle title="About" />
@@ -61,7 +64,7 @@ class IndicatorPage extends React.Component {
         </div>
 
         <ProfileSectionTitle title="Rankings" />
-        <RankingsDashboard filterCategories={filterCategories} />
+        
 
         <ProfileSectionTitle title="Trends" />
       </div>
@@ -78,7 +81,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      toggleTopNavProfileDisplay: (newSetting) => {
+    toggleTopNavProfileDisplay: (newSetting) => {
       dispatch(toggleTopNavProfileName(newSetting));
     }
   }
