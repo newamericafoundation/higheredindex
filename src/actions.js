@@ -13,6 +13,10 @@ export const RECEIVE_PROFILE_LIST = 'RECEIVE_PROFILE_LIST'
 export const REQUEST_PROFILE_PHOTO = 'REQUEST_PROFILE_PHOTO'
 export const RECEIVE_PROFILE_PHOTO = 'RECEIVE_PROFILE_PHOTO'
 export const TOGGLE_TOP_NAV_PROFILE_NAME = 'TOGGLE_TOP_NAV_PROFILE_NAME'
+export const UPDATE_INDICATOR = 'UPDATE_INDICATOR'
+export const SET_INDICATOR_UPDATE_STATUS = 'SET_INDICATOR_UPDATE_STATUS'
+export const UPLOAD_DATA_FILE = 'UPLOAD_DATA_FILE'
+export const SET_DATA_FILE_UPLOAD_STATUS = 'SET_DATA_FILE_UPLOAD_STATUS'
 
 // export const REQUEST_INST = 'REQUEST_INST'
 // export const RECEIVE_INST = 'RECEIVE_INST'
@@ -129,7 +133,7 @@ export function fetchProfileList(type) {
   }
 }
 
-  
+
 
 export function fetchProfilePhoto(id, profileType) {
   console.log(id);
@@ -176,3 +180,76 @@ export function receiveProfilePhoto(id, profileType, photoUrl) {
 	  	photoUrl
    	}
 }
+
+export function uploadDataFile(collection, newFile) {
+  console.log(newFile);
+
+  return function (dispatch) {
+    dispatch(setDataFileUploadStatus("in progress"))
+
+    console.log(JSON.stringify(newFile));
+    
+    fetch(dbPath + 'update_data/' + collection, { 
+        method: "POST", 
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        }),
+        body: JSON.stringify(newFile)
+      })
+      .then((res) => {
+        dispatch(setDataFileUploadStatus(res.status))
+      })
+    
+    return { 
+        type: UPLOAD_DATA_FILE, 
+    }
+  }
+}
+
+export function updateIndicator(newData, action) {
+  console.log(newData);
+  newData.action = action;
+
+  return function (dispatch) {
+    dispatch(setIndicatorUpdateStatus("in progress"))
+    
+    fetch(dbPath + 'update_indicator/', { 
+        method: "POST", 
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        }),
+        body: JSON.stringify(newData)
+      })
+      .then((res) => {
+        dispatch(setIndicatorUpdateStatus(res.status))
+      })
+    
+    return { 
+        type: UPDATE_INDICATOR, 
+    }
+  }
+}
+
+export function setIndicatorUpdateStatus(status) {
+   return { 
+      type: SET_INDICATOR_UPDATE_STATUS, 
+      status: status
+   }
+}
+
+export function setDataFileUploadStatus(status) {
+   return { 
+      type: SET_DATA_FILE_UPLOAD_STATUS, 
+      status: status
+   }
+}
+
+// export function sentUpdateIndicator(id, profileType) {
+//    return { 
+//     type: REQUEST_PROFILE_PHOTO, 
+//     profileType, 
+//     id 
+//    }
+// }

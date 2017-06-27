@@ -1,0 +1,13 @@
+.admin__status-bar {
+	color: white;
+	padding: 15px 25px;
+	&.success {
+		background-color: palette-get(na-turquoise);
+	}
+	&.failure {
+		background-color: palette-get(cinnabar-red);
+	}
+	&.in-progress {
+		background-color: palette-get(oti-blue);
+	}
+}

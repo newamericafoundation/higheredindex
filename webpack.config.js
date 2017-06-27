@@ -10,7 +10,7 @@ module.exports = {
   entry: path.join(__dirname, 'src', 'app-client.js'),
   devServer: {
     inline: true,
-    port: 3333,
+    port: 3100,
     contentBase: "src/static/",
     historyApiFallback: {
       index: '/index.html'
