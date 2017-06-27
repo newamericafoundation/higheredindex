@@ -20,8 +20,31 @@
 		padding: 15px 0px;
 	}
 
+	&__sub-field-container {
+		padding-bottom: 15px;
+	}
+
+	&__sub-field {
+		padding-right: 15px;
+		display: inline-block;
+
+		&__button {
+			color: palette-get(na-turquoise);
+
+			&:hover {
+				color: palette-get(na-black);
+			}
+		}
+	}
+
 	&__field-label {
 		font-weight: bold;
+		font-size: 16px;
+	}
+
+	&__sub-field-label {
+		/*font-style: italic;*/
+		color: palette-get(na-black-70);
 		font-size: 16px;
 	}
 

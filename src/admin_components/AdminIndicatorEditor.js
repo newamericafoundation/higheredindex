@@ -14,11 +14,7 @@ class AdminIndicatorEditor extends React.Component {
     const { dispatch, fetchedIndicators, id } = this.props
 
     if (id != "new") {
-      if (fetchedIndicators[id]) {
-        this.indicatorData = fetchedIndicators[id];
-      } else {
-        dispatch(fetchProfile(id, "indicator"))
-      }
+      dispatch(fetchProfile(id, "indicator"))
     }
   }
 
@@ -31,12 +27,7 @@ class AdminIndicatorEditor extends React.Component {
       const { dispatch, fetchedIndicators, id } = nextProps
 
       if (id != "new") {
-        if (fetchedIndicators[id]) {
-          this.indicatorData = fetchedIndicators[id]
-          // dispatch(changeCurrProfile(id, this.indicatorData.name, "indicator"))
-        } else {
-          dispatch(fetchProfile(id, "indicator"))
-        }
+        dispatch(fetchProfile(id, "indicator"))
       }
     }
   }
