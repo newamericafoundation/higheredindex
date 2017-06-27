@@ -48,24 +48,32 @@ class AdminIndicatorEditor extends React.Component {
     if (id == "new") {
       return (
         <div>
-          <Link to={'/admin/'}>
-            <h5 className="admin-home__option__text">Return to Admin Home</h5>
-          </Link>
-          <h5 className="admin-form__title">Create New Indicator</h5>
           <AdminStatusBar status={updateStatus} />
-          <AdminIndicatorEditorForm item={{}} action="insert" />
+          <div className="admin__form">
+
+            <h1 className="admin__form__title">Create New Indicator</h1>
+            <Link to={'/admin/'}>
+              <h5 className="admin__form__main-link">Return to Admin Home</h5>
+            </Link>
+            
+            <AdminIndicatorEditorForm item={{}} action="insert" />
+          </div>
         </div>
       )
     } else if (this.indicatorData && !this.indicatorData.isFetching) {
       if (this.indicatorData.data) {
         return (
           <div>
-            <Link to={'/admin/'}>
-              <h5 className="admin-home__option__text">Return to Admin Home</h5>
-            </Link>
-            <h5 className="admin-form__title">Edit Indicator: {this.indicatorData.data.name}</h5>
             <AdminStatusBar status={updateStatus} />
-            <AdminIndicatorEditorForm item={ this.indicatorData.data } action="update" />
+            <div className="admin__form">
+              <h1 className="admin__form__title">Edit Indicator: {this.indicatorData.data.name}</h1>
+              <Link to={'/admin/'}>
+                <h5 className="admin__form__main-link">Return to Admin Home</h5>
+              </Link>
+              
+              <AdminIndicatorEditorForm item={ this.indicatorData.data } action="update" />
+
+            </div>
           </div>
         )
       }

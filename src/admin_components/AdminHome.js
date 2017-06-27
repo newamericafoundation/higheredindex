@@ -16,37 +16,35 @@ class AdminHome extends React.Component {
     fetchProfileList("indicator")
   }
 
-  componentWillUnmount() {
-    if (this.props.dataFileUploadStatus === 200) {
-      this.props.resetFileUploadStatus();
-    }
-  }
-
   render() {
     const { indicatorList, dataFileUploadStatus } = this.props;
     return (
-      <div className="admin-home">
-        {dataFileUploadStatus === 200 && 
-          <h5 className="admin-home__status-update">File Uploaded Successfully</h5>}
-
-        <Link to={'/admin/data-upload/'}>
-          <h5 className="admin-home__option__text">Upload New Data File</h5>
-        </Link>
-        <h5 className="admin-home__option-heading">Indicators</h5>
-        <Link to={'/admin/indicators/new/'}>
-          <h5 className="admin-home__option__text">Create New Indicator</h5>
-        </Link>
-        <ul className="admin-home__options-list">
-          {indicatorList.map((d, i) => {
-            return (
-              <li className="admin-home__option">
-                <Link to={'/admin/indicators/' + d.path}>
-                  <h5 className="admin-home__option__text">{ d.name }</h5>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
+      <div className="admin__home">
+        <h1 className="admin__home__title">Admin Home</h1>
+        <div className="admin__home__section">
+          <h5 className="admin__home__heading">Data Upload</h5>
+          <Link to={'/admin/data-upload/'}>
+            <h5 className="admin__home__main-link">Upload New Data File</h5>
+          </Link>
+        </div>
+        <hr></hr>
+        <div className="admin__home__section">
+          <h5 className="admin__home__heading">Edit Indicators</h5>
+          <Link to={'/admin/indicators/new/'}>
+            <h5 className="admin__home__main-link">Create New Indicator</h5>
+          </Link>
+          <ul className="admin__home__sub-link-list">
+            {indicatorList.map((d, i) => {
+              return (
+                <li className="admin__home__sub-link-list-item">
+                  <Link to={'/admin/indicators/' + d.path}>
+                    <h5 className="admin__home__sub-link">{ d.name }</h5>
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
       </div>
     );
   }

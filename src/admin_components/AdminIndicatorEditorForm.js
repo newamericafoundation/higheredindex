@@ -12,7 +12,7 @@ class AdminIndicatorEditorForm extends React.Component {
     let statusText;
     
     return (
-      <div className="admin-form">
+      <div>
         <Form
           onSubmit={(values) => {
             console.log(values);
@@ -23,35 +23,44 @@ class AdminIndicatorEditorForm extends React.Component {
           {({submitForm}) => {
             return (
               <form onSubmit={submitForm}>
-                <h5 className="admin__form__field-label">Name</h5>
-                <Text field='name' />
-                <h5 className="admin__form__field-label">Path</h5>
-                <Text field='path'/>
-                <h5 className="admin__form__field-label">Section</h5>
-                <Select
-                  field='section'
-                  options={[{
-                    label: 'Grants',
-                    value: 'grants'
-                  }, {
-                    label: 'Loans',
-                    value: 'loans'
-                  }, {
-                    label: 'Outcomes',
-                    value: 'outcomes'
-                  }, {
-                    label: 'Schools',
-                    value: 'schools'
-                  }, {
-                    label: 'Students',
-                    value: 'students'
-                  }]} />
-                <h5 className="admin__form__field-label">Description</h5>
-                <Textarea
-                  field='description' />
+                <div className="admin__form__field">
+                  <h5 className="admin__form__field-label">Name</h5>
+                  <Text field='name' />
+                </div>
+                <div className="admin__form__field">
+                  <h5 className="admin__form__field-label">Path</h5>
+                  <Text field='path'/>
+                </div>
+                <div className="admin__form__field">
+                  <h5 className="admin__form__field-label">Section</h5>
+                  <Select
+                    field='section'
+                    options={[{
+                      label: 'Grants',
+                      value: 'grants'
+                    }, {
+                      label: 'Loans',
+                      value: 'loans'
+                    }, {
+                      label: 'Outcomes',
+                      value: 'outcomes'
+                    }, {
+                      label: 'Schools',
+                      value: 'schools'
+                    }, {
+                      label: 'Students',
+                      value: 'students'
+                    }]} />
+                </div>
+                <div className="admin__form__field">
+                  <h5 className="admin__form__field-label">Description</h5>
+                  <Textarea
+                    field='description' />
+                </div>
               
-                <button type='submit'>Submit</button>
-                <button type='delete' onClick={() => { this.props.submitHandler(item, "delete"); }}>Delete Indicator</button>
+                <button className="admin__form__button" type='submit'>Submit</button>
+                {action == "update" &&
+                  <button className="admin__form__button" type='delete' onClick={() => { this.props.submitHandler(item, "delete"); }}>Delete Indicator</button>}
               </form>
             )
           }}
