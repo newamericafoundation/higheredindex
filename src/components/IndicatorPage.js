@@ -51,9 +51,9 @@ class IndicatorPage extends React.Component {
     }
     // ad these to render return when ready
     // <ProfileHeader id={ path } name={ name } customImage={image}/>
-    // <RankingsDashboard filterCategories={filterCategories} />
+    
 
-    const {path, name, image, description, filterCategories} = this.props.indicatorData;
+    const {path, name, image, description, rankingVariables} = this.props.indicatorData;
     return (
       <div className="location-profile indicator">
         <SectionNav type="indicator"/>
@@ -64,7 +64,7 @@ class IndicatorPage extends React.Component {
         </div>
 
         <ProfileSectionTitle title="Rankings" />
-        
+        <RankingsDashboard filters={rankingVariables} />
 
         <ProfileSectionTitle title="Trends" />
       </div>
