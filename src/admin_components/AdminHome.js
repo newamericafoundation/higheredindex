@@ -8,16 +8,12 @@ import { fetchProfileList, setDataFileUploadStatus } from '../actions';
 class AdminHome extends React.Component {
   constructor(props) {
     super(props);
-
-    
   }
 
   componentWillMount() {
     const { indicatorList, fetchProfileList} = this.props;
-    console.log(indicatorList);
-    if (!indicatorList || indicatorList.length == 0) {
-      fetchProfileList("indicator")
-    }
+
+    fetchProfileList("indicator")
   }
 
   componentWillUnmount() {
@@ -36,7 +32,10 @@ class AdminHome extends React.Component {
         <Link to={'/admin/data-upload/'}>
           <h5 className="admin-home__option__text">Upload New Data File</h5>
         </Link>
-        <h5 className="admin-home__option-heading">Update Indicator Settings</h5>
+        <h5 className="admin-home__option-heading">Indicators</h5>
+        <Link to={'/admin/indicators/new/'}>
+          <h5 className="admin-home__option__text">Create New Indicator</h5>
+        </Link>
         <ul className="admin-home__options-list">
           {indicatorList.map((d, i) => {
             return (

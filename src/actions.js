@@ -207,8 +207,9 @@ export function uploadDataFile(collection, newFile) {
   }
 }
 
-export function updateIndicator(newData) {
+export function updateIndicator(newData, action) {
   console.log(newData);
+  newData.action = action;
 
   return function (dispatch) {
     dispatch(setIndicatorUpdateStatus("in progress"))

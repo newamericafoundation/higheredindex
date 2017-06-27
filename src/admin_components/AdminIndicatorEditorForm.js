@@ -7,18 +7,16 @@ import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, 
 
 class AdminIndicatorEditorForm extends React.Component {
   render() {
-    const { item } = this.props;
+    const { item, action } = this.props;
     console.log(item)
     let statusText;
     
     return (
       <div className="admin-form">
-        
-        <h5 className="admin-form__title">Edit Indicator: {item.name}</h5>
         <Form
           onSubmit={(values) => {
             console.log(values);
-            this.props.submitHandler(values);
+            this.props.submitHandler(values, action);
           }}
           defaultValues={item}
         >
@@ -53,6 +51,7 @@ class AdminIndicatorEditorForm extends React.Component {
                   field='description' />
               
                 <button type='submit'>Submit</button>
+                <button type='delete' onClick={() => { this.props.submitHandler(item, "delete"); }}>Delete Indicator</button>
               </form>
             )
           }}
@@ -69,8 +68,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    submitHandler: (value) => {
-      dispatch(updateIndicator(value))
+    submitHandler: (value, action) => {
+      dispatch(updateIndicator(value, action))
     }
   }
 }
