@@ -55,7 +55,7 @@ const DownloadHomePage = () => {
             <div className="download-home-page__section__icon">
               <SvgIcon name='institution' />
             </div>
-            <h5 className="download-home-page__section__title"Institutions</h5>
+            <h5 className="download-home-page__section__title">Institutions</h5>
             <ul className="download-home-page__section__list">
               <li className="download-home-page__section__item">
                 <h5 className="download-home-page__section__item__label">Grants</h5>
