@@ -23,8 +23,6 @@ export const SET_DATA_FILE_UPLOAD_STATUS = 'SET_DATA_FILE_UPLOAD_STATUS'
 // export const REQUEST_INST_LIST = 'REQUEST_INST_LIST'
 // export const RECEIVE_INST_LIST = 'RECEIVE_INST_LIST'
 let GoogleMapsLoader = require('google-maps');
-let json2csv = require('json2csv');
-let JSZip = require("jszip");
 
 let googlePlacesService; 
 GoogleMapsLoader.LIBRARIES = ['places'];
@@ -180,16 +178,6 @@ export function fetchProfilePhoto(id, profileType) {
       // In a real world app, you also want to
       // catch any error in the network call.
   }
-}
-
-function convertToCSV(data, resolve, reject) {
-  json2csv({ data:data, flatten:true}, function(err, csv) {
-    if (err) return reject;
-    csv = 'data:text/csv;charset=utf-8,' + csv;
-
-    let data = encodeURI(csv);
-    return resolve(csv);
-  });
 }
 
 export function setDataFileUploadStatus(status) {

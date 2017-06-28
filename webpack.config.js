@@ -54,6 +54,5 @@ module.exports = {
       beautify: false,
       dead_code: true
     }),
-  ],
-  
+  ]
 };
