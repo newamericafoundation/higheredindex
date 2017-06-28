@@ -23,6 +23,7 @@ export const SET_DATA_FILE_UPLOAD_STATUS = 'SET_DATA_FILE_UPLOAD_STATUS'
 // export const REQUEST_INST_LIST = 'REQUEST_INST_LIST'
 // export const RECEIVE_INST_LIST = 'RECEIVE_INST_LIST'
 let GoogleMapsLoader = require('google-maps');
+
 let googlePlacesService; 
 GoogleMapsLoader.LIBRARIES = ['places'];
 GoogleMapsLoader.KEY = 'AIzaSyBwiCv57aVHoDiIaY-zTFfQTWLq4ForFuM';
@@ -134,6 +135,22 @@ export function fetchProfileList(type) {
 }
 
 
+export function requestProfilePhoto(id, profileType) {
+   return { 
+    type: REQUEST_PROFILE_PHOTO, 
+    profileType, 
+    id 
+   }
+}
+
+export function receiveProfilePhoto(id, profileType, photoUrl) {
+  return { 
+      type: RECEIVE_PROFILE_PHOTO, 
+      id,
+      profileType, 
+      photoUrl
+    }
+}
 
 export function fetchProfilePhoto(id, profileType) {
   console.log(id);
@@ -163,22 +180,11 @@ export function fetchProfilePhoto(id, profileType) {
   }
 }
 
-
-export function requestProfilePhoto(id, profileType) {
+export function setDataFileUploadStatus(status) {
    return { 
-		type: REQUEST_PROFILE_PHOTO, 
-		profileType, 
-		id 
+      type: SET_DATA_FILE_UPLOAD_STATUS, 
+      status: status
    }
-}
-
-export function receiveProfilePhoto(id, profileType, photoUrl) {
-	return { 
-	  	type: RECEIVE_PROFILE_PHOTO, 
-	  	id,
-	  	profileType, 
-	  	photoUrl
-   	}
 }
 
 export function uploadDataFile(collection, newFile) {
@@ -207,6 +213,13 @@ export function uploadDataFile(collection, newFile) {
   }
 }
 
+export function setIndicatorUpdateStatus(status) {
+   return { 
+      type: SET_INDICATOR_UPDATE_STATUS, 
+      status: status
+   }
+}
+
 export function updateIndicator(newData, action) {
   console.log(newData);
   newData.action = action;
@@ -230,20 +243,6 @@ export function updateIndicator(newData, action) {
         type: UPDATE_INDICATOR, 
     }
   }
-}
-
-export function setIndicatorUpdateStatus(status) {
-   return { 
-      type: SET_INDICATOR_UPDATE_STATUS, 
-      status: status
-   }
-}
-
-export function setDataFileUploadStatus(status) {
-   return { 
-      type: SET_DATA_FILE_UPLOAD_STATUS, 
-      status: status
-   }
 }
 
 // export function sentUpdateIndicator(id, profileType) {
