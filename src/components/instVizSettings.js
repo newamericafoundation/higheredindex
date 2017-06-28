@@ -39,6 +39,7 @@ const instVizSettings = {
 						{variable:"asia", displayName:"Asian", format: "percent", color: colors.purple.light},
 						{variable:"hisp", displayName:"Hispanic", format: "percent", color: "orange"},
 						{variable:"nhpi", displayName:"Hawaiian/Pacific Islander", format: "percent", color: "yellow"},
+						{variable:"nonresident", displayName:"Nonresident Alien", format: "percent", color: "green"},
 						{variable:"twoormore", displayName:"Two or more", format: "percent", color: colors.grey.medium},
 						{variable:"unk", displayName:"Unknown race", format: "percent", color: "gold"},
 					]
@@ -116,6 +117,7 @@ const instVizSettings = {
 						{variable:"dlunsubgraddisburse", displayName:"Graduate Stafford", format: "number", color: colors.turquoise.dark},
 						{variable:"dlparentdisburse", displayName:"Parent PLUS", format: "number", color: colors.blue.light},
 						{variable:"dlgraddisburse", displayName:"Graduate PLUS", format: "number", color: colors.red.light},
+						{variable:"dltotaldisburse", displayName:"Direct Loan Total", format: "number", color: colors.black},
 						{variable:"perkdisburse", displayName:"Perkins", format: "number", color: colors.purple.light},
 					]
 				}
@@ -137,6 +139,7 @@ const instVizSettings = {
 						{variable:"dlunsubgradrecip", displayName:"Graduate Stafford", format: "number", color: colors.turquoise.dark},
 						{variable:"dlparentrecip", displayName:"Parent PLUS", format: "number", color: colors.blue.light},
 						{variable:"dlgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.red.light},
+						{variable:"dltotalrecip", displayName:"Direct Loan Total", format: "number", color: colors.black},
 						{variable:"perkrecip", displayName:"Perkins", format: "number", color: colors.purple.light},
 					]
 				}

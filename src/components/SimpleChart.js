@@ -360,6 +360,6 @@ export default class SimpleChart extends React.Component {
             return [0, valList[0]];
         }
 
-        return d3.extent(valList);
+        return [0, d3.max(valList)];
     }
 }
