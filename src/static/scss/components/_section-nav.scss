@@ -26,14 +26,21 @@
 		padding: 14px 30px;
 		vertical-align: middle;
 
-		&:hover {
-			background-color: palette-get(na-black-30);
+		&:hover, &.selected {
 			.section-nav__item__text {
 				color: white;
 			}
 			.icon {
 				fill: white;
 			}
+		}
+
+		&:hover {
+			background-color: palette-get(na-black-30);
+		}
+
+		&.selected {
+			background-color: palette-get(na-turquoise);
 		}
 
 		.icon {
@@ -45,6 +52,7 @@
 			font-size: 16px;
 			line-height: 1;
 			margin-bottom: 0px;
+			text-transform: capitalize;
 		}
 	}
 }

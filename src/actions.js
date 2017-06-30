@@ -6,6 +6,7 @@ import fetch from 'isomorphic-fetch'
 
 export const TOGGLE_MENU_EXPANSION = 'TOGGLE_MENU_EXPANSION'
 export const CHANGE_CURR_PROFILE = 'CHANGE_CURR_PROFILE'
+export const CHANGE_CURR_PROFILE_SECTION = 'CHANGE_CURR_PROFILE_SECTION'
 export const REQUEST_PROFILE = 'REQUEST_PROFILE'
 export const RECEIVE_PROFILE = 'RECEIVE_PROFILE'
 export const REQUEST_PROFILE_LIST = 'REQUEST_PROFILE_LIST'
@@ -53,6 +54,13 @@ export function changeCurrProfile(id, name, profileType) {
   	profileType,
     id,
   	name
+  }
+}
+
+export function changeCurrProfileSection(sectionIndex) {
+  return { 
+    type: CHANGE_CURR_PROFILE_SECTION, 
+    sectionIndex
   }
 }
 

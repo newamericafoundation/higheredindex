@@ -4,12 +4,11 @@ import React from 'react';
 import { Link } from 'react-router';
 import NotFoundPage from './NotFoundPage';
 import SectionNav from './SectionNav.jsx';
-import ProfileSectionTitle from './ProfileSectionTitle.jsx';
+import ProfileSection from './ProfileSection';
 import ProfileHeader from './ProfileHeader.jsx';
-import DataBlock from './DataBlock';
 import stVizSettings from './stVizSettings';
 import { connect } from 'react-redux'
-import { toggleTopNavProfileName } from '../actions'
+import { toggleTopNavProfileName, changeCurrProfileSection } from '../actions';
 import $ from 'jquery';
 
 class StPage extends React.Component {
@@ -23,6 +22,7 @@ class StPage extends React.Component {
 
   componentWillUnmount() {
     $(".app-container").off("scroll", this.handlerFunc);
+    this.props.resetCurrProfileSection();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -51,49 +51,40 @@ class StPage extends React.Component {
       <div className="location-profile state" ref="stProfile">
         <ProfileHeader id={ this.props.stData.path } name={ this.props.stData.name }/>
         <SectionNav type="location" />
-        <ProfileSectionTitle 
+        <ProfileSection 
           title="Students" 
-          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
-        <div>
-          {stVizSettings.students.map((settings, i) => {
-            return <DataBlock key={i} settings={settings} data={this.props.stData.students} />;
-          })}
-        </div>
-        <ProfileSectionTitle 
+          index="0"
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
+          settings={stVizSettings.students} 
+          data= {this.props.stData.students }/>
+        
+        <ProfileSection 
           title="Loans" 
-          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
-        <div>
-          {stVizSettings.loans.map((settings, i) => {
-            return <DataBlock key={i} settings={settings} data={this.props.stData.loans} />;
-          })}
-        </div>
-        <ProfileSectionTitle 
+          index="1"
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
+          settings={stVizSettings.loans} 
+          data= {this.props.stData.loans }/>
+
+        <ProfileSection 
           title="Grants" 
-          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
-        <div>
-          {stVizSettings.grants.map((settings, i) => {
-            return <DataBlock key={i} settings={settings} data={this.props.stData.grants} />;
-          })}
-        </div>
-        <ProfileSectionTitle 
+          index="2"
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
+          settings={stVizSettings.grants} 
+          data= {this.props.stData.grants }/>
+        
+        <ProfileSection 
           title="Schools" 
-          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
-        <div>
-          {stVizSettings.schools.map((settings, i) => {
-            return <DataBlock key={i} settings={settings} data={this.props.stData.schools} />;
-          })}
-        </div>
-        <ProfileSectionTitle 
+          index="3"
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
+          settings={stVizSettings.schools} 
+          data= {this.props.stData.schools }/>
+        
+        <ProfileSection 
           title="Outcomes" 
-          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"/>
-        <div>
-          {stVizSettings.outcomes.map((settings, i) => {
-            return <DataBlock key={i} settings={settings} data={this.props.stData.outcomes} />;
-          })}
-        </div>
-        <div className="navigateBack">
-          <Link to="/">« Back to the index</Link>
-        </div>
+          index="4"
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
+          settings={stVizSettings.outcomes} 
+          data= {this.props.stData.outcomes }/>
         
       </div>
     );
@@ -110,8 +101,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
 
-      toggleTopNavProfileDisplay: (newSetting) => {
+    toggleTopNavProfileDisplay: (newSetting) => {
       dispatch(toggleTopNavProfileName(newSetting));
+    }, 
+    resetCurrProfileSection: () => {
+      dispatch(changeCurrProfileSection('none'));
     }
   }
 }

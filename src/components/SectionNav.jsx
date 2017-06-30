@@ -3,10 +3,13 @@
 import React from 'react';
 import { Link } from 'react-router';
 import $ from 'jquery';
+import { connect } from 'react-redux'
 
 import SvgIcon from './SvgIcon'
 
-export default class SectionNav extends React.Component {
+import { changeCurrProfileSection } from '../actions';
+
+class SectionNav extends React.Component {
 	constructor() {
 		super()
 		this.state = {
@@ -24,12 +27,8 @@ export default class SectionNav extends React.Component {
 	}
 
 	handleScroll(event) {
-		console.log("scrolling")
-	    
-	    let sectionNavTop = $(this.refs.section_nav).offset().top,
+		let sectionNavTop = $(this.refs.section_nav).offset().top,
 	    	sectionNavPlaceholderTop = $(this.refs.section_nav_position_placeholder).offset().top;
-
-	    console.log(sectionNavTop, sectionNavPlaceholderTop);
 
 	    if (!this.state.fixed && sectionNavTop <= 70) {
 	    	this.setState({
@@ -41,71 +40,20 @@ export default class SectionNav extends React.Component {
 	    	this.setState({
 	    		fixed: false
 	    	})
-	    }
-	            
+	    }         
+	}
+
+	handleClick(section, i) {
+		location.href = "#" + section;
+		this.props.changeCurrSection(String(i))
 	}
 
 	render() {
 		let sections;
-
 		if (this.props.type == "indicator") {
-			sections = (
-			<div className="section-nav__items">
-				<a href='#about'>
-					<div className="section-nav__item">
-						<SvgIcon name='students' />
-						<h3 className="section-nav__item__text">About</h3>
-					</div>
-				</a>
-				<a href='#rankings'>
-					<div className="section-nav__item">
-						<SvgIcon name='loans' />
-						<h3 className="section-nav__item__text">Rankings</h3>
-					</div>
-				</a>
-				<a href='#trends'>
-					<div className="section-nav__item">
-						<SvgIcon name='grants' />
-						<h3 className="section-nav__item__text">Trends</h3>
-					</div>
-				</a>
-			</div>
-			);
+			sections = ["about, rankings, trends"];
 		} else {
-			sections = (
-			<div className="section-nav__items">
-				<a href='#students'>
-					<div className="section-nav__item">
-						<SvgIcon name='students' />
-						<h3 className="section-nav__item__text">Students</h3>
-					</div>
-				</a>
-				<a href='#loans'>
-					<div className="section-nav__item">
-						<SvgIcon name='loans' />
-						<h3 className="section-nav__item__text">Loans</h3>
-					</div>
-				</a>
-				<a href='#grants'>
-					<div className="section-nav__item">
-						<SvgIcon name='grants' />
-						<h3 className="section-nav__item__text">Grants</h3>
-					</div>
-				</a>
-				<a href='#schools'>
-					<div className="section-nav__item">
-						<SvgIcon name='books' />
-						<h3 className="section-nav__item__text">Schools</h3>
-					</div>
-				</a>
-				<a href='#outcomes'>
-					<div className="section-nav__item">
-						<SvgIcon name='outcomes' />
-						<h3 className="section-nav__item__text">Outcomes</h3>
-					</div>
-				</a>
-			</div>
-			);
+			sections = ["students", "loans", "grants", "schools", "outcomes"];
 		}
 
 		let sectionNavClass = "section-nav";
@@ -118,10 +66,37 @@ export default class SectionNav extends React.Component {
 			<div>
 				<div ref="section_nav_position_placeholder" className={sectionNavPlaceholderClass} />
 		    	<div ref="section_nav" className={sectionNavClass}>
-		    		{sections}
+		    		<div className="section-nav__items">
+		    		{sections.map((d, i) => {
+		    			let classList = "section-nav__item";
+		    			classList += this.props.currProfileSection == i ? " selected" : "";
+		    			return (
+							<div className={classList} key={i} onClick={() => { return this.handleClick(d, i); }}>
+								<SvgIcon name={d} />
+								<h3 className="section-nav__item__text">{d}</h3>
+							</div>
+						)
+		    		})}
+		    		</div>
 		    	</div>
 		    </div>
 	    );
 	}
 }
+
+const mapStateToProps = (state) => {
+  return {
+    currProfileSection: state.currProfileSection
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrSection: (newIndex) => {
+      dispatch(changeCurrProfileSection(newIndex));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SectionNav)
 

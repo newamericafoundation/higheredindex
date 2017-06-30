@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO, SET_INDICATOR_UPDATE_STATUS, SET_DATA_FILE_UPLOAD_STATUS} from './actions'
+import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, CHANGE_CURR_PROFILE_SECTION, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO, SET_INDICATOR_UPDATE_STATUS, SET_DATA_FILE_UPLOAD_STATUS} from './actions'
 
 function menuExpanded(state = false, action) {
   switch (action.type) {
@@ -18,6 +18,15 @@ function currProfile(state = {}, action) {
         name: action.name,
         type: action.profileType
       }
+    default:
+      return state
+  }
+}
+
+function currProfileSection(state = 'none', action) {
+  switch (action.type) {
+    case CHANGE_CURR_PROFILE_SECTION:
+      return action.sectionIndex
     default:
       return state
   }
@@ -226,6 +235,7 @@ function indicatorUpdateStatus(state = "inactive", action) {
 const rootReducer = combineReducers({
   menuExpanded,
   currProfile,
+  currProfileSection,
   topNavProfileNameShown,
   fetchedSts,
   fetchedInsts,

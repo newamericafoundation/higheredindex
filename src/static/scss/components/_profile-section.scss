@@ -1,4 +1,5 @@
 .profile-section {
+	position: relative;
 	&__title-container {
 		padding: 50px 0px;
 		margin: auto;
@@ -12,5 +13,12 @@
 		font-weight: normal;
 		color: palette-get(na-black-40);
 		font-size: 14px;
+	}
+
+	&__anchor {
+		display: block;
+	    position: relative;
+	    top: -$top-nav-height*2;
+	    visibility: hidden;
 	}
 }

@@ -3,7 +3,7 @@
 import React from 'react';
 import NotFoundPage from './NotFoundPage';
 import SectionNav from './SectionNav.jsx';
-import ProfileSectionTitle from './ProfileSectionTitle.jsx';
+import ProfileSection from './ProfileSection';
 import ProfileHeader from './ProfileHeader.jsx';
 import DataBlock from './DataBlock';
 import { indicatorVizSettings } from './indicatorVizSettings';
@@ -58,15 +58,15 @@ class IndicatorPage extends React.Component {
       <div className="location-profile indicator">
         <SectionNav type="indicator"/>
 
-        <ProfileSectionTitle title="About" />
+        <ProfileSection title="About" />
         <div className="location-profile__body-paragraph">
           <p>{ description }</p>
         </div>
 
-        <ProfileSectionTitle title="Rankings" />
+        <ProfileSection title="Rankings" />
         <RankingsDashboard filters={rankingVariables} />
 
-        <ProfileSectionTitle title="Trends" />
+        <ProfileSection title="Trends" />
       </div>
     )
   }
