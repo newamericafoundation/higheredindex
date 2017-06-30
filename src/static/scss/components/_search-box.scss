@@ -65,6 +65,10 @@
 
 		&__text {
 			font-size: 15px;
+
+			& > .highlighted {
+				font-weight: bold;
+			}
 		}
 	}
 

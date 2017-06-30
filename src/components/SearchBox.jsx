@@ -145,7 +145,7 @@ class SearchBox extends React.Component {
 	            onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
 	            onSuggestionSelected={this.onSuggestionSelected.bind(this)}
 	            getSuggestionValue={this.getSuggestionValue}
-	            renderSuggestion={suggestionRenderer}
+	            renderSuggestion={suggestionRenderer.bind(this)}
 	            focusFirstSuggestion = {true}
 	            alwaysRenderSuggestions = {alwaysRenderSuggestions}
 	            inputProps={inputProps}
@@ -196,9 +196,11 @@ class SearchBox extends React.Component {
 	    const inputLength = inputValue.length;
 	    const currList = this.getCurrList(propContainer);
 
-	    return currList.filter(listElem => 
-	        listElem.name.toLowerCase().slice(0, inputLength) === inputValue
-	    ).slice(0, 100);
+	    return currList.filter(listElem => {
+	        return listElem.name.toLowerCase().includes(inputValue)
+	    }).sort((a, b) => {
+	   		return a.name.toLowerCase().indexOf(inputValue) - b.name.toLowerCase().indexOf(inputValue);
+	   	}).slice(0, 100);
 	}
 
 	getCurrList(propContainer) {
@@ -222,6 +224,7 @@ class SearchBox extends React.Component {
 
 	renderSuggestion(suggestion) {
 	  const iconType = suggestion.type == "state" ? 'map-marker' : 'institution';
+
 	  return (
 	    <div className="react-autosuggest__suggestion-div">
 	    	<div className="react-autosuggest__suggestion__label">
@@ -234,20 +237,30 @@ class SearchBox extends React.Component {
 	}
 
 	renderSuggestionSimple(suggestion) {
-	  let iconType;
-	  if (suggestion.type == "state") { 
-	  	iconType = 'map-marker'; 
-	  } else if (suggestion.type == "institution") { 
-	  	iconType = "institution";
-	  } else {
-	  	iconType = "bar-chart";
-	  }
-	  return (
-	    <div className="react-autosuggest__suggestion-div">
-	      <SvgIcon name={iconType} />
-	      <h5 className="react-autosuggest__suggestion__text">{suggestion.name}</h5>
-	    </div>
-	  );
+		const {value} = this.state;
+
+		const suggName = suggestion.name,
+			valueIndex = suggestion.name.toLowerCase().indexOf(value);
+
+	  	console.log(value);
+		let iconType;
+		if (suggestion.type == "state") { 
+			iconType = 'map-marker'; 
+		} else if (suggestion.type == "institution") { 
+			iconType = "institution";
+		} else {
+			iconType = "bar-chart";
+		}
+		return (
+		<div className="react-autosuggest__suggestion-div">
+		<SvgIcon name={iconType} />
+		<h5 className="react-autosuggest__suggestion__text">
+			{suggestion.name.slice(0, valueIndex)}
+			<span className="highlighted">{suggestion.name.slice(valueIndex, valueIndex + value.length)}</span>
+			{suggestion.name.slice(valueIndex + value.length, suggName.length)}
+		</h5>
+		</div>
+		);
 
 	}
 
