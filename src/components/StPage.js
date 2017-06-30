@@ -100,7 +100,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
     toggleTopNavProfileDisplay: (newSetting) => {
       dispatch(toggleTopNavProfileName(newSetting));
     }, 
