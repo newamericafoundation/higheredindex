@@ -3,3 +3,9 @@
     @content;
   }
 }
+
+@mixin large() {
+  @media screen and (min-width: 750px) {
+    @content;
+  }
+}
