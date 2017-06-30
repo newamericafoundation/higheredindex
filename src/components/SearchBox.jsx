@@ -13,6 +13,7 @@ class SearchBox extends React.Component {
 
   		this.state = {
 			value: '',
+			numSuggestions: 100,
 			suggestions: [],
 			expanded: true,
 	    };
@@ -146,10 +147,10 @@ class SearchBox extends React.Component {
 	            onSuggestionSelected={this.onSuggestionSelected.bind(this)}
 	            getSuggestionValue={this.getSuggestionValue}
 	            renderSuggestion={suggestionRenderer.bind(this)}
+	            renderSuggestionsContainer={this.renderSuggestionsContainer.bind(this)}
 	            focusFirstSuggestion = {true}
 	            alwaysRenderSuggestions = {alwaysRenderSuggestions}
-	            inputProps={inputProps}
-	          />
+	            inputProps={inputProps} />
 	        }
 	      </div>
 	    );
@@ -169,7 +170,7 @@ class SearchBox extends React.Component {
 
 		// Autosuggest will call this function every time you need to update suggestions.
 		// You already implemented this logic above, so just use it.
-	onSuggestionsFetchRequested({ value }) {
+	onSuggestionsFetchRequested({ value, customNumSuggestions }) {
 		console.log("onSuggestionsFetchRequested")
 		if (this.props.suggestionsChangedCallback) {
 	      let counts = this.getSuggestionCounts(value, this.props);
@@ -177,7 +178,8 @@ class SearchBox extends React.Component {
 	    }
 
 	    this.setState({
-	      suggestions: this.getSuggestions(value, this.props)
+	      suggestions: this.getSuggestions(value, this.props, customNumSuggestions),
+	      numSuggestions: customNumSuggestions || 100
 	    });
 	}
 
@@ -190,7 +192,7 @@ class SearchBox extends React.Component {
 	    browserHistory.push('/' + suggestion.type + '/' + suggestionValue);
 	}
 
-	getSuggestions(value, propContainer) {
+	getSuggestions(value, propContainer, customNumSuggestions) {
 		console.log("getSuggestions")
 		const inputValue = value.trim().toLowerCase();
 	    const inputLength = inputValue.length;
@@ -200,7 +202,7 @@ class SearchBox extends React.Component {
 	        return listElem.name.toLowerCase().includes(inputValue)
 	    }).sort((a, b) => {
 	   		return a.name.toLowerCase().indexOf(inputValue) - b.name.toLowerCase().indexOf(inputValue);
-	   	}).slice(0, 100);
+	   	}).slice(0, customNumSuggestions || 100);
 	}
 
 	getCurrList(propContainer) {
@@ -223,7 +225,11 @@ class SearchBox extends React.Component {
 	}
 
 	renderSuggestion(suggestion) {
+	  const {value} = this.state;
 	  const iconType = suggestion.type == "state" ? 'map-marker' : 'institution';
+
+	  const suggName = suggestion.name,
+			valueIndex = suggestion.name.toLowerCase().indexOf(value);
 
 	  return (
 	    <div className="react-autosuggest__suggestion-div">
@@ -231,7 +237,11 @@ class SearchBox extends React.Component {
 	      		<SvgIcon name={iconType} />
 	      		<h5 className="react-autosuggest__suggestion__label__text">{suggestion.type}</h5>
 	      	</div>
-	      	<h5 className="react-autosuggest__suggestion__text">{suggestion.name}</h5>
+	      	<h5 className="react-autosuggest__suggestion__text">
+		      	{suggestion.name.slice(0, valueIndex)}
+				<span className="highlighted">{suggestion.name.slice(valueIndex, valueIndex + value.length)}</span>
+				{suggestion.name.slice(valueIndex + value.length, suggName.length)}
+			</h5>
 	    </div>
 	  );
 	}
@@ -264,6 +274,21 @@ class SearchBox extends React.Component {
 
 	}
 
+	renderSuggestionsContainer({ containerProps, children }) {
+	  return (
+	    <div {... containerProps} ref="itemsContainer" className="react-autosuggest__suggestions-container">
+	      {children}
+	      {this.props.alwaysRenderSuggestions && 
+	      	<div className="react-autosuggest__load-more" onClick={() => { return this.loadMoreResults() }}>Load More Results</div>}
+	    </div>
+	  );
+	}
+
+	loadMoreResults() {
+		console.log("loading more");
+		this.onSuggestionsFetchRequested({value:this.state.value, customNumSuggestions:this.state.numSuggestions + 100})
+	}
+
 	getSuggestionCounts(value, propContainer) {
 		console.log("getSuggestionCounts")
 		const inputValue = value.trim().toLowerCase();
@@ -281,8 +306,6 @@ class SearchBox extends React.Component {
 		        listElem.name.toLowerCase().slice(0, inputLength) === inputValue
 		    ).length;
 	   	counts.all = counts.states + counts.institutions + counts.indicators;
-
-	   	console.log("counts!", counts);
 
 	    return counts;
 	}

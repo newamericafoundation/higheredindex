@@ -21,6 +21,22 @@
 		}
 
    	}
+
+   	.react-autosuggest__load-more {
+   		z-index: 100;
+   		bottom: 0px;
+   		position: relative;
+   		padding: 10px 25px;
+   		color: white;
+   		background-color: rgba(59, 61, 67, .95);
+   		cursor: pointer;
+   		border-top: $standard-border;
+   		font-weight: bold;
+
+   		&:hover {
+   			background-color: palette-get(na-black);
+   		}
+   	}
 	
 
 	.react-autosuggest__suggestions-container {
@@ -31,7 +47,7 @@
 		top: 46px;
 		color: palette-get(na-black);
 		overflow: scroll;
-		max-height: calc(100vh/2);
+		max-height: calc(100vh - 140px) !important;
 	}
 
 	.react-autosuggest__suggestions-list {
@@ -68,6 +84,7 @@
 
 			& > .highlighted {
 				font-weight: bold;
+				color: palette-get(na-dark-turquoise);
 			}
 		}
 	}
