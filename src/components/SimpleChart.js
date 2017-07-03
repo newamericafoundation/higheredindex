@@ -319,11 +319,13 @@ export default class SimpleChart extends React.Component {
         if (this.dataElement2) {
             valArray = [...valArray, ...this.dataElement2.getValArray(year)];
         }
+        let renderingAreaWidth = $(this.refs.renderingArea).width();
     	this.setState({
             currHovered: year,
             tooltipSettings: {
-                x: eventObject.offsetX + 10,
+                x: eventObject.offsetX,
                 y: eventObject.offsetY - 30,
+                renderingAreaWidth: renderingAreaWidth,
                 title: year,
                 valArray: valArray,
             }

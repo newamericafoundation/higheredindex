@@ -9,9 +9,14 @@ export default function Tooltip(props) {
 	if (props.settings) {
 		styleObject = {
 			display: "block",
-			left: props.settings.x + "px",
 			top: props.settings.y + "px"
 		};
+
+		if (props.settings.x < (props.settings.renderingAreaWidth - 200)) {
+			styleObject.left = (props.settings.x + 10) + "px";
+		} else {
+			styleObject.right = (props.settings.renderingAreaWidth - props.settings.x + 10) + "px";
+		}
 	} else {
 		styleObject = {
 			display: "none"
