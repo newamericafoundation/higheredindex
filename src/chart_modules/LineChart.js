@@ -23,11 +23,14 @@ export default class LineChart {
 
 		for (let variable of this.variables) {
 			let varName = variable.variable;
+            console.log(varName);
 			this.dataLines[varName] = this.domElem.append("path")
                 .attr("class", "line-chart__data-line")
                 .style("fill", "none")
                 .style("stroke", variable.color)
                 .style("stroke-width", "1.5px");
+
+
 
             let dataArray = Object.keys(this.data[varName]).map(
             	(key) => {
@@ -52,6 +55,8 @@ export default class LineChart {
                 })
                 .on("mouseout", () => this.mouseoutFunc());
 		}
+
+        console.log(this.dataLines);
     }
 
     update(updateParams) {
@@ -65,11 +70,16 @@ export default class LineChart {
         const {y, x, width, height, currHovered, valsShown} = updateParams;
 
         const getLine = (dataObject) => {
-          let line = d3.line()
-            .x(d => {return x(d) + x.bandwidth()/2; })
-            .y(d => {return y(dataObject[d]); });
+            for (let key in dataObject) {
+                if (isNaN(dataObject[key])) {
+                    delete dataObject[key];
+                }
+            }
+            let line = d3.line()
+                .x(d => {return x(d) + x.bandwidth()/2; })
+                .y(d => {return y(dataObject[d]); });
 
-          return line(Object.keys(dataObject));
+            return line(Object.keys(dataObject));
         }
 
         for (let variable of this.variables) {
