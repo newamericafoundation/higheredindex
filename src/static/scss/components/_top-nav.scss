@@ -6,14 +6,28 @@
 	z-index: 10;
 
 	&__title {
+		width: 100%;
 		text-align: center;
-		padding: 15px;
+		padding: 5px 60px 0px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		@include medium {
+			padding: 0px 50px;
+		}
 		&__primary {
 			display: inline-block;
 			font-weight: normal;
 			color: white;
 			margin-bottom: 0px;
-			font-size: 30px;
+			font-size: 18px;
+			overflow-wrap: normal;
+			line-height: 1.1;
+
+			@include medium {
+				font-size: 30px;
+			}
 
 			.turquoise {
 				color: palette-get(na-turquoise);
@@ -22,19 +36,17 @@
 
 			.icon {
 				fill: white;
-				height: 22px;
-				width: auto;
-				display: none;
+				width: auto;	
+				display: block;
+				height: 17px;
+				margin-left: 10px;
 				@include medium {
-					display: block;
+					height: 22px;
 				}
 			}
 		}
 		&__secondary {
-			display: none;
-			@include medium {
-				display: inline-block;
-			}
+			display: inline-block;
 			font-weight: normal;
 			font-size: 13px;
 			color: white;
@@ -45,6 +57,10 @@
 
 		&__left, &__right {
 			display: inline-block;
+		}
+
+		&__left {
+			padding-right: 7px;
 		}
 	}
 

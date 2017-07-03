@@ -101,202 +101,202 @@ const instVizSettings = {
 		},
 	],
 	"loans": [
-		{
-			title: "Loan Disbursements (Volume)",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Students",
-					variables: [
-						{variable:"dlsubdisburse", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light },
-						{variable:"dlunsubdisburse", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
-						{variable:"dlunsubgraddisburse", displayName:"Graduate Stafford", format: "number", color: colors.turquoise.dark},
-						{variable:"dlparentdisburse", displayName:"Parent PLUS", format: "number", color: colors.blue.light},
-						{variable:"dlgraddisburse", displayName:"Graduate PLUS", format: "number", color: colors.red.light},
-						{variable:"dltotaldisburse", displayName:"Direct Loan Total", format: "number", color: colors.black},
-						{variable:"perkdisburse", displayName:"Perkins", format: "number", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		{
-			title: "Loan Recipients",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Students",
-					variables: [
-						{variable:"dlsubrecip", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light },
-						{variable:"dlunsubrecip", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
-						{variable:"dlunsubgradrecip", displayName:"Graduate Stafford", format: "number", color: colors.turquoise.dark},
-						{variable:"dlparentrecip", displayName:"Parent PLUS", format: "number", color: colors.blue.light},
-						{variable:"dlgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.red.light},
-						{variable:"dltotalrecip", displayName:"Direct Loan Total", format: "number", color: colors.black},
-						{variable:"perkrecip", displayName:"Perkins", format: "number", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		{
-			title: "Repayment Rates by Gender",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Repayment Rate",
-					variables: [
-						{variable:"male_rpy_3yr_rt", displayName:"Male", format: "percent", color: colors.turquoise.light },
-						{variable:"female_rpy_3yr_rt", displayName:"Female", format: "percent", color: colors.purple.light},
-						{variable:"rpy_3yr_rt", displayName:"Average", format: "percent", color: colors.grey.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Repayment Rates by Parental Education",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Repayment Rate",
-					variables: [
-						{variable:"firstgen_rpy_3yr_rt", displayName:"First Generation", format: "percent", color: colors.turquoise.light },
-						{variable:"notfirstgen__rpy_3yr_rt", displayName:"Not First Generation", format: "percent", color: colors.purple.light},
-						{variable:"rpy_3yr_rt", displayName:"Average", format: "percent", color: colors.grey.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Repayment Rates by Pell Status",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Repayment Rate",
-					variables: [
-						{variable:"pell_rpy_3yr_rt", displayName:"Pell Recipients", format: "percent", color: colors.turquoise.light },
-						{variable:"nopell_rpy_3yr_rt", displayName:"Non-Pell", format: "percent", color: colors.purple.light},
-						{variable:"rpy_3yr_rt", displayName:"Average", format: "percent", color: colors.grey.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Repayment Rates by Completion Status",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Repayment Rate",
-					variables: [
-						{variable:"compl_rpy_3yr_rt", displayName:"Completed", format: "percent", color: colors.turquoise.light },
-						{variable:"noncom_rpy_3yr_rt", displayName:"Withdrew", format: "percent", color: colors.purple.light},
-						{variable:"rpy_3yr_rt", displayName:"Average", format: "percent", color: colors.grey.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Repayment Rates by Income",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Repayment Rate",
-					variables: [
-						{variable:"hi_inc_rpy_3yr_rt", displayName:"High-income", format: "percent", color: colors.turquoise.light },
-						{variable:"md_inc_rpy_3yr_rt", displayName:"Middle-income", format: "percent", color: colors.turquoise.medium},
-						{variable:"lo_inc_rpy_3yr_rt", displayName:"Low-income", format: "percent", color: colors.turquoise.dark},
-						{variable:"rpy_3yr_rt", displayName:"Average", format: "percent", color: colors.grey.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Repayment Rates by Dependency",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Repayment Rate",
-					variables: [
-						{variable:"dep_rpy_3yr_rt", displayName:"Dependent", format: "percent", color: colors.turquoise.light },
-						{variable:"ind_rpy_3yr_rt", displayName:"Independent", format: "percent", color: colors.purple.light},
-						{variable:"rpy_3yr_rt", displayName:"Average", format: "percent", color: colors.grey.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Cohort Default Rates",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Default Rate",
-					variables: [
-						{variable:"cdr3", displayName:"Two-year default rates", format: "percent", color: colors.turquoise.light },
-						{variable:"cdr2", displayName:"Three-year default rates", format: "percent", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		// needs grouped bar chart
-		{
-			title: "Average Student Borrowing",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Repayment Rate",
-					variables: [
-						{variable:"avefedloan", displayName:"Average Federal Loan", format: "price", color: colors.turquoise.light },
-						{variable:"aveotherloan", displayName:"Average Other Loan", format: "price", color: colors.purple.light},
-					]
-				},
-				// chart2Settings: {
-				// 	type: "bar-chart",
-				// 	yAxisLabel: "Repayment Rate",
-				// 	variables: [
-				// 		{variable:"cdr3", displayName:"Two-year default rates", format: "percent", color: colors.turquoise.dark },
-				// 		{variable:"cdr2", displayName:"Three-year default rates", format: "percent", color: colors.purple.dark},
-				// 	]
-				// },
-			}
-		},
+		// {
+		// 	title: "Loan Disbursements (Volume)",
+		// 	paragraphSettings: {
+		// 		textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+		// 		variables: ['fem', 'men']
+		// 	},
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Students",
+		// 			variables: [
+		// 				{variable:"dlsubdisburse", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light },
+		// 				{variable:"dlunsubdisburse", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
+		// 				{variable:"dlunsubgraddisburse", displayName:"Graduate Stafford", format: "number", color: colors.turquoise.dark},
+		// 				{variable:"dlparentdisburse", displayName:"Parent PLUS", format: "number", color: colors.blue.light},
+		// 				{variable:"dlgraddisburse", displayName:"Graduate PLUS", format: "number", color: colors.red.light},
+		// 				{variable:"dltotaldisburse", displayName:"Direct Loan Total", format: "number", color: colors.black},
+		// 				{variable:"perkdisburse", displayName:"Perkins", format: "number", color: colors.purple.light},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Loan Recipients",
+		// 	paragraphSettings: {
+		// 		textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+		// 		variables: ['fem', 'men']
+		// 	},
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Students",
+		// 			variables: [
+		// 				{variable:"dlsubrecip", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light },
+		// 				{variable:"dlunsubrecip", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
+		// 				{variable:"dlunsubgradrecip", displayName:"Graduate Stafford", format: "number", color: colors.turquoise.dark},
+		// 				{variable:"dlparentrecip", displayName:"Parent PLUS", format: "number", color: colors.blue.light},
+		// 				{variable:"dlgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.red.light},
+		// 				{variable:"dltotalrecip", displayName:"Direct Loan Total", format: "number", color: colors.black},
+		// 				{variable:"perkrecip", displayName:"Perkins", format: "number", color: colors.purple.light},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Repayment Rates by Gender",
+		// 	paragraphSettings: {
+		// 		textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+		// 		variables: ['fem', 'men']
+		// 	},
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Repayment Rate",
+		// 			variables: [
+		// 				{variable:"male_rpy_3yr_rt", displayName:"Male", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"female_rpy_3yr_rt", displayName:"Female", format: "percent", color: colors.purple.light},
+		// 				{variable:"rpy_3yr_rt", displayName:"Average", format: "percent", color: colors.grey.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Repayment Rates by Parental Education",
+		// 	paragraphSettings: {
+		// 		textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+		// 		variables: ['fem', 'men']
+		// 	},
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Repayment Rate",
+		// 			variables: [
+		// 				{variable:"firstgen_rpy_3yr_rt", displayName:"First Generation", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"notfirstgen__rpy_3yr_rt", displayName:"Not First Generation", format: "percent", color: colors.purple.light},
+		// 				{variable:"rpy_3yr_rt", displayName:"Average", format: "percent", color: colors.grey.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Repayment Rates by Pell Status",
+		// 	paragraphSettings: {
+		// 		textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+		// 		variables: ['fem', 'men']
+		// 	},
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Repayment Rate",
+		// 			variables: [
+		// 				{variable:"pell_rpy_3yr_rt", displayName:"Pell Recipients", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"nopell_rpy_3yr_rt", displayName:"Non-Pell", format: "percent", color: colors.purple.light},
+		// 				{variable:"rpy_3yr_rt", displayName:"Average", format: "percent", color: colors.grey.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Repayment Rates by Completion Status",
+		// 	paragraphSettings: {
+		// 		textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+		// 		variables: ['fem', 'men']
+		// 	},
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Repayment Rate",
+		// 			variables: [
+		// 				{variable:"compl_rpy_3yr_rt", displayName:"Completed", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"noncom_rpy_3yr_rt", displayName:"Withdrew", format: "percent", color: colors.purple.light},
+		// 				{variable:"rpy_3yr_rt", displayName:"Average", format: "percent", color: colors.grey.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Repayment Rates by Income",
+		// 	paragraphSettings: {
+		// 		textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+		// 		variables: ['fem', 'men']
+		// 	},
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Repayment Rate",
+		// 			variables: [
+		// 				{variable:"hi_inc_rpy_3yr_rt", displayName:"High-income", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"md_inc_rpy_3yr_rt", displayName:"Middle-income", format: "percent", color: colors.turquoise.medium},
+		// 				{variable:"lo_inc_rpy_3yr_rt", displayName:"Low-income", format: "percent", color: colors.turquoise.dark},
+		// 				{variable:"rpy_3yr_rt", displayName:"Average", format: "percent", color: colors.grey.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Repayment Rates by Dependency",
+		// 	paragraphSettings: {
+		// 		textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+		// 		variables: ['fem', 'men']
+		// 	},
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Repayment Rate",
+		// 			variables: [
+		// 				{variable:"dep_rpy_3yr_rt", displayName:"Dependent", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"ind_rpy_3yr_rt", displayName:"Independent", format: "percent", color: colors.purple.light},
+		// 				{variable:"rpy_3yr_rt", displayName:"Average", format: "percent", color: colors.grey.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Cohort Default Rates",
+		// 	paragraphSettings: {
+		// 		textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+		// 		variables: ['fem', 'men']
+		// 	},
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Default Rate",
+		// 			variables: [
+		// 				{variable:"cdr3", displayName:"Two-year default rates", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"cdr2", displayName:"Three-year default rates", format: "percent", color: colors.purple.light},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// // needs grouped bar chart
+		// {
+		// 	title: "Average Student Borrowing",
+		// 	paragraphSettings: {
+		// 		textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+		// 		variables: ['fem', 'men']
+		// 	},
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Repayment Rate",
+		// 			variables: [
+		// 				{variable:"avefedloan", displayName:"Average Federal Loan", format: "price", color: colors.turquoise.light },
+		// 				{variable:"aveotherloan", displayName:"Average Other Loan", format: "price", color: colors.purple.light},
+		// 			]
+		// 		},
+		// 		// chart2Settings: {
+		// 		// 	type: "bar-chart",
+		// 		// 	yAxisLabel: "Repayment Rate",
+		// 		// 	variables: [
+		// 		// 		{variable:"cdr3", displayName:"Two-year default rates", format: "percent", color: colors.turquoise.dark },
+		// 		// 		{variable:"cdr2", displayName:"Three-year default rates", format: "percent", color: colors.purple.dark},
+		// 		// 	]
+		// 		// },
+		// 	}
+		// },
 	],
 	"grants": [
 		// Federal work Study and SEOG need an * with the following, on this graphic and the next one: SEOG and Federal Work Study are campus-based aid programs, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other grants are available to students at all institutions.
