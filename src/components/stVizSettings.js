@@ -112,12 +112,12 @@ const instVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "Students",
 					variables: [
-						{variable:"dlsubdisburse", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light },
-						{variable:"dlunsubdisburse", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
-						{variable:"dlunsubgraddisburse", displayName:"Graduate Stafford", format: "number", color: colors.turquoise.dark},
-						{variable:"dlparentdisburse", displayName:"Parent PLUS", format: "number", color: colors.blue.light},
-						{variable:"dlgraddisburse", displayName:"Graduate PLUS", format: "number", color: colors.red.light},
-						{variable:"perkdisburse", displayName:"Perkins", format: "number", color: colors.purple.light},
+						{variable:"dlsubdisburse", displayName:"Subsidized Stafford", format: "price", color: colors.turquoise.light },
+						{variable:"dlunsubdisburse", displayName:"Unsubsidized Stafford", format: "price", color: colors.turquoise.medium},
+						{variable:"dlunsubgraddisburse", displayName:"Graduate Stafford", format: "price", color: colors.turquoise.dark},
+						{variable:"dlparentdisburse", displayName:"Parent PLUS", format: "price", color: colors.blue.light},
+						{variable:"dlgraddisburse", displayName:"Graduate PLUS", format: "price", color: colors.red.light},
+						{variable:"perkdisburse", displayName:"Perkins", format: "price", color: colors.purple.light},
 					]
 				}
 			}

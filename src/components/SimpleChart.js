@@ -34,7 +34,6 @@ export default class SimpleChart extends React.Component {
         }
 
         if (chart2Settings) {
-            console.log("ahs chart2settings", chart2Settings)
             for (let i = 0; i < chart2Settings.variables.length; i++) {
                 let varName = chart2Settings.variables[i].variable;
                 if (data[varName]) {
@@ -79,9 +78,10 @@ export default class SimpleChart extends React.Component {
 
         this.svg = d3.select(div).append("svg");
         this.g = this.svg.append("g")
-        	.attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
 
         this.initializeYAxes();
+
+        this.g.attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
         this.initializeXAxis();
         this.initializeDataElements();
 
@@ -103,6 +103,10 @@ export default class SimpleChart extends React.Component {
         this.y1 = d3.scaleLinear()
         	.domain(this.getYExtents(chart1Settings));
 
+        if (this.y1.domain()[1] > 1000000) {
+            this.margin.left = 80;
+        }
+
         if (chart2Settings) {
             this.yAxis2 = this.g.append("g")
                 .attr("class", "axis axis--y");
@@ -116,6 +120,10 @@ export default class SimpleChart extends React.Component {
 
             this.y2 = d3.scaleLinear()
                 .domain(this.getYExtents(chart2Settings));
+
+            if (this.y2.domain()[1] > 1000000) {
+                this.margin.right = 80;
+            }
         }
     }
 
