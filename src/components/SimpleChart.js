@@ -196,7 +196,7 @@ export default class SimpleChart extends React.Component {
             .attr("height", height + margin.top + margin.bottom);
 
         this.g
-            .attr("width", width - margin.left - margin.right)
+            .attr("width", width)
             .attr("height", height);
 
         this.updateYAxes();
@@ -229,7 +229,9 @@ export default class SimpleChart extends React.Component {
 
     updateXAxis() {
         const {width, height} = this.state;
-        this.x.rangeRound([0, width]);
+
+        console.log(width);
+        this.x.range([0, width]);
 
         this.xAxis
             .attr("transform", "translate(0," + height + ")")
@@ -341,7 +343,8 @@ export default class SimpleChart extends React.Component {
 
 	// helper functions
 	getCurrWidth() {
-        return $(this.refs.renderingArea).width() - margin.left - margin.right;
+        console.log($(this.refs.renderingArea).width())
+        return $(this.refs.renderingArea).width() - margin.left;
     }
 
     getYExtents(chart) {
