@@ -210,7 +210,12 @@ export default class SimpleChart extends React.Component {
         this.y1.range([height, 0]);
         
         this.yAxis1
-            .call(d3.axisLeft(this.y1).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10).tickFormat((d) => { return formatValue(d, this.props.settings.chart1Settings.variables[0].format); }));
+            .call(d3.axisLeft(this.y1)
+                .tickSize(-width, 0, 0)
+                .tickSizeOuter(0)
+                .tickPadding(10)
+                .tickFormat((d) => { return formatValue(d, this.props.settings.chart1Settings.variables[0].format); })
+                .ticks(width > 350 ? 8 : 5));
 
         // this.yAxis1Label
         //     .attr("x", -height/2);
@@ -220,7 +225,11 @@ export default class SimpleChart extends React.Component {
 
             this.yAxis2
                 .attr("transform", "translate(" + width + ")")
-                .call(d3.axisRight(this.y2).tickSizeOuter(0).tickPadding(10).tickFormat((d) => { return formatValue(d, this.props.settings.chart2Settings.variables[0].format); }));
+                .call(d3.axisRight(this.y2)
+                    .tickSizeOuter(0)
+                    .tickPadding(10)
+                    .tickFormat((d) => { return formatValue(d, this.props.settings.chart2Settings.variables[0].format); })
+                    .ticks(width > 350 ? 8 : 5));
 
             // this.yAxis2Label
             //     .attr("x", -height/2);
@@ -241,6 +250,7 @@ export default class SimpleChart extends React.Component {
                     }
                     return e;
                 })
+                .ticks(3)
             );
     }
 
