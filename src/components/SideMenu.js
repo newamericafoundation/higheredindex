@@ -35,7 +35,7 @@ class SideMenu extends React.Component {
             <SvgIcon name='menu-toggle' />
           }
           { expanded &&
-            <SvgIcon name='students' />
+            <SvgIcon name='close' />
           }
         </a>
         <div className={containerClass}>
