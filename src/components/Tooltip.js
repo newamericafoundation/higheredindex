@@ -36,7 +36,7 @@ export default function Tooltip(props) {
 
 function renderVal(val) {
 	console.log(val);
-	if (val.value || val.value == 0) {
+	if ((val.value || val.value == 0) && !isNaN(val.value)) {
 		return (
 			<h5 className="tooltip__value" key={val.variable.variable}>
 				<span className="tooltip__value__label" style={{color:val.variable.color}}>{ val.variable.displayName }:</span>

@@ -15,35 +15,34 @@ export default class BarChart {
 	initializeDataBars() {
 		this.dataBars = {};
         
-         let dataArray;
 		for (let variable of this.variables) {
+      let dataArray = [];
 			let varName = variable.variable;
+      Object.keys(this.data[varName]).forEach(
+      	(key) => {
+      		let year = key,
+      			value = this.data[varName][key];
 
-            dataArray = Object.keys(this.data[varName]).map(
-            	(key) => {
-            		let year = key,
-            			value = this.data[varName][key];
-            		return {year: year, value: value};
-      				}
-      			)
+          if (!isNaN(value)) {
+      		  dataArray.push({year: year, value: value});
+          }
+				}
+			)
 
-            console.log(dataArray);
-            console.log(this.data);
-
-            this.dataBars[varName] = this.domElem.selectAll("rect#" + varName)
-            	.data(dataArray)
-              .enter().append("rect")
-              	.attr("id", (d) => { return varName; })
-              	.attr("class", "bar-chart__data-bar")
-                .style("fill", variable.color)
-                .style("stroke", "white")
-                .style("stroke-width", "1px")
-                .on("mouseover", (d, index, paths) => {
-                  return this.mouseoverFunc(d.year, d3.event); 
-                })
-                .on("mouseout", () => this.mouseoutFunc());
-        }
+      this.dataBars[varName] = this.domElem.selectAll("rect#" + varName)
+      	.data(dataArray)
+        .enter().append("rect")
+        	.attr("id", (d) => { return varName; })
+        	.attr("class", "bar-chart__data-bar")
+          .style("fill", variable.color)
+          .style("stroke", "white")
+          .style("stroke-width", "1px")
+          .on("mouseover", (d, index, paths) => {
+            return this.mouseoverFunc(d.year, d3.event); 
+          })
+          .on("mouseout", () => this.mouseoutFunc());
     }
+  }
 
     update(updateParams) {
         const {width, height} = updateParams;
