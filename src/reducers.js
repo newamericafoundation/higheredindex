@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO} from './actions'
+import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, CHANGE_CURR_PROFILE_SECTION, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO, SET_INDICATOR_UPDATE_STATUS, SET_DATA_FILE_UPLOAD_STATUS} from './actions'
 
 function menuExpanded(state = false, action) {
   switch (action.type) {
@@ -18,6 +18,15 @@ function currProfile(state = {}, action) {
         name: action.name,
         type: action.profileType
       }
+    default:
+      return state
+  }
+}
+
+function currProfileSection(state = 'none', action) {
+  switch (action.type) {
+    case CHANGE_CURR_PROFILE_SECTION:
+      return action.sectionIndex
     default:
       return state
   }
@@ -74,6 +83,34 @@ function fetchedInsts(state = {}, action) {
       }
     case RECEIVE_PROFILE:
       if (action.profileType == "institution") {
+        return Object.assign({}, state, {
+          [action.id] : {
+            isFetching: false,
+            data: action.data
+          }
+        })
+      } else {
+        return state
+      }
+    default:
+      return state
+  }
+}
+
+function fetchedIndicators(state = {}, action) {
+  switch (action.type) {
+    case REQUEST_PROFILE:
+      if (action.profileType == "indicator") {
+        return Object.assign({}, state, {
+          [action.id] : {
+            isFetching: true
+          }
+        })
+      } else {
+        return state
+      }
+    case RECEIVE_PROFILE:
+      if (action.profileType == "indicator") {
         return Object.assign({}, state, {
           [action.id] : {
             isFetching: false,
@@ -166,16 +203,50 @@ function instList(state = [], action) {
   }
 }
 
+function indicatorList(state = [], action) {
+  switch (action.type) {
+    case REQUEST_PROFILE_LIST:
+      return []
+    case RECEIVE_PROFILE_LIST:
+      return action.listType == "indicator" ? action.list : state
+    default:
+      return state
+  }
+}
+
+function dataFileUploadStatus(state = "inactive", action) {
+  switch (action.type) {
+    case SET_DATA_FILE_UPLOAD_STATUS:
+      return action.status
+    default:
+      return state
+  }
+}
+
+function indicatorUpdateStatus(state = "inactive", action) {
+  switch (action.type) {
+    case SET_INDICATOR_UPDATE_STATUS:
+      return action.status
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   menuExpanded,
   currProfile,
+  currProfileSection,
   topNavProfileNameShown,
   fetchedSts,
   fetchedInsts,
+  fetchedIndicators,
   fetchedStPhotos,
   fetchedInstPhotos,
   stList,
-  instList
+  instList,
+  indicatorList,
+  dataFileUploadStatus,
+  indicatorUpdateStatus
 })
 
 export default rootReducer

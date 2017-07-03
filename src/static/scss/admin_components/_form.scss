@@ -1,0 +1,93 @@
+.admin__form {
+	padding: 25px;
+
+	&__title {
+		font-size: 2.5rem;
+		line-height: 1;
+	}
+
+	&__main-link {
+		font-weight: bold;
+		color: palette-get(na-turquoise);
+		font-size: 18px;
+
+		&:hover {
+			color: palette-get(na-black);
+		}
+	}
+
+	&__field {
+		padding: 15px 0px;
+	}
+
+	&__sub-field-container {
+		padding-bottom: 15px;
+	}
+
+	&__sub-field {
+		padding-right: 15px;
+		display: inline-block;
+
+		&__button {
+			color: palette-get(na-turquoise);
+
+			&:hover {
+				color: palette-get(na-black);
+			}
+		}
+	}
+
+	&__field-label {
+		font-weight: bold;
+		font-size: 16px;
+	}
+
+	&__sub-field-label {
+		/*font-style: italic;*/
+		color: palette-get(na-black-70);
+		font-size: 16px;
+	}
+
+	input, select, textarea {
+		margin-bottom: 0px !important;
+		border: 2px solid palette-get(na-black-10) !important;
+	}
+
+	input, select {
+		max-width: 500px;
+		padding: 0px 15px;
+	}
+
+	&__button {
+		color: palette-get(na-turquoise);
+		font-weight: bold;
+		padding-right: 25px;
+		padding-top: 15px;
+		font-size: 18px;
+
+		&:hover {
+			color: palette-get(na-black);
+		}
+
+		&.disabled {
+			opacity: .7;
+			pointer-events: none;
+		}
+	}
+
+	&__file-upload {
+		border: 2px dashed palette-get(na-black-10) !important;
+		padding: 20px;
+		cursor: pointer;
+
+		&__status-heading {
+			padding: 20px 0px 0px;
+			margin-bottom: 0px;
+			font-size: 16px;
+		}
+
+		&__status {
+			margin-bottom: 0px;
+		}
+	}
+}

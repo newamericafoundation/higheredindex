@@ -3,7 +3,7 @@
 import React from 'react';
 import NotFoundPage from './NotFoundPage';
 import SectionNav from './SectionNav.jsx';
-import ProfileSectionTitle from './ProfileSectionTitle.jsx';
+import ProfileSection from './ProfileSection';
 import ProfileHeader from './ProfileHeader.jsx';
 import DataBlock from './DataBlock';
 import { indicatorVizSettings } from './indicatorVizSettings';
@@ -46,24 +46,27 @@ class IndicatorPage extends React.Component {
   render() {
     console.log(this.props);
     
-    if (!this.props.settings) {
+    if (!this.props.indicatorData) {
       return <NotFoundPage/>;
     }
-    const {id, title, image, description, filterCategories} = this.props.settings;
+    // ad these to render return when ready
+    // <ProfileHeader id={ path } name={ name } customImage={image}/>
+    
+
+    const {path, name, image, description, rankingVariables} = this.props.indicatorData;
     return (
       <div className="location-profile indicator">
-        <ProfileHeader id={ id } name={ title } customImage={image}/>
         <SectionNav type="indicator"/>
 
-        <ProfileSectionTitle title="About" />
+        <ProfileSection title="About" />
         <div className="location-profile__body-paragraph">
           <p>{ description }</p>
         </div>
 
-        <ProfileSectionTitle title="Rankings" />
-        <RankingsDashboard filterCategories={filterCategories} />
+        <ProfileSection title="Rankings" />
+        <RankingsDashboard filters={rankingVariables} />
 
-        <ProfileSectionTitle title="Trends" />
+        <ProfileSection title="Trends" />
       </div>
     )
   }
@@ -78,7 +81,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      toggleTopNavProfileDisplay: (newSetting) => {
+    toggleTopNavProfileDisplay: (newSetting) => {
       dispatch(toggleTopNavProfileName(newSetting));
     }
   }

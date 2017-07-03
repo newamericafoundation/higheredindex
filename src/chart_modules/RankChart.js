@@ -123,6 +123,11 @@ export default class RankChart extends React.Component {
             .style("cursor", "pointer")
             .on("mouseover", (d, index, paths) => { return this.mouseoverFunc(d, paths[index], d3.event); })
             .on("mouseout", () => this.mouseoutFunc());
+
+        this.dataLabels = this.g.selectAll("text")
+            .data(data)
+            .enter().append("text")
+            .attr("class", "bar-chart__data-label")
     }
 
     updateChart() {
@@ -180,6 +185,18 @@ export default class RankChart extends React.Component {
             .attr("height", (d) => { return this.state.height - this.y(d[filter.variable]); })
             .attr("width", this.x.bandwidth())
             .style("fill", (d) => { return this.setFill(d); })
+
+        this.dataLabels
+            .attr("x", (d) => { return this.x(d.state_id) + this.x.bandwidth()/2; })
+            .attr("y", (d) => { return this.y(d[filter.variable]) + 5; })
+            .attr("display", (d) => { return (this.state.height - this.y(d[filter.variable])) < 15 ? "none" : "block"})
+            .style("fill", "white")
+            .style("font-size", "10px")
+            .style("font-weight", "bold")
+            .style("pointer-events", "none")
+            .style("text-anchor", "middle")
+            .style("alignment-baseline", "hanging")
+            .text((d) => { return d.abbreviation; })
     }
 
 	render() {

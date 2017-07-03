@@ -6,6 +6,7 @@ import fetch from 'isomorphic-fetch'
 
 export const TOGGLE_MENU_EXPANSION = 'TOGGLE_MENU_EXPANSION'
 export const CHANGE_CURR_PROFILE = 'CHANGE_CURR_PROFILE'
+export const CHANGE_CURR_PROFILE_SECTION = 'CHANGE_CURR_PROFILE_SECTION'
 export const REQUEST_PROFILE = 'REQUEST_PROFILE'
 export const RECEIVE_PROFILE = 'RECEIVE_PROFILE'
 export const REQUEST_PROFILE_LIST = 'REQUEST_PROFILE_LIST'
@@ -13,12 +14,17 @@ export const RECEIVE_PROFILE_LIST = 'RECEIVE_PROFILE_LIST'
 export const REQUEST_PROFILE_PHOTO = 'REQUEST_PROFILE_PHOTO'
 export const RECEIVE_PROFILE_PHOTO = 'RECEIVE_PROFILE_PHOTO'
 export const TOGGLE_TOP_NAV_PROFILE_NAME = 'TOGGLE_TOP_NAV_PROFILE_NAME'
+export const UPDATE_INDICATOR = 'UPDATE_INDICATOR'
+export const SET_INDICATOR_UPDATE_STATUS = 'SET_INDICATOR_UPDATE_STATUS'
+export const UPLOAD_DATA_FILE = 'UPLOAD_DATA_FILE'
+export const SET_DATA_FILE_UPLOAD_STATUS = 'SET_DATA_FILE_UPLOAD_STATUS'
 
 // export const REQUEST_INST = 'REQUEST_INST'
 // export const RECEIVE_INST = 'RECEIVE_INST'
 // export const REQUEST_INST_LIST = 'REQUEST_INST_LIST'
 // export const RECEIVE_INST_LIST = 'RECEIVE_INST_LIST'
 let GoogleMapsLoader = require('google-maps');
+
 let googlePlacesService; 
 GoogleMapsLoader.LIBRARIES = ['places'];
 GoogleMapsLoader.KEY = 'AIzaSyBwiCv57aVHoDiIaY-zTFfQTWLq4ForFuM';
@@ -48,6 +54,13 @@ export function changeCurrProfile(id, name, profileType) {
   	profileType,
     id,
   	name
+  }
+}
+
+export function changeCurrProfileSection(sectionIndex) {
+  return { 
+    type: CHANGE_CURR_PROFILE_SECTION, 
+    sectionIndex
   }
 }
 
@@ -129,7 +142,23 @@ export function fetchProfileList(type) {
   }
 }
 
-  
+
+export function requestProfilePhoto(id, profileType) {
+   return { 
+    type: REQUEST_PROFILE_PHOTO, 
+    profileType, 
+    id 
+   }
+}
+
+export function receiveProfilePhoto(id, profileType, photoUrl) {
+  return { 
+      type: RECEIVE_PROFILE_PHOTO, 
+      id,
+      profileType, 
+      photoUrl
+    }
+}
 
 export function fetchProfilePhoto(id, profileType) {
   console.log(id);
@@ -159,20 +188,75 @@ export function fetchProfilePhoto(id, profileType) {
   }
 }
 
-
-export function requestProfilePhoto(id, profileType) {
+export function setDataFileUploadStatus(status) {
    return { 
-		type: REQUEST_PROFILE_PHOTO, 
-		profileType, 
-		id 
+      type: SET_DATA_FILE_UPLOAD_STATUS, 
+      status: status
    }
 }
 
-export function receiveProfilePhoto(id, profileType, photoUrl) {
-	return { 
-	  	type: RECEIVE_PROFILE_PHOTO, 
-	  	id,
-	  	profileType, 
-	  	photoUrl
-   	}
+export function uploadDataFile(collection, newFile) {
+  console.log(newFile);
+
+  return function (dispatch) {
+    dispatch(setDataFileUploadStatus("in progress"))
+
+    console.log(JSON.stringify(newFile));
+    
+    fetch(dbPath + 'update_data/' + collection, { 
+        method: "POST", 
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        }),
+        body: JSON.stringify(newFile)
+      })
+      .then((res) => {
+        dispatch(setDataFileUploadStatus(res.status))
+      })
+    
+    return { 
+        type: UPLOAD_DATA_FILE, 
+    }
+  }
 }
+
+export function setIndicatorUpdateStatus(status) {
+   return { 
+      type: SET_INDICATOR_UPDATE_STATUS, 
+      status: status
+   }
+}
+
+export function updateIndicator(newData, action) {
+  console.log(newData);
+  newData.action = action;
+
+  return function (dispatch) {
+    dispatch(setIndicatorUpdateStatus("in progress"))
+    
+    fetch(dbPath + 'update_indicator/', { 
+        method: "POST", 
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        }),
+        body: JSON.stringify(newData)
+      })
+      .then((res) => {
+        dispatch(setIndicatorUpdateStatus(res.status))
+      })
+    
+    return { 
+        type: UPDATE_INDICATOR, 
+    }
+  }
+}
+
+// export function sentUpdateIndicator(id, profileType) {
+//    return { 
+//     type: REQUEST_PROFILE_PHOTO, 
+//     profileType, 
+//     id 
+//    }
+// }

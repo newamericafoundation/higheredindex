@@ -37,7 +37,7 @@ const LandingPage = () => {
       	</div>
         <div className="landing-page__methodology-links">
           <div className="landing-page__methodology-link">
-            <Link to={'/'}>
+            <Link to={'/download'}>
               <SvgIcon name='download' />
               <h5 className="landing-page__methodology-link__primary">Download Dataset</h5>
             </Link>

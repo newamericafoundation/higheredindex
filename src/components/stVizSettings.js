@@ -39,6 +39,7 @@ const instVizSettings = {
 						{variable:"asia", displayName:"Asian", format: "percent", color: colors.purple.light},
 						{variable:"hisp", displayName:"Hispanic", format: "percent", color: "orange"},
 						{variable:"nhpi", displayName:"Hawaiian/Pacific Islander", format: "percent", color: "yellow"},
+						{variable:"nonresident", displayName:"Nonresident Alien", format: "percent", color: "green"},
 						{variable:"twoormore", displayName:"Two or more", format: "percent", color: colors.grey.medium},
 						{variable:"unk", displayName:"Unknown race", format: "percent", color: "gold"},
 					]

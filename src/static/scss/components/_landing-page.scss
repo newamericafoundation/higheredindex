@@ -48,7 +48,10 @@
 	}
 
 	&__explore-link {
-		padding: $desktop-padding 30px;
+		padding: 10px 11px;
+		@include medium {
+			padding: $desktop-padding 30px;
+		}
 		&:first-child {
 			border-right: $standard-border;
 		}
@@ -63,13 +66,19 @@
 		}
 		&__primary {
 			font-weight: bold;
-			font-size: 20px;
+			font-size: 16px;
 			color: white;
+			@include medium {
+				font-size: 20px;
+			}
 		}
 	}
 
 	&__methodology-link {
-		padding: 15px 25px;
+		padding: 7px 15px;
+		@include medium {
+			padding: 15px 25px;
+		}
 		&__primary {
 			font-weight: bold;
 			font-size: 18px;
@@ -86,7 +95,11 @@
 	&__title {
 		padding: 10px 0px;
 		font-weight: normal;
-		font-size: 55px;
+		font-size: 35px;
+
+		@include medium {
+			font-size: 55px;
+		}
 	}
 
 	.search-box {

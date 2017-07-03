@@ -1,4 +1,6 @@
 $top-bar-height: 55px;
+
+
 .listings-page {
 	background-image: url('../img/school.jpg');
 	background-size: cover;
@@ -20,10 +22,12 @@ $top-bar-height: 55px;
 			/*display: table;*/
 
 			.search-box {
-				width: 70%;
-				position: absolute;
-				right: 0px;
-				display: inline-block;
+				@include large {
+					width: 70%;
+					position: absolute;
+					right: 0px;
+					display: inline-block;
+				}
 
 				input {
 					background-color: rgb(89, 91, 96);
@@ -89,8 +93,12 @@ $top-bar-height: 55px;
 			}
 
 			.listings-page__top-bar__filter-label {
-				width: 30%;
-				display: inline-block;
+				display: none;
+				@include large {
+					width: 30%;
+					display: inline-block;
+				}
+				
 				height: $top-bar-height;
 				background-color: rgba(59, 61, 67, .9);
 				padding-left: 25px;
@@ -156,18 +164,27 @@ $top-bar-height: 55px;
 	}
 
 	&__filter-container, &__results-container {
-		display: inline-block;
 		vertical-align: top;
+
+		@include large {
+			display: inline-block;
+		}
 	}
 
 	&__filter-container {
-		width: 30%;
+		display: none;
+		@include large {
+			width: 30%;
+			display: block;
+		}
 		background-color: rgba(59, 61, 67, .9);
 		padding: 15px 25px;
 	}
 
 	&__results-container {
-		width: 70%;
+		@include large {
+			width: 70%;
+		}
 
 	}
 

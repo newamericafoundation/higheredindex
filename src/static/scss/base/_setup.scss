@@ -84,5 +84,5 @@ input, select {
 }
 
 .top-nav-shifted-content {
-	transform: translateY($top-nav-height);
+	padding-top: $top-nav-height;
 }

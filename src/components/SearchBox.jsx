@@ -5,7 +5,6 @@ import Autosuggest from 'react-autosuggest';
 import { fetchProfileList } from '../actions';
 import SvgIcon from './SvgIcon';
 import { sortAlpha } from "../helper_functions/sort_alpha.js";
-import { indicatorList } from './indicatorVizSettings'
 var d3 = require("d3");
 
 class SearchBox extends React.Component {
@@ -14,6 +13,7 @@ class SearchBox extends React.Component {
 
   		this.state = {
 			value: '',
+			numSuggestions: 100,
 			suggestions: [],
 			expanded: true,
 	    };
@@ -23,7 +23,7 @@ class SearchBox extends React.Component {
 
   	componentWillMount() {
   		console.log("in component will mount");
-		const { dispatch, stList, instList, filter, suggestionsChangedCallback } = this.props;
+		const { dispatch, stList, indicatorList, instList, filter, suggestionsChangedCallback } = this.props;
 		let newSuggestions = [],
 			forceUpdate = false;
 
@@ -35,9 +35,12 @@ class SearchBox extends React.Component {
 			}
 		}
 
-		if (filter == "indicators" || filter == "all") {
-			newSuggestions = [...newSuggestions, ...indicatorList];
-			forceUpdate = true;
+		if (indicatorList.length == 0) {
+			dispatch(fetchProfileList("indicator"))
+		} else {
+			if (filter == "indicators" || filter == "all") {
+				newSuggestions = [...newSuggestions, ...this.getSuggestions(this.state.value, this.props)]; 
+			}
 		}
 
 		if (instList.length == 0) {
@@ -67,7 +70,7 @@ class SearchBox extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { stList, instList, filter, suggestionsChangedCallback } = this.props;
+		const { stList, indicatorList, instList, filter, suggestionsChangedCallback } = this.props;
 		console.log("in component will receive props");
 		let newSuggestions = [],
 			updateCounts = false,
@@ -81,11 +84,12 @@ class SearchBox extends React.Component {
 			updateCounts = true;
 		}
 
-		if (filter != nextProps.filter) {
+		if (indicatorList != nextProps.indicatorList || filter != nextProps.filter) {
 			if (nextProps.filter == "indicators" || nextProps.filter == "all") {
 				newSuggestions = [...newSuggestions, ...this.getSuggestions(this.state.value, nextProps)];
+				updateState = true;
 			}
-			updateState = true;
+			updateCounts = true;
 		}
 
 		if (instList != nextProps.instList || filter != nextProps.filter) {
@@ -112,7 +116,7 @@ class SearchBox extends React.Component {
   		console.log("rendering", this.props);
   		console.log(this.state);
   		const { value, suggestions } = this.state;
-  		const { stList, instList, alwaysRenderSuggestions, expandable, expanded } = this.props;
+  		const { stList, indicatorList, instList, alwaysRenderSuggestions, expandable, expanded } = this.props;
 
   		const inputProps = {
 	      placeholder: 'Search',
@@ -142,11 +146,11 @@ class SearchBox extends React.Component {
 	            onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
 	            onSuggestionSelected={this.onSuggestionSelected.bind(this)}
 	            getSuggestionValue={this.getSuggestionValue}
-	            renderSuggestion={suggestionRenderer}
+	            renderSuggestion={suggestionRenderer.bind(this)}
+	            renderSuggestionsContainer={this.renderSuggestionsContainer.bind(this)}
 	            focusFirstSuggestion = {true}
 	            alwaysRenderSuggestions = {alwaysRenderSuggestions}
-	            inputProps={inputProps}
-	          />
+	            inputProps={inputProps} />
 	        }
 	      </div>
 	    );
@@ -166,7 +170,7 @@ class SearchBox extends React.Component {
 
 		// Autosuggest will call this function every time you need to update suggestions.
 		// You already implemented this logic above, so just use it.
-	onSuggestionsFetchRequested({ value }) {
+	onSuggestionsFetchRequested({ value, customNumSuggestions }) {
 		console.log("onSuggestionsFetchRequested")
 		if (this.props.suggestionsChangedCallback) {
 	      let counts = this.getSuggestionCounts(value, this.props);
@@ -174,7 +178,8 @@ class SearchBox extends React.Component {
 	    }
 
 	    this.setState({
-	      suggestions: this.getSuggestions(value, this.props)
+	      suggestions: this.getSuggestions(value, this.props, customNumSuggestions),
+	      numSuggestions: customNumSuggestions || 100
 	    });
 	}
 
@@ -187,19 +192,21 @@ class SearchBox extends React.Component {
 	    browserHistory.push('/' + suggestion.type + '/' + suggestionValue);
 	}
 
-	getSuggestions(value, propContainer) {
+	getSuggestions(value, propContainer, customNumSuggestions) {
 		console.log("getSuggestions")
 		const inputValue = value.trim().toLowerCase();
 	    const inputLength = inputValue.length;
 	    const currList = this.getCurrList(propContainer);
 
-	    return currList.filter(listElem => 
-	        listElem.name.toLowerCase().slice(0, inputLength) === inputValue
-	    ).slice(0, 100);
+	    return currList.filter(listElem => {
+	        return listElem.name.toLowerCase().includes(inputValue)
+	    }).sort((a, b) => {
+	   		return a.name.toLowerCase().indexOf(inputValue) - b.name.toLowerCase().indexOf(inputValue);
+	   	}).slice(0, customNumSuggestions || 100);
 	}
 
 	getCurrList(propContainer) {
-		const { filter, stList, instList } = propContainer;
+		const { filter, stList, indicatorList, instList } = propContainer;
 
 		if (filter == "states") {
 			return stList;
@@ -218,41 +225,75 @@ class SearchBox extends React.Component {
 	}
 
 	renderSuggestion(suggestion) {
+	  const {value} = this.state;
 	  const iconType = suggestion.type == "state" ? 'map-marker' : 'institution';
+
+	  const suggName = suggestion.name,
+			valueIndex = suggestion.name.toLowerCase().indexOf(value);
+
 	  return (
 	    <div className="react-autosuggest__suggestion-div">
 	    	<div className="react-autosuggest__suggestion__label">
 	      		<SvgIcon name={iconType} />
 	      		<h5 className="react-autosuggest__suggestion__label__text">{suggestion.type}</h5>
 	      	</div>
-	      	<h5 className="react-autosuggest__suggestion__text">{suggestion.name}</h5>
+	      	<h5 className="react-autosuggest__suggestion__text">
+		      	{suggestion.name.slice(0, valueIndex)}
+				<span className="highlighted">{suggestion.name.slice(valueIndex, valueIndex + value.length)}</span>
+				{suggestion.name.slice(valueIndex + value.length, suggName.length)}
+			</h5>
 	    </div>
 	  );
 	}
 
 	renderSuggestionSimple(suggestion) {
-	  let iconType;
-	  if (suggestion.type == "state") { 
-	  	iconType = 'map-marker'; 
-	  } else if (suggestion.type == "institution") { 
-	  	iconType = "institution";
-	  } else {
-	  	iconType = "bar-chart";
-	  }
+		const {value} = this.state;
+
+		const suggName = suggestion.name,
+			valueIndex = suggestion.name.toLowerCase().indexOf(value);
+
+	  	console.log(value);
+		let iconType;
+		if (suggestion.type == "state") { 
+			iconType = 'map-marker'; 
+		} else if (suggestion.type == "institution") { 
+			iconType = "institution";
+		} else {
+			iconType = "bar-chart";
+		}
+		return (
+		<div className="react-autosuggest__suggestion-div">
+		<SvgIcon name={iconType} />
+		<h5 className="react-autosuggest__suggestion__text">
+			{suggestion.name.slice(0, valueIndex)}
+			<span className="highlighted">{suggestion.name.slice(valueIndex, valueIndex + value.length)}</span>
+			{suggestion.name.slice(valueIndex + value.length, suggName.length)}
+		</h5>
+		</div>
+		);
+
+	}
+
+	renderSuggestionsContainer({ containerProps, children }) {
 	  return (
-	    <div className="react-autosuggest__suggestion-div">
-	      <SvgIcon name={iconType} />
-	      <h5 className="react-autosuggest__suggestion__text">{suggestion.name}</h5>
+	    <div {... containerProps} ref="itemsContainer" className="react-autosuggest__suggestions-container">
+	      {children}
+	      {this.props.alwaysRenderSuggestions && this.state.suggestions.length == this.state.numSuggestions &&
+	      	<div className="react-autosuggest__load-more" onClick={() => { return this.loadMoreResults() }}>Load More Results</div>}
 	    </div>
 	  );
+	}
 
+	loadMoreResults() {
+		console.log("loading more");
+		this.onSuggestionsFetchRequested({value:this.state.value, customNumSuggestions:this.state.numSuggestions + 100})
 	}
 
 	getSuggestionCounts(value, propContainer) {
 		console.log("getSuggestionCounts")
 		const inputValue = value.trim().toLowerCase();
 	    const inputLength = inputValue.length;
-	    const { stList, instList} = propContainer;
+	    const { stList, indicatorList, instList} = propContainer;
 	    let counts = {};
 
 	    counts.states = stList.filter(listElem => 
@@ -266,8 +307,6 @@ class SearchBox extends React.Component {
 		    ).length;
 	   	counts.all = counts.states + counts.institutions + counts.indicators;
 
-	   	console.log("counts!", counts);
-
 	    return counts;
 	}
 }
@@ -277,6 +316,7 @@ const mapStateToProps = (state) => {
 	console.log(state);
   return {
     stList: state.stList,
+    indicatorList: state.indicatorList,
     instList: state.instList,
   }
 }
