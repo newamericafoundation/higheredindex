@@ -8,8 +8,6 @@ import LineChart from "../chart_modules/LineChart.js";
 import BarChart from "../chart_modules/BarChart.js";
 import { formatValue } from "../helper_functions/format_value.js";
 
-let margin = {top: 10, right: 0, bottom: 30, left: 60};
-
 export default class SimpleChart extends React.Component {
 	constructor(props) {
 		super(props);
@@ -22,6 +20,7 @@ export default class SimpleChart extends React.Component {
 		let fullValList = [];
 
         this.missingVars = [];
+        this.margin = {top: 10, right: 0, bottom: 30, left: 60};
 
         for (let i = 0; i < chart1Settings.variables.length; i++) {
             let varName = chart1Settings.variables[i].variable;
@@ -35,6 +34,7 @@ export default class SimpleChart extends React.Component {
         }
 
         if (chart2Settings) {
+            console.log("ahs chart2settings", chart2Settings)
             for (let i = 0; i < chart2Settings.variables.length; i++) {
                 let varName = chart2Settings.variables[i].variable;
                 if (data[varName]) {
@@ -46,7 +46,7 @@ export default class SimpleChart extends React.Component {
                 }
             }
 
-            margin.right = 60;
+            this.margin.right = 60;
         }
 
         //for development only
@@ -79,7 +79,7 @@ export default class SimpleChart extends React.Component {
 
         this.svg = d3.select(div).append("svg");
         this.g = this.svg.append("g")
-        	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        	.attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
 
         this.initializeYAxes();
         this.initializeXAxis();
@@ -193,7 +193,7 @@ export default class SimpleChart extends React.Component {
 
         this.svg
             .attr("width", "100%")
-            .attr("height", height + margin.top + margin.bottom);
+            .attr("height", height + this.margin.top + this.margin.bottom);
 
         this.g
             .attr("width", width)
@@ -229,9 +229,7 @@ export default class SimpleChart extends React.Component {
 
     updateXAxis() {
         const {width, height} = this.state;
-
-        console.log(width);
-        this.x.range([0, width]);
+        this.x.rangeRound([0, width]);
 
         this.xAxis
             .attr("transform", "translate(0," + height + ")")
@@ -343,8 +341,9 @@ export default class SimpleChart extends React.Component {
 
 	// helper functions
 	getCurrWidth() {
-        console.log($(this.refs.renderingArea).width())
-        return $(this.refs.renderingArea).width() - margin.left;
+        console.log(this.margin.right);
+        console.log(this.props.settings);
+        return $(this.refs.renderingArea).width() - this.margin.left - this.margin.right;
     }
 
     getYExtents(chart) {
