@@ -426,7 +426,6 @@ const instVizSettings = {
 			}
 		},
 		{
-			// need grouped bar chart
 			title: "Student Aid",
 			paragraphSettings: {
 				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
@@ -440,7 +439,14 @@ const instVizSettings = {
 						{variable:"fedaidperc", displayName:"Percent of Federal Aid Recipients", format: "percent", color: colors.turquoise.dark },
 					]
 				},
-				
+				chart2Settings: {
+					type: "grouped-bar-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"avefedaid", displayName:"Average Federal Aid", format: "price", color: colors.turquoise.light },
+						{variable:"avetotaid", displayName:"Average Total Aid", format: "price", color: colors.purple.light },
+					]
+				},
 			}
 		},
 		{
