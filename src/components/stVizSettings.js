@@ -386,7 +386,43 @@ const instVizSettings = {
 			}
 		},
 	], "schools" : [
-		// add fact boxes for school data
+		{
+			title: "Institutional Breakdowns",
+			paragraphSettings: null,
+			vizSettings: {
+				chart1Settings: {
+					type: "table",
+					tableSettingsList: 
+					[
+						{
+							headingLabels: ["Category", "Count"],
+							variables: [
+								{variable:"public", displayName:"Public", format: "number" },
+								{variable:"nonprofit", displayName:"Non-Profit", format: "number"},
+								{variable:"forprofit", displayName:"For-Profit", format: "number"},
+								{variable:"fouryear", displayName:"Four-Year", format: "number"},
+								{variable:"twoyear", displayName:"Two-Year", format: "number"},
+								{variable:"lessthan2yr", displayName:"Less than Two-Year", format: "number"},
+								{variable:"pub4yr", displayName:"Public Four-Year", format: "number" },
+								{variable:"nonprof4yr", displayName:"Non-Profit Four-Year", format: "number"},
+								{variable:"twoyrlesspublic", displayName:"Public Two-Year or Less", format: "number"},
+								{variable:"degree", displayName:"Degree Granting", format: "number"},
+								{variable:"hbcu", displayName:"HBCU", format: "number"},
+								{variable:"schools", displayName:"Total", format: "number", bold: true},
+							],
+						},
+						{
+							headingLabels: ["Category", "Count"],
+							variables: [
+								{variable:"public", displayName:"Public", format: "number" },
+								{variable:"nonprofit", displayName:"Non-Profit", format: "number"},
+								{variable:"forprofit", displayName:"For-Profit", format: "number"},
+							],
+						}
+					]
+				}
+			}
+		},
 		{
 			title: "Sticker Price",
 			paragraphSettings: {

@@ -1,0 +1,45 @@
+$side-padding: 25px;
+.table {
+	display: table;
+
+	width: 100%;
+	padding-bottom: 25px;
+
+	@include medium {
+		float: left;
+		margin-right: $side-padding;
+		width: calc(50% - #{$side-padding});
+	}
+
+	&-container {
+		width: 100%;
+	}
+	&__row {
+		display: table-row;
+		&:nth-child(even) {
+		    background: palette-get(na-black-05);
+		}
+
+		&.bold {
+			font-weight: bold;
+		}
+		&__heading-label, &__label, &__value {
+			display: table-cell;
+			padding: 5px 10px;
+		}
+
+		&__heading-label {
+			font-weight: bold;
+			color: white;
+			background-color: palette-get(na-black-40) !important;
+			&:last-child {
+				border-left: 1px solid palette-get(na-black-10);
+			}
+		}
+
+		&__value {
+			font-weight: bold;
+			border-left: 1px solid palette-get(na-black-10);
+		}
+	}
+}
