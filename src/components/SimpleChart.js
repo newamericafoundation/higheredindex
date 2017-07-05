@@ -6,6 +6,7 @@ import LegendCategorical from "./LegendCategorical.js";
 import Tooltip from "./Tooltip.js";
 import LineChart from "../chart_modules/LineChart.js";
 import BarChart from "../chart_modules/BarChart.js";
+import GroupedBarChart from "../chart_modules/GroupedBarChart.js";
 import { formatValue } from "../helper_functions/format_value.js";
 
 export default class SimpleChart extends React.Component {
@@ -181,6 +182,9 @@ export default class SimpleChart extends React.Component {
         switch (chart.type) {
             case "bar-chart":
                 retVal = new BarChart(params);
+                break;
+            case "grouped-bar-chart":
+                retVal = new GroupedBarChart(params);
                 break;
             case "line-chart":
                 retVal = new LineChart(params);
