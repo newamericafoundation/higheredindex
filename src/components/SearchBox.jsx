@@ -297,13 +297,13 @@ class SearchBox extends React.Component {
 	    let counts = {};
 
 	    counts.states = stList.filter(listElem => 
-		        listElem.name.toLowerCase().slice(0, inputLength) === inputValue
+		        listElem.name.toLowerCase().includes(inputValue)
 		    ).length;
 	   	counts.institutions = instList.filter(listElem => 
-		        listElem.name.toLowerCase().slice(0, inputLength) === inputValue
+		        listElem.name.toLowerCase().includes(inputValue)
 		    ).length;
 	   	counts.indicators = indicatorList.filter(listElem => 
-		        listElem.name.toLowerCase().slice(0, inputLength) === inputValue
+		        listElem.name.toLowerCase().includes(inputValue)
 		    ).length;
 	   	counts.all = counts.states + counts.institutions + counts.indicators;
 
