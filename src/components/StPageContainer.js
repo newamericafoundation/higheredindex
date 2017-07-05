@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { changeCurrProfile, fetchProfile } from '../actions'
 import StPage from './StPage'
 import NotFoundPage from './NotFoundPage';
+import LoadingIcon from './LoadingIcon';
 
 import React from 'react';
 
@@ -42,8 +43,6 @@ class StPageContainer extends React.Component {
     const { fetchedSts, id } = this.props
     this.stData = fetchedSts[id]
 
-    console.log("ID is: ")
-    console.log(id);
     if (this.stData && !this.stData.isFetching) {
       if (this.stData.data) {
         return <StPage stData={ this.stData.data } />
@@ -53,7 +52,7 @@ class StPageContainer extends React.Component {
       }
     } 
     
-    return <h1> Loading ... </h1>
+    return <LoadingIcon />
   }
 }
 
