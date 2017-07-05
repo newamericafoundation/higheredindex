@@ -12,6 +12,8 @@ export default class DataBlockViz extends React.Component {
   	const {settings, data} = this.props,
       {type} = settings;
 
+      console.log(settings);
+
     // let viz;
     // switch (type) {
     //   case "line-chart":
@@ -23,7 +25,10 @@ export default class DataBlockViz extends React.Component {
 
     return (
     	<div className="data-block__viz">
-    		<SimpleChart settings={settings} data={data} />
+        {(settings.chart1Settings.type == "line-chart" || settings.chart1Settings.type == "line-chart") &&
+    		  <SimpleChart settings={settings} data={data} /> }
+        {settings.chart1Settings.type == "table" &&
+          <Table settings={settings} data={data} /> }
     	</div>
     )
   }
