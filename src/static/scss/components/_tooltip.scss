@@ -1,36 +1,53 @@
+$color-swatch-radius: 4px;
 .tooltip {
 	position: absolute;
 	background-color: white;
 	border: 1px solid palette-get(na-black-10);
 	z-index: 100;
-	padding: 10px 10px;
+	padding: 10px 12px;
 	pointer-events: none;
-
-	&__title, &__value {
-		text-align: center;
-		margin-bottom: 0px;
-		line-height: 1.3;
-	}
 
 	&__title {
 		font-weight: bold;
 		font-size: 17px;
 		padding-top: 3px;
 		padding-bottom: 3px;
+		margin-bottom: 0px;
+		line-height: 1.3;
+		color: palette-get(na-black);
+	}
+
+	&__row-container {
+		display: table;
+	}
+
+	&__row {
+		display: table-row;
+	}
+
+	&__color-swatch-container, &__label, &__value {
+		display: table-cell;
+	}
+
+	&__color-swatch-container {
+		width: $color-swatch-radius*2;
+		height: $color-swatch-radius*2;
+	}
+
+	&__color-swatch {
+
+	}
+
+	&__label, &__value {
+		font-size: 13px;
+		padding: 2px 0px 2px 7px;
+	}
+
+	&__label {
+		color: palette-get(na-black-70);
 	}
 
 	&__value {
-		font-size: 15px;
-		padding-top: 3px;
-		padding-bottom: 3px;
-
-		&__label {
-			font-weight: bold;
-			padding-right: 2px;
-
-		}
-		&__val {
-
-		}
+		font-weight: bold;
 	}
 }

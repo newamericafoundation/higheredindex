@@ -27,7 +27,9 @@ export default function Tooltip(props) {
 		{ props.settings &&
 			<div>
 				<h5 className="tooltip__title">{props.settings.title}</h5>
-				{ props.settings.valArray.map((val) => { return renderVal(val); })}
+				<div className="tooltip__row-container">
+					{ props.settings.valArray.map((val) => { return renderVal(val); })}
+				</div>
 			</div>
 		}
 		</div>
@@ -38,10 +40,13 @@ function renderVal(val) {
 	console.log(val);
 	if ((val.value || val.value == 0) && !isNaN(val.value)) {
 		return (
-			<h5 className="tooltip__value" key={val.variable.variable}>
-				<span className="tooltip__value__label" style={{color:val.variable.color}}>{ val.variable.displayName }:</span>
-				<span className="tooltip__value__val">{ formatValue(val.value, val.variable.format) }</span>
-			</h5>
+			<div className="tooltip__row" key={val.variable.variable}>
+				<svg className="tooltip__color-swatch-container">
+					<circle className="tooltip__color-swatch" cx="4" cy="4" r="4" style={{fill:val.variable.color}}></circle>
+				</svg>
+				<h5 className="tooltip__label">{ val.variable.displayName }</h5>
+				<h5 className="tooltip__value">{ formatValue(val.value, val.variable.format) }</h5>
+			</div>
 		)
 	}
 }

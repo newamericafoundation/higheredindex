@@ -71,4 +71,8 @@
 	& > path {
 		stroke-width: 0;
 	}
+
+	& > text {
+		fill: palette-get(na-black-70);
+	}
 }

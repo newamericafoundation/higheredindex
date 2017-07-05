@@ -80,45 +80,30 @@ export default class SimpleChart extends React.Component {
         this.svg = d3.select(div).append("svg");
         this.g = this.svg.append("g")
 
-        this.initializeYAxes();
+        this.initializeYScales();
 
         this.g.attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
-        this.initializeXAxis();
+        
+        this.initializeXScale();
+        this.initializeYAxes();
         this.initializeDataElements();
+
+        this.initializeXAxis();
 
         return div;
     }
 
-    initializeYAxes() {
+    initializeYScales() {
         let {chart1Settings, chart2Settings} = this.props.settings;
-    	this.yAxis1 = this.g.append("g")
-            .attr("class", "axis axis--y");
-
-        // this.yAxis1Label = this.yAxis1.append("text")
-        //     .attr("class", "data-block__viz__y-axis-label")
-        //     .attr("transform", "rotate(-90)")
-        //     .attr("y", -30)
-        //     .attr("fill", "#000")
-        //     .text("Value");
 
         this.y1 = d3.scaleLinear()
-        	.domain(this.getYExtents(chart1Settings));
+            .domain(this.getYExtents(chart1Settings));
 
         if (this.y1.domain()[1] > 1000000) {
             this.margin.left = 80;
         }
 
         if (chart2Settings) {
-            this.yAxis2 = this.g.append("g")
-                .attr("class", "axis axis--y");
-
-            // this.yAxis2Label = this.yAxis2.append("text")
-            //     .attr("class", "data-block__viz__y-axis-label")
-            //     .attr("transform", "rotate(-90)")
-            //     .attr("y", 30)
-            //     .attr("fill", "#000")
-            //     .text("Value");
-
             this.y2 = d3.scaleLinear()
                 .domain(this.getYExtents(chart2Settings));
 
@@ -128,11 +113,8 @@ export default class SimpleChart extends React.Component {
         }
     }
 
-    initializeXAxis() {
-        let { chart1Settings, chart2Settings } = this.props.settings;
-
-        this.xAxis = this.g.append("g")
-            .attr("class", "axis axis--x");
+    initializeXScale() {
+        let {chart1Settings, chart2Settings} = this.props.settings;
 
         this.x = d3.scaleBand()
             .paddingInner(0.3)
@@ -155,6 +137,37 @@ export default class SimpleChart extends React.Component {
         keyList = Array.from(new Set(keyList)).sort(d3.ascending);
 
         this.x.domain(keyList);
+    }
+
+    initializeYAxes() {
+        let {chart1Settings, chart2Settings} = this.props.settings;
+    	this.yAxis1 = this.g.append("g")
+            .attr("class", "axis axis--y");
+
+        // this.yAxis1Label = this.yAxis1.append("text")
+        //     .attr("class", "data-block__viz__y-axis-label")
+        //     .attr("transform", "rotate(-90)")
+        //     .attr("y", -30)
+        //     .attr("fill", "#000")
+        //     .text("Value");
+
+
+        if (chart2Settings) {
+            this.yAxis2 = this.g.append("g")
+                .attr("class", "axis axis--y");
+
+            // this.yAxis2Label = this.yAxis2.append("text")
+            //     .attr("class", "data-block__viz__y-axis-label")
+            //     .attr("transform", "rotate(-90)")
+            //     .attr("y", 30)
+            //     .attr("fill", "#000")
+            //     .text("Value");
+        }
+    }
+
+    initializeXAxis() {
+        this.xAxis = this.g.append("g")
+            .attr("class", "axis axis--x");
     }
 
     initializeDataElements() {
@@ -239,6 +252,7 @@ export default class SimpleChart extends React.Component {
                 .attr("transform", "translate(" + width + ")")
                 .call(d3.axisRight(this.y2)
                     .tickSizeOuter(0)
+                    .tickSizeInner(0)
                     .tickPadding(10)
                     .tickFormat((d) => { return formatValue(d, this.props.settings.chart2Settings.variables[0].format); })
                     .ticks(width > 350 ? 8 : 5));
