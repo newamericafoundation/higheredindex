@@ -34,14 +34,14 @@ const instVizSettings = {
 					yAxisLabel: "Students",
 					variables: [
 						{variable:"white", displayName:"White", format: "percent", color: colors.turquoise.light },
-						{variable:"amin", displayName:"American Indian", format: "percent", color: colors.blue.light},
-						{variable:"afam", displayName:"Black", format: "percent", color: colors.red.light},
+						{variable:"afam", displayName:"Black", format: "percent", color: colors.blue.light},
+						{variable:"hisp", displayName:"Hispanic", format: "percent", color: colors.red.light},
 						{variable:"asia", displayName:"Asian", format: "percent", color: colors.purple.light},
-						{variable:"hisp", displayName:"Hispanic", format: "percent", color: "orange"},
-						{variable:"nhpi", displayName:"Hawaiian/Pacific Islander", format: "percent", color: "yellow"},
-						{variable:"nonresident", displayName:"Nonresident Alien", format: "percent", color: "green"},
-						{variable:"twoormore", displayName:"Two or more", format: "percent", color: colors.grey.medium},
-						{variable:"unk", displayName:"Unknown race", format: "percent", color: "gold"},
+						{variable:"nhpi", displayName:"Hawaiian/Pacific Islander", format: "percent", color: colors.orange},
+						{variable:"amin", displayName:"American Indian", format: "percent", color: colors.yellow},
+						{variable:"twoormore", displayName:"Two or more", format: "percent", color: colors.brown},
+						{variable:"nonresident", displayName:"Nonresident Alien", format: "percent", color: colors.grey.medium},
+						{variable:"unk", displayName:"Unknown race", format: "percent", color: colors.grey.light},
 					]
 				}
 			}
