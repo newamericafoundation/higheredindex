@@ -1,6 +1,6 @@
 var d3 = require("d3");
 
-export default class BarChart {
+export default class GroupedBarChart {
     constructor(settings) {
         let {data, variables, domElem, mouseoverFunc, mouseoutFunc} = settings;
         this.data = data;
