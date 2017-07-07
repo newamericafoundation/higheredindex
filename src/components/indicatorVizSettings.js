@@ -13,7 +13,7 @@ export const indicatorList = [
 	{ name: "Student Loans", path: "student_loans", type: "indicator" },
 	{ name: "Pell Grants", path: "pell_grants", type: "indicator" },
 	{ name: "Supplemental Educational Opportunity Grants", path: "seog", type: "indicator" },
-	{ name: "Teach Grants", path: "teach_grants", type: "indicator" },
+	{ name: "TEACH Grants", path: "teach_grants", type: "indicator" },
 	{ name: "Iraq and Afghanistan Service Grants", path: "iraq_afghanistan_grants", type: "indicator" },
 	{ name: "Federal Work Study", path: "fed_work_study", type: "indicator" },
 	{ name: "State and Local Aid", path: "state_local_aid", type: "indicator" },
