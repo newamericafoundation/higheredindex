@@ -1,13 +1,14 @@
 .footer {
 	width: 100%;
-	
+	z-index: 100;
 	background-color: palette-get(na-black);
 	color: white;
 	padding: 40px 25px;
+	position: relative;
 
 	@include breakpoint(medium) {
 		display: table;
-		padding: 75px 25px;
+		padding: 50px 25px;
 	}
 
 	&__left, &__right {
