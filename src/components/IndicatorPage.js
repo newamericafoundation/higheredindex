@@ -7,7 +7,6 @@ import ProfileSection from './ProfileSection';
 import ProfileHeader from './ProfileHeader.jsx';
 import DataBlock from './DataBlock';
 import { indicatorVizSettings } from './indicatorVizSettings';
-import RankingsDashboard from '../chart_modules/RankingsDashboard';
 import { connect } from 'react-redux'
 import { toggleTopNavProfileName } from '../actions'
 import $ from 'jquery';
@@ -50,23 +49,26 @@ class IndicatorPage extends React.Component {
       return <NotFoundPage/>;
     }
     // ad these to render return when ready
-    // <ProfileHeader id={ path } name={ name } customImage={image}/>
-    
 
-    const {path, name, image, description, rankingVariables} = this.props.indicatorData;
+        // <ProfileSection title="Trends" />
+
+    const {path, name, description, rankingVariables} = this.props.indicatorData;
     return (
       <div className="location-profile indicator">
+        <ProfileHeader id={ path } name={ name } />
         <SectionNav type="indicator"/>
+        <ProfileSection 
+          title="About"
+          index="0"
+          type="description"
+          text={description} />
+        <ProfileSection 
+          title="Rankings"
+          index="1"
+          type="rankingDashboard"
+          settings={rankingVariables} />
 
-        <ProfileSection title="About" />
-        <div className="location-profile__body-paragraph">
-          <p>{ description }</p>
-        </div>
 
-        <ProfileSection title="Rankings" />
-        <RankingsDashboard filters={rankingVariables} />
-
-        <ProfileSection title="Trends" />
       </div>
     )
   }

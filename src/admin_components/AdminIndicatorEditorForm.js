@@ -17,14 +17,16 @@ class AdminIndicatorEditorForm extends React.Component {
       <div>
         <Form
           onSubmit={(values) => {
-            values.rankingVariables.map((d, i) => {
-              d.index = i;
-              d.numBins = 5;
-              d.scaleType = "quantize";
-              d.customRange = [colors.white, colors[d.color].light, colors[d.color].dark];
-              d.format = "number";
-              return d;
-            })
+            if (values && values.rankingVariables) {
+              values.rankingVariables.map((d, i) => {
+                d.index = i;
+                d.numBins = 5;
+                d.scaleType = "quantize";
+                d.customRange = [colors.white, colors[d.color].light, colors[d.color].dark];
+                d.format = "number";
+                return d;
+              })
+            }
             console.log(values);
             this.props.submitHandler(values, action);
           }}

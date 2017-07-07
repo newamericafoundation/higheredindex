@@ -51,7 +51,7 @@ class SectionNav extends React.Component {
 	render() {
 		let sections;
 		if (this.props.type == "indicator") {
-			sections = ["about, rankings, trends"];
+			sections = ["about", "rankings", "trends"];
 		} else {
 			sections = ["students", "loans", "grants", "schools", "outcomes"];
 		}
