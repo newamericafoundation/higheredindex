@@ -34,14 +34,14 @@ const instVizSettings = {
 					yAxisLabel: "Students",
 					variables: [
 						{variable:"white", displayName:"White", format: "percent", color: colors.turquoise.light },
-						{variable:"amin", displayName:"American Indian", format: "percent", color: colors.blue.light},
-						{variable:"afam", displayName:"Black", format: "percent", color: colors.red.light},
+						{variable:"afam", displayName:"Black", format: "percent", color: colors.blue.light},
+						{variable:"hisp", displayName:"Hispanic", format: "percent", color: colors.red.light},
 						{variable:"asia", displayName:"Asian", format: "percent", color: colors.purple.light},
-						{variable:"hisp", displayName:"Hispanic", format: "percent", color: "orange"},
-						{variable:"nhpi", displayName:"Hawaiian/Pacific Islander", format: "percent", color: "yellow"},
-						{variable:"nonresident", displayName:"Nonresident Alien", format: "percent", color: "green"},
-						{variable:"twoormore", displayName:"Two or more", format: "percent", color: colors.grey.medium},
-						{variable:"unk", displayName:"Unknown race", format: "percent", color: "gold"},
+						{variable:"nhpi", displayName:"Hawaiian/Pacific Islander", format: "percent", color: colors.orange},
+						{variable:"amin", displayName:"American Indian", format: "percent", color: colors.yellow},
+						{variable:"twoormore", displayName:"Two or more", format: "percent", color: colors.brown},
+						{variable:"nonresident", displayName:"Nonresident Alien", format: "percent", color: colors.grey.medium},
+						{variable:"unk", displayName:"Unknown race", format: "percent", color: colors.grey.light},
 					]
 				}
 			}
@@ -426,7 +426,6 @@ const instVizSettings = {
 			}
 		},
 		{
-			// need grouped bar chart
 			title: "Student Aid",
 			paragraphSettings: {
 				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
@@ -440,7 +439,14 @@ const instVizSettings = {
 						{variable:"fedaidperc", displayName:"Percent of Federal Aid Recipients", format: "percent", color: colors.turquoise.dark },
 					]
 				},
-				
+				chart2Settings: {
+					type: "grouped-bar-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"avefedaid", displayName:"Average Federal Aid", format: "price", color: colors.turquoise.light },
+						{variable:"avetotaid", displayName:"Average Total Aid", format: "price", color: colors.purple.light },
+					]
+				},
 			}
 		},
 		{

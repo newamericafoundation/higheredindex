@@ -1,124 +1,85 @@
 var d3 = require("d3");
 
-export default class LineChart {
-	constructor(settings) {
-		console.log(settings);
-		let {data, variables, domElem, mouseoverFunc, mouseoutFunc} = settings;
+export default class GroupedBarChart {
+    constructor(settings) {
+        let {data, variables, domElem, mouseoverFunc, mouseoutFunc} = settings;
+        this.data = data;
+        this.variables = variables;
+        this.domElem = domElem;
+        this.mouseoverFunc = mouseoverFunc;
+        this.mouseoutFunc = mouseoutFunc;
 
-		this.data = data;
-		this.variables = variables;
-		this.domElem = domElem;
-		this.mouseoverFunc = mouseoverFunc;
-		this.mouseoutFunc = mouseoutFunc;
+        this.initializeDataBars();
+    }
 
-		this.initializeXScale();
-		this.initializeDataBars();
-
-        this.xAxis = this.domElem.append("g")
-            .attr("class", "axis axis--x");
-
-	}
-
-	initializeXScale() {
-        this.x = d3.scaleBand()
-            .paddingInner(0.3)
-            .paddingOuter(0.4);
-
-        let keyList = [];
-
-        for (let variable of this.variables) {
-            let keys = Object.keys(this.data[variable.variable]);
-            keyList.push(...keys);
-        }
-
-        keyList = Array.from(new Set(keyList));
-
-        this.x.domain(keyList);
-	}
-
-	initializeDataBars() {
-		this.dataBars = {};
+    initializeDataBars() {
+        this.dataBars = {};
         
-         let dataArray;
-		for (let variable of this.variables) {
-			let varName = variable.variable;
+        for (let variable of this.variables) {
+            let dataArray = [];
+            let varName = variable.variable;
+            Object.keys(this.data[varName]).forEach(
+                (key) => {
+                    let year = key,
+                        value = this.data[varName][key];
 
-            dataArray = Object.keys(this.data[varName]).map(
-            	(key) => {
-            		let year = key,
-            			value = this.data[varName][key];
-            		return {year: year, value: value};
-				}
-			)
+                  if (!isNaN(value)) {
+                      dataArray.push({year: year, value: value});
+                  }
+                }
+            )
+
+            console.log(dataArray)
 
             this.dataBars[varName] = this.domElem.selectAll("rect#" + varName)
-            	.data(dataArray)
-              .enter().append("rect")
-              	.attr("id", (d) => { console.log(d); return varName; })
-              	.attr("class", "bar-chart__data-bar")
-                .style("fill", variable.color)
-                .style("stroke", "white")
-                .style("stroke-width", "1px")
-                .on("mouseover", (d, index, paths) => { return this.mouseoverFunc(d, paths[index], d3.event, varName); })
-                .on("mouseout", () => this.mouseoutFunc());
+                .data(dataArray)
+                .enter().append("rect")
+                    .attr("id", (d) => { return varName; })
+                    .attr("class", "bar-chart__data-bar")
+                  .style("fill", variable.color)
+                  .style("stroke", "white")
+                  .style("stroke-width", "1px")
+                  .on("mouseover", (d, index, paths) => {
+                    return this.mouseoverFunc(d.year, d3.event); 
+                  })
+                  .on("mouseout", () => this.mouseoutFunc());
         }
-    }
+  }
 
     update(updateParams) {
         const {width, height} = updateParams;
- 		this.updateXScale(updateParams);
- 		this.updateDataBars(updateParams);
-
-        this.xAxis
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(this.x).tickSize(0).tickPadding(10)
-                .tickFormat(function(e){
-                    if(Math.floor(e) != e)
-                    {
-                        return;
-                    }
-                    return e;
-                })
-            );
-    }
-
-    updateXScale(updateParams) {
-    	const {width, height} = updateParams;
-
-        this.x.rangeRound([0, width]);
-        
+           this.updateDataBars(updateParams);
     }
 
     updateDataBars(updateParams) {
-        const {y, width, height, currHovered, valsShown} = updateParams;
-
-        console.log(currHovered);
-
-        let barHeights = {};
-        for (let year of this.x.domain()) {
-            barHeights[year] = height;
-        }
-
+        const {y, x, width, height, currHovered, valsShown} = updateParams;
+ 
+        let i = 0;
         for (let variable of this.variables) {
-         let varName = variable.variable;
+            let varName = variable.variable;
 
             this.dataBars[varName]
-                .attr("x", (d) => { return this.x(d.year); })
-                .attr("y", (d) => {
-                    barHeights[d.year] -= (height - y(d.value));
-                    return barHeights[d.year];
-                })
+                .attr("x", (d) => { return x(d.year) + i*(x.bandwidth()/2); })
+                .attr("y", (d) => { return y(d.value); })
                 .attr("height", (d) => { return height - y(d.value); })
-                .attr("width", this.x.bandwidth())
+                .attr("width", x.bandwidth()/2)
                 .attr("opacity", (d) => {
-                     if (currHovered) {
-                         if (varName == currHovered.varName && d.year == currHovered.year) {
+                     if (currHovered && d.year == currHovered) {
                              return .7;
-                         }
                      } 
                      return 1;
                 })
                 .classed("disabled", valsShown.indexOf(varName) == -1)
+
+            i++;
         }
+    }
+
+    getValArray(year) {
+      let valArray = [];
+      for (let variable of this.variables) {
+        valArray.push({ variable: variable, value: this.data[variable.variable][year] });
+      }
+      return valArray;
     }
 }

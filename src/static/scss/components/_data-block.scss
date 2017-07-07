@@ -7,6 +7,7 @@
 		margin-bottom: 25px;
 	}
 	&__content {
+		width: 100%;
 		@include medium {
 			display: table;
 		}
@@ -55,6 +56,10 @@
 			word-break: break-all;
 			font-size: 14px;
 		}
+
+		&:first-child {
+			width: 100% !important;
+		}
 	}
 }
 
@@ -65,5 +70,9 @@
 	}
 	& > path {
 		stroke-width: 0;
+	}
+
+	& > text {
+		fill: palette-get(na-black-70);
 	}
 }
