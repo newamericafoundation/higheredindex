@@ -50,23 +50,24 @@ class IndicatorPage extends React.Component {
       return <NotFoundPage/>;
     }
     // ad these to render return when ready
-    // <ProfileHeader id={ path } name={ name } customImage={image}/>
-    
+    // 
+            // <ProfileSection title="About" />
+        // <div className="location-profile__body-paragraph">
+        //   <p>{ description }</p>
+        // </div>
 
-    const {path, name, image, description, rankingVariables} = this.props.indicatorData;
+        // <ProfileSection title="Rankings" />
+        // <RankingsDashboard filters={rankingVariables} />
+
+        // <ProfileSection title="Trends" />
+
+    const {path, name, description, rankingVariables} = this.props.indicatorData;
     return (
       <div className="location-profile indicator">
+        <ProfileHeader id={ path } name={ name } />
         <SectionNav type="indicator"/>
 
-        <ProfileSection title="About" />
-        <div className="location-profile__body-paragraph">
-          <p>{ description }</p>
-        </div>
 
-        <ProfileSection title="Rankings" />
-        <RankingsDashboard filters={rankingVariables} />
-
-        <ProfileSection title="Trends" />
       </div>
     )
   }
