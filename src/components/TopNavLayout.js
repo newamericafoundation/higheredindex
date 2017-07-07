@@ -10,7 +10,6 @@ class TopNavLayout extends React.Component {
       <div>
         <TopNav />
         <div className="top-nav-shifted-content">{this.props.children}</div>
-        <Footer />
       </div>
     );
   }

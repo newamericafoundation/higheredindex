@@ -5,5 +5,8 @@ export var colors = {
 	"purple": { "very_light": "#bd9fc6","light": "#A076AC", "medium": "#74557E","dark": "#48304F"},
 	"grey": { "light": "#EAEAEB", "medium_light":"#CBCBCD" ,"medium": "#ABACAE","dark": "#2C2F35"},
 	"white": "#FFFFFF",
-	"black": "#2c2f35"
+	"black": "#2c2f35",
+	"orange": "#f19348",
+	"yellow": "#f4dc70",
+	"brown": "#bf9963",
 }

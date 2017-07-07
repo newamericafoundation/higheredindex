@@ -68,7 +68,7 @@ class IndicatorPage extends React.Component {
           type="rankingDashboard"
           settings={rankingVariables} />
 
-
+        <Footer />
       </div>
     )
   }
