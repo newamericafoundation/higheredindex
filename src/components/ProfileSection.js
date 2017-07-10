@@ -6,7 +6,8 @@ import DataBlock from './DataBlock';
 
 import $ from 'jquery';
 
-import SvgIcon from './SvgIcon'
+import SvgIcon from './SvgIcon';
+import RankingsDashboard from '../chart_modules/RankingsDashboard';
 
 import { changeCurrProfileSection } from '../actions';
 
@@ -39,20 +40,48 @@ class ProfileSection extends React.Component {
 		return false;
 	}
 
+	getSectionContent() {
+		const {type, data, settings, description} = this.props;
+		
+		switch(type) {
+			case "description":
+				return (
+			        <div className="location-profile__body-paragraph">
+			          <p>{ description }</p>
+			        </div>
+				)
+			case "rankingDashboard":
+				console.log(settings)
+				return (
+			        <div>
+			        	{settings && <RankingsDashboard filters={settings} />}
+			        </div>
+				)
+			default:
+				return (
+					<div>
+			          {settings.map((settingsObject, i) => {
+			            return <DataBlock key={i} settings={settingsObject} data={data} />;
+			          })}
+			        </div>
+				)
+		}
+			
+	}
+
 	render() {
+		const {title, subtitle, data, settings} = this.props;
 		console.log("rendering");
+
+		let sectionContent = this.getSectionContent();
 		return (
 	    	<section ref="profile_section" className="profile-section">
-	    		<a className="profile-section__anchor" name={this.props.title.toLowerCase()} />
+	    		<a className="profile-section__anchor" name={title.toLowerCase()} />
 	    		<div className="profile-section__title-container">
-	    			<h3 className="profile-section__title">{this.props.title}</h3>
-	    			<h5 className="profile-section__subtitle">{this.props.subtitle}</h5>
+	    			<h3 className="profile-section__title">{title}</h3>
+	    			{subtitle && <h5 className="profile-section__subtitle">{subtitle}</h5>}
 	    		</div>
-	    		<div>
-		          {this.props.settings.map((settings, i) => {
-		            return <DataBlock key={i} settings={settings} data={this.props.data} />;
-		          })}
-		        </div>
+	    		{sectionContent}
 	    	</section>
 	    );
 	}

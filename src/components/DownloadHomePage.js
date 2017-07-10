@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { downloadDataFile } from '../actions';
 import SvgIcon from './SvgIcon'
+import Footer from './Footer';
+
 
 
 const downloadFile = (collection) => {
@@ -86,6 +88,7 @@ const DownloadHomePage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

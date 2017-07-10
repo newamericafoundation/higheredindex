@@ -6,6 +6,7 @@ import NotFoundPage from './NotFoundPage';
 import SectionNav from './SectionNav.jsx';
 import ProfileSection from './ProfileSection';
 import ProfileHeader from './ProfileHeader.jsx';
+import Footer from './Footer';
 import stVizSettings from './stVizSettings';
 import { connect } from 'react-redux'
 import { toggleTopNavProfileName, changeCurrProfileSection } from '../actions';
@@ -85,7 +86,7 @@ class StPage extends React.Component {
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
           settings={stVizSettings.outcomes} 
           data= {this.props.stData.outcomes }/>
-        
+        <Footer />
       </div>
     );
   }

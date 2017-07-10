@@ -176,6 +176,7 @@ $top-bar-height: 55px;
 		@include large {
 			width: 30%;
 			display: block;
+			position: fixed;
 		}
 		background-color: rgba(59, 61, 67, .9);
 		padding: 15px 25px;

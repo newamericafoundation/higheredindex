@@ -1,0 +1,107 @@
+.footer {
+	width: 100%;
+	z-index: 100;
+	background-color: palette-get(na-black);
+	color: white;
+	padding: 40px 25px;
+	position: relative;
+
+	@include breakpoint(medium) {
+		display: table;
+		padding: 50px 25px;
+	}
+
+	&__left, &__right {
+		width: 100%;
+		display: block;
+
+		@include breakpoint(medium) {
+			display: table-cell;
+			width: 50%;
+			vertical-align: top;
+		}
+	}
+
+	&__right {
+		padding-top: 25px;
+
+		@include breakpoint(medium) {
+			padding-top: 0px;
+		}
+	}
+
+	&__link-list-container {
+		display: table;
+	}
+
+	&__link-list {
+		display: table-cell;
+		width: 25%;
+		padding: 0px;
+		@include breakpoint(medium) {
+			padding: 0px 10%;
+		}
+
+		&:last-of-type {
+			padding-left: 0px;
+		}
+
+		&__title {
+			font-weight: bold;
+			text-transform: uppercase;
+			letter-spacing: 1.3px;
+		}
+
+		&__link > a {
+			color: white;
+
+			&:hover {
+				color: palette-get(na-turquoise);
+			}
+		}
+	}
+
+	&__license {
+		line-height: 1.3;
+	}
+	&__last-updated {
+		&__label {
+			font-weight: bold;
+		}
+	}
+
+	&__icons {
+		width: 100%;
+		position: relative;
+		padding-bottom: 15px;
+
+		svg {
+			fill: white;
+		}
+
+		&__left {
+			display: inline-block;
+			position: relative;
+			left: 0;
+			svg {
+				width: 260px;
+				height: 50px;
+			}
+		}
+
+		&__right {
+			@media screen and (min-width: 775px) {
+			    display: inline-block;
+				position: absolute;
+				right: 0;
+				top: 0;
+			} 
+
+			svg {
+				height: 50px;
+				width: 40px;
+				margin-right: 15px;
+			}
+		}
+	}
+}

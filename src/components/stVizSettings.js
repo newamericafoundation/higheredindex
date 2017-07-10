@@ -1,6 +1,6 @@
 import { colors } from './../helper_functions/colors.js';
 
-const instVizSettings = {
+const stVizSettings = {
 	"students": [
 		{
 			title: "Enrollment by Student Type",
@@ -235,7 +235,7 @@ const instVizSettings = {
 			}
 		},
 		{
-			title: "Repayment Rates by Dependency",
+			title: "Repayment Rates by Dependency Status",
 			paragraphSettings: {
 				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
 				variables: ['fem', 'men']
@@ -312,7 +312,7 @@ const instVizSettings = {
 					variables: [
 						{variable:"pelldisburse", displayName:"Pell Grants", format: "price", color: colors.turquoise.light },
 						{variable:"seogdisburse", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "price", color: colors.turquoise.medium},
-						{variable:"teachdisburse", displayName:"Teach Grants", format: "price", color: colors.blue.light},
+						{variable:"teachdisburse", displayName:"TEACH Grants", format: "price", color: colors.blue.light},
 						{variable:"iraqdisburse", displayName:"Iraq/Afghanistan", format: "price", color: colors.red.light},
 						{variable:"workdisburse", displayName:"Federal Work Study", format: "price", color: colors.purple.light},
 					]
@@ -332,7 +332,7 @@ const instVizSettings = {
 					variables: [
 						{variable:"pellrecip", displayName:"Pell Grants", format: "price", color: colors.turquoise.light },
 						{variable:"seogrecip", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "price", color: colors.turquoise.medium},
-						{variable:"teachrecip", displayName:"Teach Grants", format: "price", color: colors.blue.light},
+						{variable:"teachrecip", displayName:"TEACH Grants", format: "price", color: colors.blue.light},
 						{variable:"iraqrecip", displayName:"Iraq/Afghanistan", format: "price", color: colors.red.light},
 						{variable:"workrecip", displayName:"Federal Work Study", format: "price", color: colors.purple.light},
 					]
@@ -460,7 +460,6 @@ const instVizSettings = {
 			}
 		},
 		{
-			// need grouped bar chart
 			title: "Student Aid",
 			paragraphSettings: {
 				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
@@ -638,7 +637,7 @@ const instVizSettings = {
 			}
 		},
 		{
-			title: "Mean Earnings by Dependency",
+			title: "Mean Earnings by Dependency Status",
 			paragraphSettings: {
 				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
 				variables: ['fem', 'men']
@@ -766,7 +765,7 @@ const instVizSettings = {
 			}
 		},
 		{
-			title: "Median Debt by Dependency",
+			title: "Median Debt by Dependency Status",
 			paragraphSettings: {
 				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
 				variables: ['fem', 'men']
@@ -783,8 +782,7 @@ const instVizSettings = {
 				}
 			}
 		},
-
 	]
 }
 
-export default instVizSettings;
+export default stVizSettings;

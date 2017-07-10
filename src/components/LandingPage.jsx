@@ -44,7 +44,7 @@ const LandingPage = () => {
           </div>
           <div className="landing-page__methodology-link">
             <Link to={'/'}>
-              <SvgIcon name='line-chart' />
+              <SvgIcon name='trends' />
               <h5 className="landing-page__methodology-link__primary">Methodology</h5>
             </Link>
           </div>
