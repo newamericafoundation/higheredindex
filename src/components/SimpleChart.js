@@ -86,9 +86,10 @@ export default class SimpleChart extends React.Component {
         
         this.initializeXScale();
         this.initializeYAxes();
-        this.initializeDataElements();
+        
 
         this.initializeXAxis();
+        this.initializeDataElements();
 
         return div;
     }

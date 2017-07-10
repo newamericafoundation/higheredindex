@@ -1,6 +1,6 @@
 import { colors } from './../helper_functions/colors.js';
 
-const instVizSettings = {
+const stVizSettings = {
 	"students": [
 		{
 			title: "Enrollment by Student Type",
@@ -785,4 +785,4 @@ const instVizSettings = {
 	]
 }
 
-export default instVizSettings;
+export default stVizSettings;

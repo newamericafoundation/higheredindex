@@ -4,6 +4,7 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router';
 import AdminHome from './admin_components/AdminHome';
 import AdminDataUpload from './admin_components/AdminDataUpload';
+import AdminLogin from './admin_components/AdminLogin';
 import AdminIndicatorEditor from './admin_components/AdminIndicatorEditor';
 import SideMenuLayout from './components/SideMenuLayout';
 import TopNavLayout from './components/TopNavLayout';
@@ -14,6 +15,26 @@ import InstPageContainer from './components/InstPageContainer';
 import IndicatorPageContainer from './components/IndicatorPageContainer';
 import DownloadHomePage from './components/DownloadHomePage';
 import NotFoundPage from './components/NotFoundPage';
+import store from './store';
+
+const loggedIn = (state) => {
+	console.log("HERE IS THE STETE", store)
+	return 
+  // ...
+}
+
+const requireAuth = (nextState, replace) => {
+	console.log(store.getState())
+  if (!store.getState().adminLoginStatus) {
+  	console.log("redirecting")
+    replace({
+      pathname: '/admin/login'
+    })
+  } else {
+  	console.log("staying")
+  	return;
+  }
+}
 
 const routes = (
 	<Route path="/" component={SideMenuLayout}>
@@ -24,9 +45,10 @@ const routes = (
 		    <Route path="institution/:id" component={InstPageContainer}/>
 		    <Route path="indicator/:id" component={IndicatorPageContainer}/>
 		    <Route path="download" component={DownloadHomePage}/>
-		    <Route path="admin" component={AdminHome}/>
-		    <Route path="admin/data-upload" component={AdminDataUpload}/>
-		    <Route path="admin/indicators/:id" component={AdminIndicatorEditor}/>
+		    <Route path="admin" component={AdminHome} onEnter={requireAuth}/>
+		    <Route path="admin/login" component={AdminLogin} />
+		    <Route path="admin/data-upload" component={AdminDataUpload} onEnter={requireAuth}/>
+		    <Route path="admin/indicators/:id" component={AdminIndicatorEditor} onEnter={requireAuth}/>
 		    <Route path="*" component={NotFoundPage}/>
 		</Route>
   	</Route>

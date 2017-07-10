@@ -18,6 +18,7 @@ export const UPDATE_INDICATOR = 'UPDATE_INDICATOR'
 export const SET_INDICATOR_UPDATE_STATUS = 'SET_INDICATOR_UPDATE_STATUS'
 export const UPLOAD_DATA_FILE = 'UPLOAD_DATA_FILE'
 export const SET_DATA_FILE_UPLOAD_STATUS = 'SET_DATA_FILE_UPLOAD_STATUS'
+export const SET_ADMIN_LOGIN_STATUS = 'SET_ADMIN_LOGIN_STATUS'
 
 // export const REQUEST_INST = 'REQUEST_INST'
 // export const RECEIVE_INST = 'RECEIVE_INST'
@@ -252,6 +253,14 @@ export function updateIndicator(newData, action) {
     }
   }
 }
+
+export function setAdminLoginStatus(status) {
+   return { 
+      type: SET_ADMIN_LOGIN_STATUS, 
+      status: status
+   }
+}
+
 
 // export function sentUpdateIndicator(id, profileType) {
 //    return { 

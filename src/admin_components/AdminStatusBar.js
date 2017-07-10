@@ -8,6 +8,8 @@ function AdminStatusBar({status}) {
       return <div className="admin__status-bar failure">Update Failed</div>
     } else if (status == "in progress") {
       return <div className="admin__status-bar in-progress">In Progress</div>
+    } else if (status == "incorrect password") {
+      return <div className="admin__status-bar in-progress">Incorrect Password</div>
     } else {
       return null;
     }

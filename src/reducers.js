@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, CHANGE_CURR_PROFILE_SECTION, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO, SET_INDICATOR_UPDATE_STATUS, SET_DATA_FILE_UPLOAD_STATUS} from './actions'
+import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, CHANGE_CURR_PROFILE_SECTION, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO, SET_INDICATOR_UPDATE_STATUS, SET_DATA_FILE_UPLOAD_STATUS, SET_ADMIN_LOGIN_STATUS} from './actions'
 
 function menuExpanded(state = false, action) {
   switch (action.type) {
@@ -232,6 +232,15 @@ function indicatorUpdateStatus(state = "inactive", action) {
   }
 }
 
+function adminLoginStatus(state = false, action) {
+  switch (action.type) {
+    case SET_ADMIN_LOGIN_STATUS:
+      return action.status
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   menuExpanded,
   currProfile,
@@ -246,7 +255,8 @@ const rootReducer = combineReducers({
   instList,
   indicatorList,
   dataFileUploadStatus,
-  indicatorUpdateStatus
+  indicatorUpdateStatus,
+  adminLoginStatus
 })
 
 export default rootReducer
