@@ -3,8 +3,9 @@
 const debug = process.env.NODE_ENV !== "production";
 
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 const path = require('path');
-
+console.log(process.env.PASSWORD)
 module.exports = {
   devtool: debug ? 'inline-sourcemap' : null,
   entry: path.join(__dirname, 'src', 'app-client.js'),
@@ -41,18 +42,28 @@ module.exports = {
       }
     ]
   },
-  plugins: debug ? [] : [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      mangle: true,
-      sourcemap: false,
-      beautify: false,
-      dead_code: true
-    }),
+  plugins: debug ? [
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+          ADMIN_PASS: JSON.stringify(process.env.ADMIN_PASS || 'default')
+        }
+      }),
+    ] : [
+     new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+          ADMIN_PASS: JSON.stringify(process.env.ADMIN_PASS || 'default')
+        }
+      }),
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: { warnings: false },
+        mangle: true,
+        sourcemap: false,
+        beautify: false,
+        dead_code: true
+      }),
   ]
 };

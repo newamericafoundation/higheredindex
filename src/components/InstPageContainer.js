@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { changeCurrProfile, fetchProfile } from '../actions'
 import InstPage from './InstPage'
 import NotFoundPage from './NotFoundPage';
+import LoadingIcon from './LoadingIcon';
 
 import React from 'react';
 
@@ -51,7 +52,7 @@ class InstPageContainer extends React.Component {
       }
     } 
     
-    return <h1> Loading ... </h1>
+    return <LoadingIcon />
   }
 }
 
