@@ -378,8 +378,6 @@ export default class SimpleChart extends React.Component {
 
 	// helper functions
 	getCurrWidth() {
-        console.log(this.margin.right);
-        console.log(this.props.settings);
         return $(this.refs.renderingArea).width() - this.margin.left - this.margin.right;
     }
 

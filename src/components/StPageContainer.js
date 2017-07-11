@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { changeCurrProfile, fetchProfile } from '../actions'
+import { changeCurrProfile, fetchProfile, fetchDataInfo } from '../actions'
 import StPage from './StPage'
 import NotFoundPage from './NotFoundPage';
 import LoadingIcon from './LoadingIcon';
@@ -12,13 +12,19 @@ class StPageContainer extends React.Component {
   }
 
   componentWillMount() {
-    const { dispatch, fetchedSts, id } = this.props
+    const { dispatch, fetchedSts, id, dataInfo } = this.props
 
     if (fetchedSts[id]) {
       this.stData = fetchedSts[id].data;
       dispatch(changeCurrProfile(id, this.stData.data.name, "state"))
     } else {
       dispatch(fetchProfile(id, "state"))
+    }
+
+    console.log(dataInfo)
+    if (!dataInfo) {
+      console.log("fetching data info")
+      dispatch(fetchDataInfo())
     }
   }
 
@@ -40,10 +46,10 @@ class StPageContainer extends React.Component {
   }
 
   render() {
-    const { fetchedSts, id } = this.props
+    const { fetchedSts, id, dataInfo } = this.props
     this.stData = fetchedSts[id]
 
-    if (this.stData && !this.stData.isFetching) {
+    if (this.stData && !this.stData.isFetching && dataInfo != "fetching") {
       if (this.stData.data) {
         return <StPage stData={ this.stData.data } />
       }
@@ -62,7 +68,8 @@ const mapStateToProps = (state, ownProps) => {
   console.log(ownProps.params.id)
   return {
     id: ownProps.params.id,
-    fetchedSts: state.fetchedSts || {}
+    fetchedSts: state.fetchedSts || {},
+    dataInfo: state.dataInfo
   }
 }
 

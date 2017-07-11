@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, CHANGE_CURR_PROFILE_SECTION, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO, SET_INDICATOR_UPDATE_STATUS, SET_DATA_FILE_UPLOAD_STATUS, SET_ADMIN_LOGIN_STATUS} from './actions'
+import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, CHANGE_CURR_PROFILE_SECTION, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO, SET_INDICATOR_UPDATE_STATUS, SET_DATA_FILE_UPLOAD_STATUS, SET_ADMIN_LOGIN_STATUS, REQUEST_DATA_INFO, RECEIVE_DATA_INFO} from './actions'
 
 function menuExpanded(state = false, action) {
   switch (action.type) {
@@ -203,6 +203,17 @@ function instList(state = [], action) {
   }
 }
 
+function dataInfo(state = null, action) {
+  switch (action.type) {
+    case REQUEST_DATA_INFO:
+      return "fetching"
+    case RECEIVE_DATA_INFO:
+      return action.data_info
+    default:
+      return state
+  }
+}
+
 function indicatorList(state = [], action) {
   switch (action.type) {
     case REQUEST_PROFILE_LIST:
@@ -253,6 +264,7 @@ const rootReducer = combineReducers({
   fetchedInstPhotos,
   stList,
   instList,
+  dataInfo,
   indicatorList,
   dataFileUploadStatus,
   indicatorUpdateStatus,

@@ -11,6 +11,8 @@ export const REQUEST_PROFILE = 'REQUEST_PROFILE'
 export const RECEIVE_PROFILE = 'RECEIVE_PROFILE'
 export const REQUEST_PROFILE_LIST = 'REQUEST_PROFILE_LIST'
 export const RECEIVE_PROFILE_LIST = 'RECEIVE_PROFILE_LIST'
+export const REQUEST_DATA_INFO = 'REQUEST_DATA_INFO'
+export const RECEIVE_DATA_INFO = 'RECEIVE_DATA_INFO'
 export const REQUEST_PROFILE_PHOTO = 'REQUEST_PROFILE_PHOTO'
 export const RECEIVE_PROFILE_PHOTO = 'RECEIVE_PROFILE_PHOTO'
 export const TOGGLE_TOP_NAV_PROFILE_NAME = 'TOGGLE_TOP_NAV_PROFILE_NAME'
@@ -139,6 +141,30 @@ export function fetchProfileList(type) {
       		return d;
       	})
         dispatch(receiveProfileList(type, json))
+      })
+  }
+}
+
+export function requestDataInfo() {
+  return { type: REQUEST_DATA_INFO }
+}
+
+export function receiveDataInfo(json) {
+  return { 
+    type: RECEIVE_DATA_INFO,
+    data_info: json
+  }
+}
+
+export function fetchDataInfo() {
+  return function (dispatch) {
+
+    dispatch(requestDataInfo())
+
+    return fetch(dbPath + 'data-info/')
+      .then(response => { return response.json()})
+      .then(json => {
+        dispatch(receiveDataInfo(json))
       })
   }
 }

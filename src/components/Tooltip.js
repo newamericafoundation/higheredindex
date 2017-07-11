@@ -4,7 +4,6 @@ var d3 = require("d3");
 import { formatValue } from "../helper_functions/format_value.js";
 
 export default function Tooltip(props) {
-	console.log(props);
 	let styleObject;
 	if (props.settings) {
 		styleObject = {
@@ -37,7 +36,6 @@ export default function Tooltip(props) {
 }
 
 function renderVal(val) {
-	console.log(val);
 	if ((val.value || val.value == 0) && !isNaN(val.value)) {
 		return (
 			<div className="tooltip__row" key={val.variable.variable}>

@@ -3,6 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import DataBlock from './DataBlock';
+let d3 = require("d3")
 
 import $ from 'jquery';
 
@@ -37,6 +38,9 @@ class ProfileSection extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
+		if (this.dataInfo && nextProps.dataInfo && this.dataInfo.length != nextProps.dataInfo.length) {
+			return true;
+		}
 		return false;
 	}
 
@@ -69,17 +73,35 @@ class ProfileSection extends React.Component {
 			
 	}
 
-	render() {
-		const {title, subtitle, data, settings} = this.props;
-		console.log("rendering");
+	getLastUpdated(dataInfo, collectionName) {
+		let retVal = null;
+		dataInfo.forEach((d) => {
+			if (d.collection === collectionName) {
+				if (d.last_updated) {
+					retVal = d3.timeFormat("%B %d, %Y - %I:%M %p")(new Date(d.last_updated));
+					console.log(retVal)
+				}
+				return;
+			}
+		})
+		return retVal;
+	}
 
+	render() {
+		const {title, subtitle, data, settings, collectionName, dataInfo} = this.props;
+		console.log("rendering");
+		let lastUpdated = dataInfo && collectionName ? this.getLastUpdated(dataInfo, collectionName) : null;
+		console.log(dataInfo, collectionName, lastUpdated)
 		let sectionContent = this.getSectionContent();
 		return (
 	    	<section ref="profile_section" className="profile-section">
 	    		<a className="profile-section__anchor" name={title.toLowerCase()} />
 	    		<div className="profile-section__title-container">
 	    			<h3 className="profile-section__title">{title}</h3>
-	    			{subtitle && <h5 className="profile-section__subtitle">{subtitle}</h5>}
+	    			<p>
+		    			{ subtitle && <span className="profile-section__subtitle">{subtitle}</span>}
+		    			{ lastUpdated && <span className="profile-section__last-updated">{" Last updated: " + lastUpdated}</span>}
+	    			</p>
 	    		</div>
 	    		{sectionContent}
 	    	</section>
@@ -89,7 +111,8 @@ class ProfileSection extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		currProfileSection: state.currProfileSection
+		currProfileSection: state.currProfileSection,
+		dataInfo: state.dataInfo
 	}
 }
 

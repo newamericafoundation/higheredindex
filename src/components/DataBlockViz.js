@@ -13,8 +13,6 @@ export default class DataBlockViz extends React.Component {
   	const {settings, data} = this.props,
       {type} = settings;
 
-      console.log(settings);
-
     // let viz;
     // switch (type) {
     //   case "line-chart":

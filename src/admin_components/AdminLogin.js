@@ -40,7 +40,7 @@ class AdminLogin extends React.Component {
             return (
               <form onSubmit={submitForm}>
                 <div className="admin__form__field">
-                  <h5 className="admin__form__field-label">password</h5>
+                  <h5 className="admin__form__field-label">Password</h5>
                   <Text field='password' />
                 </div>
                 <button className="admin__form__button" type='submit'>Submit</button>

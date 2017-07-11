@@ -5,11 +5,12 @@
 		margin: auto;
 		text-align: center;
 		max-width: 550px;
+		position: relative;
 	}
 	&__title {
 		font-weight: bold;
 	}
-	&__subtitle {
+	&__subtitle, &__last-updated {
 		font-weight: normal;
 		color: palette-get(na-black-40);
 		font-size: 14px;
@@ -21,4 +22,5 @@
 	    top: -$top-nav-height*2;
 	    visibility: hidden;
 	}
+
 }

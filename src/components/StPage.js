@@ -57,35 +57,40 @@ class StPage extends React.Component {
           index="0"
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
           settings={stVizSettings.students} 
-          data= {this.props.stData.students }/>
+          data= {this.props.stData.students }
+          collectionName="states_students"/>
         
         <ProfileSection 
           title="Loans" 
           index="1"
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
           settings={stVizSettings.loans} 
-          data= {this.props.stData.loans }/>
+          data= {this.props.stData.loans }
+          collectionName="states_loans"/>
 
         <ProfileSection 
           title="Grants" 
           index="2"
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
           settings={stVizSettings.grants} 
-          data= {this.props.stData.grants }/>
+          data= {this.props.stData.grants }
+          collectionName="states_grants"/>
         
         <ProfileSection 
           title="Schools" 
           index="3"
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
           settings={stVizSettings.schools} 
-          data= {this.props.stData.schools }/>
+          data= {this.props.stData.schools }
+          collectionName="states_schools"/>
         
         <ProfileSection 
           title="Outcomes" 
           index="4"
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
           settings={stVizSettings.outcomes} 
-          data= {this.props.stData.outcomes }/>
+          data= {this.props.stData.outcomes }
+          collectionName="states_outcomes"/>
         <Footer />
       </div>
     );

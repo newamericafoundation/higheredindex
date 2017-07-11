@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { changeCurrProfile, fetchProfile } from '../actions'
+import { changeCurrProfile, fetchProfile, fetchDataInfo } from '../actions'
 import InstPage from './InstPage'
 import NotFoundPage from './NotFoundPage';
 import LoadingIcon from './LoadingIcon';
@@ -12,13 +12,17 @@ class InstPageContainer extends React.Component {
   }
 
   componentWillMount() {
-    const { dispatch, fetchedInsts, id } = this.props
+    const { dispatch, fetchedInsts, id, dataInfo } = this.props
 
     if (fetchedInsts[id]) {
       this.instData = fetchedInsts[id].data;
       dispatch(changeCurrProfile(id, this.instData.name, "institution"))
     } else {
       dispatch(fetchProfile(id, "institution"))
+    }
+
+    if (!dataInfo) {
+      dispatch(fetchDataInfo)
     }
   }
 
@@ -40,10 +44,10 @@ class InstPageContainer extends React.Component {
   }
 
   render() {
-    const { fetchedInsts, id } = this.props
+    const { fetchedInsts, id, dataInfo } = this.props
     this.instData = fetchedInsts[id]
 
-    if (this.instData && !this.instData.isFetching) {
+    if (this.instData && !this.instData.isFetching && dataInfo != "fetching") {
       if (this.instData.data) {
         return <InstPage instData={ this.instData.data } />
       }
@@ -61,7 +65,8 @@ class InstPageContainer extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     id: ownProps.params.id,
-    fetchedInsts: state.fetchedInsts || {}
+    fetchedInsts: state.fetchedInsts || {},
+    dataInfo: state.dataInfo
   }
 }
 
