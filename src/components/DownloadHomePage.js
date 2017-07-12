@@ -1,96 +1,121 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { downloadDataFile } from '../actions';
 import SvgIcon from './SvgIcon'
 import Footer from './Footer';
+import { fetchDataInfo } from '../actions'
+let d3 = require("d3")
 
-
+const stateSections = [{name:"Grants", collection:"states_grants"}, {name:"Loans", collection:"states_loans"}, {name:"Students", collection:"states_students"}, {name:"Schools", collection:"states_schools"}, {name:"Outcomes", collection:"states_outcomes"}];
+const instSections = [{name:"Grants", collection:"inst_grants"}, {name:"Loans", collection:"inst_loans"}, {name:"Students", collection:"inst_students"}, {name:"Overview", collection:"inst_schools"}, {name:"Outcomes", collection:"inst_outcomes"}];
 
 const downloadFile = (collection) => {
    window.open('http://localhost:3000/api/download_data/' + collection);
 }
 
-const DownloadHomePage = () => {
+class DownloadHomePage extends React.Component {
+  constructor() {
+    super()
+  }
 
-  return (
-    <div className="download-home-page">
-      <div className="download-home-page__overlay"></div>
-      <div className="download-home-page__content">
-        <h5 className="download-home-page__title">Download Data</h5>
-        <p className="download-home-page__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor at elit sed sodales. Maecenas volutpat diam ac enim tempus, nec fringilla purus interdum. Duis ut posuere sem. Curabitur lacinia neque rutrum augue dapibus fermentum. Phasellus ligula turpis, sagittis ut lacinia vel, consequat a nibh. In sodales varius consectetur. Praesent luctus eleifend quam in euismod. Ut gravida egestas feugiat. Morbi vestibulum euismod tincidunt. Proin consectetur ante at ipsum venenatis, sit amet sodales nunc accumsan. Sed nec libero a justo fermentum ornare vitae a leo. Ut blandit luctus ligula, porttitor luctus nisi cursus ac.</p>
-        <div className="download-home-page__section-container">
-          <div className="download-home-page__section">
-            <div className="download-home-page__section__icon">
-              <SvgIcon name='map-marker' />
-            </div>
-         	  <h5 className="download-home-page__section__title">States</h5>
-            <ul className="download-home-page__section__list">
-              <li className="download-home-page__section__item">
-                <h5 className="download-home-page__section__item__label">Grants</h5>
-                <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile("states_grants"); }}>Data</h5>
-                <h5 className="download-home-page__section__item__text">Codebook</h5>
+  componentWillMount() {
+    const { dataInfo, fetchLastUpdated } = this.props
 
-              </li>
-              <li className="download-home-page__section__item"> 
-                <h5 className="download-home-page__section__item__label">Loans</h5>
-                <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile("states_loans"); }}>Data</h5>
-                <h5 className="download-home-page__section__item__text">Codebook</h5>
-              </li>
-              <li className="download-home-page__section__item">
-                <h5 className="download-home-page__section__item__label">Outcomes</h5>
-                <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile("states_outcomes"); }}>Data</h5>
-                <h5 className="download-home-page__section__item__text">Codebook</h5>
-              </li>
-              <li className="download-home-page__section__item">
-                <h5 className="download-home-page__section__item__label">Schools</h5>
-                <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile("states_schools"); }}>Data</h5>
-                <h5 className="download-home-page__section__item__text">Codebook</h5>
-              </li>
-              <li className="download-home-page__section__item">
-                <h5 className="download-home-page__section__item__label">Students</h5>
-                <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile("states_students"); }}>Data</h5>
-                <h5 className="download-home-page__section__item__text">Codebook</h5>
-              </li>
-            </ul>
-          </div>
-          <div className="download-home-page__section">
-            <div className="download-home-page__section__icon">
-              <SvgIcon name='institution' />
+    if (!dataInfo) {
+      fetchLastUpdated();
+    }
+  }
+
+  getLastUpdated(collection) {
+    const { dataInfo } = this.props;
+    let retVal = null;
+    dataInfo.forEach((d) => {
+      if (d.collection === collection) {
+        if (d.last_updated) {
+          retVal = d3.timeFormat("%B %d, %Y - %I:%M %p")(new Date(d.last_updated));
+          console.log(retVal)
+        }
+        return;
+      }
+    })
+    return retVal;
+  }
+
+  render() {
+    const { dataInfo } = this.props;
+
+    return (
+      <div className="download-home-page">
+        <div className="download-home-page__overlay"></div>
+        <div className="download-home-page__content">
+          <h5 className="download-home-page__title">Download Data</h5>
+          <p className="download-home-page__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor at elit sed sodales. Maecenas volutpat diam ac enim tempus, nec fringilla purus interdum. Duis ut posuere sem. Curabitur lacinia neque rutrum augue dapibus fermentum. Phasellus ligula turpis, sagittis ut lacinia vel, consequat a nibh. In sodales varius consectetur. Praesent luctus eleifend quam in euismod. Ut gravida egestas feugiat. Morbi vestibulum euismod tincidunt. Proin consectetur ante at ipsum venenatis, sit amet sodales nunc accumsan. Sed nec libero a justo fermentum ornare vitae a leo. Ut blandit luctus ligula, porttitor luctus nisi cursus ac.</p>
+          <div className="download-home-page__section-container">
+            <div className="download-home-page__section">
+              <div className="download-home-page__section__icon">
+                <SvgIcon name='map-marker' />
+              </div>
+           	  <h5 className="download-home-page__section__title">States</h5>
+              <ul className="download-home-page__section__list">
+                  {stateSections.map((section) => {
+                    let lastUpdated = null;
+                    if (dataInfo && dataInfo != "fetching") {
+                      lastUpdated = this.getLastUpdated(section.collection);
+                    }
+                    return (
+                      <li className="download-home-page__section__item" key={section.name}>
+                        <h5 className="download-home-page__section__item__label">{section.name}</h5>
+                        { lastUpdated && <h5 className="download-home-page__section__item__last-updated">{"Last Updated: " + lastUpdated}</h5> }
+                        <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile(section.collection); }}>Data</h5>
+                        <h5 className="download-home-page__section__item__text">Codebook</h5>
+                      
+                      </li>
+                    )
+                  })}
+              </ul>
             </div>
-            <h5 className="download-home-page__section__title">Institutions</h5>
-            <ul className="download-home-page__section__list">
-              <li className="download-home-page__section__item">
-                <h5 className="download-home-page__section__item__label">Grants</h5>
-                <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile("inst_grants"); }}>Data</h5>
-                <h5 className="download-home-page__section__item__text">Codebook</h5>
-              </li>
-              <li className="download-home-page__section__item">
-                <h5 className="download-home-page__section__item__label">Loans</h5>
-                <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile("isnt_loans"); }}>Data</h5>
-                <h5 className="download-home-page__section__item__text">Codebook</h5>
-              </li>
-              <li className="download-home-page__section__item">
-                <h5 className="download-home-page__section__item__label">Outcomes</h5>
-                <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile("isnt_outcomes"); }}>Data</h5>
-                <h5 className="download-home-page__section__item__text">Codebook</h5>
-              </li>
-              <li className="download-home-page__section__item">
-                <h5 className="download-home-page__section__item__label">Schools</h5>
-                <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile("isnt_schools"); }}>Data</h5>
-                <h5 className="download-home-page__section__item__text">Codebook</h5>
-              </li>
-              <li className="download-home-page__section__item">
-                <h5 className="download-home-page__section__item__label">Students</h5>
-                <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile("isnt_students"); }}>Data</h5>
-                <h5 className="download-home-page__section__item__text">Codebook</h5>
-              </li>
-            </ul>
+            <div className="download-home-page__section">
+              <div className="download-home-page__section__icon">
+                <SvgIcon name='institution' />
+              </div>
+              <h5 className="download-home-page__section__title">Institutions</h5>
+              <ul className="download-home-page__section__list">
+                  {instSections.map((section) => {
+                    let lastUpdated = null;
+                    if (dataInfo && dataInfo != "fetching") {
+                      lastUpdated = this.getLastUpdated(section.collection);
+                    }
+                    return (
+                      <li className="download-home-page__section__item" key={section.name}>
+                        <h5 className="download-home-page__section__item__label">{section.name}</h5>
+                        { lastUpdated && <h5 className="download-home-page__section__item__last-updated">{"Last Updated: " + lastUpdated}</h5> }
+                        <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile(section.collection); }}>Data</h5>
+                        <h5 className="download-home-page__section__item__text">Codebook</h5>
+                      </li>
+                    )
+                  })}
+              </ul>
+            </div>
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-  )
+    )
+  }
 }
 
-export default DownloadHomePage;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    dataInfo: state.dataInfo
+  }
+}
+
+const mapDispatchToProps = (dispatch) => { 
+  return {
+    fetchLastUpdated: () => {
+      dispatch(fetchDataInfo())
+    }
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(DownloadHomePage)
