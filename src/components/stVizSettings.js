@@ -40,7 +40,7 @@ const stVizSettings = {
 						{variable:"nhpi", displayName:"Hawaiian/Pacific Islander", format: "percent", color: colors.orange},
 						{variable:"amin", displayName:"American Indian", format: "percent", color: colors.yellow},
 						{variable:"twoormore", displayName:"Two or more", format: "percent", color: colors.brown},
-						{variable:"nonresident", displayName:"Nonresident Alien", format: "percent", color: colors.grey.medium},
+						{variable:"nonresident", displayName:"International", format: "percent", color: colors.grey.medium},
 						{variable:"unk", displayName:"Unknown race", format: "percent", color: colors.grey.light},
 					]
 				}
