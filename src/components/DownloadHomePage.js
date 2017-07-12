@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import SvgIcon from './SvgIcon'
 import Footer from './Footer';
 import { fetchDataInfo } from '../actions'
+import sectionSettings from '../settings/sectionSettings.js';
 let d3 = require("d3")
 
-const stateSections = [{name:"Grants", collection:"states_grants"}, {name:"Loans", collection:"states_loans"}, {name:"Students", collection:"states_students"}, {name:"Schools", collection:"states_schools"}, {name:"Outcomes", collection:"states_outcomes"}];
-const instSections = [{name:"Grants", collection:"inst_grants"}, {name:"Loans", collection:"inst_loans"}, {name:"Students", collection:"inst_students"}, {name:"Overview", collection:"inst_schools"}, {name:"Outcomes", collection:"inst_outcomes"}];
 
 const downloadFile = (collection) => {
    window.open('http://localhost:3000/api/download_data/' + collection);
@@ -56,7 +55,7 @@ class DownloadHomePage extends React.Component {
               </div>
            	  <h5 className="download-home-page__section__title">States</h5>
               <ul className="download-home-page__section__list">
-                  {stateSections.map((section) => {
+                  {sectionSettings.states.map((section) => {
                     let lastUpdated = null;
                     if (dataInfo && dataInfo != "fetching") {
                       lastUpdated = this.getLastUpdated(section.collection);
@@ -79,7 +78,7 @@ class DownloadHomePage extends React.Component {
               </div>
               <h5 className="download-home-page__section__title">Institutions</h5>
               <ul className="download-home-page__section__list">
-                  {instSections.map((section) => {
+                  {sectionSettings.institutions.map((section) => {
                     let lastUpdated = null;
                     if (dataInfo && dataInfo != "fetching") {
                       lastUpdated = this.getLastUpdated(section.collection);

@@ -38,7 +38,6 @@ export default function Footer() {
 					</div>
 				</div>
 				<p className="footer__license">This site carries a Creative Commons (CC BY 4.0) license, which permits re-use of New America content when proper attribution is provided.</p>
-				<p className="footer__last-updated"><span className="footer__last-updated__label">Last Updated:</span></p>
 			</div>
 		
 		</div>

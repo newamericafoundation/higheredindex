@@ -1,7 +1,214 @@
 import { colors } from './../helper_functions/colors.js';
 
 const stVizSettings = {
-	"students": [
+	"Schools" : [
+		{
+			title: "Institutional Breakdowns",
+			paragraphSettings: null,
+			vizSettings: {
+				chart1Settings: {
+					type: "table",
+					tableSettingsList: 
+					[
+						{
+							headingLabels: ["Category", "Count"],
+							variables: [
+								{variable:"pub4yr", displayName:"Public Four-Year", format: "number" },
+								{variable:"twoyrlesspublic", displayName:"Public Two-Year or Less", format: "number"},
+								{variable:"nonprof4yr", displayName:"Non-Profit Four-Year", format: "number"},
+								{variable:"forprofit", displayName:"For-Profit", format: "number"},
+								{variable:"schools", displayName:"Total", format: "number", bold: true},
+							],
+						},
+						{
+							headingLabels: ["Category", "Count"],
+							variables: [
+								{variable:"degree", displayName:"Degree Granting", format: "number"},
+								{variable:"hbcu", displayName:"HBCU", format: "number"},
+							],
+						}
+					]
+				}
+			}
+		},
+		{
+			title: "Sticker Price",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "line-chart",
+					yAxisLabel: "Price",
+					variables: [
+						{variable:"indistprice", displayName:"In-district price", format: "price", color: colors.turquoise.light },
+						{variable:"instateprice", displayName:"In-state price", format: "price", color: colors.turquoise.medium},
+						{variable:"outstate", displayName:"Out-of-state price", format: "price", color: colors.turquoise.dark},
+						{variable:"cost", displayName:"Sticker price", format: "price", color: colors.red.light},
+					]
+				}
+			}
+		},
+		{
+			title: "Net Price by Income",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "line-chart",
+					yAxisLabel: "Price",
+					variables: [
+						{variable:"netprice", displayName:"Net price", format: "price", color: colors.turquoise.light },
+						{variable:"netpriceinc", displayName:"Low-income net price", format: "price", color: colors.purple.light},
+					]
+				}
+			}
+		},
+		{
+			title: "Student Aid",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "line-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"fedaidperc", displayName:"Percent of Federal Aid Recipients", format: "percent", color: colors.turquoise.dark },
+					]
+				},
+				chart2Settings: {
+					type: "grouped-bar-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"avefedaid", displayName:"Average Federal Aid", format: "price", color: colors.turquoise.light },
+						{variable:"avetotaid", displayName:"Average Total Aid", format: "price", color: colors.purple.light },
+
+					]
+				},
+				
+			}
+		},
+		{
+			title: "Graduation Rates",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "line-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"gradtot", displayName:"Graduation rate", format: "percent", color: colors.turquoise.light },
+						{variable:"gradbach", displayName:"Bachelor's degree graduation rate", format: "percent", color: colors.purple.light},
+					]
+				}
+			}
+		},
+		{
+			title: "Retention Rates",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "bar-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"retrate", displayName:"Retention rate", format: "percent", color: colors.turquoise.light },
+					]
+				}
+			}
+		},
+		{
+			title: "Transfer Students",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "bar-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"transfer", displayName:"Share of transfer students", format: "percent", color: colors.turquoise.light },
+					]
+				}
+			}
+		},
+		{
+			title: "SAT/ACT Average",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "bar-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"sat_avg_all", displayName:"SAT/ACT score", format: "number", color: colors.turquoise.light },
+					]
+				}
+			}
+		},
+		{
+			title: "Instructional Expenses",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "bar-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"inexpfte", displayName:"Instructional expenses per FTE", format: "price", color: colors.turquoise.light },
+					]
+				}
+			}
+		},
+		{
+			title: "Endowment",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "bar-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"endowment", displayName:"Endowment", format: "price", color: colors.turquoise.light },
+					]
+				}
+			}
+		},
+		{
+			title: "90/10 Proportion",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "bar-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"prop_9010", displayName:"90/10 proportion", format: "percent", color: colors.turquoise.light },
+					]
+				}
+			}
+		},
+		// add state map with pinpoint for school
+	], 
+	"Students": [
 		{
 			title: "Enrollment by Student Type",
 			paragraphSettings: {
@@ -100,7 +307,97 @@ const stVizSettings = {
 			}
 		},
 	],
-	"loans": [
+	"Grants": [
+		// Federal work Study and SEOG need an * with the following, on this graphic and the next one: SEOG and Federal Work Study are campus-based aid programs, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other grants are available to students at all institutions.
+
+		{
+			title: "Grant Disbursments (Volume)",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "line-chart",
+					yAxisLabel: "Disbursements",
+					variables: [
+						{variable:"pelldisburse", displayName:"Pell Grants", format: "price", color: colors.turquoise.light },
+						{variable:"seogdisburse", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "price", color: colors.turquoise.medium},
+						{variable:"teachdisburse", displayName:"TEACH Grants", format: "price", color: colors.blue.light},
+						{variable:"iraqdisburse", displayName:"Iraq/Afghanistan", format: "price", color: colors.red.light},
+						{variable:"workdisburse", displayName:"Federal Work Study", format: "price", color: colors.purple.light},
+					]
+				}
+			}
+		},
+		{
+			title: "Grant Recipients",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "line-chart",
+					yAxisLabel: "Disbursements",
+					variables: [
+						{variable:"pellrecip", displayName:"Pell Grants", format: "price", color: colors.turquoise.light },
+						{variable:"seogrecip", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "price", color: colors.turquoise.medium},
+						{variable:"teachrecip", displayName:"TEACH Grants", format: "price", color: colors.blue.light},
+						{variable:"iraqrecip", displayName:"Iraq/Afghanistan", format: "price", color: colors.red.light},
+						{variable:"workrecip", displayName:"Federal Work Study", format: "price", color: colors.purple.light},
+					]
+				}
+			}
+		},
+		{
+			title: "Pell Awards",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "line-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"pellperc", displayName:"Percent of Recipients", format: "percent", color: colors.turquoise.dark },
+					]
+				},
+				chart2Settings: {
+					type: "bar-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"avepell", displayName:"Average Award", format: "price", color: colors.turquoise.light },
+					]
+				}
+			}
+		},
+		{
+			title: "State and Local Aid",
+			paragraphSettings: {
+				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
+				variables: ['fem', 'men']
+			},
+			vizSettings: {
+				chart1Settings: {
+					type: "line-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"statelocalaidperc", displayName:"Percent of Recipients", format: "percent", color: colors.turquoise.dark },
+					]
+				},
+				chart2Settings: {
+					type: "bar-chart",
+					yAxisLabel: "",
+					variables: [
+						{variable:"avestatelocalaid", displayName:"Average Award", format: "price", color: colors.turquoise.light },
+					]
+				}
+			}
+		},
+	], 
+	"Loans": [
 		{
 			title: "Loan Disbursements (Volume)",
 			paragraphSettings: {
@@ -295,311 +592,7 @@ const stVizSettings = {
 				// },
 			}
 		},
-	],
-	"grants": [
-		// Federal work Study and SEOG need an * with the following, on this graphic and the next one: SEOG and Federal Work Study are campus-based aid programs, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other grants are available to students at all institutions.
-
-		{
-			title: "Grant Disbursments (Volume)",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Disbursements",
-					variables: [
-						{variable:"pelldisburse", displayName:"Pell Grants", format: "price", color: colors.turquoise.light },
-						{variable:"seogdisburse", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "price", color: colors.turquoise.medium},
-						{variable:"teachdisburse", displayName:"TEACH Grants", format: "price", color: colors.blue.light},
-						{variable:"iraqdisburse", displayName:"Iraq/Afghanistan", format: "price", color: colors.red.light},
-						{variable:"workdisburse", displayName:"Federal Work Study", format: "price", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		{
-			title: "Grant Recipients",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Disbursements",
-					variables: [
-						{variable:"pellrecip", displayName:"Pell Grants", format: "price", color: colors.turquoise.light },
-						{variable:"seogrecip", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "price", color: colors.turquoise.medium},
-						{variable:"teachrecip", displayName:"TEACH Grants", format: "price", color: colors.blue.light},
-						{variable:"iraqrecip", displayName:"Iraq/Afghanistan", format: "price", color: colors.red.light},
-						{variable:"workrecip", displayName:"Federal Work Study", format: "price", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		{
-			title: "Pell Awards",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"pellperc", displayName:"Percent of Recipients", format: "percent", color: colors.turquoise.dark },
-					]
-				},
-				chart2Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"avepell", displayName:"Average Award", format: "price", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "State and Local Aid",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"statelocalaidperc", displayName:"Percent of Recipients", format: "percent", color: colors.turquoise.dark },
-					]
-				},
-				chart2Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"avestatelocalaid", displayName:"Average Award", format: "price", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-	], "schools" : [
-		{
-			title: "Institutional Breakdowns",
-			paragraphSettings: null,
-			vizSettings: {
-				chart1Settings: {
-					type: "table",
-					tableSettingsList: 
-					[
-						{
-							headingLabels: ["Category", "Count"],
-							variables: [
-								{variable:"public", displayName:"Public", format: "number" },
-								{variable:"nonprofit", displayName:"Non-Profit", format: "number"},
-								{variable:"forprofit", displayName:"For-Profit", format: "number"},
-								{variable:"fouryear", displayName:"Four-Year", format: "number"},
-								{variable:"twoyear", displayName:"Two-Year", format: "number"},
-								{variable:"lessthan2yr", displayName:"Less than Two-Year", format: "number"},
-								{variable:"pub4yr", displayName:"Public Four-Year", format: "number" },
-								{variable:"nonprof4yr", displayName:"Non-Profit Four-Year", format: "number"},
-								{variable:"twoyrlesspublic", displayName:"Public Two-Year or Less", format: "number"},
-								{variable:"degree", displayName:"Degree Granting", format: "number"},
-								{variable:"hbcu", displayName:"HBCU", format: "number"},
-								{variable:"schools", displayName:"Total", format: "number", bold: true},
-							],
-						},
-						{
-							headingLabels: ["Category", "Count"],
-							variables: [
-								{variable:"public", displayName:"Public", format: "number" },
-								{variable:"nonprofit", displayName:"Non-Profit", format: "number"},
-								{variable:"forprofit", displayName:"For-Profit", format: "number"},
-							],
-						}
-					]
-				}
-			}
-		},
-		{
-			title: "Sticker Price",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Price",
-					variables: [
-						{variable:"indistprice", displayName:"In-district price", format: "price", color: colors.turquoise.light },
-						{variable:"instateprice", displayName:"In-state price", format: "price", color: colors.turquoise.medium},
-						{variable:"outstate", displayName:"Out-of-state price", format: "price", color: colors.turquoise.dark},
-						{variable:"cost", displayName:"Sticker price", format: "price", color: colors.red.light},
-					]
-				}
-			}
-		},
-		{
-			title: "Net Price by Income",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Price",
-					variables: [
-						{variable:"netprice", displayName:"Net price", format: "price", color: colors.turquoise.light },
-						{variable:"netpriceinc", displayName:"Low-income net price", format: "price", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		{
-			title: "Student Aid",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"fedaidperc", displayName:"Percent of Federal Aid Recipients", format: "percent", color: colors.turquoise.dark },
-					]
-				},
-				chart2Settings: {
-					type: "grouped-bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"avefedaid", displayName:"Average Federal Aid", format: "price", color: colors.turquoise.light },
-						{variable:"avetotaid", displayName:"Average Total Aid", format: "price", color: colors.purple.light },
-
-					]
-				},
-				
-			}
-		},
-		{
-			title: "Graduation Rates",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"gradtot", displayName:"Graduation rate", format: "percent", color: colors.turquoise.light },
-						{variable:"gradbach", displayName:"Bachelor's degree graduation rate", format: "percent", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		{
-			title: "Retention Rates",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"retrate", displayName:"Retention rate", format: "percent", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "Transfer Students",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"transfer", displayName:"Share of transfer students", format: "percent", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "SAT/ACT Average",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"sat_avg_all", displayName:"SAT/ACT score", format: "number", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "Instructional Expenses",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"inexpfte", displayName:"Instructional expenses per FTE", format: "price", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "Endowment",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"endowment", displayName:"Endowment", format: "price", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "90/10 Proportion",
-			paragraphSettings: {
-				textSections: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius urna tellus, vel mattis ligula convallis sollicitudin. Donec quis luctus justo, ac ultrices velit"],
-				variables: ['fem', 'men']
-			},
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"prop_9010", displayName:"90/10 proportion", format: "percent", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		// add state map with pinpoint for school
-	], "outcomes" : [
+	], "Outcomes" : [
 		{
 			title: "Median Earnings",
 			paragraphSettings: {
