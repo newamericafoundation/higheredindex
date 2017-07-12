@@ -3,9 +3,8 @@
 const debug = process.env.NODE_ENV !== "production";
 
 const webpack = require('webpack');
-const Dotenv = require('dotenv-webpack');
 const path = require('path');
-console.log(process.env.PASSWORD)
+
 module.exports = {
   devtool: debug ? 'inline-sourcemap' : null,
   entry: path.join(__dirname, 'src', 'app-client.js'),

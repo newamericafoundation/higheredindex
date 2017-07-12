@@ -66,15 +66,23 @@
 			&__label {
 				color: palette-get(na-turquoise);
 				font-weight: bold;
+				margin-bottom: 5px;
 			}
 
 			&__text {
 				cursor: pointer;
 				display: inline-block;
 				padding: 0px 7px;
+				margin-bottom: 5px;
 				&:hover {
 					color: palette-get(na-turquoise);
 				}
+			}
+
+			&__last-updated {
+				font-size: 14px;
+				line-height: 1.2;
+				color: palette-get(na-black-40);
 			}
 		}
 	}
