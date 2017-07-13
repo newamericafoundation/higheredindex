@@ -254,11 +254,11 @@ class SearchBox extends React.Component {
 	  	console.log(value);
 		let iconType;
 		if (suggestion.type == "state") { 
-			iconType = 'map-marker'; 
+			iconType = 'state'; 
 		} else if (suggestion.type == "institution") { 
 			iconType = "institution";
 		} else {
-			iconType = "bar-chart";
+			iconType = "indicator";
 		}
 		return (
 		<div className="react-autosuggest__suggestion-div">
