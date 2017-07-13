@@ -52,7 +52,7 @@ class DownloadHomePage extends React.Component {
           <div className="download-home-page__section-container">
             <div className="download-home-page__section">
               <div className="download-home-page__section__icon">
-                <SvgIcon name='map-marker' />
+                <SvgIcon name='state' />
               </div>
            	  <h5 className="download-home-page__section__title">States</h5>
               <ul className="download-home-page__section__list">

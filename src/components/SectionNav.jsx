@@ -4,6 +4,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import $ from 'jquery';
 import { connect } from 'react-redux'
+var scrollTo = require('scroll-to');
 
 import SvgIcon from './SvgIcon'
 
@@ -44,8 +45,15 @@ class SectionNav extends React.Component {
 	}
 
 	handleClick(section, i) {
-		location.href = "#" + section;
-		this.props.changeCurrSection(String(i))
+		$(".app-container").animate(
+        	{'scrollTop':$("#" + section).offset().top + $(".app-container").scrollTop()},
+        	500,
+        	() => {
+        		location.href = "#" + section;
+				this.props.changeCurrSection(String(i))
+        	}
+        );
+		
 	}
 
 	render() {

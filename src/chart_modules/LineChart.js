@@ -75,9 +75,6 @@ export default class LineChart {
     updateDataLines(updateParams) {
         const {y, x, width, height, currHovered, valsShown} = updateParams;
 
-        console.log(valsShown);
-        console.log(this.variables);
-
         const getLine = (dataObject) => {
             for (let key in dataObject) {
                 if (isNaN(dataObject[key])) {

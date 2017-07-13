@@ -94,8 +94,8 @@ class ProfileSection extends React.Component {
 		console.log(dataInfo, collectionName, lastUpdated)
 		let sectionContent = this.getSectionContent();
 		return (
-	    	<section ref="profile_section" className="profile-section">
-	    		<a className="profile-section__anchor" name={title.toLowerCase()} />
+	    	<section ref="profile_section" className="profile-section" >
+	    		<a className="profile-section__anchor" id={title.toLowerCase()} name={title.toLowerCase()} />
 	    		<div className="profile-section__title-container">
 	    			<h3 className="profile-section__title">{title}</h3>
 	    			<p>
