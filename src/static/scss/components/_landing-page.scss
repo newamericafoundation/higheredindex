@@ -63,11 +63,14 @@
 			font-size: 13px;
 			margin-bottom: 0px;
 			color: white;
+			line-height: 1;
+			padding-top: 5px;
 		}
 		&__primary {
 			font-weight: bold;
 			font-size: 16px;
 			color: white;
+			line-height: 1;
 			@include medium {
 				font-size: 20px;
 			}
