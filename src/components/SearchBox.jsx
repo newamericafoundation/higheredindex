@@ -226,7 +226,7 @@ class SearchBox extends React.Component {
 
 	renderSuggestion(suggestion) {
 	  const {value} = this.state;
-	  const iconType = suggestion.type == "state" ? 'map-marker' : 'institution';
+	  const iconType = suggestion.type == "state" ? 'state' : 'institution';
 
 	  const suggName = suggestion.name,
 			valueIndex = suggestion.name.toLowerCase().indexOf(value);

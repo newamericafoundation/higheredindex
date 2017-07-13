@@ -3,15 +3,50 @@
 	background-size: cover;
 	background-position: 50% 50%;
 
-	&__text {
+	&__content {
 		@include center-vertical;
 		text-align: center;
+		z-index: 3;
+	}
+
+	&__text {
 		color: white;
 		text-transform: uppercase;
 		font-size: 65px;
+		letter-spacing: 2.5px;
+		font-weight: 100;
+		text-shadow: 0px 0px 3px palette-get(na-black);
+		line-height: 1.1;
+		padding: 10px 15px 0px 15px;
 
 		&.black {
 			color: black;
+		}
+	}
+
+	&__overlay {
+		position: absolute;
+		z-index: 2;
+		background-color: rgba(0,0,0,.3);
+		width: 100%;
+		height: calc(100vh - #{$top-nav-height});
+		top: 0px;
+	}
+
+	&-wrapper {
+		position: relative;
+		height: calc(100vh - #{$top-nav-height});
+	}
+
+	&__icon {
+		margin: auto;
+		
+		svg {
+			width: 60px;
+			height: 60px;
+			fill: white;
+			stroke: white;
+			padding: 5px 0px;
 		}
 	}
 }

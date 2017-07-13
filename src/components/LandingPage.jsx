@@ -15,7 +15,7 @@ const LandingPage = () => {
       	<div className="landing-page__explore-links">
           <div className="landing-page__explore-link">
             <Link to={'/search/#states'}>
-              <SvgIcon name='map-marker' />
+              <SvgIcon name='state' />
               <h5 className="landing-page__explore-link__secondary">Explore</h5>
               <h3 className="landing-page__explore-link__primary">States</h3>
             </Link>
