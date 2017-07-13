@@ -10,7 +10,7 @@ const LandingPage = () => {
     <div className="landing-page">
       <div className="landing-page__content">
      	  <a href={'https://www.newamerica.org/'}><SvgIcon name='new-america' /></a>
-      	<h1 className="landing-page__title">Ed-Index</h1>
+      	<div className="landing-page__title"><SvgIcon name='higher-ed-index' /></div>
       	<SearchBox filter="all" />
       	<div className="landing-page__explore-links">
           <div className="landing-page__explore-link">
@@ -29,7 +29,7 @@ const LandingPage = () => {
           </div>
           <div className="landing-page__explore-link">
             <Link to={'/search/#indicators'}>
-              <SvgIcon name='bar-chart' />
+              <SvgIcon name='indicator' />
               <h5 className="landing-page__explore-link__secondary">Explore</h5>
               <h3 className="landing-page__explore-link__primary">Indicators</h3>
             </Link>

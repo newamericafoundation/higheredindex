@@ -14,19 +14,25 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		@include medium {
-			padding: 0px 50px;
+			padding: 5px 50px;
+		}
+
+		&__decorator {
+			font-size: 25px;
+			padding-left: 3px;
+			position: relative;
+			top: -3px;
 		}
 		&__primary {
 			display: inline-block;
 			font-weight: normal;
 			color: white;
 			margin-bottom: 0px;
-			font-size: 18px;
 			overflow-wrap: normal;
 			line-height: 1.1;
 
 			@include medium {
-				font-size: 30px;
+				font-size: 32px;
 			}
 
 			.turquoise {
@@ -37,7 +43,7 @@
 			.icon {
 				fill: white;
 				width: auto;	
-				display: block;
+				display: inline-block;
 				height: 17px;
 				margin-left: 10px;
 				@include medium {
@@ -60,7 +66,7 @@
 		}
 
 		&__left {
-			padding-right: 7px;
+			padding-right: 5px;
 		}
 	}
 

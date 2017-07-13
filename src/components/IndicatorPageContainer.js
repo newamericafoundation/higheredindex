@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { changeCurrProfile, fetchProfile } from '../actions'
 import IndicatorPage from './IndicatorPage'
 import NotFoundPage from './NotFoundPage';
+import LoadingIcon from './LoadingIcon';
 
 import React from 'react';
 
@@ -57,7 +58,7 @@ class IndicatorPageContainer extends React.Component {
       }
     } 
     
-    return <h1> Loading ... </h1>
+    return <LoadingIcon />
   }
 }
 

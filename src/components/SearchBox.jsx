@@ -226,7 +226,6 @@ class SearchBox extends React.Component {
 
 	renderSuggestion(suggestion) {
 	  const {value} = this.state;
-	  const iconType = suggestion.type == "state" ? 'state' : 'institution';
 
 	  const suggName = suggestion.name,
 			valueIndex = suggestion.name.toLowerCase().indexOf(value);
@@ -234,7 +233,7 @@ class SearchBox extends React.Component {
 	  return (
 	    <div className="react-autosuggest__suggestion-div">
 	    	<div className="react-autosuggest__suggestion__label">
-	      		<SvgIcon name={iconType} />
+	      		<SvgIcon name={suggestion.type} />
 	      		<h5 className="react-autosuggest__suggestion__label__text">{suggestion.type}</h5>
 	      	</div>
 	      	<h5 className="react-autosuggest__suggestion__text">

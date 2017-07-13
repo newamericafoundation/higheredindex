@@ -19,52 +19,33 @@ class ProfileHeader extends React.Component {
 	}
 	render() {	
 		const { fetchedPhotos, name, id, profileType } = this.props
-
+		let divStyle = {};
 		if (profileType == "indicator") {
-			const divStyle ={
+			divStyle ={
 	            backgroundImage: 'url(' + indicatorImageUrl + (Math.random() * 30 | 0) + '.jpg)'
 	        }
-			return (
-				<div className="profile-header" style={divStyle}>
-					<h2 className="profile-header__text">{name}</h2>
-				</div>
-			)
   		} else if (fetchedPhotos[id] && !fetchedPhotos[id].isFetching) {
   			this.photoUrl = fetchedPhotos[id].photoUrl;
-  			const divStyle = {}
   			if (this.photoUrl) {
 				divStyle.backgroundImage = 'url(' + this.photoUrl + ')';
 		    } else {
 		    	divStyle.backgroundImage = "url('../img/school.jpg')";
 		    }
-			return (
-				<div className="profile-header-wrapper">
-					<div className="profile-header" style={divStyle}>
-						<div className="profile-header__content">
-							<div className="profile-header__icon"> 
-								<SvgIcon name={profileType} />
-							</div>
-							<h2 className="profile-header__text">{name}</h2>
-						</div>
-					</div>
-					<div className="profile-header__overlay"></div>
-				</div>
-			)
-		} else {
-			return (
-				<div className="profile-header-wrapper">
-					<div className="profile-header">
-						<div className="profile-header__content">
-							<div className="profile-header__icon"> 
-								<SvgIcon name={profileType} />
-							</div>
-							<h2 className="profile-header__text">{name}</h2>
-						</div>
-					</div>
-					<div className="profile-header__overlay"></div>
-				</div>
-			)
 		}
+
+		return (
+			<div className="profile-header-wrapper">
+				<div className="profile-header" style={divStyle}>
+					<div className="profile-header__content">
+						<div className="profile-header__icon"> 
+							<SvgIcon name={profileType} />
+						</div>
+						<h2 className="profile-header__text">{name}</h2>
+					</div>
+				</div>
+				<div className="profile-header__overlay"></div>
+			</div>
+		)
 	}
 }
 

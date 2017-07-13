@@ -32,7 +32,7 @@ class ListingsPage extends React.Component {
 		} else if (type == "institutions") { 
 		  	iconName = "institution";
 		} else if (type == "indicators") {
-		  	iconName = "bar-chart";
+		  	iconName = "indicator";
 		} else {
 			return null;
 		}

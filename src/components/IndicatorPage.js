@@ -10,6 +10,8 @@ import { indicatorVizSettings } from './indicatorVizSettings';
 import { connect } from 'react-redux'
 import { toggleTopNavProfileName } from '../actions'
 import $ from 'jquery';
+import Footer from './Footer';
+
 
 class IndicatorPage extends React.Component {
   constructor() {
