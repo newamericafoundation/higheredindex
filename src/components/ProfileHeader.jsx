@@ -7,6 +7,7 @@ let d3 = require("d3");
 import $ from 'jquery';
 
 const indicatorImageUrl = "https://s3-us-west-2.amazonaws.com/na-data-projects/images/febp_ed-index/indicator_images/";
+const fallbackImageUrl = "https://s3-us-west-2.amazonaws.com/na-data-projects/images/febp_ed-index/fallback_images/";
 
 class ProfileHeader extends React.Component {
 
@@ -21,15 +22,13 @@ class ProfileHeader extends React.Component {
 		const { fetchedPhotos, name, id, profileType } = this.props
 		let divStyle = {};
 		if (profileType == "indicator") {
-			divStyle ={
-	            backgroundImage: 'url(' + indicatorImageUrl + (Math.random() * 30 | 0) + '.jpg)'
-	        }
+			divStyle.backgroundImage = 'url(' + indicatorImageUrl + (Math.random() * 30 | 0) + '.jpg)'
   		} else if (fetchedPhotos[id] && !fetchedPhotos[id].isFetching) {
   			this.photoUrl = fetchedPhotos[id].photoUrl;
   			if (this.photoUrl) {
 				divStyle.backgroundImage = 'url(' + this.photoUrl + ')';
 		    } else {
-		    	divStyle.backgroundImage = "url('../img/school.jpg')";
+				divStyle.backgroundImage = 'url(' + fallbackImageUrl + (Math.random() * 2 | 0) + '.jpg)'
 		    }
 		}
 
