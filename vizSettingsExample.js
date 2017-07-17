@@ -29,7 +29,7 @@
 	callOutBoxSettings: {
 		type: "value",
 		variables: [
-			{variable:"ugenroll", displayName:"Undergraduate Students Enrolled", format: "number"},
+			{variable:"ugenroll", displayName:"Rank among all states of lowest average sticker price", format: "number"},
 			{variable:"gradenroll", displayName:"Graduate Students Enrolled", format: "number"},
 		]
 	}

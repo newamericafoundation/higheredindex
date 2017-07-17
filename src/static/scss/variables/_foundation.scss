@@ -37,10 +37,10 @@ $grid-column-gutter: (
 );
 
 // Overrides the maximum width a row can take on.
-$grid-row-width: rem-calc($max-site-width);
+/*$grid-row-width: rem-calc($max-site-width);*/
 
 $breadcrumbs-margin: 0;
-$breadcrumbs-item-font-size: rem-calc(16);
+/*$breadcrumbs-item-font-size: rem-calc(16);*/
 $breadcrumbs-item-color: palette-get(na-black);
 // $breadcrumbs-item-color-current: $black !default;
 // $breadcrumbs-item-color-disabled: $medium-gray !default;
@@ -55,7 +55,7 @@ $input-background-focus: #fff;
 $input-color-focus: palette-get(na-black);
 
 $input-height: 35px;
-$input-font-size: rem-calc(16);
+/*$input-font-size: rem-calc(16);*/
 
 $input-border: 2px solid palette-get(na-black-10);
 /*$input-border-focus: 2px solid palette-get(na-black-10);*/
