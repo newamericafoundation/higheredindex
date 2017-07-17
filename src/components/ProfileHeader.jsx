@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProfilePhoto } from '../actions'
+import SvgIcon from './SvgIcon'
 let d3 = require("d3");
 
 import $ from 'jquery';
 
 const indicatorImageUrl = "https://s3-us-west-2.amazonaws.com/na-data-projects/images/febp_ed-index/indicator_images/";
+const fallbackImageUrl = "https://s3-us-west-2.amazonaws.com/na-data-projects/images/febp_ed-index/fallback_images/";
 
 class ProfileHeader extends React.Component {
 
@@ -18,36 +20,31 @@ class ProfileHeader extends React.Component {
 	}
 	render() {	
 		const { fetchedPhotos, name, id, profileType } = this.props
-
+		let divStyle = {};
 		if (profileType == "indicator") {
-			const divStyle ={
-	            backgroundImage: 'url(' + indicatorImageUrl + (Math.random() * 30 | 0) + '.jpg)'
-	        }
-			return (
-				<div className="profile-header" style={divStyle}>
-					<h2 className="profile-header__text">{name}</h2>
-				</div>
-			)
+			divStyle.backgroundImage = 'url(' + indicatorImageUrl + (Math.random() * 30 | 0) + '.jpg)'
   		} else if (fetchedPhotos[id] && !fetchedPhotos[id].isFetching) {
   			this.photoUrl = fetchedPhotos[id].photoUrl;
-  			const divStyle = {}
   			if (this.photoUrl) {
 				divStyle.backgroundImage = 'url(' + this.photoUrl + ')';
 		    } else {
-		    	divStyle.backgroundImage = "url('../img/school.jpg')";
+				divStyle.backgroundImage = 'url(' + fallbackImageUrl + (Math.random() * 2 | 0) + '.jpg)'
 		    }
-			return (
-				<div className="profile-header" style={divStyle}>
-					<h2 className="profile-header__text">{name}</h2>
-				</div>
-			)
-		} else {
-			return (
-				<div className="profile-header">
-					<h2 className="profile-header__text">{name}</h2>
-				</div>
-			)
 		}
+
+		return (
+			<div className="profile-header-wrapper">
+				<div className="profile-header" style={divStyle}>
+					<div className="profile-header__content">
+						<div className="profile-header__icon"> 
+							<SvgIcon name={profileType} />
+						</div>
+						<h2 className="profile-header__text">{name}</h2>
+					</div>
+				</div>
+				<div className="profile-header__overlay"></div>
+			</div>
+		)
 	}
 }
 

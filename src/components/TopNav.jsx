@@ -14,15 +14,15 @@ class TopNav extends React.Component {
 
     render() {
         const {topNavProfileNameShown} = this.props;
-        let titleText = topNavProfileNameShown ? "Ed-Index :" : "Ed-Index";
+        let titleTextDecorator = topNavProfileNameShown ? <span className="top-nav__title__decorator">:</span> : "";
     	return (
             <header>
         	<nav className="top-nav">
         		<div className="top-nav__title">
                     <div className="top-nav__title__left">
-            			<Link to="/">
-            				<h3 className="top-nav__title__primary">{ titleText }</h3>
-            			</Link>
+            			
+            			<div className="top-nav__title__primary"><Link to="/"><SvgIcon name='higher-ed-index' /></Link>{titleTextDecorator}</div>
+            			
                     </div>
                     { !topNavProfileNameShown &&
                         <div className="top-nav__title__right">

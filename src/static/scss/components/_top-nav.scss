@@ -14,19 +14,28 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		@include medium {
-			padding: 0px 50px;
+			padding: 5px 50px;
+		}
+
+		&__decorator {
+			font-size: 25px;
+			padding-left: 3px;
+			@include medium {
+				position: relative;
+				top: -3px;
+			}
 		}
 		&__primary {
 			display: inline-block;
 			font-weight: normal;
 			color: white;
 			margin-bottom: 0px;
-			font-size: 18px;
 			overflow-wrap: normal;
 			line-height: 1.1;
+			font-size: 25px;
 
 			@include medium {
-				font-size: 30px;
+				font-size: 32px;
 			}
 
 			.turquoise {
@@ -37,7 +46,7 @@
 			.icon {
 				fill: white;
 				width: auto;	
-				display: block;
+				display: inline-block;
 				height: 17px;
 				margin-left: 10px;
 				@include medium {
@@ -53,6 +62,7 @@
 			margin-bottom: 0px;
 			height: 15px;
 			line-height: 15px;
+			padding-left: 7px;
 		}
 
 		&__left, &__right {
@@ -60,7 +70,11 @@
 		}
 
 		&__left {
-			padding-right: 7px;
+			padding-right: 3px;
+		}
+
+		&__right {
+			white-space: nowrap;
 		}
 	}
 
@@ -68,7 +82,7 @@
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
-		right: 10px;
+		right: 25px;
 		cursor: pointer;
 	}
 

@@ -279,7 +279,6 @@ const instVizSettings = {
 	],
 	"Grants": [
 		// Federal work Study and SEOG need an * with the following, on this graphic and the next one: SEOG and Federal Work Study are campus-based aid programs, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other grants are available to students at all institutions.
-
 		{
 			title: "Grant Disbursments (Volume)",
 			paragraphSettings: {
