@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+import { nestYears, addFullStateNames, addPathKeys} from './helper_functions/process_uploaded_data.js';
 
 /*
  * action types
@@ -226,9 +227,18 @@ export function uploadDataFile(collection, newFile) {
   console.log(newFile);
 
   return function (dispatch) {
-    dispatch(setDataFileUploadStatus("in progress"))
+    dispatch(setDataFileUploadStatus("Nesting Years"))
+    let processedData = nestYears(newFile);
 
-    console.log(JSON.stringify(newFile));
+    dispatch(setDataFileUploadStatus("Setting Full State Names"))
+    processedData = addFullStateNames(processedData);
+
+    dispatch(setDataFileUploadStatus("Adding Path Keys"))
+    processedData = addPathKeys(processedData);
+   
+    console.log(processedData)
+
+    dispatch(setDataFileUploadStatus("Uploading Data to Database - " + processedData.length + " rows"))
     
     fetch(dbPath + 'update_data/' + collection, { 
         method: "POST", 
@@ -236,7 +246,7 @@ export function uploadDataFile(collection, newFile) {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         }),
-        body: JSON.stringify(newFile)
+        body: JSON.stringify(processedData)
       })
       .then((res) => {
         dispatch(setDataFileUploadStatus(res.status))

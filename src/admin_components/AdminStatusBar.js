@@ -9,9 +9,11 @@ function AdminStatusBar({status}) {
     } else if (status == "in progress") {
       return <div className="admin__status-bar in-progress">In Progress</div>
     } else if (status == "incorrect password") {
-      return <div className="admin__status-bar in-progress">Incorrect Password</div>
+      return <div className="admin__status-bar failure">Incorrect Password</div>
+    } else if (status == "inactive") {
+      return null
     } else {
-      return null;
+      return <div className="admin__status-bar in-progress">{status}</div>
     }
 }
 
