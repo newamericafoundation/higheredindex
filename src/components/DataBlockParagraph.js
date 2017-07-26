@@ -4,7 +4,7 @@ var d3 = require("d3");
 function getMaxYear(variables, data) {
 	let totalMaxYear = 0;
 	for (let variable of variables) {
-		if (typeof(data[variable]) == 'object') {
+		if (data[variable] && typeof(data[variable]) == 'object') {
 			let keys = Object.keys(data[variable]);
 			let localMaxYear = d3.max(keys, (d) => { return Number(d) });
 			totalMaxYear = localMaxYear > totalMaxYear ? localMaxYear : totalMaxYear;
@@ -18,6 +18,8 @@ function getMaxYear(variables, data) {
 export default function DataBlockParagraph(props) {
 	const {settings, data} = props,
 		{textSections, variables} = settings;
+
+	if (!data) { return null; }
   	
   	let populatedText = [],
   		totalMaxYear = getMaxYear(variables, data);
@@ -35,9 +37,9 @@ export default function DataBlockParagraph(props) {
 		if (typeof(data[variable]) == 'object') {
 			let keys = Object.keys(data[variable]);
 			let localMaxYear = d3.max(keys, (d) => { return Number(d) });
-			populatedText.push(<span className={variableClass}>{data[variable][localMaxYear]}</span>);
+			populatedText.push(<span className={variableClass} key={i}>{data[variable][localMaxYear]}</span>);
 		} else {
-			populatedText.push(<span className={variableClass}>{data[variable]}</span>);
+			populatedText.push(<span className={variableClass} key={i}>{data[variable]}</span>);
 		}
     })
 

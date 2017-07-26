@@ -10,7 +10,8 @@ export default class DataBlock extends React.Component {
       // console.log(data)
       // console.log(paragraphSettings)
       // console.log(vizSettings)
-
+    if (!data) { return null }
+      
     return (
       <div className="data-block">
       	<h5 className="data-block__title">{title}</h5>
