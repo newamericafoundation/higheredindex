@@ -21,7 +21,6 @@ class StPageContainer extends React.Component {
       dispatch(fetchProfile(id, "state"))
     }
 
-    console.log(dataInfo)
     if (!dataInfo) {
       console.log("fetching data info")
       dispatch(fetchDataInfo())

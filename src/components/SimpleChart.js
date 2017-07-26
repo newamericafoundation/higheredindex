@@ -309,7 +309,7 @@ export default class SimpleChart extends React.Component {
 		const { data, settings } = this.props,
             {chart1Settings, chart2Settings} = settings;
 
-        let content, legend, tooltip, missingVarsList, presentVarsList;
+        let content, legend, tooltip, missingVarsList, presentVarsList, fullVarsList;
         let variables = chart1Settings.variables;
 
         if (chart2Settings) {
@@ -323,6 +323,8 @@ export default class SimpleChart extends React.Component {
             tooltip = <Tooltip settings={this.state.tooltipSettings} />
             presentVarsList = this.fullValList.length > 0 ? <h5 className="data-block__viz__debugging-list">Using variables: {this.fullValList.toString()}</h5> : null;
             missingVarsList = this.missingVars.length > 0 ? <h5 className="data-block__viz__debugging-list">Missing variables: {this.missingVars.toString()}</h5> : null;
+            fullVarsList = this.missingVars.length > 0 ? <h5 className="data-block__viz__debugging-list">This is the full list of variables for this entry: {Object.keys(data).toString()}</h5> : null;
+            console.log(Object.keys(data));
         } else {
             content = "loading chart";
         }
@@ -333,6 +335,7 @@ export default class SimpleChart extends React.Component {
                 {tooltip}
                 {presentVarsList}
                 {missingVarsList}
+                {fullVarsList}
             </div>
         )
 	}

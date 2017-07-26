@@ -7,7 +7,7 @@ import SectionNav from './SectionNav.jsx';
 import ProfileSection from './ProfileSection';
 import ProfileHeader from './ProfileHeader.jsx';
 import Footer from './Footer';
-import stVizSettings from './stVizSettings';
+import stVizSettings from '../settings/stVizSettings';
 import { connect } from 'react-redux'
 import { toggleTopNavProfileName, changeCurrProfileSection } from '../actions';
 import sectionSettings from '../settings/sectionSettings.js';
