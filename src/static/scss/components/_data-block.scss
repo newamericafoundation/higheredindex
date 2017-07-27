@@ -112,6 +112,23 @@
 			font-weight: bold;
 		}
 	}
+
+	&__source {
+		color: palette-get(na-black-30);
+	}
+
+	&__indicator-link {
+		border: 1px solid palette-get(na-black-30);
+		margin-top: 15px;
+		padding: 10px;
+		display: inline-block;
+		color: palette-get(na-black-30);
+
+		&:hover {
+			background-color: palette-get(na-black-30);
+			color: white;
+		}
+	}
 }
 
 .tick {

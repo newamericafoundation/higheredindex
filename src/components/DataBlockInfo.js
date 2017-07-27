@@ -3,6 +3,7 @@ var d3 = require("d3");
 import {formatValue} from '../helper_functions/format_value';
 import DataBlockCallout from "./DataBlockCallout";
 import DataBlockParagraph from "./DataBlockParagraph";
+import { Link } from 'react-router';
 
 function getMaxYear(variables, data) {
 	let totalMaxYear = 0;
@@ -18,7 +19,6 @@ function getMaxYear(variables, data) {
 	return totalMaxYear;
 }
 
-
 export default function DataBlockInfo(props) {
 	const {settings, data, collectionName} = props,
 		{paragraphSettings, calloutSettings, source, indicatorLink} = settings;
@@ -31,7 +31,8 @@ export default function DataBlockInfo(props) {
       <div className="data-block__info">
       	{ calloutSettings && <DataBlockCallout settings={calloutSettings} maxYear={maxYear} data={data} collectionName={collectionName}/> }
       	<DataBlockParagraph settings={paragraphSettings} maxYear={maxYear} data={data} />
-      	
+      	{ source && <div className="data-block__source">Source: {source}</div> }
+      	{ indicatorLink && <Link to={"/indicator/" + indicatorLink}><div className="data-block__indicator-link">Learn More</div></Link> }
       </div>
     )
 }
