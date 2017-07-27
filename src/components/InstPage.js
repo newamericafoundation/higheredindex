@@ -8,7 +8,7 @@ import ProfileSection from './ProfileSection';
 import ProfileHeader from './ProfileHeader.jsx';
 import DataBlock from './DataBlock';
 import Footer from './Footer';
-import instVizSettings from './instVizSettings';
+import instVizSettings from '../settings/instVizSettings';
 import { connect } from 'react-redux'
 import { toggleTopNavProfileName, changeCurrProfileSection } from '../actions';
 import $ from 'jquery';
@@ -66,6 +66,7 @@ class InstPage extends React.Component {
               index={i}
               subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
               settings={instVizSettings[name]}
+              collectionName={"inst_" + section.dataDivision}
               data= {this.props.instData[section.dataDivision] }/>
           )
         })}

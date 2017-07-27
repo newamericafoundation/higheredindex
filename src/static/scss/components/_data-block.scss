@@ -61,6 +61,53 @@
 			width: 100% !important;
 		}
 	}
+
+	&__callout-container {
+		display: block;
+		width: 100%;
+		padding-bottom: 15px;
+	}
+
+	&__callout {
+		display: inline-block;
+		color: palette-get(na-black-40);
+		vertical-align: top;
+
+		.children-1 & {
+			width: 100%;
+		}
+		.children-2 & {
+			width: 50%;
+
+			&:first-child {
+				padding-right: 10px;
+			}
+
+			&:last-child {
+				padding-left: 10px;
+			}
+		}
+		.children-3 & {
+			width: 100%;
+			display: block;
+		}
+
+		&__value {
+			font-size: 45px;
+			margin-bottom: 0px;
+			font-weight: normal;
+			line-height: 1.1;
+			color: palette-get(na-black-70);
+		}
+
+		&__label {
+			text-transform: uppercase;
+			font-size: 12px;
+			letter-spacing: .7px;
+			color: palette-get(na-black-70);
+			font-weight: bold;
+		}
+	}
 }
 
 .tick {
