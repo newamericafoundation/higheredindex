@@ -14,10 +14,6 @@ class DataBlockCallout extends React.Component {
         super();
     }
 
-    componentWillMount() {
-
-    }
-
     getValueCallout(data, variable) {
 		const {collectionName, maxYear} = this.props;
 	    

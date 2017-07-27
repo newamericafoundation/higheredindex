@@ -46,7 +46,7 @@ class ProfileSection extends React.Component {
 
 	getSectionContent() {
 		const {type, data, settings, description, collectionName} = this.props;
-		console.log(collectionName)
+
 		switch(type) {
 			case "description":
 				return (
@@ -55,7 +55,6 @@ class ProfileSection extends React.Component {
 			        </div>
 				)
 			case "rankingDashboard":
-				console.log(settings)
 				return (
 			        <div>
 			        	{settings && <RankingsDashboard filters={settings} />}
@@ -89,9 +88,9 @@ class ProfileSection extends React.Component {
 
 	render() {
 		const {title, subtitle, data, settings, collectionName, dataInfo} = this.props;
-		console.log("rendering");
+
 		let lastUpdated = dataInfo && collectionName ? this.getLastUpdated(dataInfo, collectionName) : null;
-		console.log(dataInfo, collectionName, lastUpdated)
+		
 		let sectionContent = this.getSectionContent();
 		return (
 	    	<section ref="profile_section" className="profile-section" >

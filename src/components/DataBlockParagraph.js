@@ -64,7 +64,6 @@ export default function DataBlockParagraph(props) {
 	    fullText.push(<p>{textSection}</p>)
 	});
 
-  	console.log(fullText)
     return (
       <div className="data-block__paragraph">
       	{ calloutSettings && <DataBlockCallout settings={calloutSettings} maxYear={maxYear} data={data} collectionName={collectionName}/> }
