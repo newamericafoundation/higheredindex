@@ -18,7 +18,7 @@ export default class DataBlock extends React.Component {
       	<h5 className="data-block__title">{title}</h5>
       	<div className="data-block__content">
 	      	{ paragraphSettings && <DataBlockParagraph settings={paragraphSettings} calloutSettings={callOutBoxSettings} data={data} collectionName={collectionName}/> }
-          <DataBlockViz settings={vizSettings} data={data}/>
+          { vizSettings && <DataBlockViz settings={vizSettings} data={data}/> }
         </div>
       </div>
     )

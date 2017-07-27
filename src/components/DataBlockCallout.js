@@ -3,6 +3,11 @@ import {formatValue} from '../helper_functions/format_value'
 import {fetchRanking} from '../actions.js'
 import { connect } from 'react-redux';
 
+const getOrdinal = (n) => {
+    var s=["th","st","nd","rd"],
+    v=n%100;
+    return n+(s[(v-20)%10]||s[v]||s[0]);
+}
 
 class DataBlockCallout extends React.Component {
       constructor() {
@@ -14,8 +19,9 @@ class DataBlockCallout extends React.Component {
       }
 
       getValueCallout(data, variable) {
+      		const {collectionName, maxYear} = this.props;
             let value = data[variable.variable][maxYear];
-            if (variable.format == "number") {
+            if (variable.format == "number" || variable.format == "price") {
                   if (value >= 1000000000) {
                         value = Math.round(value/1000000000) + "B"
                   } else if (value >= 1000000) {
@@ -27,41 +33,43 @@ class DataBlockCallout extends React.Component {
                   value = formatValue(value, variable.format)
             }
 
+            value = variable.format == "price" ? "$" + value : value;
+
             return value;
       }
 
-      sendRankCalloutRequest(data, variable) {
+      sendRankCalloutRequest(data, variable, direction) {
             const {collectionName, maxYear} = this.props;
             console.log(collectionName)
-            this.props.fetchRanking(collectionName, variable.variable, maxYear, data[variable.variable][maxYear], data.path)
+            this.props.fetchRanking(collectionName, direction, variable.variable, maxYear, data[variable.variable][maxYear], data.path)
             console.log("sending rank request")
       }
 
       render() {
             const {settings, maxYear, data} = this.props;
-      	const {type, variables} = settings;
+      	const {type, direction, variables} = settings;
 
       	if (!data) { return null; }
         
-
             return (
                   <div className={"data-block__callout-container children-" + variables.length}>
                   	{variables.map((variable) => {
                   		if (data[variable.variable] && data[variable.variable][maxYear]) {
                                     let value;
                                     if (type == "value") {
-                  			      value = this.getValueCallout(data, variable);
+                  			      		value = this.getValueCallout(data, variable);
                                     } else {
-                                          let rankingKey = data.path + "_" + variable.variable;
-                                          console.log(this.props.fetchedRankings)
-                                          console.log(rankingKey)
-                                          if (this.props.fetchedRankings[rankingKey]) {
-                                                value = this.props.fetchedRankings[rankingKey];
-                                          } else if (this.props.fetchedRankings[rankingKey] == "fetching") {
-                                                value = null
-                                          } else {
-                                                this.sendRankCalloutRequest(data, variable)
-                                          }
+										let rankingKey = data.path + "_" + variable.variable;
+										console.log(this.props.fetchedRankings)
+										console.log(rankingKey)
+
+										if (this.props.fetchedRankings[rankingKey]) {
+											value = getOrdinal(this.props.fetchedRankings[rankingKey]);
+										} else if (this.props.fetchedRankings[rankingKey] == "fetching") {
+											value = null
+										} else {
+											this.sendRankCalloutRequest(data, variable, direction)
+										}
                                     }
             	      		return (
             	      			<div className="data-block__callout">
@@ -87,8 +95,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => { 
   return {
-    fetchRanking: (collection, variable, year, value, profilePath) => {
-      dispatch(fetchRanking(collection, variable, year, value, profilePath))
+    fetchRanking: (collection, direction, variable, year, value, profilePath) => {
+      dispatch(fetchRanking(collection, direction, variable, year, value, profilePath))
     }
   }
 }

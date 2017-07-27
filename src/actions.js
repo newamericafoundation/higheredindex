@@ -235,11 +235,11 @@ export function receiveRanking(variable, profilePath, rank) {
   }
 }
 
-export function fetchRanking(collection, variable, year, value, profilePath) {
+export function fetchRanking(collection, direction, variable, year, value, profilePath) {
   return function (dispatch) {
     dispatch(requestRanking(variable, profilePath))
 
-    return fetch(dbPath + 'get-ranking/' + collection + "/" + variable + "/" + year + "/" + value)
+    return fetch(dbPath + 'get-ranking/' + collection + "/" + direction + "/" + variable + "/" + year + "/" + value)
       .then(response => { return response.json()})
       .then(json => {
         dispatch(receiveRanking(variable, profilePath, json))
