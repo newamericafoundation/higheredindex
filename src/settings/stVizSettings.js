@@ -44,7 +44,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the average in-district price was", ", the average in-state price was ", ", and the average out-of-state price was ", " at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the average in-district price was", ", the average in-state price was ", ", and the average out-of-state price was ", " at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"indistprice", format: "price" },
 					{variable:"instateprice", format: "price"},
@@ -76,7 +77,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the average cost of attendance after grant aid was ", ", and the average for low-income students was ", " at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the average cost of attendance after grant aid was ", ", and the average for low-income students was ", " at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"netprice", format: "price" },
 					{variable:"netpriceinc", format: "price"},
@@ -106,7 +108,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the average amount of federal aid received was ", ", and ", " of students received federal aid; and the average amount of total aid was ", ", and ", " of students received total aid at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the average amount of federal aid received was ", ", and ", " of students received federal aid; and the average amount of total aid was ", ", and ", " of students received total aid at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"avefedaid", format: "price" },
 					{variable:"fedaidperc", format: "percent"},
@@ -148,7 +151,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["", " of students graduated, and ", " of bachelor’s degree students graduated at ", " institutions in @year.<br><br>The following chart depicts trends over time."],
+				textSections: [["", " of students graduated, and ", " of bachelor’s degree students graduated at ", " institutions in @year."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"gradtot", format: "percent" },
 					{variable:"gradbach", format: "percent"},
@@ -178,7 +182,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["Retention rates averaged ", " at ", " institutions in @year.<br><br>The following chart depicts trends over time."],
+				textSections: [["Retention rates averaged ", " at ", " institutions in @year."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"retrate", format: "percent" },
 					{variable:"name", format: "string"},
@@ -205,7 +210,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, ", " of students at ", " institutions were transfer students.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, ", " of students at ", " institutions were transfer students."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"transfer", format: "percent" },
 					{variable:"name", format: "string"},
@@ -232,7 +238,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, students enrolled at ", " institutions scored an SAT/ACT average of ", ".<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, students enrolled at ", " institutions scored an SAT/ACT average of ", "."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"sat_avg_all", format: "number"},
@@ -260,7 +267,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["Instructional expenses averaged ", " and tuition averaged ", " at ", " institutions in @year.<br><br>The following chart depicts trends over time."],
+				textSections: [["Instructional expenses averaged ", " and tuition averaged ", " at ", " institutions in @year."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"inexpfte", format: "price" },
 					{variable:"tuitfte", format: "price"},
@@ -289,7 +297,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["Endowment averaged ", " at ", " institutions in @year.<br><br>The following chart depicts trends over time."],
+				textSections: [["Endowment averaged ", " at ", " institutions in @year."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"endowment", format: "price" },
 					{variable:"name", format: "string"},
@@ -316,7 +325,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, ", " of ", " institutions received over 90 percent of their revenue from federal sources, violating the 90/10 rule.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, ", " of ", " institutions received over 90 percent of their revenue from federal sources, violating the 90/10 rule."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"prop_9010", format: "percent" },
 					{variable:"name", format: "string"},
@@ -343,7 +353,7 @@ const stVizSettings = {
 		// 		]
 		// 	},
 		// 	paragraphSettings: {
-		// 		textSections: ["In @year, there was an average of ", " institutions per congressional district in ", "."],
+		// 		textSections: [["In @year, there was an average of ", " institutions per congressional district in ", "."],
 		// 		variables: [
 		// 			{variable:"", format: "number" },  // add variable
 		// 			{variable:"name", format: "string"},
@@ -367,7 +377,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, ", " institutions enrolled ", " undergraduate students and ", " graduate students; of these ", " were full-time students and ", " were part-time students.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, ", " institutions enrolled ", " undergraduate students and ", " graduate students; of these ", " were full-time students and ", " were part-time students."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"ugenroll", format: "number"},
@@ -396,7 +407,8 @@ const stVizSettings = {
 			title: "Enrollment by Race",
 			callOutBoxSettings: null,
 			paragraphSettings: {
-				textSections: ["In @year, students at ", " institutions were ", " white, ", " black, ", " Asian, ", " Hispanic, ", " American Indian, ", " Hawaiian or Pacific Islander, ", " multiracial, ", " international, and ", " unknown.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, students at ", " institutions were ", " white, ", " black, ", " Asian, ", " Hispanic, ", " American Indian, ", " Hawaiian or Pacific Islander, ", " multiracial, ", " international, and ", " unknown."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"white", format: "percent"},
@@ -440,7 +452,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, ", " of students identified as male and ", " as female at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, ", " of students identified as male and ", " as female at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"men", format: "percent" },
 					{variable:"fem", format: "percent"},
@@ -470,7 +483,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, ", " of students had taken out at least one federal student loan and ", " of students had ever received Pell Grants at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, ", " of students had taken out at least one federal student loan and ", " of students had ever received Pell Grants at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"loan_ever", format: "percent"},
 					{variable:"pell_ever", format: "percent"},
@@ -500,7 +514,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, ", " of students were the first in their families to go to college; ", " of students were married; ", " of students were financially independent from their parents or other family; and ", " of students were veterans at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, ", " of students were the first in their families to go to college; ", " of students were married; ", " of students were financially independent from their parents or other family; and ", " of students were veterans at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"first_gen", format: "percent" },
 					{variable:"married", format: "percent"},
@@ -537,7 +552,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["", " institutions disbursed ", " in Pell Grants; ", " in Federal Supplemental Education Opportunity Grants; ", " in TEACH Grants; ", " in Iraq/Afghanistan Service Grants; and ", " in Federal Work-Study to students in @year.<br><br>The following chart depicts trends over time."],
+				textSections: [["", " institutions disbursed ", " in Pell Grants; ", " in Federal Supplemental Education Opportunity Grants; ", " in TEACH Grants; ", " in Iraq/Afghanistan Service Grants; and ", " in Federal Work-Study to students in @year."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"pelldisburse", format: "price"},
@@ -572,7 +588,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["", " institutions awarded ", " Pell Grants; ", " Federal Supplemental Education Opportunity Grants; ", " TEACH Grants; ", " Iraq/Afghanistan Service Grants; and ", " Federal Work-Study awards in @year.<br><br>The following chart depicts trends over time."],
+				textSections: [["", " institutions awarded ", " Pell Grants; ", " Federal Supplemental Education Opportunity Grants; ", " TEACH Grants; ", " Iraq/Afghanistan Service Grants; and ", " Federal Work-Study awards in @year."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"pellrecip", format: "number"},
@@ -608,7 +625,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the average Pell Grant award was ", ", and ", " of students received awards at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the average Pell Grant award was ", ", and ", " of students received awards at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"avepell", format: "price" },
 					{variable:"pellperc", format: "percent"},
@@ -644,7 +662,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the average amount of state and local aid awarded was ", ", and ", " of students received awards at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the average amount of state and local aid awarded was ", ", and ", " of students received awards at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"avestatelocalaid", format: "price" },
 					{variable:"statelocalaidperc", format: "percent"},
@@ -681,7 +700,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["", " institutions disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates; ", " in unsubsidized graduate Stafford Loans; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in Perkins Loans to students in @year.<br><br>The following chart depicts trends over time."],
+				textSections: [["", " institutions disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates; ", " in unsubsidized graduate Stafford Loans; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in Perkins Loans to students in @year."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"allsubdisburse", format: "price"},
@@ -720,7 +740,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["", " institutions authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates; ", " unsubsidized graduate Stafford Loans; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " Perkins Loans in @year.<br><br>The following chart depicts trends over time."],
+				textSections: [["", " institutions authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates; ", " unsubsidized graduate Stafford Loans; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " Perkins Loans in @year."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"allsubrecip", format: "number"}, 
@@ -760,7 +781,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the three-year repayment rate was ", " for male students and ", " for female students at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the three-year repayment rate was ", " for male students and ", " for female students at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"male_rpy_3yr_rt", format: "percent"},
 					{variable:"female_rpy_3yr_rt", format: "percent"},
@@ -791,7 +813,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the three-year repayment rate was ", " for first-generation students and ", " for students with at least one parent who holds a college degree at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the three-year repayment rate was ", " for first-generation students and ", " for students with at least one parent who holds a college degree at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"firstgen_rpy_3yr_rt", format: "percent"},
 					{variable:"notfirstgen__rpy_3yr_rt", format: "percent"},
@@ -822,7 +845,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the three-year repayment rate was ", " for Pell Grant recipients and ", " for students who did not receive Pell Grants at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the three-year repayment rate was ", " for Pell Grant recipients and ", " for students who did not receive Pell Grants at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"pell_rpy_3yr_rt", format: "percent"},
 					{variable:"nopell_rpy_3yr_rt", format: "percent"},
@@ -853,7 +877,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the three-year repayment rate was ", " for graduates and ", " for students who withdrew from ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the three-year repayment rate was ", " for graduates and ", " for students who withdrew from ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"compl_rpy_3yr_rt", format: "percent"},
 					{variable:"noncom_rpy_3yr_rt", format: "percent"},
@@ -885,7 +910,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the three-year repayment rate was ", " for low-income students, ", " for middle-income students, and ", " for high-income students at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the three-year repayment rate was ", " for low-income students, ", " for middle-income students, and ", " for high-income students at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"lo_inc_rpy_3yr_rt", format: "percent"},
 					{variable:"md_inc_rpy_3yr_rt", format: "percent"},
@@ -918,7 +944,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the three-year repayment rate was ", " for dependent students and ", " for independent students at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the three-year repayment rate was ", " for dependent students and ", " for independent students at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"dep_rpy_3yr_rt", format: "percent"},
 					{variable:"ind_rpy_3yr_rt", format: "percent"},
@@ -948,7 +975,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the three-year cohort default rate was ", " and the two-year cohort default rate was ", " at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the three-year cohort default rate was ", " and the two-year cohort default rate was ", " at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"cdr2", format: "percent"},
 					{variable:"cdr3", format: "percent"},
@@ -978,7 +1006,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the average federal student loan was ", ", and ", " of students received federal student loans; and the average other loan was ", ", and ", " of students received other loans at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the average federal student loan was ", ", and ", " of students received federal student loans; and the average other loan was ", ", and ", " of students received other loans at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"avefedloan", format: "price"},
 					{variable:"fedloanperc", format: "percent"},
@@ -1022,7 +1051,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, median earnings six years after enrolling in school were ", ", median earnings after eight years were ", ", and median earnings after 10 years were ", " for graduates of ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, median earnings six years after enrolling in school were ", ", median earnings after eight years were ", ", and median earnings after 10 years were ", " for graduates of ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"md_earn_wne_p6", format: "price"},
 					{variable:"md_earn_wne_p8", format: "price"},
@@ -1054,7 +1084,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the mean earnings 10 years after enrolling in school were ", " for men and ", " for women at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the mean earnings 10 years after enrolling in school were ", " for men and ", " for women at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"mn_earn_wne_male1_p10", format: "price"},
 					{variable:"mn_earn_wne_male0_p10", format: "price"},
@@ -1085,7 +1116,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the mean earnings 10 years after enrolling in school were ", " for independent graduates and ", " for dependent graduates of ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the mean earnings 10 years after enrolling in school were ", " for independent graduates and ", " for dependent graduates of ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"mn_earn_wne_indep0_p10", format: "price"},
 					{variable:"mn_earn_wne_indep1_p10", format: "price"},
@@ -1116,7 +1148,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the share of former students of ", " institutions earning over $25,000 was ", " seven years after entry, ", " eight years after entry, ", " nine years after entry, and ", " 10 years after initially enrolling in school.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the share of former students of ", " institutions earning over $25,000 was ", " seven years after entry, ", " eight years after entry, ", " nine years after entry, and ", " 10 years after initially enrolling in school."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"gt_25k_p7", format: "percent"},
@@ -1150,7 +1183,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the median debt was ", " for graduates and ", " for students who withdrew from ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the median debt was ", " for graduates and ", " for students who withdrew from ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"grad_debt_mdn", format: "price"},
 					{variable:"wdraw_debt_mdn", format: "price"},
@@ -1181,7 +1215,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the median debt was ", " for male students and ", " for female students at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the median debt was ", " for male students and ", " for female students at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"male_debt_mdn", format: "price"},
 					{variable:"female_debt_mdn", format: "price"},
@@ -1212,7 +1247,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the median debt was ", " for first-generation students and ", " for students whose parents held a college degree at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the median debt was ", " for first-generation students and ", " for students whose parents held a college degree at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"firstgen_debt_mdn", format: "price"},
 					{variable:"notfirstgen_debt_mdn", format: "price"},
@@ -1243,7 +1279,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the median debt was ", " for students who received Pell Grants and ", " for students who did not receive Pell Grants at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the median debt was ", " for students who received Pell Grants and ", " for students who did not receive Pell Grants at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"pell_debt_mdn", format: "price"},
 					{variable:"nopell_debt_mdn", format: "price"},
@@ -1275,7 +1312,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the median debt was ", " for students from low-income backgrounds, ", " for students from middle-income backgrounds, and ", " for students from high-income backgrounds of ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the median debt was ", " for students from low-income backgrounds, ", " for students from middle-income backgrounds, and ", " for students from high-income backgrounds of ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"lo_inc_debt_mdn", format: "price"},
 					{variable:"md_inc_debt_mdn", format: "price"},
@@ -1308,7 +1346,8 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: ["In @year, the median debt was ", " for dependent students and ", " for independent students at ", " institutions.<br><br>The following chart depicts trends over time."],
+				textSections: [["In @year, the median debt was ", " for dependent students and ", " for independent students at ", " institutions."],
+					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"dep_debt_mdn", format: "price"},
 					{variable:"ind_debt_mdn", format: "price"},

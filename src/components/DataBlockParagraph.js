@@ -24,43 +24,53 @@ export default function DataBlockParagraph(props) {
 
 	if (!data) { return null; }
   	
-  	let populatedText = [],
+  	
+  	let fullText = [],
   		maxYear = getMaxYear(variables, data);
 
   	if (textSections.length == 0 || variables.length == 0) {
   		return (<div className="data-block__paragraph"></div>);
   	}
 
-	textSections.map((text, i) => {
-		let variable = variables[i];
-		text = text.replace("@year", maxYear);
-		populatedText.push(<span>{text}</span>);
+  	let variableCounter = 0;
+  	textSections.forEach((section, i) => {
+  		let textSection = [];
+		section.map((text, j) => {
+			let variable = variables[variableCounter];
+			text = text.replace("@year", maxYear);
+			textSection.push(<span>{text}</span>);
 
-		if (variable) {
-		 	if (data[variable.variable]) {
-		 		let value;
-				let varName = variable.variable,
-					variableClass = varName == 'name' ? '' : "data-block__paragraph__data";
+			if (variable) {
+			 	if (data[variable.variable]) {
+			 		let value;
+					let varName = variable.variable,
+						variableClass = varName == 'name' ? '' : "data-block__paragraph__data";
 
-				if (typeof(data[varName]) == 'object') {
-					value = data[varName][maxYear];
+					if (typeof(data[varName]) == 'object') {
+						value = data[varName][maxYear];
+					} else {
+						value = data[varName];
+					}
+					
+					value = value ? formatValue(value, variable.format) : "N/A";	
+					textSection.push(<span className={variableClass} key={j}>{value}</span>);
+
 				} else {
-					value = data[varName];
+					textSection.push(<span className="data-block__paragraph__data" key={j}>N/A</span>);
 				}
-				
-				value = value ? formatValue(value, variable.format) : "N/A";	
-				populatedText.push(<span className={variableClass} key={i}>{value}</span>);
-
-			} else {
-				populatedText.push(<span className="data-block__paragraph__data" key={i}>N/A</span>);
 			}
-		}
-    })
+			variableCounter++;
+	    })
+	    fullText.push(<p>{textSection}</p>)
+	});
 
+  	console.log(fullText)
     return (
       <div className="data-block__paragraph">
       	{ calloutSettings && <DataBlockCallout settings={calloutSettings} maxYear={maxYear} data={data} collectionName={collectionName}/> }
-      	<p>{populatedText}</p>
+      	<div className="data-block__paragraph__text">
+      		{fullText}
+      	</div>
       </div>
     )
 }
