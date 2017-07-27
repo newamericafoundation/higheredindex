@@ -5,7 +5,7 @@ const instVizSettings = {
 		// add fact boxes for school data
 		{
 			title: "Sticker Price",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "instateprice", displayName:"In-state price", format: "price"},
@@ -37,7 +37,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Net Price",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "netprice", displayName:"Net price", format: "price"},
@@ -68,7 +68,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Student Aid",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "avefedaid", displayName:"Average federal aid", format: "price"},
@@ -111,7 +111,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Graduation Rates",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "gradtot", displayName:"Graduation rate", format: "percent"},
@@ -142,7 +142,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Retention Rates",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "retrate", displayName:"Retention rate", format: "percent"},
@@ -170,7 +170,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Transfer Students",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "transfer", displayName:"Share of transfer students", format: "percent"},
@@ -198,7 +198,7 @@ const instVizSettings = {
 		},
 		{
 			title: "SAT/ACT Average",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "sat_avg_all", displayName:"SAT/ACT average", format: "number"},
@@ -226,7 +226,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Instructional Expenses",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "inexpfte", displayName:"Instructional expenses per full-time equivalent", format: "price"},
@@ -257,7 +257,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Endowment",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "endowment", displayName:"Endowment", format: "price"},
@@ -287,7 +287,7 @@ const instVizSettings = {
 	"Students": [
 		{
 			title: "Enrollment by Student Type",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "ugenroll", displayName:"Undergraduate enrollment", format: "number"},
@@ -323,7 +323,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Enrollment by Race",
-			callOutBoxSettings: null,
+			calloutSettings: null,
 			paragraphSettings: {
 				textSections: [["In @year, students at ", " were ", " white, ", " black, ", " Asian, ", " Hispanic, ", " American Indian, ", " Hawaiian or Pacific Islander, ", " multiracial, ", " international, and ", " unknown."],
 					["The following chart depicts trends over time."]],
@@ -362,7 +362,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Enrollment by Gender",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "men", displayName:"Male", format: "percent"},
@@ -393,7 +393,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Enrollment by Financial Need",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "loan_ever", displayName:"Ever borrowed federal loans", format: "percent"},
@@ -424,7 +424,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Enrollment by Non-traditional Students",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "first_gen", displayName:"First generation", format: "percent"},
@@ -462,7 +462,7 @@ const instVizSettings = {
 		// Federal work Study and SEOG need an * with the following, on this graphic and the next one: SEOG and Federal Work Study are campus-based aid programs, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other grants are available to students at all institutions.
 		{
 			title: "Grant Disbursments (Volume)",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "pelldisburse", displayName:"Pell Grant disbursements", format: "pelldisburse"},
@@ -498,7 +498,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Grant Recipients",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "pellrecip", displayName:"Pell Grant recipients", format: "number"},
@@ -534,7 +534,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Pell Awards",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "avepell", displayName:"Average Pell award", format: "price"},
@@ -571,7 +571,7 @@ const instVizSettings = {
 		},
 		{
 			title: "State and Local Aid",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "avestatelocalaid", displayName:"Average amount of state and local aid", format: "price"},
@@ -609,7 +609,7 @@ const instVizSettings = {
 	], "Loans": [
 		{
 			title: "Loan Disbursements (Volume)",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "dltotaldisburse", displayName:"Total direct loan volume", format:"price"},
@@ -649,7 +649,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Loan Recipients",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "dltotalrecip", displayName:"Total direct loan recipients", format:"number"},
@@ -689,7 +689,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Repayment Rates by Gender",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "male_rpy_3yr_rt", displayName:"Male", format:"percent"},
@@ -721,7 +721,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Repayment Rates by Parental Education",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "firstgen_rpy_3yr_rt", displayName:"First generation", format:"percent"},
@@ -753,7 +753,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Repayment Rates by Pell Status",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "pell_rpy_3yr_rt", displayName:"Pell recipients", format:"percent"},
@@ -785,7 +785,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Repayment Rates by Completion Status",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "compl_rpy_3yr_rt", displayName:"Completers", format:"percent"},
@@ -817,7 +817,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Repayment Rates by Income",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "lo_inc_rpy_3yr_rt", displayName:"Low-income", format:"percent"},
@@ -852,7 +852,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Repayment Rates by Dependency Status",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "dep_rpy_3yr_rt", displayName:"Dependent", format:"percent"},
@@ -884,7 +884,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Cohort Default Rates",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "cdr3", displayName:"Three-year cohort default rate", format:"percent"},
@@ -914,7 +914,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Average Student Borrowing",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "avefedloan", displayName:"Average federal loan", format:"price"},
@@ -958,7 +958,7 @@ const instVizSettings = {
 	], "Outcomes" : [
 		{
 			title: "Median Earnings",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "md_earn_wne_p10", displayName:"10-year", format:"price"},
@@ -992,7 +992,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Mean Earnings by Gender",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "mn_earn_wne_male1_p10", displayName:"Male", format:"price"},
@@ -1024,7 +1024,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Mean Earnings by Dependency Status",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "mn_earn_wne_indep0_p10", displayName:"Dependent", format:"price"},
@@ -1056,7 +1056,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Share Earning Over $25,000",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "gt_25k_p10", displayName:"Share of students earning more than $25,000 per year", format:"percent"},
@@ -1090,7 +1090,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Median Debt by Completion Status",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "grad_debt_mdn", displayName:"Completers", format:"price"},
@@ -1122,7 +1122,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Median Debt by Gender",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "male_debt_mdn", displayName:"Male", format:"price"},
@@ -1154,7 +1154,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Median Debt by Parental Education",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "firstgen_debt_mdn", displayName:"First generation", format:"price"},
@@ -1186,7 +1186,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Median Debt by Pell Status",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "pell_debt_mdn", displayName:"Pell recipients", format:"price"},
@@ -1218,7 +1218,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Median Debt by Income",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "lo_inc_debt_mdn", displayName:"Low-income", format:"price"},
@@ -1253,7 +1253,7 @@ const instVizSettings = {
 		},
 		{
 			title: "Median Debt by Dependency Status",
-			callOutBoxSettings: {
+			calloutSettings: {
 				type: "value",
 				variables: [
 					{variable: "dep_debt_mdn", displayName:"Dependent", format:"price"},

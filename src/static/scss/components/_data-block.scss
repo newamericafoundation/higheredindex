@@ -12,12 +12,12 @@
 			display: table;
 		}
 	}
-	&__paragraph, &__viz {
+	&__info, &__viz {
 		@include breakpoint(medium) {
 			display: table-cell;
 		}
 	}
-	&__paragraph {
+	&__info {
 		width: 100%;
 		@include breakpoint(medium) {
 			width: 40%;
@@ -25,16 +25,8 @@
 		
 		vertical-align: top;
 		padding-right: 25px;
-		p {
-			line-height: 1.6;
-			color: palette-get(na-black-40);
-			font-size: 16px;
-		}
-		&__data {
-			font-weight: bold;
-			color: palette-get(na-black);
-		}
 	}
+
 	&__viz {
 		width: 100%;
 		@include breakpoint(medium) {
@@ -59,6 +51,18 @@
 
 		&:first-child {
 			width: 100% !important;
+		}
+	}
+
+	&__paragraph {
+		p {
+			line-height: 1.6;
+			color: palette-get(na-black-40);
+			font-size: 16px;
+		}
+		&__data {
+			font-weight: bold;
+			color: palette-get(na-black);
 		}
 	}
 
