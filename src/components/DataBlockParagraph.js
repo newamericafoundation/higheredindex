@@ -1,32 +1,12 @@
 import React from 'react';
 var d3 = require("d3");
 import {formatValue} from '../helper_functions/format_value';
-import DataBlockCallout from "./DataBlockCallout";
-
-function getMaxYear(variables, data) {
-	let totalMaxYear = 0;
-	for (let variable of variables) {
-		let varName = variable.variable;
-		if (data[varName] && typeof(data[varName]) == 'object') {
-			let keys = Object.keys(data[varName]);
-			let localMaxYear = d3.max(keys, (d) => { return Number(d) });
-			totalMaxYear = Math.max(localMaxYear, totalMaxYear);
-		}
-	}
-
-	return totalMaxYear;
-}
-
 
 export default function DataBlockParagraph(props) {
-	const {settings, calloutSettings, data, collectionName} = props,
+	const {settings, maxYear, data} = props,
 		{textSections, variables} = settings;
 
-	if (!data) { return null; }
-  	
-  	
-  	let fullText = [],
-  		maxYear = getMaxYear(variables, data);
+  	let fullText = []
 
   	if (textSections.length == 0 || variables.length == 0) {
   		return (<div className="data-block__paragraph"></div>);
@@ -66,7 +46,6 @@ export default function DataBlockParagraph(props) {
 
     return (
       <div className="data-block__paragraph">
-      	{ calloutSettings && <DataBlockCallout settings={calloutSettings} maxYear={maxYear} data={data} collectionName={collectionName}/> }
       	<div className="data-block__paragraph__text">
       		{fullText}
       	</div>
