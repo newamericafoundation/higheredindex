@@ -45,7 +45,7 @@ class ProfileSection extends React.Component {
 	}
 
 	getSectionContent() {
-		const {type, data, settings, description} = this.props;
+		const {type, data, settings, description, collectionName} = this.props;
 		
 		switch(type) {
 			case "description":
@@ -65,7 +65,7 @@ class ProfileSection extends React.Component {
 				return (
 					<div>
 			          {settings.map((settingsObject, i) => {
-			            return <DataBlock key={i} settings={settingsObject} data={data} />;
+			            return <DataBlock key={i} settings={settingsObject} data={data} collectionName={collectionName} />;
 			          })}
 			        </div>
 				)

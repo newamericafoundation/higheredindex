@@ -5,7 +5,7 @@ import DataBlockViz from "./DataBlockViz";
 
 export default class DataBlock extends React.Component {
   render() {
-  	let {settings, data} = this.props,
+  	let {settings, data, collectionName} = this.props,
       {title, callOutBoxSettings, paragraphSettings, vizSettings} = settings;
 
       // console.log(data)
@@ -17,7 +17,7 @@ export default class DataBlock extends React.Component {
       <div className="data-block">
       	<h5 className="data-block__title">{title}</h5>
       	<div className="data-block__content">
-	      	{ paragraphSettings && <DataBlockParagraph settings={paragraphSettings} calloutSettings={callOutBoxSettings} data={data}/> }
+	      	{ paragraphSettings && <DataBlockParagraph settings={paragraphSettings} calloutSettings={callOutBoxSettings} data={data} collectionName={collectionName}/> }
           <DataBlockViz settings={vizSettings} data={data}/>
         </div>
       </div>

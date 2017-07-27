@@ -19,7 +19,7 @@ function getMaxYear(variables, data) {
 
 
 export default function DataBlockParagraph(props) {
-	const {settings, calloutSettings, data} = props,
+	const {settings, calloutSettings, data, collectionName} = props,
 		{textSections, variables} = settings;
 
 	if (!data) { return null; }
@@ -59,7 +59,7 @@ export default function DataBlockParagraph(props) {
 
     return (
       <div className="data-block__paragraph">
-      	{ calloutSettings && <DataBlockCallout settings={calloutSettings} maxYear={maxYear} data={data}/> }
+      	{ calloutSettings && <DataBlockCallout settings={calloutSettings} maxYear={maxYear} data={data} collectionName={collectionName}/> }
       	<p>{populatedText}</p>
       </div>
     )
