@@ -22,6 +22,8 @@ export const SET_INDICATOR_UPDATE_STATUS = 'SET_INDICATOR_UPDATE_STATUS'
 export const UPLOAD_DATA_FILE = 'UPLOAD_DATA_FILE'
 export const SET_DATA_FILE_UPLOAD_STATUS = 'SET_DATA_FILE_UPLOAD_STATUS'
 export const SET_ADMIN_LOGIN_STATUS = 'SET_ADMIN_LOGIN_STATUS'
+export const RECEIVE_RANKING = 'RECEIVE_RANKING'
+export const REQUEST_RANKING = 'REQUEST_RANKING'
 
 // export const REQUEST_INST = 'REQUEST_INST'
 // export const RECEIVE_INST = 'RECEIVE_INST'
@@ -213,6 +215,35 @@ export function fetchProfilePhoto(id, profileType) {
 
       // In a real world app, you also want to
       // catch any error in the network call.
+  }
+}
+
+export function requestRanking(variable, profilePath) {
+  return { 
+    type: REQUEST_RANKING,
+    variable,
+    profilePath
+  }
+}
+
+export function receiveRanking(variable, profilePath, rank) {
+  return { 
+    type: RECEIVE_RANKING,
+    variable,
+    profilePath,
+    rank
+  }
+}
+
+export function fetchRanking(collection, variable, year, value, profilePath) {
+  return function (dispatch) {
+    dispatch(requestRanking(variable, profilePath))
+
+    return fetch(dbPath + 'get-ranking/' + collection + "/" + variable + "/" + year + "/" + value)
+      .then(response => { return response.json()})
+      .then(json => {
+        dispatch(receiveRanking(variable, profilePath, json))
+      })
   }
 }
 

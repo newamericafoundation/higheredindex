@@ -98,6 +98,7 @@ const stVizSettings = {
 			title: "Student Aid",
 			callOutBoxSettings: {
 				type: "ranking",
+				direction: "lowest",
 				variables: [
 					{variable: "fedaidperc", displayName:"Rank among all states for greatest share of students receiving federal grant aid"},
 				]

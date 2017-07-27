@@ -46,7 +46,7 @@ class ProfileSection extends React.Component {
 
 	getSectionContent() {
 		const {type, data, settings, description, collectionName} = this.props;
-		
+		console.log(collectionName)
 		switch(type) {
 			case "description":
 				return (
