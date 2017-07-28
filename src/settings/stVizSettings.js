@@ -2,348 +2,348 @@ import { colors } from './../helper_functions/colors.js';
 
 const stVizSettings = {
 	"Schools" : [
-		{
-			title: "Institutional Breakdowns",
-			calloutSettings: null,
-			paragraphSettings: null,
-			source: "Federal Student Aid, College Scorecard",
-			indicatorLink: null,
-			vizSettings: {
-				chart1Settings: {
-					type: "table",
-					tableSettingsList: 
-					[
-						{
-							headingLabels: ["Category", "Count"],
-							variables: [
-								{variable:"pub4yr", displayName:"Public Four-Year", format: "number" },
-								{variable:"twoyrlesspublic", displayName:"Public Two-Year or Less", format: "number"},
-								{variable:"nonprof4yr", displayName:"Non-Profit Four-Year", format: "number"},
-								{variable:"forprofit", displayName:"For-Profit", format: "number"},
-								{variable:"schools", displayName:"Total", format: "number", bold: true},
-							],
-						},
-						{
-							headingLabels: ["Category", "Count"],
-							variables: [
-								{variable:"degree", displayName:"Degree Granting", format: "number"},
-								{variable:"hbcu", displayName:"HBCU", format: "number"},
-							],
-						}
-					]
-				}
-			}
-		},
-		{
-			title: "Sticker Price",
-			calloutSettings: {
-				type: "ranking",
-				direction: "lowest",
-				variables: [
-					{variable: "instateprice", displayName:"Rank among all states for lowest average in-state price"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the average in-district price was", ", the average in-state price was ", ", and the average out-of-state price was ", " at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"indistprice", format: "price" },
-					{variable:"instateprice", format: "price"},
-					{variable:"outstate", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "sticker-price",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Price",
-					variables: [
-						{variable:"indistprice", displayName:"In-district price", format: "price", color: colors.turquoise.light },
-						{variable:"instateprice", displayName:"In-state price", format: "price", color: colors.turquoise.medium},
-						{variable:"outstate", displayName:"Out-of-state price", format: "price", color: colors.turquoise.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Net Price",
-			calloutSettings: {
-				type: "ranking",
-				direction: "lowest",
-				variables: [
-					{variable: "netpriceinc", displayName:"Rank among all states for lowest net price for low-income students"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the average cost of attendance after grant aid was ", ", and the average for low-income students was ", " at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"netprice", format: "price" },
-					{variable:"netpriceinc", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "IPEDS",
-			indicatorLink: "net-price",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Price",
-					variables: [
-						{variable:"netprice", displayName:"Net price", format: "price", color: colors.turquoise.light },
-						{variable:"netpriceinc", displayName:"Net price for low-income students", format: "price", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		{
-			title: "Student Aid",
-			calloutSettings: {
-				type: "ranking",
-				direction: "highest",
-				variables: [
-					{variable: "fedaidperc", displayName:"Rank among all states for greatest share of students receiving federal grant aid"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the average amount of federal aid received was ", ", and ", " of students received federal aid; and the average amount of total aid was ", ", and ", " of students received total aid at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"avefedaid", format: "price" },
-					{variable:"fedaidperc", format: "percent"},
-					{variable:"avetotaid", format: "price"},
-					{variable:"totaidperc", format: "percent"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "IPEDS",
-			indicatorLink: "student-aid",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"fedaidperc", displayName:"Percent receiving federal aid", format: "percent", color: colors.turquoise.dark },
-						{variable:"totaidperc", displayName:"Percent receiving total aid", format: "percent", color: colors.purple.dark },
-					]
-				},
-				chart2Settings: {
-					type: "grouped-bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"avefedaid", displayName:"Average federal aid", format: "price", color: colors.turquoise.light },
-						{variable:"avetotaid", displayName:"Average total aid", format: "price", color: colors.purple.light },
+		// {
+		// 	title: "Institutional Breakdowns",
+		// 	calloutSettings: null,
+		// 	paragraphSettings: null,
+		// 	source: "Federal Student Aid, College Scorecard",
+		// 	indicatorLink: null,
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "table",
+		// 			tableSettingsList: 
+		// 			[
+		// 				{
+		// 					headingLabels: ["Category", "Count"],
+		// 					variables: [
+		// 						{variable:"pub4yr", displayName:"Public Four-Year", format: "number" },
+		// 						{variable:"twoyrlesspublic", displayName:"Public Two-Year or Less", format: "number"},
+		// 						{variable:"nonprof4yr", displayName:"Non-Profit Four-Year", format: "number"},
+		// 						{variable:"forprofit", displayName:"For-Profit", format: "number"},
+		// 						{variable:"schools", displayName:"Total", format: "number", bold: true},
+		// 					],
+		// 				},
+		// 				{
+		// 					headingLabels: ["Category", "Count"],
+		// 					variables: [
+		// 						{variable:"degree", displayName:"Degree Granting", format: "number"},
+		// 						{variable:"hbcu", displayName:"HBCU/MSI", format: "number"},
+		// 					],
+		// 				}
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Sticker Price",
+		// 	calloutSettings: {
+		// 		type: "ranking",
+		// 		direction: "lowest",
+		// 		variables: [
+		// 			{variable: "instateprice", displayName:"Rank among all states for lowest average in-state tuition"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the average in-district tuition was", ", the average in-state tuition was ", ", and the average out-of-state tuition was ", " at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"indistprice", format: "price" },
+		// 			{variable:"instateprice", format: "price"},
+		// 			{variable:"outstate", format: "price"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "sticker-price",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Price",
+		// 			variables: [
+		// 				{variable:"indistprice", displayName:"In-district", format: "price", color: colors.turquoise.light },
+		// 				{variable:"instateprice", displayName:"In-state", format: "price", color: colors.turquoise.medium},
+		// 				{variable:"outstate", displayName:"Out-of-state", format: "price", color: colors.turquoise.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Net Price",
+		// 	calloutSettings: {
+		// 		type: "ranking",
+		// 		direction: "lowest",
+		// 		variables: [
+		// 			{variable: "netpriceinc", displayName:"Rank among all states for lowest net price for low-income students"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the average cost of attendance after grant aid was ", ", and the average for low-income students was ", " at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"netprice", format: "price" },
+		// 			{variable:"netpriceinc", format: "price"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "IPEDS",
+		// 	indicatorLink: "net-price",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Price",
+		// 			variables: [
+		// 				{variable:"netprice", displayName:"Net price", format: "price", color: colors.turquoise.light },
+		// 				{variable:"netpriceinc", displayName:"Net price for low-income students", format: "price", color: colors.purple.light},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Student Aid",
+		// 	calloutSettings: {
+		// 		type: "ranking",
+		// 		direction: "highest",
+		// 		variables: [
+		// 			{variable: "fedaidperc", displayName:"Rank among all states for greatest share of students receiving federal grant aid"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the average amount of federal aid received was ", ", and ", " of students received federal aid; and the average amount of total aid was ", ", and ", " of students received total aid at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"avefedaid", format: "price" },
+		// 			{variable:"fedaidperc", format: "percent"},
+		// 			{variable:"avetotaid", format: "price"},
+		// 			{variable:"totaidperc", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "IPEDS",
+		// 	indicatorLink: "student-aid",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"fedaidperc", displayName:"Percent receiving federal aid", format: "percent", color: colors.turquoise.dark },
+		// 				{variable:"totaidperc", displayName:"Percent receiving total aid", format: "percent", color: colors.purple.dark },
+		// 			]
+		// 		},
+		// 		chart2Settings: {
+		// 			type: "grouped-bar-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"avefedaid", displayName:"Average federal aid", format: "price", color: colors.turquoise.light },
+		// 				{variable:"avetotaid", displayName:"Average total aid", format: "price", color: colors.purple.light },
 
-					]
-				},
+		// 			]
+		// 		},
 				
-			}
-		},
-		{
-			title: "Graduation Rates",
-			calloutSettings: {
-				type: "ranking",
-				direction: "highest",
-				variables: [
-					{variable: "gradtot", displayName:"Rank among all states for highest graduation rate"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["", " of students graduated, and ", " of bachelor’s degree students graduated at ", " institutions in @year."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"gradtot", format: "percent" },
-					{variable:"gradbach", format: "percent"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "IPEDS",
-			indicatorLink: "graduation-rate",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"gradtot", displayName:"Graduation rate", format: "percent", color: colors.turquoise.light },
-						{variable:"gradbach", displayName:"Bachelor's degree graduation rate", format: "percent", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		{
-			title: "Retention Rates",
-			calloutSettings: {
-				type: "ranking",
-				direction: "highest",
-				variables: [
-					{variable: "retrate", displayName:"Rank among all states for highest average retention rate"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["Retention rates averaged ", " at ", " institutions in @year."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"retrate", format: "percent" },
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "IPEDS",
-			indicatorLink: "retention-rate",
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"retrate", displayName:"Retention rate", format: "percent", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "Transfer Students",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "transfer", displayName:"Share of all students who transferred institutions", format:"percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, ", " of students at ", " institutions were transfer students."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"transfer", format: "percent" },
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: null,
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"transfer", displayName:"Share of transfer students", format: "percent", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "SAT/ACT Average",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "sat_avg_all", displayName:"SAT/ACT average", format: "number"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, students enrolled at ", " institutions scored an SAT/ACT average of ", "."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"name", format: "string"},
-					{variable:"sat_avg_all", format: "number"},
-				]
-			},
-			source: "IPEDS",
-			indicatorLink: "sat-act-average",
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"sat_avg_all", displayName:"SAT/ACT average", format: "number", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "Instructional Expenses",
-			calloutSettings: {
-				type: "ranking",
-				direction: "highest",
-				variables: [
-					{variable: "inexpfte", displayName:"Rank among all states for greatest average instructional expenses per full-time equivalent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["Instructional expenses averaged ", " and tuition averaged ", " at ", " institutions in @year."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"inexpfte", format: "price" },
-					{variable:"tuitfte", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "instructional-expenses",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"inexpfte", displayName:"Instructional expenses per FTE", format: "price", color: colors.turquoise.light},
-						{variable:"tuitfte", displayName:"Tuition per FTE", format: "price", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		{
-			title: "Endowment",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "endowment", displayName:"Average endowment of state’s institutions", format: "price"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["Endowment averaged ", " at ", " institutions in @year."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"endowment", format: "price" },
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "endowment",
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"endowment", displayName:"Endowment", format: "price", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "90/10 Proportion",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "prop_9010", displayName:"Share of state’s institutions which received over 90 percent of their revenue from federal sources", format: "percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, ", " of ", " institutions received over 90 percent of their revenue from federal sources, violating the 90/10 rule."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"prop_9010", format: "percent" },
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "Federal Student Aid",
-			indicatorLink: "90-10-proportion",
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"prop_9010", displayName:"90/10 proportion", format: "percent", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
+		// 	}
+		// },
+		// {
+		// 	title: "Graduation Rates",
+		// 	calloutSettings: {
+		// 		type: "ranking",
+		// 		direction: "highest",
+		// 		variables: [
+		// 			{variable: "gradtot", displayName:"Rank among all states for highest graduation rate"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["", " of students graduated, and ", " of bachelor’s degree students graduated at ", " institutions in @year."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"gradtot", format: "percent" },
+		// 			{variable:"gradbach", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "IPEDS",
+		// 	indicatorLink: "graduation-rate",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"gradtot", displayName:"Graduation rate", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"gradbach", displayName:"Bachelor's degree graduation rate", format: "percent", color: colors.purple.light},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Retention Rates",
+		// 	calloutSettings: {
+		// 		type: "ranking",
+		// 		direction: "highest",
+		// 		variables: [
+		// 			{variable: "retrate", displayName:"Rank among all states for highest average retention rate"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["Retention rates averaged ", " at ", " institutions in @year."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"retrate", format: "percent" },
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "IPEDS",
+		// 	indicatorLink: "retention-rate",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "bar-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"retrate", displayName:"Retention rate", format: "percent", color: colors.turquoise.light },
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Transfer Students",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "transfer", displayName:"Share of all students who transferred institutions", format:"percent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, ", " of students at ", " institutions were transfer students."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"transfer", format: "percent" },
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: null,
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "bar-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"transfer", displayName:"Share of transfer students", format: "percent", color: colors.turquoise.light },
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "SAT/ACT Average",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "sat_avg_all", displayName:"SAT/ACT average", format: "number"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, students enrolled at ", " institutions scored an SAT/ACT average of ", "."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"name", format: "string"},
+		// 			{variable:"sat_avg_all", format: "number"},
+		// 		]
+		// 	},
+		// 	source: "IPEDS",
+		// 	indicatorLink: "sat-act-average",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "bar-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"sat_avg_all", displayName:"SAT/ACT average", format: "number", color: colors.turquoise.light },
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Instructional Expenses",
+		// 	calloutSettings: {
+		// 		type: "ranking",
+		// 		direction: "highest",
+		// 		variables: [
+		// 			{variable: "inexpfte", displayName:"Rank among all states for greatest average instructional expenses per full-time equivalent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["Instructional expenses averaged ", " and tuition averaged ", " at ", " institutions in @year."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"inexpfte", format: "price" },
+		// 			{variable:"tuitfte", format: "price"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "instructional-expenses",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"inexpfte", displayName:"Instructional expenses per FTE", format: "price", color: colors.turquoise.light},
+		// 				{variable:"tuitfte", displayName:"Tuition per FTE", format: "price", color: colors.purple.light},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Endowment",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "endowment", displayName:"Average endowment of state’s institutions", format: "price"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["Endowment averaged ", " at ", " institutions in @year."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"endowment", format: "price" },
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "endowment",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "bar-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"endowment", displayName:"Endowment", format: "price", color: colors.turquoise.light },
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "90/10 Proportion",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "prop_9010", displayName:"Share of state’s institutions which received over 90 percent of their revenue from federal sources", format: "percent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, ", " of ", " institutions received over 90 percent of their revenue from federal sources, violating the 90/10 rule."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"prop_9010", format: "percent" },
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "Federal Student Aid",
+		// 	indicatorLink: "90-10-proportion",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "bar-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"prop_9010", displayName:"90/10 proportion", format: "percent", color: colors.turquoise.light },
+		// 			]
+		// 		}
+		// 	}
+		// },
 		// {
 		// 	title: "Congressional Districts",
 		// 	calloutSettings: {
@@ -367,178 +367,178 @@ const stVizSettings = {
 		
 	], 
 	"Students": [
-		{
-			title: "Enrollment by Student Type",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "ugenroll", displayName:"Undergraduate enrollment", format: "number"},
-					{variable: "enroll", displayName:"Total enrollment", format: "number"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, ", " institutions enrolled ", " undergraduate students and ", " graduate students; of these ", " were full-time students and ", " were part-time students."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"name", format: "string"},
-					{variable:"ugenroll", format: "number"},
-					{variable:"gradenroll", format: "number"},
-					{variable:"ftenroll", format: "number"},
-					{variable:"ptenroll", format: "number"},
-				]
-			},
-			source: "IPEDS",
-			indicatorLink: "enrollment",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Students",
-					variables: [
-						{variable:"ugenroll", displayName:"Undergraduate", format: "number", color: colors.turquoise.light },
-						{variable:"gradenroll", displayName:"Graduate", format: "number", color: colors.turquoise.dark},
-						{variable:"ftenroll", displayName:"Full-time", format: "number", color: colors.purple.light},
-						{variable:"ptenroll", displayName:"Part-time", format: "number", color: colors.purple.dark},
-						{variable:"enroll", displayName:"Total", format: "number", color: colors.grey.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Enrollment by Race",
-			calloutSettings: null,
-			paragraphSettings: {
-				textSections: [["In @year, students at ", " institutions were ", " white, ", " black, ", " Asian, ", " Hispanic, ", " American Indian, ", " Hawaiian or Pacific Islander, ", " multiracial, ", " international, and ", " unknown."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"name", format: "string"},
-					{variable:"white", format: "percent"},
-					{variable:"afam", format: "percent"},
-					{variable:"hisp", format: "percent"},
-					{variable:"asia", format: "percent"},
-					{variable:"nhpi", format: "percent"},
-					{variable:"amin", format: "percent" },
-					{variable:"twoormore", format: "percent"},
-					{variable:"nonresident", format: "percent"},
-					{variable:"unknown", format: "percent"},
-				]
-			},
-			source: "IPEDS",
-			indicatorLink: "enrollment",
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "Students",
-					variables: [
-						{variable:"white", displayName:"White", format: "percent", color: colors.turquoise.light },
-						{variable:"afam", displayName:"Black", format: "percent", color: colors.blue.light},
-						{variable:"hisp", displayName:"Hispanic", format: "percent", color: colors.red.light},
-						{variable:"asia", displayName:"Asian", format: "percent", color: colors.purple.light},
-						{variable:"nhpi", displayName:"Hawaiian/Pacific Islander", format: "percent", color: colors.orange},
-						{variable:"amin", displayName:"American Indian", format: "percent", color: colors.yellow},
-						{variable:"twoormore", displayName:"Two or more", format: "percent", color: colors.brown},
-						{variable:"nonresident", displayName:"International", format: "percent", color: colors.grey.medium},
-						{variable:"unk", displayName:"Unknown race", format: "percent", color: colors.grey.light},
-					]
-				}
-			}
-		},
-		{
-			title: "Enrollment by Gender",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "men", displayName:"Male", format: "percent"},
-					{variable: "fem", displayName:"Female", format: "percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, ", " of students identified as male and ", " as female at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"men", format: "percent" },
-					{variable:"fem", format: "percent"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "IPEDS",
-			indicatorLink: "enrollment",
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "Students",
-					variables: [
-						{variable:"men", displayName:"Male", format: "percent", color: colors.turquoise.light},
-						{variable:"fem", displayName:"Female", format: "percent", color: colors.purple.light },
-					]
-				}
-			}
-		},
-		{
-			title: "Enrollment by Financial Need",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "loan_ever", displayName:"Ever borrowed federal loans", format: "percent"},
-					{variable: "pell_ever", displayName:"Ever received a Pell Grant", format: "percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, ", " of students had taken out at least one federal student loan and ", " of students had ever received Pell Grants at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"loan_ever", format: "percent"},
-					{variable:"pell_ever", format: "percent"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "enrollment",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Students",
-					variables: [
-						{variable:"loan_ever", displayName:"Ever borrowed federal loans", format: "percent", color: colors.turquoise.light },
-						{variable:"pell_ever", displayName:"Ever received Pell Grant", format: "percent", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		{
-			title: "Enrollment by Nontraditional Students",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "first_gen", displayName:"First generation", format: "percent"},
-					{variable: "independent", displayName:"Independent", format: "percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, ", " of students were the first in their families to go to college; ", " of students were married; ", " of students were financially independent from their parents or other family; and ", " of students were veterans at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"first_gen", format: "percent" },
-					{variable:"married", format: "percent"},
-					{variable:"independent", format: "percent"},
-					{variable:"veteran", format: "percent"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "enrollment",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Students",
-					variables: [
-						{variable:"first_gen", displayName:"First generation", format: "percent", color: colors.turquoise.light},
-						{variable:"married", displayName:"Married", format: "percent", color: colors.blue.light},
-						{variable:"independent", displayName:"Independent", format: "percent", color: colors.red.light},
-						{variable:"veteran", displayName:"Veterans", format: "percent", color: colors.purple.light},
-					]
-				}
-			}
-		},
+		// {
+		// 	title: "Enrollment by Student Type",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "ugenroll", displayName:"Undergraduate enrollment", format: "number"},
+		// 			{variable: "enroll", displayName:"Total enrollment", format: "number"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, ", " institutions enrolled ", " undergraduate students and ", " graduate students; of these ", " were full-time students and ", " were part-time students."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"name", format: "string"},
+		// 			{variable:"ugenroll", format: "number"},
+		// 			{variable:"gradenroll", format: "number"},
+		// 			{variable:"ftenroll", format: "number"},
+		// 			{variable:"ptenroll", format: "number"},
+		// 		]
+		// 	},
+		// 	source: "IPEDS",
+		// 	indicatorLink: "enrollment",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Students",
+		// 			variables: [
+		// 				{variable:"ugenroll", displayName:"Undergraduate", format: "number", color: colors.turquoise.light },
+		// 				{variable:"gradenroll", displayName:"Graduate", format: "number", color: colors.turquoise.dark},
+		// 				{variable:"ftenroll", displayName:"Full-time", format: "number", color: colors.purple.light},
+		// 				{variable:"ptenroll", displayName:"Part-time", format: "number", color: colors.purple.dark},
+		// 				{variable:"enroll", displayName:"Total", format: "number", color: colors.grey.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Enrollment by Race",
+		// 	calloutSettings: null,
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, students at ", " institutions were ", " white, ", " black, ", " Asian, ", " Hispanic, ", " American Indian, ", " Hawaiian or Pacific Islander, ", " multiracial, ", " international, and ", " unknown."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"name", format: "string"},
+		// 			{variable:"white", format: "percent"},
+		// 			{variable:"afam", format: "percent"},
+		// 			{variable:"hisp", format: "percent"},
+		// 			{variable:"asia", format: "percent"},
+		// 			{variable:"nhpi", format: "percent"},
+		// 			{variable:"amin", format: "percent" },
+		// 			{variable:"twoormore", format: "percent"},
+		// 			{variable:"nonresident", format: "percent"},
+		// 			{variable:"unknown", format: "percent"},
+		// 		]
+		// 	},
+		// 	source: "IPEDS",
+		// 	indicatorLink: "enrollment",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "bar-chart",
+		// 			yAxisLabel: "Students",
+		// 			variables: [
+		// 				{variable:"white", displayName:"White", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"afam", displayName:"Black", format: "percent", color: colors.blue.light},
+		// 				{variable:"hisp", displayName:"Hispanic", format: "percent", color: colors.red.light},
+		// 				{variable:"asia", displayName:"Asian", format: "percent", color: colors.purple.light},
+		// 				{variable:"nhpi", displayName:"Hawaiian/Pacific Islander", format: "percent", color: colors.orange},
+		// 				{variable:"amin", displayName:"American Indian", format: "percent", color: colors.yellow},
+		// 				{variable:"twoormore", displayName:"Two or more", format: "percent", color: colors.brown},
+		// 				{variable:"nonresident", displayName:"International", format: "percent", color: colors.grey.medium},
+		// 				{variable:"unk", displayName:"Unknown race", format: "percent", color: colors.grey.light},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Enrollment by Gender",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "men", displayName:"Male", format: "percent"},
+		// 			{variable: "fem", displayName:"Female", format: "percent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, ", " of students identified as male and ", " as female at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"men", format: "percent" },
+		// 			{variable:"fem", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "IPEDS",
+		// 	indicatorLink: "enrollment",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "bar-chart",
+		// 			yAxisLabel: "Students",
+		// 			variables: [
+		// 				{variable:"men", displayName:"Male", format: "percent", color: colors.turquoise.light},
+		// 				{variable:"fem", displayName:"Female", format: "percent", color: colors.purple.light },
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Enrollment by Financial Need",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "loan_ever", displayName:"Ever borrowed federal loans", format: "percent"},
+		// 			{variable: "pell_ever", displayName:"Ever received a Pell Grant", format: "percent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, ", " of students had taken out at least one federal student loan and ", " of students had ever received Pell Grants at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"loan_ever", format: "percent"},
+		// 			{variable:"pell_ever", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "enrollment",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Students",
+		// 			variables: [
+		// 				{variable:"loan_ever", displayName:"Ever borrowed federal loans", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"pell_ever", displayName:"Ever received Pell Grant", format: "percent", color: colors.purple.light},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Enrollment by Nontraditional Students",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "first_gen", displayName:"First generation", format: "percent"},
+		// 			{variable: "independent", displayName:"Independent", format: "percent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, ", " of students were the first in their families to go to college; ", " of students were married; ", " of students were financially independent from their parents or other family; and ", " of students were veterans at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"first_gen", format: "percent" },
+		// 			{variable:"married", format: "percent"},
+		// 			{variable:"independent", format: "percent"},
+		// 			{variable:"veteran", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "enrollment",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Students",
+		// 			variables: [
+		// 				{variable:"first_gen", displayName:"First generation", format: "percent", color: colors.turquoise.light},
+		// 				{variable:"married", displayName:"Married", format: "percent", color: colors.blue.light},
+		// 				{variable:"independent", displayName:"Independent", format: "percent", color: colors.red.light},
+		// 				{variable:"veteran", displayName:"Veterans", format: "percent", color: colors.purple.light},
+		// 			]
+		// 		}
+		// 	}
+		// },
 	],
 	"Grants": [
 		// Federal Work-Study and SEOG need an * with the following, on this graphic and the next one: SEOG and Federal Work-Study are campus-based aid programs, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other grants are available to students at all institutions.
@@ -552,15 +552,21 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions disbursed ", " in Pell Grants; ", " in Federal Supplemental Education Opportunity Grants; ", " in TEACH Grants; ", " in Iraq/Afghanistan Service Grants; and ", " in Federal Work-Study to students in @year."],
+				textSections: [["", " institutions disbursed ", " in ", "; ", " in ","; ", " in ","; ", " in ","; and ", " in "," to students in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"pelldisburse", format: "price"},
+					{linkText:"Pell Grants", linkUrl:"/indicators/pell-grants"},
 					{variable:"seogdisburse", format: "price" },
+					{linkText:"Federal Supplemental Education Opportunity Grants", linkUrl:"indicators/campus-based-aid"},
 					{variable:"teachdisburse", format: "price"},
+					{linkText:"TEACH Grants", linkUrl:"indicators/teach-grants"},
 					{variable:"iraqdisburse", format: "price"},
+					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"indicators/iraq-afghanistan-service-grants"},
 					{variable:"workdisburse", format: "price"},
+					{linkText:"Federal Work-Study", linkUrl:"indicators/campus-based-aid"},
+
 				]
 			},
 			source: "Federal Student Aid",
@@ -588,15 +594,21 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions awarded ", " Pell Grants; ", " Federal Supplemental Education Opportunity Grants; ", " TEACH Grants; ", " Iraq/Afghanistan Service Grants; and ", " Federal Work-Study awards in @year."],
+				textSections: [["", " institutions awarded ", " ","; ", " ","; ", " ","; ", " ","; and ", " "," awards in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"pellrecip", format: "number"},
+					{linkText:"Pell Grants", linkUrl:"/indicators/pell-grants"},
 					{variable:"seogrecip", format: "number" },
+					{linkText:"Federal Supplemental Education Opportunity Grants", linkUrl:"indicators/campus-based-aid"},
 					{variable:"teachrecip", format: "number"},
+					{linkText:"TEACH Grants", linkUrl:"indicators/teach-grants"},
 					{variable:"iraqrecip", format: "number"},
+					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"indicators/iraq-afghanistan-service-grants"},
 					{variable:"workrecip", format: "number"},
+					{linkText:"Federal Work-Study", linkUrl:"indicators/campus-based-aid"},
+
 				]
 			},
 			source: "Federal Student Aid",
@@ -606,11 +618,11 @@ const stVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "Disbursements",
 					variables: [
-						{variable:"pellrecip", displayName:"Pell Grants", format: "price", color: colors.turquoise.light },
-						{variable:"seogrecip", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "price", color: colors.blue.light},
-						{variable:"teachrecip", displayName:"TEACH Grants", format: "price", color: colors.red.light},
-						{variable:"iraqrecip", displayName:"Iraq/Afghanistan Service Grants", format: "price", color: colors.purple.light},
-						{variable:"workrecip", displayName:"Federal Work-Study", format: "price", color: colors.yellow},
+						{variable:"pellrecip", displayName:"Pell Grants", format: "number", color: colors.turquoise.light },
+						{variable:"seogrecip", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "number", color: colors.blue.light},
+						{variable:"teachrecip", displayName:"TEACH Grants", format: "number", color: colors.red.light},
+						{variable:"iraqrecip", displayName:"Iraq/Afghanistan Service Grants", format: "number", color: colors.purple.light},
+						{variable:"workrecip", displayName:"Federal Work-Study", format: "number", color: colors.yellow},
 					]
 				}
 			}
@@ -700,7 +712,7 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates; ", " in unsubsidized graduate Stafford Loans; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in Perkins Loans to students in @year."],
+				textSections: [["", " institutions disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates; ", " in unsubsidized graduate Stafford Loans; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in "," to students in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
@@ -710,7 +722,8 @@ const stVizSettings = {
 					{variable:"dlsubgraddisburse", format: "price"},
 					{variable:"allgraddisburse", format: "price"},
 					{variable:"allparentdisburse", format: "price"},
-					{variable:"alltotaldisburse", format: "price"},
+					// {variable:"alltotaldisburse", format: "price"},
+					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
 				]
 			},
 			source: "Federal Student Aid",
@@ -740,7 +753,7 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates; ", " unsubsidized graduate Stafford Loans; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " Perkins Loans in @year."],
+				textSections: [["", " institutions authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates; ", " unsubsidized graduate Stafford Loans; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " "," in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
@@ -750,7 +763,8 @@ const stVizSettings = {
 					{variable:"dlsubgradrecip", format: "number"},
 					{variable:"allgradrecip", format: "number"}, 
 					{variable:"allparentrecip", format: "number"}, 
-					{variable:"alltotalrecip", format: "number"},
+					// {variable:"alltotalrecip", format: "number"},
+					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
 				]
 			},
 			source: "Federal Student Aid",

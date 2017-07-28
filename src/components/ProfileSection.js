@@ -47,6 +47,8 @@ class ProfileSection extends React.Component {
 	getSectionContent() {
 		const {type, data, settings, description, collectionName} = this.props;
 
+		console.log(this.props)
+
 		switch(type) {
 			case "description":
 				return (
@@ -92,6 +94,8 @@ class ProfileSection extends React.Component {
 		let lastUpdated = dataInfo && collectionName ? this.getLastUpdated(dataInfo, collectionName) : null;
 		
 		let sectionContent = this.getSectionContent();
+
+		console.log(settings)
 		return (
 	    	<section ref="profile_section" className="profile-section" >
 	    		<a className="profile-section__anchor" id={title.toLowerCase()} name={title.toLowerCase()} />

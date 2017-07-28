@@ -199,8 +199,9 @@ class SearchBox extends React.Component {
 	    const currList = this.getCurrList(propContainer);
 
 	    return currList.filter(listElem => {
-	        return listElem.name.toLowerCase().includes(inputValue)
+	        return listElem && listElem.name ? listElem.name.toLowerCase().includes(inputValue) : null
 	    }).sort((a, b) => {
+	    	
 	   		return a.name.toLowerCase().indexOf(inputValue) - b.name.toLowerCase().indexOf(inputValue);
 	   	}).slice(0, customNumSuggestions || 100);
 	}

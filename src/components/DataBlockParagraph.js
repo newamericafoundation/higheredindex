@@ -1,6 +1,8 @@
 import React from 'react';
-var d3 = require("d3");
+const d3 = require("d3");
 import {formatValue} from '../helper_functions/format_value';
+const markdown = require( "markdown" ).markdown;
+// console.log( markdown.toHTML( "Hello *World*!" ) );
 
 export default function DataBlockParagraph(props) {
 	const {settings, maxYear, data} = props,
@@ -13,35 +15,46 @@ export default function DataBlockParagraph(props) {
   	}
 
   	let variableCounter = 0;
+  	console.log(settings)
   	textSections.forEach((section, i) => {
-  		let textSection = [];
-		section.map((text, j) => {
-			let variable = variables[variableCounter];
-			text = text.replace("@year", maxYear);
-			textSection.push(<span>{text}</span>);
+  		if (section) {
+	  		console.log(section)
+	  		let textSection = [];
+			section.map((text, j) => {
+				let variable = variables[variableCounter];
+				text = text.replace("@year", maxYear);
+				
+				textSection.push(<span>{text}</span>);
 
-			if (variable) {
-			 	if (data[variable.variable]) {
-			 		let value;
-					let varName = variable.variable,
-						variableClass = varName == 'name' ? '' : "data-block__paragraph__data";
+				console.log(variable)
 
-					if (typeof(data[varName]) == 'object') {
-						value = data[varName][maxYear];
+				if (variable) {
+					if (variable.linkText) {
+						textSection.push(<a className="data-block__paragraph__link" href={variable.linkUrl}>{variable.linkText}</a>)
 					} else {
-						value = data[varName];
-					}
-					
-					value = value ? formatValue(value, variable.format) : "N/A";	
-					textSection.push(<span className={variableClass} key={j}>{value}</span>);
+					 	if (data[variable.variable]) {
+					 		let value;
+							let varName = variable.variable,
+								variableClass = varName == 'name' ? '' : "data-block__paragraph__data";
 
-				} else {
-					textSection.push(<span className="data-block__paragraph__data" key={j}>N/A</span>);
+							if (typeof(data[varName]) == 'object') {
+								value = data[varName][maxYear];
+							} else {
+								value = data[varName];
+							}
+							
+							value = value ? formatValue(value, variable.format) : "N/A";	
+							textSection.push(<span className={variableClass} key={j}>{value}</span>);
+
+						} else {
+							textSection.push(<span className="data-block__paragraph__data" key={j}>N/A</span>);
+						}
+					}
 				}
-			}
-			variableCounter++;
-	    })
-	    fullText.push(<p>{textSection}</p>)
+				variableCounter++;
+		    })
+		    fullText.push(<p>{textSection}</p>)
+		}
 	});
 
     return (

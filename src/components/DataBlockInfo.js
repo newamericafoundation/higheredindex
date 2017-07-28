@@ -26,7 +26,7 @@ export default function DataBlockInfo(props) {
 	if (!data) { return null; }
 
 	const maxYear = getMaxYear(paragraphSettings.variables, data);
-  	
+ 	console.log(paragraphSettings)
     return (
       <div className="data-block__info">
       	{ calloutSettings && <DataBlockCallout settings={calloutSettings} maxYear={maxYear} data={data} collectionName={collectionName}/> }

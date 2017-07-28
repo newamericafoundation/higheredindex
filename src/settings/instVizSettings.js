@@ -8,11 +8,11 @@ const instVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "instateprice", displayName:"In-state price", format: "price"},
+					{variable: "instateprice", displayName:"In-state tuition", format: "price"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, the in-district price was ", ", the in-state price was ", ", and the out-of-state price was ", " at ", "."],
+				textSections: [["In @year, the in-district tuition was ", ", the in-state tuition was ", ", and the out-of-state tuition was ", " at ", "."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"indistprice", format: "price"},
@@ -28,9 +28,9 @@ const instVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "Price",
 					variables: [
-						{variable:"indistprice", displayName:"In-district price", format: "price", color: colors.turquoise.light },
-						{variable:"instateprice", displayName:"In-state price", format: "price", color: colors.turquoise.medium},
-						{variable:"outstate", displayName:"Out-of-state price", format: "price", color: colors.turquoise.dark},
+						{variable:"indistprice", displayName:"In-district", format: "price", color: colors.turquoise.light },
+						{variable:"instateprice", displayName:"In-state", format: "price", color: colors.turquoise.medium},
+						{variable:"outstate", displayName:"Out-of-state", format: "price", color: colors.turquoise.dark},
 					]
 				}
 			}
@@ -373,8 +373,8 @@ const instVizSettings = {
 				textSections: [["In @year, ", " of students identified as male and ", " as female at ", "."],
 					["The following chart depicts trends over time."]],
 				variables: [
-					{variable:"men", format: "percent"},
-					{variable:"fem", format: "percent"},
+					{variable:"male", format: "percent"},
+					{variable:"female", format: "percent"},
 					{variable:"name", format: "string"},
 				]
 			},
@@ -469,15 +469,20 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " disbursed ", " in Pell Grants; ", " in Federal Supplemental Education Opportunity Grants; ", " in Teach Grants; ", " in Iraq/Afghanistan Service Grants; and ", " in Federal Work-Study to students in @year."],
+				textSections: [["", " disbursed ", " in ","; ", " in ","; ", " in ","; ", " in ","; and ", " in "," to students in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"pelldisburse", format: "price"},
-					{variable:"seogdisburse", format: "price"},
+					{linkText:"Pell Grants", linkUrl:"/indicators/pell-grants"},
+					{variable:"seogdisburse", format: "price" },
+					{linkText:"Federal Supplemental Education Opportunity Grants", linkUrl:"indicators/campus-based-aid"},
 					{variable:"teachdisburse", format: "price"},
+					{linkText:"TEACH Grants", linkUrl:"indicators/teach-grants"},
 					{variable:"iraqdisburse", format: "price"},
+					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"indicators/iraq-afghanistan-service-grants"},
 					{variable:"workdisburse", format: "price"},
+					{linkText:"Federal Work-Study", linkUrl:"indicators/campus-based-aid"},
 				]
 			},
 			source: "Federal Student Aid",
@@ -505,15 +510,20 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " awarded ", " Pell Grants; ", " Federal Supplemental Education Opportunity Grants; ", " Teach Grants; ", " Iraq/Afghanistan Service Grants; and ", " Federal Work-Study awards in @year."],
+				textSections: [["", " awarded ", " ","; ", " ","; ", " ","; ", " ","; and ", " "," awards in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"pellrecip", format: "number"},
-					{variable:"seogrecip", format: "number"},
+					{linkText:"Pell Grants", linkUrl:"/indicators/pell-grants"},
+					{variable:"seogrecip", format: "number" },
+					{linkText:"Federal Supplemental Education Opportunity Grants", linkUrl:"indicators/campus-based-aid"},
 					{variable:"teachrecip", format: "number"},
+					{linkText:"TEACH Grants", linkUrl:"indicators/teach-grants"},
 					{variable:"iraqrecip", format: "number"},
+					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"indicators/iraq-afghanistan-service-grants"},
 					{variable:"workrecip", format: "number"},
+					{linkText:"Federal Work-Study", linkUrl:"indicators/campus-based-aid"},
 				]
 			},
 			source: "Federal Student Aid",
@@ -523,11 +533,11 @@ const instVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "Disbursements",
 					variables: [
-						{variable:"pellrecip", displayName:"Pell Grants", format: "price", color: colors.turquoise.light },
-						{variable:"seogrecip", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "price", color: colors.blue.light},
-						{variable:"teachrecip", displayName:"TEACH Grants", format: "price", color: colors.red.light},
-						{variable:"iraqrecip", displayName:"Iraq/Afghanistan Service Grants", format: "price", color: colors.purple.light},
-						{variable:"workrecip", displayName:"Federal Work-Study", format: "price", color: colors.yellow},
+						{variable:"pellrecip", displayName:"Pell Grants", format: "number", color: colors.turquoise.light },
+						{variable:"seogrecip", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "number", color: colors.blue.light},
+						{variable:"teachrecip", displayName:"TEACH Grants", format: "number", color: colors.red.light},
+						{variable:"iraqrecip", displayName:"Iraq/Afghanistan Service Grants", format: "number", color: colors.purple.light},
+						{variable:"workrecip", displayName:"Federal Work-Study", format: "number", color: colors.yellow},
 					]
 				}
 			}
@@ -616,7 +626,7 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates; ", " in unsubsidized graduate Stafford Loans; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in Perkins Loans to students in @year."],
+				textSections: [["", " disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates; ", " in unsubsidized graduate Stafford Loans; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in "," to students in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
@@ -626,7 +636,9 @@ const instVizSettings = {
 					{variable:"dlsubgraddisburse", format: "price"},
 					{variable:"allgraddisburse", format: "price"},
 					{variable:"allparentdisburse", format: "price"},
-					{variable:"alltotaldisburse", format: "price"},
+					// {variable:"alltotaldisburse", format: "price"},
+					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
+
 				]
 			},
 			source: "Federal Student Aid",
@@ -656,7 +668,7 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates; ", " unsubsidized graduate Stafford Loans; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " Perkins Loans in @year."],
+				textSections: [["", " authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates; ", " unsubsidized graduate Stafford Loans; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " "," in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
@@ -666,7 +678,9 @@ const instVizSettings = {
 					{variable:"dlsubgradrecip", format: "number"},
 					{variable:"allgradrecip", format: "number"}, 
 					{variable:"allparentrecip", format: "number"}, 
-					{variable:"alltotalrecip", format: "number"},
+					// {variable:"alltotalrecip", format: "number"},
+					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
+
 				]
 			},
 			source: "Federal Student Aid",
