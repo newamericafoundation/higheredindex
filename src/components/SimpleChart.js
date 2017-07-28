@@ -9,6 +9,8 @@ import BarChart from "../chart_modules/BarChart.js";
 import GroupedBarChart from "../chart_modules/GroupedBarChart.js";
 import { formatValue } from "../helper_functions/format_value.js";
 
+const range = (start, end) => [...Array(end - start + 1)].map((_, i) => start + i);
+
 export default class SimpleChart extends React.Component {
 	constructor(props) {
 		super(props);
@@ -135,9 +137,13 @@ export default class SimpleChart extends React.Component {
             });
         }
 
-        keyList = Array.from(new Set(keyList)).sort(d3.ascending);
+        if (keyList.length > 0) {
+            let xExtents = d3.extent(keyList);
 
-        this.x.domain(keyList);
+            this.x.domain(range(+xExtents[0], +xExtents[1]));
+        } else {
+            this.x.domain([0,0]);
+        }
     }
 
     initializeYAxes() {
