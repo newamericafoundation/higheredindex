@@ -65,7 +65,7 @@ class ProfileSection extends React.Component {
 			default:
 				return (
 					<div>
-			          {settings.map((settingsObject, i) => {
+			          {settings && settings.map((settingsObject, i) => {
 			            return <DataBlock key={i} settings={settingsObject} data={data} collectionName={collectionName} />;
 			          })}
 			        </div>

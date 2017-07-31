@@ -7,8 +7,8 @@ export default class DataBlock extends React.Component {
   render() {
   	let {settings, data, collectionName} = this.props,
       {title, paragraphSettings, vizSettings} = settings;
-
-    if (!data) { return null }
+      console.log(title, data)
+    // if (!data) { return null }
       console.log(title, paragraphSettings)
     return (
       <div className="data-block">

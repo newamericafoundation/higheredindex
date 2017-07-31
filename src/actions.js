@@ -38,7 +38,7 @@ GoogleMapsLoader.load(function(google) {
   googlePlacesService = new google.maps.places.PlacesService(document.createElement('div'));
 });
 
-const dbPath = 'https://febp-backend.herokuapp.com/api/';
+const dbPath = process.env.NODE_ENV == 'production' ? 'https://febp-backend.herokuapp.com/api/' : 'http://localhost:3000/api/';
 console.log(dbPath);
 
 
