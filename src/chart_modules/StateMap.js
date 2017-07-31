@@ -1,20 +1,24 @@
 import React from 'react';
 import ReactFauxDOM from 'react-faux-dom';
+import { connect } from 'react-redux'
 var d3 = require("d3");
 import $ from 'jquery';
 import LegendQuantize from "../components/LegendQuantize.js";
 import Tooltip from "../components/Tooltip.js";
 import { formatValue } from "../helper_functions/format_value.js";
 import { colors } from "../helper_functions/colors.js";
+import { getColorScale } from "../helper_functions/get_color_scale.js";
+
 import { congressionalDistricts } from './congressional-districts.js';
 import { us } from './us.js';
 import { statePlane } from './d3-geo-state-plane.js';
 import { stateIdMappings } from './state-id-mappings.js';
+import { fetchCongDistrictInfo } from '../actions.js';
 let topojson = require('topojson');
 
 let margin = {top: 10, right: 0, bottom: 30, left: 60};
 
-export default class StateMap extends React.Component {
+class StateMap extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -31,17 +35,33 @@ export default class StateMap extends React.Component {
         }
 	}
 
+    componentWillMount() {
+        const {getCongDistrictInfo, fetchedCongDistrictInfo} = this.props;
+
+        if (!fetchedCongDistrictInfo[this.props.data.state]) {
+            getCongDistrictInfo(this.props.data.state);
+        }
+    }
+
 	componentDidMount() {
         $(window).resize(this.resizeFunc);
 
-        const chart = this.initialize();
-
         let w = this.getCurrWidth();
         this.setState({
-            chart: chart,
             width: w,
             height: 3*w/5
         })
+    }
+
+    componentDidUpdate(prevProps) {
+        if (!this.state.chart && this.props.fetchedCongDistrictInfo[this.props.data.state] && this.props.fetchedCongDistrictInfo[this.props.data.state] != "fetching") {
+            console.log("CALLING INITIALIZE", this.props.fetchedCongDistrictInfo)
+            const chart = this.initialize();
+
+            this.setState({
+                chart: chart
+            })
+        }
     }
 
     initialize() {
@@ -53,13 +73,16 @@ export default class StateMap extends React.Component {
         	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-        // this.colorScale = this.props.colorScale;
-        // console.log(this.colorScale.domain());
+        this.colorScale = getColorScale(
+            this.props.fetchedCongDistrictInfo[this.props.data.state], 
+            {variable:"count", displayName: "Count", scaleType:"quantize", numBins: 5, customRange:[colors.white, colors.turquoise.light, colors.turquoise.dark]}
+        )
+        console.log(this.colorScale.domain(), this.colorScale.range());
 
         // this.initializeYAxes();
         // this.initializeXAxis();
 
-        // this.bindDataToGeom();
+        this.bindDataToGeom();
         this.initializeMap();
 
         return div;
@@ -68,26 +91,29 @@ export default class StateMap extends React.Component {
     initializeMap() {
         console.log(this.geometry);
 
-        this.paths = this.g.selectAll("path")
-            .data(this.geometry)
-            .enter()
-            .append("path")
-            .attr("class", "us-map__state")
-            .attr("stroke", "white")
-            .on("mouseover", (d, index, paths) => { return this.mouseover(d, paths[index], d3.event) })
-            .on("mouseout", (d, index, paths) => { return this.mouseout(paths[index]) });
+        // this.paths = this.g.selectAll("path")
+        //     .data(this.geometry)
+        //     .enter()
+        //     .append("path")
+        //     .attr("class", "us-map__state")
+        //     .attr("stroke", "white")
+        //     .on("mouseover", (d, index, paths) => { return this.mouseover(d, paths[index], d3.event) })
+        //     .on("mouseout", (d, index, paths) => { return this.mouseout(paths[index]) });
     }
 
     bindDataToGeom() {
-        for (let dataElem of this.data) {
-            let dataId = dataElem.state_id;
-            for (let geogElem of this.geometry) {
-                if (dataId == geogElem.id) {
-                    geogElem.data = dataElem;
-                    break;
+        let districtCounts = this.props.fetchedCongDistrictInfo[this.props.data.state];
+        console.log(this.props.fetchedCongDistrictInfo)
+
+        districtCounts.forEach((districtCount) => {
+            this.geometry.forEach((geogElem) => {
+                if (districtCount._id == geogElem.id) {
+                    geogElem.data = districtCount.count;
+                    return;
                 }
-            }
-        }
+            })
+        })
+
     }
 
     update() {
@@ -136,6 +162,7 @@ export default class StateMap extends React.Component {
               .data(topojson.feature(congressionalDistricts, congressionalDistricts.objects.districts).features)
             .enter().append("path")
               .attr("d", this.pathGenerator)
+              .attr("fill", (d) => { console.log(d.data); return this.colorScale(d.data); })
             .append("title")
               .text(function(d) { return d.id; });
 
@@ -261,3 +288,21 @@ export default class StateMap extends React.Component {
         return colors.grey.light;
     }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    fetchedCongDistrictInfo: state.fetchedCongDistrictInfo
+  }
+}
+
+const mapDispatchToProps = (dispatch) => { 
+  return {
+    getCongDistrictInfo: (stAbbrev) => {
+      dispatch(fetchCongDistrictInfo(stAbbrev))
+    }
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(StateMap)
+

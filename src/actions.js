@@ -24,11 +24,9 @@ export const SET_DATA_FILE_UPLOAD_STATUS = 'SET_DATA_FILE_UPLOAD_STATUS'
 export const SET_ADMIN_LOGIN_STATUS = 'SET_ADMIN_LOGIN_STATUS'
 export const RECEIVE_RANKING = 'RECEIVE_RANKING'
 export const REQUEST_RANKING = 'REQUEST_RANKING'
+export const RECEIVE_CONG_DISTRICT_INFO = 'RECEIVE_CONG_DISTRICT_INFO'
+export const REQUEST_CONG_DISTRICT_INFO = 'REQUEST_CONG_DISTRICT_INFO'
 
-// export const REQUEST_INST = 'REQUEST_INST'
-// export const RECEIVE_INST = 'RECEIVE_INST'
-// export const REQUEST_INST_LIST = 'REQUEST_INST_LIST'
-// export const RECEIVE_INST_LIST = 'RECEIVE_INST_LIST'
 let GoogleMapsLoader = require('google-maps');
 
 let googlePlacesService; 
@@ -243,6 +241,33 @@ export function fetchRanking(collection, direction, variable, year, value, profi
       .then(response => { return response.json()})
       .then(json => {
         dispatch(receiveRanking(variable, profilePath, json))
+      })
+  }
+}
+
+export function requestCongDistrictInfo(stateAbbrev) {
+  return { 
+    type: REQUEST_CONG_DISTRICT_INFO,
+    stateAbbrev,
+  }
+}
+
+export function receiveCongDistrictInfo(stateAbbrev, data) {
+  return { 
+    type: RECEIVE_CONG_DISTRICT_INFO,
+    stateAbbrev,
+    data
+  }
+}
+
+export function fetchCongDistrictInfo(stateAbbrev) {
+  return function (dispatch) {
+    dispatch(requestCongDistrictInfo(stateAbbrev))
+
+    return fetch(dbPath + 'state-congressional-district-info/' + stateAbbrev)
+      .then(response => { return response.json()})
+      .then(json => {
+        dispatch(receiveCongDistrictInfo(stateAbbrev, json))
       })
   }
 }
