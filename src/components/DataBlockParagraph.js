@@ -1,8 +1,6 @@
 import React from 'react';
 const d3 = require("d3");
 import {formatValue} from '../helper_functions/format_value';
-const markdown = require( "markdown" ).markdown;
-// console.log( markdown.toHTML( "Hello *World*!" ) );
 
 export default function DataBlockParagraph(props) {
 	const {settings, maxYear, data} = props,
