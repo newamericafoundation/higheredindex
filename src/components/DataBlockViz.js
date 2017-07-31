@@ -11,22 +11,13 @@ import $ from 'jquery';
 
 export default class DataBlockViz extends React.Component {
   render() {
-  	const {settings, data} = this.props,
-      {type} = settings;
+  	const {settings, data} = this.props;
 
-    // let viz;
-    // switch (type) {
-    //   case "line-chart":
-    //     viz = <LineChart settings={settings} data={data} />
-    //     break;
-    //   default:
-    //     viz = "No Chart Type";
-    // }
-
+    console.log(settings)
     return (
     	<div className="data-block__viz">
         {(settings.chart1Settings.type == "line-chart" || settings.chart1Settings.type == "bar-chart" || settings.chart1Settings.type == "grouped-bar-chart") &&
-    		  <SimpleChart settings={settings} data={data} /> }
+          <SimpleChart settings={settings} data={data} /> }
         {settings.chart1Settings.type == "table" &&
           <Table settings={settings} data={data} /> }
         {settings.chart1Settings.type == "state-map" &&
@@ -35,15 +26,3 @@ export default class DataBlockViz extends React.Component {
     )
   }
 }
-
-// const mapStateToProps = (state, ownProps) => {
-// 	console.log(state);
-// 	console.log(ownProps);
-//   return {
-//     id: ownProps.params.id,
-//     fetchedSts: state.fetchedSts || {}
-//   }
-// }
-
-
-// export default connect(mapStateToProps)(DataBlock)

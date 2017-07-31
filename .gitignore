@@ -3,6 +3,9 @@ babel_cache
 
 src/static/js/
 
+src/static/.DS_Store
+src/static/img/.DS_Store
+
 npm-debug.log
 
 .env

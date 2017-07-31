@@ -9,6 +9,8 @@ import BarChart from "../chart_modules/BarChart.js";
 import GroupedBarChart from "../chart_modules/GroupedBarChart.js";
 import { formatValue } from "../helper_functions/format_value.js";
 
+const range = (start, end) => [...Array(end - start + 1)].map((_, i) => start + i);
+
 export default class SimpleChart extends React.Component {
 	constructor(props) {
 		super(props);
@@ -135,9 +137,13 @@ export default class SimpleChart extends React.Component {
             });
         }
 
-        keyList = Array.from(new Set(keyList)).sort(d3.ascending);
+        if (keyList.length > 0) {
+            let xExtents = d3.extent(keyList);
 
-        this.x.domain(keyList);
+            this.x.domain(range(+xExtents[0], +xExtents[1]));
+        } else {
+            this.x.domain([0,0]);
+        }
     }
 
     initializeYAxes() {
@@ -309,7 +315,7 @@ export default class SimpleChart extends React.Component {
 		const { data, settings } = this.props,
             {chart1Settings, chart2Settings} = settings;
 
-        let content, legend, tooltip, missingVarsList, presentVarsList;
+        let content, legend, tooltip, missingVarsList, presentVarsList, fullVarsList;
         let variables = chart1Settings.variables;
 
         if (chart2Settings) {
@@ -323,6 +329,7 @@ export default class SimpleChart extends React.Component {
             tooltip = <Tooltip settings={this.state.tooltipSettings} />
             presentVarsList = this.fullValList.length > 0 ? <h5 className="data-block__viz__debugging-list">Using variables: {this.fullValList.toString()}</h5> : null;
             missingVarsList = this.missingVars.length > 0 ? <h5 className="data-block__viz__debugging-list">Missing variables: {this.missingVars.toString()}</h5> : null;
+            fullVarsList = this.missingVars.length > 0 ? <h5 className="data-block__viz__debugging-list">Full list of variables for this entry: {Object.keys(data).toString()}</h5> : null;
         } else {
             content = "loading chart";
         }
@@ -333,6 +340,7 @@ export default class SimpleChart extends React.Component {
                 {tooltip}
                 {presentVarsList}
                 {missingVarsList}
+                {fullVarsList}
             </div>
         )
 	}

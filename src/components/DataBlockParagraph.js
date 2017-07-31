@@ -1,49 +1,65 @@
 import React from 'react';
-var d3 = require("d3");
-
-function getMaxYear(variables, data) {
-	let totalMaxYear = 0;
-	for (let variable of variables) {
-		if (typeof(data[variable]) == 'object') {
-			let keys = Object.keys(data[variable]);
-			let localMaxYear = d3.max(keys, (d) => { return Number(d) });
-			totalMaxYear = localMaxYear > totalMaxYear ? localMaxYear : totalMaxYear;
-		}
-	}
-
-	return totalMaxYear;
-}
-
+const d3 = require("d3");
+import {formatValue} from '../helper_functions/format_value';
 
 export default function DataBlockParagraph(props) {
-	const {settings, data} = props,
+	const {settings, maxYear, data} = props,
 		{textSections, variables} = settings;
-  	
-  	let populatedText = [],
-  		totalMaxYear = getMaxYear(variables, data);
+
+  	let fullText = []
 
   	if (textSections.length == 0 || variables.length == 0) {
   		return (<div className="data-block__paragraph"></div>);
   	}
 
-	textSections.map((text, i) => {
-		let variable = variables[i],
-			variableClass = variable == 'name' ? '' : "data-block__paragraph__data";
-		text = text.replace("@year", totalMaxYear);
-		populatedText.push(<span>{text}</span>);
+  	let variableCounter = 0;
+  	console.log(settings)
+  	textSections.forEach((section, i) => {
+  		if (section) {
+	  		console.log(section)
+	  		let textSection = [];
+			section.map((text, j) => {
+				let variable = variables[variableCounter];
+				text = text.replace("@year", maxYear);
+				
+				textSection.push(<span>{text}</span>);
 
-		if (typeof(data[variable]) == 'object') {
-			let keys = Object.keys(data[variable]);
-			let localMaxYear = d3.max(keys, (d) => { return Number(d) });
-			populatedText.push(<span className={variableClass}>{data[variable][localMaxYear]}</span>);
-		} else {
-			populatedText.push(<span className={variableClass}>{data[variable]}</span>);
+				console.log(variable)
+
+				if (variable) {
+					if (variable.linkText) {
+						textSection.push(<a className="data-block__paragraph__link" href={variable.linkUrl}>{variable.linkText}</a>)
+					} else {
+					 	if (data[variable.variable]) {
+					 		let value;
+							let varName = variable.variable,
+								variableClass = varName == 'name' ? '' : "data-block__paragraph__data";
+
+							if (typeof(data[varName]) == 'object') {
+								value = data[varName][maxYear];
+							} else {
+								value = data[varName];
+							}
+							
+							value = value ? formatValue(value, variable.format) : "N/A";	
+							textSection.push(<span className={variableClass} key={j}>{value}</span>);
+
+						} else {
+							textSection.push(<span className="data-block__paragraph__data" key={j}>N/A</span>);
+						}
+					}
+				}
+				variableCounter++;
+		    })
+		    fullText.push(<p>{textSection}</p>)
 		}
-    })
+	});
 
     return (
       <div className="data-block__paragraph">
-      	<p>{populatedText}</p>
+      	<div className="data-block__paragraph__text">
+      		{fullText}
+      	</div>
       </div>
     )
 }

@@ -7,9 +7,10 @@ import SectionNav from './SectionNav.jsx';
 import ProfileSection from './ProfileSection';
 import ProfileHeader from './ProfileHeader.jsx';
 import Footer from './Footer';
-import stVizSettings from './stVizSettings';
+import stVizSettings from '../settings/stVizSettings';
 import { connect } from 'react-redux'
 import { toggleTopNavProfileName, changeCurrProfileSection } from '../actions';
+import sectionSettings from '../settings/sectionSettings.js';
 import $ from 'jquery';
 
 class StPage extends React.Component {
@@ -51,46 +52,21 @@ class StPage extends React.Component {
     return (
       <div className="location-profile state" ref="stProfile">
         <ProfileHeader id={ this.props.stData.path } name={ this.props.stData.name }/>
-        <SectionNav type="location" />
-        <ProfileSection 
-          title="Students" 
-          index="0"
-          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
-          settings={stVizSettings.students} 
-          data= {this.props.stData.students }
-          collectionName="states_students"/>
-        
-        <ProfileSection 
-          title="Loans" 
-          index="1"
-          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
-          settings={stVizSettings.loans} 
-          data= {this.props.stData.loans }
-          collectionName="states_loans"/>
+        <SectionNav type="states" />
+        { sectionSettings.states.map((section, i) => {
+          let name = section.name;
 
-        <ProfileSection 
-          title="Grants" 
-          index="2"
-          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
-          settings={stVizSettings.grants} 
-          data= {this.props.stData.grants }
-          collectionName="states_grants"/>
-        
-        <ProfileSection 
-          title="Schools" 
-          index="3"
-          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
-          settings={stVizSettings.schools} 
-          data= {this.props.stData.schools }
-          collectionName="states_schools"/>
-        
-        <ProfileSection 
-          title="Outcomes" 
-          index="4"
-          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
-          settings={stVizSettings.outcomes} 
-          data= {this.props.stData.outcomes }
-          collectionName="states_outcomes"/>
+          return (
+            <ProfileSection
+              key={name}
+              title={name}
+              index={i}
+              subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
+              settings={stVizSettings[name]}
+              collectionName={"states_" + section.dataDivision}
+              data= {this.props.stData[section.dataDivision] }/>
+          )
+        })}
         <Footer />
       </div>
     );

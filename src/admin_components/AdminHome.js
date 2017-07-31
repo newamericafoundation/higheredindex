@@ -3,7 +3,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { fetchProfileList, setDataFileUploadStatus } from '../actions';
+import { fetchProfileList, setDataFileUploadStatus, fetchDataInfo  } from '../actions';
+const d3 = require("d3")
 
 class AdminHome extends React.Component {
   constructor(props) {
@@ -11,13 +12,15 @@ class AdminHome extends React.Component {
   }
 
   componentWillMount() {
-    const { indicatorList, fetchProfileList} = this.props;
+    const { indicatorList, fetchProfileList, fetchDataInfo} = this.props;
 
     fetchProfileList("indicator")
+    fetchDataInfo()
   }
 
   render() {
-    const { indicatorList, dataFileUploadStatus } = this.props;
+    const { indicatorList, dataFileUploadStatus, dataInfo } = this.props;
+
     return (
       <div className="admin__home">
         <h1 className="admin__home__title">Admin Home</h1>
@@ -26,6 +29,18 @@ class AdminHome extends React.Component {
           <Link to={'/admin/data-upload/'}>
             <h5 className="admin__home__main-link">Upload New Data File</h5>
           </Link>
+          { dataInfo && dataInfo != "fetching" && dataInfo.length > 0 &&
+            <ul className="admin__home__data-info-container">
+              {dataInfo.map((d) => {
+                return (
+                  <li className="admin__home__data-info">
+                    <span className="admin__home__data-info__title">{d.collection}:</span>
+                    {d.last_updated && <span className="admin__home__data-info__value">{d3.timeFormat("%B %d, %Y - %I:%M %p")(new Date(d.last_updated))}</span>}
+                  </li>
+                )
+              })}
+            </ul>
+          }
         </div>
         <hr></hr>
         <div className="admin__home__section">
@@ -56,12 +71,16 @@ const mapStateToProps = (state) => {
   console.log(state);
   return {
     indicatorList: state.indicatorList,
-    dataFileUploadStatus: state.dataFileUploadStatus
+    dataFileUploadStatus: state.dataFileUploadStatus,
+    dataInfo: state.dataInfo
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+      fetchDataInfo: () => {
+        dispatch(fetchDataInfo());
+      },
       fetchProfileList: (type) => {
         dispatch(fetchProfileList(type));
       },

@@ -45,8 +45,10 @@ class ProfileSection extends React.Component {
 	}
 
 	getSectionContent() {
-		const {type, data, settings, description} = this.props;
-		
+		const {type, data, settings, description, collectionName} = this.props;
+
+		console.log(this.props)
+
 		switch(type) {
 			case "description":
 				return (
@@ -55,7 +57,6 @@ class ProfileSection extends React.Component {
 			        </div>
 				)
 			case "rankingDashboard":
-				console.log(settings)
 				return (
 			        <div>
 			        	{settings && <RankingsDashboard filters={settings} />}
@@ -64,8 +65,8 @@ class ProfileSection extends React.Component {
 			default:
 				return (
 					<div>
-			          {settings.map((settingsObject, i) => {
-			            return <DataBlock key={i} settings={settingsObject} data={data} />;
+			          {settings && settings.map((settingsObject, i) => {
+			            return <DataBlock key={i} settings={settingsObject} data={data} collectionName={collectionName} />;
 			          })}
 			        </div>
 				)
@@ -89,10 +90,12 @@ class ProfileSection extends React.Component {
 
 	render() {
 		const {title, subtitle, data, settings, collectionName, dataInfo} = this.props;
-		console.log("rendering");
+
 		let lastUpdated = dataInfo && collectionName ? this.getLastUpdated(dataInfo, collectionName) : null;
-		console.log(dataInfo, collectionName, lastUpdated)
+		
 		let sectionContent = this.getSectionContent();
+
+		console.log(settings)
 		return (
 	    	<section ref="profile_section" className="profile-section" >
 	    		<a className="profile-section__anchor" id={title.toLowerCase()} name={title.toLowerCase()} />

@@ -4,9 +4,9 @@ import React from 'react';
 import { Link } from 'react-router';
 import $ from 'jquery';
 import { connect } from 'react-redux'
-var scrollTo = require('scroll-to');
 
 import SvgIcon from './SvgIcon'
+import sectionSettings from '../settings/sectionSettings.js';
 
 import { changeCurrProfileSection } from '../actions';
 
@@ -58,10 +58,11 @@ class SectionNav extends React.Component {
 
 	render() {
 		let sections;
+		console.log(this.props.type)
 		if (this.props.type == "indicator") {
 			sections = ["about", "rankings", "trends"];
 		} else {
-			sections = ["students", "loans", "grants", "schools", "outcomes"];
+			sections = sectionSettings[this.props.type];
 		}
 
 		let sectionNavClass = "section-nav";
@@ -75,13 +76,13 @@ class SectionNav extends React.Component {
 				<div ref="section_nav_position_placeholder" className={sectionNavPlaceholderClass} />
 		    	<div ref="section_nav" className={sectionNavClass}>
 		    		<div className="section-nav__items">
-		    		{sections.map((d, i) => {
+		    		{sections.map((section, i) => {
 		    			let classList = "section-nav__item";
 		    			classList += this.props.currProfileSection == i ? " selected" : "";
 		    			return (
-							<div className={classList} key={i} onClick={() => { return this.handleClick(d, i); }}>
-								<SvgIcon name={d} />
-								<h3 className="section-nav__item__text">{d}</h3>
+							<div className={classList} key={i} onClick={() => { return this.handleClick(section.name.toLowerCase(), i); }}>
+								<SvgIcon name={section.dataDivision} />
+								<h3 className="section-nav__item__text">{section.name}</h3>
 							</div>
 						)
 		    		})}

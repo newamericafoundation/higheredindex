@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+import { nestYears, addFullStateNames, addPathKeys} from './helper_functions/process_uploaded_data.js';
 
 /*
  * action types
@@ -21,6 +22,8 @@ export const SET_INDICATOR_UPDATE_STATUS = 'SET_INDICATOR_UPDATE_STATUS'
 export const UPLOAD_DATA_FILE = 'UPLOAD_DATA_FILE'
 export const SET_DATA_FILE_UPLOAD_STATUS = 'SET_DATA_FILE_UPLOAD_STATUS'
 export const SET_ADMIN_LOGIN_STATUS = 'SET_ADMIN_LOGIN_STATUS'
+export const RECEIVE_RANKING = 'RECEIVE_RANKING'
+export const REQUEST_RANKING = 'REQUEST_RANKING'
 
 // export const REQUEST_INST = 'REQUEST_INST'
 // export const RECEIVE_INST = 'RECEIVE_INST'
@@ -215,6 +218,35 @@ export function fetchProfilePhoto(id, profileType) {
   }
 }
 
+export function requestRanking(variable, profilePath) {
+  return { 
+    type: REQUEST_RANKING,
+    variable,
+    profilePath
+  }
+}
+
+export function receiveRanking(variable, profilePath, rank) {
+  return { 
+    type: RECEIVE_RANKING,
+    variable,
+    profilePath,
+    rank
+  }
+}
+
+export function fetchRanking(collection, direction, variable, year, value, profilePath) {
+  return function (dispatch) {
+    dispatch(requestRanking(variable, profilePath))
+
+    return fetch(dbPath + 'get-ranking/' + collection + "/" + direction + "/" + variable + "/" + year + "/" + value)
+      .then(response => { return response.json()})
+      .then(json => {
+        dispatch(receiveRanking(variable, profilePath, json))
+      })
+  }
+}
+
 export function setDataFileUploadStatus(status) {
    return { 
       type: SET_DATA_FILE_UPLOAD_STATUS, 
@@ -226,9 +258,18 @@ export function uploadDataFile(collection, newFile) {
   console.log(newFile);
 
   return function (dispatch) {
-    dispatch(setDataFileUploadStatus("in progress"))
+    dispatch(setDataFileUploadStatus("Nesting Years"))
+    let processedData = nestYears(newFile);
 
-    console.log(JSON.stringify(newFile));
+    dispatch(setDataFileUploadStatus("Setting Full State Names"))
+    processedData = addFullStateNames(processedData);
+
+    dispatch(setDataFileUploadStatus("Adding Path Keys"))
+    processedData = addPathKeys(processedData);
+   
+    console.log(processedData)
+
+    dispatch(setDataFileUploadStatus("Uploading Data to Database - " + processedData.length + " rows"))
     
     fetch(dbPath + 'update_data/' + collection, { 
         method: "POST", 
@@ -236,7 +277,7 @@ export function uploadDataFile(collection, newFile) {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         }),
-        body: JSON.stringify(newFile)
+        body: JSON.stringify(processedData)
       })
       .then((res) => {
         dispatch(setDataFileUploadStatus(res.status))

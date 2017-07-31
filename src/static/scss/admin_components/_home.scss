@@ -39,4 +39,24 @@
 	hr {
 		margin: 0px;
 	}
+
+	&__data-info-container {
+		columns: 2;
+		max-width: 1000px;
+	}
+
+	&__data-info {
+		width: 100%;
+
+
+		&__title {
+			font-weight: bold;
+			padding-right: 5px;
+
+		}
+
+		&__value {
+			font-weight: normal;
+		}
+	}
 }
