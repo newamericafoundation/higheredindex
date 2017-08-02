@@ -353,7 +353,7 @@ const stVizSettings = {
 		// 		]
 		// 	},
 		// 	paragraphSettings: {
-		// 		textSections: [["In @year, there was an average of ", " institutions per congressional district in ", "."],
+		// 		textSections: [["There are an average of ", " institutions per congressional district in ", "."],
 		// 		variables: [
 		// 			{variable:"", format: "number" },  // add variable
 		// 			{variable:"name", format: "string"},
