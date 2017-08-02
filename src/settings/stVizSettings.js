@@ -353,9 +353,10 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, there was an average of ", " institutions per congressional district in ", "."]],
+				textSections: [["There is an average of ", " institutions per congressional district in ", "."]],
+				usesCongressionalDistrictAggregate: true,
 				variables: [
-					{variable:"", format: "number" },  // add variable
+					{congressionalDistrictAggregate: true},  // add variable
 					{variable:"name", format: "string"},
 				]
 			},

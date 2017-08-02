@@ -35,16 +35,9 @@ class StateMap extends React.Component {
             height: 0,
             currHovered: null,
             tooltipSettings: null,
+            valsShown: "all"
         }
 	}
-
-    componentWillMount() {
-        const {getCongDistrictInfo, fetchedCongDistrictInfo} = this.props;
-
-        if (!fetchedCongDistrictInfo[this.props.data.state]) {
-            getCongDistrictInfo(this.props.data.state);
-        }
-    }
 
 	componentDidMount() {
         $(window).resize(this.resizeFunc);
@@ -58,7 +51,6 @@ class StateMap extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (!this.state.chart && this.props.fetchedCongDistrictInfo[this.props.data.state] && this.props.fetchedCongDistrictInfo[this.props.data.state] != "fetching") {
-            console.log("CALLING INITIALIZE", this.props.fetchedCongDistrictInfo)
             this.districtCounts = this.props.fetchedCongDistrictInfo[this.props.data.state];
             const chart = this.initialize();
             
@@ -70,7 +62,6 @@ class StateMap extends React.Component {
 
     initialize() {
         const div = new ReactFauxDOM.Element('div');
-        console.log(this.state);
 
         this.svg = d3.select(div).append("svg");
         this.g = this.svg.append("g")
@@ -85,7 +76,7 @@ class StateMap extends React.Component {
 
         let stateId = String(this.districtCounts[0]._id).slice(0, -2);
 
-        this.districtGeom.geometries = this.districtGeom.geometries.filter((geoElem) => { console.log(geoElem); return parseInt(geoElem.properties.STATEFP, 10) == stateId})
+        this.districtGeom.geometries = this.districtGeom.geometries.filter((geoElem) => { return parseInt(geoElem.properties.STATEFP, 10) == stateId})
 
         this.paths = this.svg.append("g")
               .attr("class", "districts")
@@ -111,8 +102,6 @@ class StateMap extends React.Component {
             .attr("width", width - margin.left - margin.right)
             .attr("height", height);
 
-        console.log(width, height)
-
         this.projection = statePlane(this.props.data.state, width, height);
 
         this.pathGenerator = d3.geoPath()
@@ -124,12 +113,10 @@ class StateMap extends React.Component {
 
     updateMap() {
         const {currHovered} = this.props;
-
-        console.log(congressionalDistricts)
         this.paths
               .attr("d", this.pathGenerator)
-              .attr("fill", (d) => { return this.colorScale(this.getDistrictCount(d)); })
-              .attr("fill-opacity", (d) => { console.log(d.properties.GEOID, this.state.currHovered); return d.properties.GEOID === this.state.currHovered ? .7 : 1 });
+              .attr("fill", (d) => { return this.setFill(d) })
+              .attr("fill-opacity", (d) => { return d.properties.GEOID === this.state.currHovered ? .7 : 1 });
     }
 
 	render() {
@@ -140,7 +127,7 @@ class StateMap extends React.Component {
             content = this.state.chart.toReact();
             tooltip = <Tooltip settings={this.state.tooltipSettings} />
             let legendVar = {numBins: 5}
-            legend = <LegendQuantize filter={this.filterVar} colorScale={this.colorScale} toggleVals={null} />
+            legend = <LegendQuantize filter={this.filterVar} colorScale={this.colorScale} toggleChartVals={this.toggleVals.bind(this)} />
         } else {
             content = "loading chart";
         }
@@ -169,29 +156,33 @@ class StateMap extends React.Component {
     // callback functions
 
     mouseover(datum, eventObject) {
-        console.log(eventObject, this.props)
+        console.log("mousing over")
         let districtCount = this.getDistrictCount(datum);
         this.paths
             .attr("fill-opacity", (d) => { return d == datum ? .7 : 1 })
             .attr("stroke-width", (d) => { return d == datum ? 2 : .5 })
+
     	this.setState({
             currHovered: datum.properties.GEOID,
             tooltipSettings: {
                 x: eventObject.offsetX + 40,
                 y: eventObject.offsetY - 30,
                 renderingAreaWidth: this.state.width,
-                title: this.props.data.state + " - " + datum.properties.CD115FP,
+                title: datum.properties.CD115FP === "00" ? this.props.data.state + " - At-Large" : this.props.data.state + " - " + datum.properties.CD115FP,
                 valArray: [{ variable: { displayName:"Count", format:"number", color: this.colorScale(districtCount)}, value: districtCount }]
             }
         })
     }
 
     mouseout() {
+        console.log("mousing out")
         this.paths
             .attr("fill-opacity", 1)
             .attr("stroke-width", .5)
+
     	this.setState({
-            tooltipSettings: null
+            tooltipSettings: null,
+            currHovered: null
         })
     }
 
@@ -210,20 +201,22 @@ class StateMap extends React.Component {
         })
         return retVal;
     }
-    setFill(d) {
-        const {currHovered, valsShown, colorScale, filter} = this.props;
-        
-        if (d.data) {
-            let value = d.data[filter.variable];
-            let binIndex = colorScale.range().indexOf(colorScale(value));
-            if (valsShown.indexOf(binIndex) > -1) {
-                return value ? colorScale(value) : "white";
-            } 
-        } else {
-            return "white";
-        }
 
-        return colors.grey.light;
+    setFill(d) {
+        const {valsShown} = this.state;
+        let count = this.getDistrictCount(d)
+        let binIndex = this.colorScale.range().indexOf(this.colorScale(count));
+        if (valsShown == "all" || valsShown.indexOf(binIndex) > -1) {
+            return this.colorScale(count);
+        } else {
+            return colors.grey.light;
+        }
+    }
+
+    toggleVals(valsShown) {
+        this.setState({
+            valsShown: valsShown
+        })
     }
 }
 
@@ -233,14 +226,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => { 
-  return {
-    getCongDistrictInfo: (stAbbrev) => {
-      dispatch(fetchCongDistrictInfo(stAbbrev))
-    }
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(StateMap)
+export default connect(mapStateToProps)(StateMap)
 
