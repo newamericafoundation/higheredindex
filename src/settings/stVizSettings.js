@@ -712,14 +712,13 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates; ", " in unsubsidized graduate Stafford Loans; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in "," to students in @year."],
+				textSections: [["", " institutions disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates and graduates; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in "," to students in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"allsubdisburse", format: "price"},
 					{variable:"allunsubdisburse", format: "price"},
 					{variable:"perkdisburse", format: "price"},
-					{variable:"dlsubgraddisburse", format: "price"},
 					{variable:"allgraddisburse", format: "price"},
 					{variable:"allparentdisburse", format: "price"},
 					// {variable:"alltotaldisburse", format: "price"},
@@ -735,9 +734,8 @@ const stVizSettings = {
 					variables: [
 						{variable:"allsubdisburse", displayName:"Subsidized Stafford", format: "price", color: colors.turquoise.light},
 						{variable:"allunsubdisburse", displayName:"Unsubsidized Stafford", format: "price", color: colors.turquoise.medium},
-						{variable:"perkdisburse", displayName:"Perkins", format: "price", color: colors.turquoise.dark},
-						{variable:"dlsubgraddisburse", displayName:"Graduate Stafford", format: "price", color: colors.blue.light},
-						{variable:"allgraddisburse", displayName:"Graduate PLUS", format: "price", color: colors.blue.medium},
+						{variable:"perkdisburse", displayName:"Perkins", format: "price", color: colors.blue.light},
+						{variable:"allgraddisburse", displayName:"Graduate PLUS", format: "price", color: colors.red.light},
 						{variable:"allparentdisburse", displayName:"Parent PLUS", format: "price", color: colors.purple.light}, 
 						{variable:"alltotaldisburse", displayName:"Total", format: "price", color: colors.grey.dark}, 
 					]
@@ -753,14 +751,13 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates; ", " unsubsidized graduate Stafford Loans; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " "," in @year."],
+				textSections: [["", " institutions authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates and graduates; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " "," in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"allsubrecip", format: "number"}, 
 					{variable:"allunsubrecip", format: "number"}, 
 					{variable:"perkrecip", format: "number"},
-					{variable:"dlsubgradrecip", format: "number"},
 					{variable:"allgradrecip", format: "number"}, 
 					{variable:"allparentrecip", format: "number"}, 
 					// {variable:"alltotalrecip", format: "number"},
@@ -776,9 +773,8 @@ const stVizSettings = {
 					variables: [
 						{variable:"allsubrecip", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light }, 
 						{variable:"allunsubrecip", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
-						{variable:"perkrecip", displayName:"Perkins", format: "number", color: colors.turquoise.dark},
-						{variable:"dlsubgradrecip", displayName:"Graduate Stafford", format: "number", color: colors.blue.light},
-						{variable:"allgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.blue.medium}, 
+						{variable:"perkrecip", displayName:"Perkins", format: "number", color: colors.blue.,light},
+						{variable:"allgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.red.light}, 
 						{variable:"allparentrecip", displayName:"Parent PLUS", format: "number", color: colors.purple.light}, 
 						{variable:"alltotalrecip", displayName:"Total", format: "number", color: colors.grey.dark}, 
 					]
