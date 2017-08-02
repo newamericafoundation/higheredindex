@@ -44,7 +44,7 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, the average in-district tuition was", ", the average in-state tuition was ", ", and the average out-of-state tuition was ", " at ", " institutions."],
+				textSections: [["In @year, the average in-district tuition was ", ", the average in-state tuition was ", ", and the average out-of-state tuition was ", " at ", " institutions."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"indistprice", format: "price" },
@@ -774,13 +774,13 @@ const stVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "Students",
 					variables: [
-						{variable:"allsubrecip", displayName:"Subsidized Stafford", format: "price", color: colors.turquoise.light }, 
-						{variable:"allunsubrecip", displayName:"Unsubsidized Stafford", format: "price", color: colors.turquoise.medium},
-						{variable:"perkrecip", displayName:"Perkins", format: "price", color: colors.turquoise.dark},
-						{variable:"dlsubgradrecip", displayName:"Graduate Stafford", format: "price", color: colors.blue.light},
-						{variable:"allgradrecip", displayName:"Graduate PLUS", format: "price", color: colors.blue.medium}, 
-						{variable:"allparentrecip", displayName:"Parent PLUS", format: "price", color: colors.purple.light}, 
-						{variable:"alltotalrecip", displayName:"Total", format: "price", color: colors.grey.dark}, 
+						{variable:"allsubrecip", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light }, 
+						{variable:"allunsubrecip", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
+						{variable:"perkrecip", displayName:"Perkins", format: "number", color: colors.turquoise.dark},
+						{variable:"dlsubgradrecip", displayName:"Graduate Stafford", format: "number", color: colors.blue.light},
+						{variable:"allgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.blue.medium}, 
+						{variable:"allparentrecip", displayName:"Parent PLUS", format: "number", color: colors.purple.light}, 
+						{variable:"alltotalrecip", displayName:"Total", format: "number", color: colors.grey.dark}, 
 					]
 				}
 			}
