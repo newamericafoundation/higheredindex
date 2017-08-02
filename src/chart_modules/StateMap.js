@@ -10,13 +10,12 @@ import { colors } from "../helper_functions/colors.js";
 import { getColorScale } from "../helper_functions/get_color_scale.js";
 
 import { congressionalDistricts } from './congressional-districts.js';
-import { us } from './us.js';
 import { statePlane } from './d3-geo-state-plane.js';
 import { stateIdMappings } from './state-id-mappings.js';
 import { fetchCongDistrictInfo } from '../actions.js';
 let topojson = require('topojson');
 
-let margin = {top: 10, right: 0, bottom: 30, left: 60};
+let margin = {top: 0, right: 0, bottom: 0, left: 0};
 
 class StateMap extends React.Component {
 	constructor(props) {
@@ -24,13 +23,17 @@ class StateMap extends React.Component {
 
         this.resizeFunc = this.resize.bind(this);
 
-        this.geometry = congressionalDistricts.objects.districts.geometries;
+        this.districtGeom = {
+            type: "GeometryCollection",
+            geometries: congressionalDistricts.objects.cb_2016_us_cd115_500k.geometries.slice()
+        }
 
         // this.data = props.data;
 
 		this.state = {
             width: 0,
             height: 0,
+            currHovered: null,
             tooltipSettings: null,
         }
 	}
@@ -56,8 +59,9 @@ class StateMap extends React.Component {
     componentDidUpdate(prevProps) {
         if (!this.state.chart && this.props.fetchedCongDistrictInfo[this.props.data.state] && this.props.fetchedCongDistrictInfo[this.props.data.state] != "fetching") {
             console.log("CALLING INITIALIZE", this.props.fetchedCongDistrictInfo)
+            this.districtCounts = this.props.fetchedCongDistrictInfo[this.props.data.state];
             const chart = this.initialize();
-
+            
             this.setState({
                 chart: chart
             })
@@ -72,48 +76,28 @@ class StateMap extends React.Component {
         this.g = this.svg.append("g")
         	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+        this.filterVar = {variable:"count", displayName: "Count", format: "number", scaleType:"quantize", numBins: 5, customRange:[colors.white, colors.turquoise.light, colors.turquoise.dark]}
 
         this.colorScale = getColorScale(
-            this.props.fetchedCongDistrictInfo[this.props.data.state], 
-            {variable:"count", displayName: "Count", scaleType:"quantize", numBins: 5, customRange:[colors.white, colors.turquoise.light, colors.turquoise.dark]}
+            this.districtCounts, 
+            this.filterVar
         )
-        console.log(this.colorScale.domain(), this.colorScale.range());
 
-        // this.initializeYAxes();
-        // this.initializeXAxis();
+        let stateId = String(this.districtCounts[0]._id).slice(0, -2);
 
-        this.bindDataToGeom();
-        this.initializeMap();
+        this.districtGeom.geometries = this.districtGeom.geometries.filter((geoElem) => { console.log(geoElem); return parseInt(geoElem.properties.STATEFP, 10) == stateId})
+
+        this.paths = this.svg.append("g")
+              .attr("class", "districts")
+            .selectAll("path")
+              .data(topojson.feature(congressionalDistricts, this.districtGeom).features)
+            .enter().append("path")
+              .attr("stroke", "white")
+              .attr("stroke-width", .5)
+              .on("mouseover", (d) => { return this.mouseover(d, d3.event); })
+              .on("mouseout", (d) => { return this.mouseout(); })
 
         return div;
-    }
-
-    initializeMap() {
-        console.log(this.geometry);
-
-        // this.paths = this.g.selectAll("path")
-        //     .data(this.geometry)
-        //     .enter()
-        //     .append("path")
-        //     .attr("class", "us-map__state")
-        //     .attr("stroke", "white")
-        //     .on("mouseover", (d, index, paths) => { return this.mouseover(d, paths[index], d3.event) })
-        //     .on("mouseout", (d, index, paths) => { return this.mouseout(paths[index]) });
-    }
-
-    bindDataToGeom() {
-        let districtCounts = this.props.fetchedCongDistrictInfo[this.props.data.state];
-        console.log(this.props.fetchedCongDistrictInfo)
-
-        districtCounts.forEach((districtCount) => {
-            this.geometry.forEach((geogElem) => {
-                if (districtCount._id == geogElem.id) {
-                    geogElem.data = districtCount.count;
-                    return;
-                }
-            })
-        })
-
     }
 
     update() {
@@ -129,80 +113,34 @@ class StateMap extends React.Component {
 
         console.log(width, height)
 
-        this.projection = statePlane(this.props.data.state, 500, 350);
+        this.projection = statePlane(this.props.data.state, width, height);
 
         this.pathGenerator = d3.geoPath()
             .projection(this.projection);
 
-        this.svg.append("defs").append("path")
-          .attr("id", "land")
-          .datum(topojson.feature(us, this.getStateClipPath()))
-          .attr("d", this.pathGenerator);
-
-        this.svg.append("clipPath")
-          .attr("id", "clip-land")
-        .append("use")
-          .attr("xlink:href", "#land");
-
-
-        console.log(this.geometry);
 
         this.updateMap();
-        // this.updateXAxis();
-        // this.updateDataElements();
     }
 
     updateMap() {
         const {currHovered} = this.props;
 
-        this.svg.append("g")
-              .attr("class", "districts")
-              .attr("clip-path", "url(#clip-land)")
-            .selectAll("path")
-              .data(topojson.feature(congressionalDistricts, congressionalDistricts.objects.districts).features)
-            .enter().append("path")
+        console.log(congressionalDistricts)
+        this.paths
               .attr("d", this.pathGenerator)
-              .attr("fill", (d) => { console.log(d.data); return this.colorScale(d.data); })
-            .append("title")
-              .text(function(d) { return d.id; });
-
-        // this.svg.append("path")
-        //       .attr("class", "district-boundaries")
-        //       .datum(topojson.mesh(congressionalDistricts, congressionalDistricts.objects.districts, function(a, b) { return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
-        //       .attr("d", this.pathGenerator);
-
-        // this.svg.append("path")
-        //       .attr("class", "state-boundaries")
-        //       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-        //       .attr("d", this.pathGenerator);
-        // this.paths
-        //     .attr("d", (d) => { return this.pathGenerator(d); })
-            // .attr("fill", (d) => { return this.setFill(d); })
-            // .attr("stroke-width", (d) => { 
-            //     if (d.data) {
-            //         if (currHovered && currHovered == d.data.state_id) {
-            //             return "5px";
-            //         }
-            //     }
-            //     return "1px";
-            // });
+              .attr("fill", (d) => { return this.colorScale(this.getDistrictCount(d)); })
+              .attr("fill-opacity", (d) => { console.log(d.properties.GEOID, this.state.currHovered); return d.properties.GEOID === this.state.currHovered ? .7 : 1 });
     }
 
 	render() {
-		// const { data, settings } = this.props,
-  //           {chart1Settings, chart2Settings} = settings;
-
-        let content, legend, tooltip, missingVarsList, presentVarsList;
-        // let variables = chart1Settings.variables;
-
-        // if (chart2Settings) {
-        //     variables = variables.concat(chart2Settings.variables);
-        // }
-
+        let content, legend, tooltip;
+       
 		if (this.state.chart) {
             this.update();
             content = this.state.chart.toReact();
-            // tooltip = <Tooltip settings={this.state.tooltipSettings} />
+            tooltip = <Tooltip settings={this.state.tooltipSettings} />
+            let legendVar = {numBins: 5}
+            legend = <LegendQuantize filter={this.filterVar} colorScale={this.colorScale} toggleVals={null} />
         } else {
             content = "loading chart";
         }
@@ -210,6 +148,7 @@ class StateMap extends React.Component {
             <div className="data-block__viz__rendering-area" ref="renderingArea">
                 {content}
                 {tooltip}
+                {legend}
             </div>
         )
 	}
@@ -229,23 +168,28 @@ class StateMap extends React.Component {
 
     // callback functions
 
-    mouseover(datum, path, eventObject) {
-        const {filter, hoverChangeFunc} = this.props;
-        hoverChangeFunc(datum.data.state_id);
+    mouseover(datum, eventObject) {
+        console.log(eventObject, this.props)
+        let districtCount = this.getDistrictCount(datum);
+        this.paths
+            .attr("fill-opacity", (d) => { return d == datum ? .7 : 1 })
+            .attr("stroke-width", (d) => { return d == datum ? 2 : .5 })
     	this.setState({
+            currHovered: datum.properties.GEOID,
             tooltipSettings: {
-                x: eventObject.offsetX + 20,
+                x: eventObject.offsetX + 40,
                 y: eventObject.offsetY - 30,
-                title: datum.data.state,
-                value: datum.data[filter.variable],
-                format: filter.format
+                renderingAreaWidth: this.state.width,
+                title: this.props.data.state + " - " + datum.properties.CD115FP,
+                valArray: [{ variable: { displayName:"Count", format:"number", color: this.colorScale(districtCount)}, value: districtCount }]
             }
         })
     }
 
     mouseout() {
-        const {hoverChangeFunc} = this.props;
-        hoverChangeFunc(null);
+        this.paths
+            .attr("fill-opacity", 1)
+            .attr("stroke-width", .5)
     	this.setState({
             tooltipSettings: null
         })
@@ -256,22 +200,16 @@ class StateMap extends React.Component {
         return $(this.refs.renderingArea).width() - margin.left - margin.right;
     }
 
-    getStateClipPath() {
-        console.log(this.props.data.name)
-        console.log(stateIdMappings)
-        const stateId = stateIdMappings[this.props.data.name];
+    getDistrictCount(d) {
         let retVal;
-        us.objects.states.geometries.forEach((d, i) => {
-            console.log(d, stateId)
-            if (d.id == stateId) {
-                retVal = d;
+        this.districtCounts.forEach((district) => {
+            if (district._id == d.properties.GEOID) {
+                retVal = district.count;
                 return;
             }
         })
-        console.log(retVal)
         return retVal;
     }
-
     setFill(d) {
         const {currHovered, valsShown, colorScale, filter} = this.props;
         

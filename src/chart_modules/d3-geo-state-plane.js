@@ -5,7 +5,8 @@ export const statePlane = (function() {
     var prj = {
         merc: 'geoMercator',
         tmerc: 'geoTransverseMercator',
-        lcc: 'geoConicConformal'
+        lcc: 'geoConicConformal',
+        albers: 'geoAlbers'
     };
 
     var statePlaneDef = {
