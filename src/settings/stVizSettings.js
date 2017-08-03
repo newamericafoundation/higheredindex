@@ -28,6 +28,7 @@ const stVizSettings = {
 							variables: [
 								{variable:"degree", displayName:"Degree Granting", format: "number"},
 								{variable:"hbcu", displayName:"HBCU/MSI", format: "number"},
+								{variable:"prop_9010", displayName:"90/10 Proportion", format: "number"},
 							],
 						}
 					]
@@ -44,7 +45,7 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, the average in-district tuition was", ", the average in-state tuition was ", ", and the average out-of-state tuition was ", " at ", " institutions."],
+				textSections: [["In @year, the average in-district tuition was ", ", the average in-state tuition was ", ", and the average out-of-state tuition was ", " at ", " institutions."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"indistprice", format: "price" },
@@ -73,15 +74,17 @@ const stVizSettings = {
 				type: "ranking",
 				direction: "lowest",
 				variables: [
-					{variable: "netpriceinc", displayName:"Rank among all states for lowest net price for low-income students"},
+					{variable: "netpriceincpub", displayName:"Rank among all states for lowest net price for low-income students at public institutions"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, the average cost of attendance after grant aid was ", ", and the average for low-income students was ", " at ", " institutions."],
+				textSections: [["In @year, the average cost of attendance after grant aid was ", " at public institutions and ", " at private institutions; and the average for low-income students was ", " at public institutions and ", " at private institutions in ", "."],
 					["The following chart depicts trends over time."]],
 				variables: [
-					{variable:"netprice", format: "price" },
-					{variable:"netpriceinc", format: "price"},
+					{variable:"netpricepubc", format: "price" },
+					{variable:"netpriceincpub", format: "price"},
+					{variable:"netpricepriv", format: "price" },
+					{variable:"netpriceincpriv", format: "price"},
 					{variable:"name", format: "string"},
 				]
 			},
@@ -92,8 +95,10 @@ const stVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "Price",
 					variables: [
-						{variable:"netprice", displayName:"Net price", format: "price", color: colors.turquoise.light },
-						{variable:"netpriceinc", displayName:"Net price for low-income students", format: "price", color: colors.purple.light},
+						{variable:"netpricepubc", displayName:"Public institutions", format: "price", color: colors.turquoise.light },
+						{variable:"netpriceincpub", displayName:"Public institutions (low-income)", format: "price", color: colors.turquoise.medium },
+						{variable:"netpricepriv", displayName:"Private institutions", format: "price", color: colors.purple.light},
+						{variable:"netpriceincpriv", displayName:"Private institutions (low-income)", format: "price", color: colors.purple.medium},
 					]
 				}
 			}
@@ -230,65 +235,6 @@ const stVizSettings = {
 			}
 		},
 		{
-			title: "SAT/ACT Average",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "sat_avg_all", displayName:"SAT/ACT average", format: "number"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, students enrolled at ", " institutions scored an SAT/ACT average of ", "."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"name", format: "string"},
-					{variable:"sat_avg_all", format: "number"},
-				]
-			},
-			source: "IPEDS",
-			indicatorLink: "sat-act-average",
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"sat_avg_all", displayName:"SAT/ACT average", format: "number", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "Instructional Expenses",
-			calloutSettings: {
-				type: "ranking",
-				direction: "highest",
-				variables: [
-					{variable: "inexpfte", displayName:"Rank among all states for greatest average instructional expenses per full-time equivalent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["Instructional expenses averaged ", " and tuition averaged ", " at ", " institutions in @year."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"inexpfte", format: "price" },
-					{variable:"tuitfte", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "instructional-expenses",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"inexpfte", displayName:"Instructional expenses per FTE", format: "price", color: colors.turquoise.light},
-						{variable:"tuitfte", displayName:"Tuition per FTE", format: "price", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		{
 			title: "Endowment",
 			calloutSettings: {
 				type: "value",
@@ -312,34 +258,6 @@ const stVizSettings = {
 					yAxisLabel: "",
 					variables: [
 						{variable:"endowment", displayName:"Endowment", format: "price", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "90/10 Proportion",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "prop_9010", displayName:"Share of state’s institutions which received over 90 percent of their revenue from federal sources", format: "percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, ", " of ", " institutions received over 90 percent of their revenue from federal sources, violating the 90/10 rule."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"prop_9010", format: "percent" },
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "Federal Student Aid",
-			indicatorLink: "90-10-proportion",
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"prop_9010", displayName:"90/10 proportion", format: "percent", color: colors.turquoise.light },
 					]
 				}
 			}
@@ -371,7 +289,6 @@ const stVizSettings = {
 				}
 			}
 		},
-		
 	], 
 	"Students": [
 		{
@@ -719,14 +636,13 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates; ", " in unsubsidized graduate Stafford Loans; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in "," to students in @year."],
+				textSections: [["", " institutions disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates and graduates; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in "," to students in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"allsubdisburse", format: "price"},
 					{variable:"allunsubdisburse", format: "price"},
 					{variable:"perkdisburse", format: "price"},
-					{variable:"dlsubgraddisburse", format: "price"},
 					{variable:"allgraddisburse", format: "price"},
 					{variable:"allparentdisburse", format: "price"},
 					// {variable:"alltotaldisburse", format: "price"},
@@ -742,9 +658,8 @@ const stVizSettings = {
 					variables: [
 						{variable:"allsubdisburse", displayName:"Subsidized Stafford", format: "price", color: colors.turquoise.light},
 						{variable:"allunsubdisburse", displayName:"Unsubsidized Stafford", format: "price", color: colors.turquoise.medium},
-						{variable:"perkdisburse", displayName:"Perkins", format: "price", color: colors.turquoise.dark},
-						{variable:"dlsubgraddisburse", displayName:"Graduate Stafford", format: "price", color: colors.blue.light},
-						{variable:"allgraddisburse", displayName:"Graduate PLUS", format: "price", color: colors.blue.medium},
+						{variable:"perkdisburse", displayName:"Perkins", format: "price", color: colors.blue.light},
+						{variable:"allgraddisburse", displayName:"Graduate PLUS", format: "price", color: colors.red.light},
 						{variable:"allparentdisburse", displayName:"Parent PLUS", format: "price", color: colors.purple.light}, 
 						{variable:"alltotaldisburse", displayName:"Total", format: "price", color: colors.grey.dark}, 
 					]
@@ -760,14 +675,13 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates; ", " unsubsidized graduate Stafford Loans; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " "," in @year."],
+				textSections: [["", " institutions authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates and graduates; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " "," in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"allsubrecip", format: "number"}, 
 					{variable:"allunsubrecip", format: "number"}, 
 					{variable:"perkrecip", format: "number"},
-					{variable:"dlsubgradrecip", format: "number"},
 					{variable:"allgradrecip", format: "number"}, 
 					{variable:"allparentrecip", format: "number"}, 
 					// {variable:"alltotalrecip", format: "number"},
@@ -781,13 +695,12 @@ const stVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "Students",
 					variables: [
-						{variable:"allsubrecip", displayName:"Subsidized Stafford", format: "price", color: colors.turquoise.light }, 
-						{variable:"allunsubrecip", displayName:"Unsubsidized Stafford", format: "price", color: colors.turquoise.medium},
-						{variable:"perkrecip", displayName:"Perkins", format: "price", color: colors.turquoise.dark},
-						{variable:"dlsubgradrecip", displayName:"Graduate Stafford", format: "price", color: colors.blue.light},
-						{variable:"allgradrecip", displayName:"Graduate PLUS", format: "price", color: colors.blue.medium}, 
-						{variable:"allparentrecip", displayName:"Parent PLUS", format: "price", color: colors.purple.light}, 
-						{variable:"alltotalrecip", displayName:"Total", format: "price", color: colors.grey.dark}, 
+						{variable:"allsubrecip", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light }, 
+						{variable:"allunsubrecip", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
+						{variable:"perkrecip", displayName:"Perkins", format: "number", color: colors.blue.,light},
+						{variable:"allgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.red.light}, 
+						{variable:"allparentrecip", displayName:"Parent PLUS", format: "number", color: colors.purple.light}, 
+						{variable:"alltotalrecip", displayName:"Total", format: "number", color: colors.grey.dark}, 
 					]
 				}
 			}
@@ -1063,21 +976,21 @@ const stVizSettings = {
 	], 
 	"Outcomes" : [
 		{
-			title: "Median Earnings",
+			title: "Mean Earnings",
 			calloutSettings: {
 				type: "ranking",
 				direction: "highest",
 				variables: [
-					{variable: "md_earn_wne_p10", displayName:"Rank among all states for greatest 10-year median earnings"},
+					{variable: "mn_earn_wne_p10", displayName:"Rank among all states for greatest 10-year mean earnings"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, median earnings six years after enrolling in school were ", ", median earnings after eight years were ", ", and median earnings after 10 years were ", " for graduates of ", " institutions."],
+				textSections: [["In @year, mean earnings six years after enrolling in school were ", ", mean earnings after eight years were ", ", and mean earnings after 10 years were ", " for graduates of ", " institutions."],
 					["The following chart depicts trends over time."]],
 				variables: [
-					{variable:"md_earn_wne_p6", format: "price"},
-					{variable:"md_earn_wne_p8", format: "price"},
-					{variable:"md_earn_wne_p10", format: "price"},
+					{variable:"mn_earn_wne_p6", format: "price"},
+					{variable:"mn_earn_wne_p8", format: "price"},
+					{variable:"mn_earn_wne_p10", format: "price"},
 					{variable:"name", format: "string"},
 				]
 			},
@@ -1101,7 +1014,7 @@ const stVizSettings = {
 				type: "ranking",
 				direction: "lowest",
 				variables: [
-					{variable: "", displayName:"Rank among all states for smallest difference between 10-year median earnings of men and women"},  // add variable
+					{variable: "", displayName:"Rank among all states for smallest difference between 10-year mean earnings of men and women"},  // add variable
 				]
 			},
 			paragraphSettings: {
@@ -1194,201 +1107,7 @@ const stVizSettings = {
 				}
 			}
 		},
-		{
-			title: "Median Debt by Completion Status",
-			calloutSettings: {
-				type: "ranking",
-				direction: "lowest",
-				variables: [
-					{variable: "grad_debt_mdn", displayName:"Rank among all states for lowest median debt among completers"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the median debt was ", " for graduates and ", " for students who withdrew from ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"grad_debt_mdn", format: "price"},
-					{variable:"wdraw_debt_mdn", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "cumulative-loan-debt",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"grad_debt_mdn", displayName:"Completed", format: "price", color: colors.turquoise.light},
-						{variable:"wdraw_debt_mdn", displayName:"Withdrew", format: "price", color: colors.purple.light},
-						{variable:"debt_mdn", displayName:"Overall", format: "price", color: colors.grey.dark },
-					]
-				}
-			}
-		},
-		{
-			title: "Median Debt by Gender",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "male_debt_mdn", displayName:"Male", format:"price"},
-					{variable: "female_debt_mdn", displayName:"Female", format:"price"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the median debt was ", " for male students and ", " for female students at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"male_debt_mdn", format: "price"},
-					{variable:"female_debt_mdn", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "cumulative-loan-debt",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"male_debt_mdn", displayName:"Male", format: "price", color: colors.turquoise.light},
-						{variable:"female_debt_mdn", displayName:"Female", format: "price", color: colors.purple.light},
-						{variable:"debt_mdn", displayName:"Overall", format: "price", color: colors.grey.dark },
-					]
-				}
-			}
-		},
-		{
-			title: "Median Debt by Parental Education",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "firstgen_debt_mdn", displayName:"First generation", format:"price"},
-					{variable: "notfirstgen_debt_mdn", displayName:"Non-first generation", format:"price"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the median debt was ", " for first-generation students and ", " for students whose parents held a college degree at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"firstgen_debt_mdn", format: "price"},
-					{variable:"notfirstgen_debt_mdn", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "cumulative-loan-debt",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"firstgen_debt_mdn", displayName:"First generation", format: "price", color: colors.turquoise.light},
-						{variable:"notfirstgen_debt_mdn", displayName:"Non-first generation ", format: "price", color: colors.purple.light},
-						{variable:"debt_mdn", displayName:"Overall", format: "price", color: colors.grey.dark },
-					]
-				}
-			}
-		},
-		{
-			title: "Median Debt by Pell Status",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "pell_debt_mdn", displayName:"Pell recipients", format:"price"},
-					{variable: "nopell_debt_mdn", displayName:"Non-Pell recipients", format:"price"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the median debt was ", " for students who received Pell Grants and ", " for students who did not receive Pell Grants at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"pell_debt_mdn", format: "price"},
-					{variable:"nopell_debt_mdn", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "cumulative-loan-debt",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"pell_debt_mdn", displayName:"Received Pell Grant", format: "price", color: colors.turquoise.light},
-						{variable:"nopell_debt_mdn", displayName:"Did not receive Pell Grant", format: "price", color: colors.purple.light},
-						{variable:"debt_mdn", displayName:"Overall", format: "price", color: colors.grey.dark },
-					]
-				}
-			}
-		},
-		{
-			title: "Median Debt by Income",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "lo_inc_debt_mdn", displayName:"Low-income", format:"price"},
-					{variable: "md_inc_debt_mdn", displayName:"Middle-income", format:"price"},
-					{variable: "hi_inc_debt_mdn", displayName:"High-income", format:"price"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the median debt was ", " for students from low-income backgrounds, ", " for students from middle-income backgrounds, and ", " for students from high-income backgrounds of ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"lo_inc_debt_mdn", format: "price"},
-					{variable:"md_inc_debt_mdn", format: "price"},
-					{variable:"hi_inc_debt_mdn", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "cumulative-loan-debt",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"lo_inc_debt_mdn", displayName:"Low-income", format: "price", color: colors.turquoise.light},
-						{variable:"md_inc_debt_mdn", displayName:"Middle-income", format: "price", color: colors.turquoise.medium},
-						{variable:"hi_inc_debt_mdn", displayName:"High-income", format: "price", color: colors.turquoise.dark},	
-						{variable:"debt_mdn", displayName:"Overall", format: "price", color: colors.grey.dark },
-					]
-				}
-			}
-		},
-		{
-			title: "Median Debt by Dependency Status",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "dep_debt_mdn", displayName:"Dependent", format:"price"},
-					{variable: "ind_debt_mdn", displayName:"Independent", format:"price"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the median debt was ", " for dependent students and ", " for independent students at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"dep_debt_mdn", format: "price"},
-					{variable:"ind_debt_mdn", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "cumulative-loan-debt",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"dep_debt_mdn", displayName:"Dependent", format: "price", color: colors.turquoise.light},
-						{variable:"ind_debt_mdn", displayName:"Independent", format: "price", color: colors.purple.light},
-						{variable:"debt_mdn", displayName:"Overall", format: "price", color: colors.grey.dark },
-					]
-				}
-			}
-		},
+		
 	]
 }
 
