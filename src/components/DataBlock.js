@@ -24,7 +24,7 @@ class DataBlock extends React.Component {
   	let {settings, data, collectionName, fetchedCongDistrictInfo} = this.props,
       {title, paragraphSettings, vizSettings} = settings;
       console.log(title, data)
-    // if (!data) { return null }
+    if (!data) { return null }
       console.log(title, paragraphSettings)
 
     return (

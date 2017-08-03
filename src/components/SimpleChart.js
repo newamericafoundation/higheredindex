@@ -126,20 +126,28 @@ export default class SimpleChart extends React.Component {
         let keyList = [];
 
         chart1Settings.variables.map((d) => {
-            let keys = Object.keys(this.props.data[d.variable]);
+            let data = this.props.data[d.variable];
+            let keys = Object.keys(data);
+            keys = keys.filter((key) => {
+                return !isNaN(data[key]);
+            })
             keyList.push(...keys);
         });
 
         if (chart2Settings) {
             chart2Settings.variables.map((d) => {
-                let keys = Object.keys(this.props.data[d.variable]);
+                let data = this.props.data[d.variable];
+                let keys = Object.keys(data);
+                keys = keys.filter((key) => {
+                    return !isNaN(data[key]);
+                })
                 keyList.push(...keys);
             });
         }
 
         if (keyList.length > 0) {
             let xExtents = d3.extent(keyList);
-
+            console.log(xExtents)
             this.x.domain(range(+xExtents[0], +xExtents[1]));
         } else {
             this.x.domain([0,0]);

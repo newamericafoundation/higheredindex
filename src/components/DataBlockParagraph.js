@@ -37,60 +37,64 @@ class DataBlockParagraph extends React.Component {
 		const {settings, maxYear, data} = this.props,
 			{textSections, variables} = settings;
 
-	  	let fullText = []
+		if (data) {
+		  	let fullText = []
 
-	  	if (textSections.length == 0 || variables.length == 0) {
-	  		return (<div className="data-block__paragraph"></div>);
-	  	}
+		  	if (textSections.length == 0 || variables.length == 0) {
+		  		return (<div className="data-block__paragraph"></div>);
+		  	}
 
-	  	let variableCounter = 0;
-	  	textSections.forEach((section, i) => {
-	  		if (section) {
-		  		let textSection = [];
-				section.map((text, j) => {
-					let variable = variables[variableCounter];
-					text = text.replace("@year", maxYear);
-					
-					textSection.push(<span key={j + "_text"} >{text}</span>);
+		  	let variableCounter = 0;
+		  	textSections.forEach((section, i) => {
+		  		if (section) {
+			  		let textSection = [];
+					section.map((text, j) => {
+						let variable = variables[variableCounter];
+						text = text.replace("@year", maxYear);
+						
+						textSection.push(<span key={j + "_text"} >{text}</span>);
 
-					if (variable) {
-						if (variable.linkText) {
-							textSection.push(<a className="data-block__paragraph__link" key={j} href={variable.linkUrl}>{variable.linkText}</a>)
-						} else if (variable.congressionalDistrictAggregate) {
-							textSection.push(<span className="data-block__paragraph__data" key={j}>{this.state.congressionalDistrictAggregate}</span>)
-						} else {
-						 	if (data[variable.variable]) {
-						 		let value;
-								let varName = variable.variable,
-									variableClass = varName == 'name' ? '' : "data-block__paragraph__data";
-
-								if (typeof(data[varName]) == 'object') {
-									value = data[varName][maxYear];
-								} else {
-									value = data[varName];
-								}
-								
-								value = value ? formatValue(value, variable.format) : "N/A";	
-								textSection.push(<span className={variableClass} key={j}>{value}</span>);
-
+						if (variable) {
+							if (variable.linkText) {
+								textSection.push(<a className="data-block__paragraph__link" key={j} href={variable.linkUrl}>{variable.linkText}</a>)
+							} else if (variable.congressionalDistrictAggregate) {
+								textSection.push(<span className="data-block__paragraph__data" key={j}>{this.state.congressionalDistrictAggregate}</span>)
 							} else {
-								textSection.push(<span className="data-block__paragraph__data" key={j}>N/A</span>);
+							 	if (data[variable.variable]) {
+							 		let value;
+									let varName = variable.variable,
+										variableClass = varName == 'name' ? '' : "data-block__paragraph__data";
+
+									if (typeof(data[varName]) == 'object') {
+										value = data[varName][maxYear];
+									} else {
+										value = data[varName];
+									}
+									
+									value = value ? formatValue(value, variable.format) : "N/A";	
+									textSection.push(<span className={variableClass} key={j}>{value}</span>);
+
+								} else {
+									textSection.push(<span className="data-block__paragraph__data" key={j}>N/A</span>);
+								}
 							}
 						}
-					}
-					variableCounter++;
-			    })
-			    fullText.push(<p key={i} >{textSection}</p>)
-			}
-		});
+						variableCounter++;
+				    })
+				    fullText.push(<p key={i} >{textSection}</p>)
+				}
+			});
 
-	    return (
-	      <div className="data-block__paragraph">
-	      	<div className="data-block__paragraph__text">
-	      		{fullText}
-	      	</div>
-	      </div>
-	    )
+		    return (
+		      <div className="data-block__paragraph">
+		      	<div className="data-block__paragraph__text">
+		      		{fullText}
+		      	</div>
+		      </div>
+		    )
+		} else {
+			return null;
+		}
 	}
 }
 
