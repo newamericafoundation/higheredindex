@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { uploadDataFile, setDataFileUploadStatus } from '../actions';
 import { Form, Select } from 'react-form';
 import AdminStatusBar from './AdminStatusBar';
+import { checkForVariables} from '../helper_functions/process_uploaded_data.js';
 
 
 
@@ -19,22 +20,19 @@ class AdminDataUpload extends React.Component {
     super(props);
     console.log(props.dataType);
     this.state = { 
-      file: null
+      file: null,
+      fileData: null,
+      type: null,
+      granularity: null,
+      variableCheck: null
     }
   }
 
   onDrop(files) {
+    const { type, granularity } = this.state;
     console.log(files);
-    this.setState({
-      file: files[0]
-    });
-  }
-
-  onSubmit(type, granularity) {
-    const {uploadFile} = this.props;
-
     var reader = new FileReader();
-    reader.onload = function(e){
+    reader.onload = (e) => {
       let response = e.target.result;
       
       var data = Papa.parse(response, {
@@ -44,11 +42,34 @@ class AdminDataUpload extends React.Component {
 
       console.log(data);
 
-      uploadFile(granularity + "_" + type, data.data);
+      let variableCheck = checkForVariables(data.data, type, granularity);
+   
+      console.log(variableCheck)
 
-    };
-    reader.readAsText(this.state.file);
-    
+      this.setState({
+        file: files[0],
+        fileData: data.data,
+        variableCheck: variableCheck
+      })
+
+    } 
+
+    reader.readAsText(files[0]);
+  }
+
+  onChange({type, granularity}) {
+    this.setState({
+      type: type,
+      granularity: granularity
+    })
+  }
+
+  onSubmit(type, granularity) {
+    const {uploadFile} = this.props;
+
+    if (this.state.fileData) {
+      uploadFile(granularity + "_" + type, this.state.fileData);
+    }
   }
 
   componentWillUnmount() {
@@ -57,7 +78,7 @@ class AdminDataUpload extends React.Component {
 
   render() {
     const { fileUploadStatus } = this.props;
-    const { file } = this.state;
+    const { file, variableCheck } = this.state;
 
     let submitButtonClass = "admin__form__button";
     submitButtonClass += this.state.file ? "" : " disabled";
@@ -86,6 +107,13 @@ class AdminDataUpload extends React.Component {
                 console.log('Success!')
                 this.onSubmit(type, granularity);
               }
+            }}
+
+            onChange={(internalState) => {
+              
+              console.log(internalState)
+              this.onChange(internalState.values);
+              
             }}
           >
             {({submitForm}) => {
@@ -136,6 +164,28 @@ class AdminDataUpload extends React.Component {
                         <aside>
                           <h5 className="admin__form__file-upload__status-heading">File to Upload</h5>
                           <p className="admin__form__file-upload__status">{file.name} - {file.size} bytes</p>
+                        </aside>
+                      }
+                      {variableCheck &&
+                        <aside>
+                          <h5 className="admin__form__file-upload__status-heading">Missing Variables</h5>
+                          <ul className="admin__form__file-upload__variable-check">
+                            {Array.from(variableCheck.missingVars).map((varName) => {
+                                return <li key={varName} className="admin__form__file-upload__variable-check__value">{varName}</li>
+                            })}
+                          </ul>
+                          <h5 className="admin__form__file-upload__status-heading">Unused Variables</h5>
+                          <ul className="admin__form__file-upload__variable-check">
+                            {Array.from(variableCheck.unusedVars).map((varName) => {
+                                return <li key={varName} className="admin__form__file-upload__variable-check__value">{varName}</li>
+                            })}
+                          </ul>
+                          <h5 className="admin__form__file-upload__status-heading">Full Variable List</h5>
+                          <ul className="admin__form__file-upload__variable-check">
+                            {Array.from(variableCheck.fullVarList).map((varName) => {
+                                return <li key={varName} className="admin__form__file-upload__variable-check__value">{varName}</li>
+                            })}
+                          </ul>
                         </aside>
                       }
                     </section>

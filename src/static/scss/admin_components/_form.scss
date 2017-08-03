@@ -84,10 +84,18 @@
 			padding: 20px 0px 0px;
 			margin-bottom: 0px;
 			font-size: 16px;
+			font-weight: bold;
 		}
 
 		&__status {
 			margin-bottom: 0px;
+		}
+
+		&__variable-check {
+			columns: 3;
+			&__value {
+				display: block;
+			}
 		}
 	}
 }

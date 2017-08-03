@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { nestYears, addFullStateNames, addPathKeys} from './helper_functions/process_uploaded_data.js';
+import { validateData, nestYears, addFullStateNames, addPathKeys, checkForVariables} from './helper_functions/process_uploaded_data.js';
 
 /*
  * action types
@@ -283,16 +283,17 @@ export function uploadDataFile(collection, newFile) {
   console.log(newFile);
 
   return function (dispatch) {
+    dispatch(setDataFileUploadStatus("Validating Data"))
+    let processedData = validateData(newFile);
+
     dispatch(setDataFileUploadStatus("Nesting Years"))
-    let processedData = nestYears(newFile);
+    processedData = nestYears(processedData);
 
     dispatch(setDataFileUploadStatus("Setting Full State Names"))
     processedData = addFullStateNames(processedData);
 
     dispatch(setDataFileUploadStatus("Adding Path Keys"))
     processedData = addPathKeys(processedData);
-   
-    console.log(processedData)
 
     dispatch(setDataFileUploadStatus("Uploading Data to Database - " + processedData.length + " rows"))
     

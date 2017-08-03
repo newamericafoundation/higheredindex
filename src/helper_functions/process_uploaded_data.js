@@ -1,3 +1,46 @@
+import instVizSettings from "../settings/instVizSettings";
+import stVizSettings from "../settings/stVizSettings";
+import sectionSettings from "../settings/sectionSettings";
+
+const yearRegEx = new RegExp('_[0-9]{4}');
+
+export function validateData(inputData) {
+	console.log(inputData)
+	let nonAlphaNumericRegEx = /\W+/g
+
+	let columnNames = Object.keys(inputData[0]);
+	let colsToChange = []
+	columnNames.forEach((column) => {
+		let forbiddenChars = column.match(nonAlphaNumericRegEx);
+		if (forbiddenChars && forbiddenChars.length > 0) {
+			colsToChange.push(column)
+		}
+	})
+
+	console.log(colsToChange);
+
+	if (colsToChange.length > 0) {
+		inputData.map((d) => {
+			colsToChange.forEach((colName) => {
+				d = replaceKey(colName, colName.replace(nonAlphaNumericRegEx, "_"), d)
+			})
+		})
+	}
+	console.log(inputData)
+
+	return inputData;
+}
+
+function replaceKey(oldKey, newKey, dataObject) {
+	if (oldKey !== newKey && dataObject[oldKey]) {
+	    Object.defineProperty(dataObject, newKey,
+	        Object.getOwnPropertyDescriptor(dataObject, oldKey));
+	    delete dataObject[oldKey];
+	}
+	return dataObject;
+}
+
+
 export function nestYears(inputData) {
 	let regEx = new RegExp('_[0-9]{4}');
 	let retArray = [];
@@ -65,3 +108,81 @@ export function processUploadedData(inputData) {
 
 	return withPathKeys;
 }
+
+export function checkForVariables(inputData, type, granularity) {
+	let sectionSettings = getSectionSettings(type, granularity);
+	console.log(sectionSettings)
+	
+	let sampleDatapoint = inputData[0];
+
+	let unusedVars = new Set(),
+		fullVarList = new Set();
+
+	Object.keys(sampleDatapoint).forEach((varName) => {
+		if (varName != "school" && varName != "name" ) {
+			unusedVars.add(varName.replace(yearRegEx, ""))
+			fullVarList.add(varName.replace(yearRegEx, ""))
+		}
+	})
+
+	let retObject = {
+		missingVars: new Set(),
+		unusedVars: unusedVars,
+		fullVarList: fullVarList
+	}
+
+
+	sectionSettings.forEach((section) => {
+		if (section.calloutSettings) {
+			retObject = checkSettingsSection(section.calloutSettings.variables, retObject)
+		}
+		if (section.paragraphSettings) {
+			retObject = checkSettingsSection(section.paragraphSettings.variables, retObject)
+		}
+		if (section.vizSettings) {
+			retObject = checkSettingsSection(section.vizSettings.chart1Settings.variables, retObject)
+			if (section.vizSettings.chart2Settings) {
+				retObject = checkSettingsSection(section.vizSettings.chart2Settings.variables, retObject)
+			}
+		}
+	})
+
+	return retObject;
+}
+
+function getSectionSettings(type, granularity) {
+	let sectionName;
+	if (granularity == "states") {
+		sectionName = type[0].toUpperCase() + type.slice(1)
+
+		return stVizSettings[sectionName];
+	} else {
+		if (type == "schools") {
+			sectionName = "Overview"
+		} else {
+			sectionName = type[0].toUpperCase() + type.slice(1)
+		}
+		return instVizSettings[sectionName];
+	}
+}
+
+function checkSettingsSection(variableList, retObject) {
+	let {missingVars, unusedVars, fullVarList} = retObject;
+
+	variableList.forEach((variable) => {
+		if (variable.variable) {
+			let varName = variable.variable;
+		
+			if (fullVarList.has(varName)) {
+				unusedVars.delete(varName)
+			} else {
+				if (varName != "name") {
+					missingVars.add(varName);
+				}
+			}
+		}
+	})
+
+	return retObject;
+}
+
