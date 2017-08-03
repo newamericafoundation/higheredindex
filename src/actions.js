@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { nestYears, addFullStateNames, addPathKeys} from './helper_functions/process_uploaded_data.js';
+import { validateData, nestYears, addFullStateNames, addPathKeys} from './helper_functions/process_uploaded_data.js';
 
 /*
  * action types
@@ -24,11 +24,9 @@ export const SET_DATA_FILE_UPLOAD_STATUS = 'SET_DATA_FILE_UPLOAD_STATUS'
 export const SET_ADMIN_LOGIN_STATUS = 'SET_ADMIN_LOGIN_STATUS'
 export const RECEIVE_RANKING = 'RECEIVE_RANKING'
 export const REQUEST_RANKING = 'REQUEST_RANKING'
+export const RECEIVE_CONG_DISTRICT_INFO = 'RECEIVE_CONG_DISTRICT_INFO'
+export const REQUEST_CONG_DISTRICT_INFO = 'REQUEST_CONG_DISTRICT_INFO'
 
-// export const REQUEST_INST = 'REQUEST_INST'
-// export const RECEIVE_INST = 'RECEIVE_INST'
-// export const REQUEST_INST_LIST = 'REQUEST_INST_LIST'
-// export const RECEIVE_INST_LIST = 'RECEIVE_INST_LIST'
 let GoogleMapsLoader = require('google-maps');
 
 let googlePlacesService; 
@@ -247,6 +245,33 @@ export function fetchRanking(collection, direction, variable, year, value, profi
   }
 }
 
+export function requestCongDistrictInfo(stateAbbrev) {
+  return { 
+    type: REQUEST_CONG_DISTRICT_INFO,
+    stateAbbrev,
+  }
+}
+
+export function receiveCongDistrictInfo(stateAbbrev, data) {
+  return { 
+    type: RECEIVE_CONG_DISTRICT_INFO,
+    stateAbbrev,
+    data
+  }
+}
+
+export function fetchCongDistrictInfo(stateAbbrev) {
+  return function (dispatch) {
+    dispatch(requestCongDistrictInfo(stateAbbrev))
+
+    return fetch(dbPath + 'state-congressional-district-info/' + stateAbbrev)
+      .then(response => { return response.json()})
+      .then(json => {
+        dispatch(receiveCongDistrictInfo(stateAbbrev, json))
+      })
+  }
+}
+
 export function setDataFileUploadStatus(status) {
    return { 
       type: SET_DATA_FILE_UPLOAD_STATUS, 
@@ -258,16 +283,17 @@ export function uploadDataFile(collection, newFile) {
   console.log(newFile);
 
   return function (dispatch) {
+    dispatch(setDataFileUploadStatus("Validating Data"))
+    let processedData = validateData(newFile);
+
     dispatch(setDataFileUploadStatus("Nesting Years"))
-    let processedData = nestYears(newFile);
+    processedData = nestYears(processedData);
 
     dispatch(setDataFileUploadStatus("Setting Full State Names"))
     processedData = addFullStateNames(processedData);
 
     dispatch(setDataFileUploadStatus("Adding Path Keys"))
     processedData = addPathKeys(processedData);
-   
-    console.log(processedData)
 
     dispatch(setDataFileUploadStatus("Uploading Data to Database - " + processedData.length + " rows"))
     

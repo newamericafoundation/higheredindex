@@ -262,27 +262,33 @@ const stVizSettings = {
 				}
 			}
 		},
-		// {
-		// 	title: "Congressional Districts",
-		// 	calloutSettings: {
-		// 		type: "value",
-		// 		variables: [
-		// 			{variable: "", displayName:"Average number of institutions per congressional district", format: "number"}, // add variable
-		// 		]
-		// 	},
-		// 	paragraphSettings: {
-		// 		textSections: [["There are an average of ", " institutions per congressional district in ", "."],
-		// 		variables: [
-		// 			{variable:"", format: "number" },  // add variable
-		// 			{variable:"name", format: "string"},
-		// 		]
-		// 	},
-		// 	source: "IPEDS",
-		// 	indicatorLink: null,
-		// 	vizSettings: {  // add congressional state map
-		// 	}
-		// },
-		
+		{
+			title: "Congressional Districts",
+			calloutSettings: {
+				type: "value",
+				variables: [
+					{variable: "", displayName:"Average number of institutions per congressional district", format: "number"}, // add variable
+				]
+			},
+			paragraphSettings: {
+				textSections: [["There is an average of ", " institutions per congressional district in ", "."]],
+				usesCongressionalDistrictAggregate: true,
+				variables: [
+					{congressionalDistrictAggregate: true},  // add variable
+					{variable:"name", format: "string"},
+				]
+			},
+			source: "IPEDS",
+			indicatorLink: null,
+			vizSettings: {  // add congressional state map
+				chart1Settings: {
+					type: "state-map",
+					variables: [
+						{variable:"cngdstcd", displayName:"Congressional District", format: "number"},
+					]
+				}
+			}
+		},
 	], 
 	"Students": [
 		{

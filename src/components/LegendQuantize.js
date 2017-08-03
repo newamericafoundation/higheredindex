@@ -7,7 +7,6 @@ export default class LegendQuantize extends React.Component {
 		super(props);
 
 		console.log("in legend quantize!");
-		console.log(props);
 
 		this.fullValList = Array.from(Array(props.filter.numBins).keys());
 
@@ -47,13 +46,12 @@ export default class LegendQuantize extends React.Component {
 	}
 
 	renderCells() {
-		const {colorScale, filter, toggleVals} = this.props;
+		const {colorScale, filter, toggleChartVals} = this.props;
 		const {numBins, format} = filter;
 		const {valsShown} = this.state;
 		let [dataMin, dataMax] = colorScale.domain();
 		let dataSpread = dataMax - dataMin;
 		let binInterval = dataSpread/numBins;
-		console.log(colorScale.range())
 
 		let cells = [];
 		let currCell, cellText, classes;
@@ -91,7 +89,7 @@ export default class LegendQuantize extends React.Component {
 		const {numBins} = filter;
 
 		return (
-			<div className="legend">
+			<div className="legend map-legend">
 				<ul className="legend__cell-list">
 					{this.renderCells()}
 				</ul>

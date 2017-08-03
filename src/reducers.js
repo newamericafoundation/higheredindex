@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, CHANGE_CURR_PROFILE_SECTION, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO, SET_INDICATOR_UPDATE_STATUS, SET_DATA_FILE_UPLOAD_STATUS, SET_ADMIN_LOGIN_STATUS, REQUEST_DATA_INFO, RECEIVE_DATA_INFO, REQUEST_RANKING, RECEIVE_RANKING} from './actions'
+import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, CHANGE_CURR_PROFILE_SECTION, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO, SET_INDICATOR_UPDATE_STATUS, SET_DATA_FILE_UPLOAD_STATUS, SET_ADMIN_LOGIN_STATUS, REQUEST_DATA_INFO, RECEIVE_DATA_INFO, REQUEST_RANKING, RECEIVE_RANKING, REQUEST_CONG_DISTRICT_INFO, RECEIVE_CONG_DISTRICT_INFO} from './actions'
 
 function menuExpanded(state = false, action) {
   switch (action.type) {
@@ -215,7 +215,6 @@ function dataInfo(state = null, action) {
 }
 
 function fetchedRankings(state = {}, action) {
-  console.log(action)
   switch (action.type) {
     case REQUEST_RANKING:
       return Object.assign({}, state, {
@@ -224,6 +223,21 @@ function fetchedRankings(state = {}, action) {
     case RECEIVE_RANKING:
       return Object.assign({}, state, {
         [action.profilePath + "_" + action.variable] : action.rank
+      })
+    default:
+      return state
+  }
+}
+
+function fetchedCongDistrictInfo(state = {}, action) {
+  switch (action.type) {
+    case REQUEST_CONG_DISTRICT_INFO:
+      return Object.assign({}, state, {
+        [action.stateAbbrev] : "fetching"
+      })
+    case RECEIVE_CONG_DISTRICT_INFO:
+      return Object.assign({}, state, {
+        [action.stateAbbrev] : action.data
       })
     default:
       return state
@@ -279,6 +293,7 @@ const rootReducer = combineReducers({
   fetchedStPhotos,
   fetchedInstPhotos,
   fetchedRankings,
+  fetchedCongDistrictInfo,
   stList,
   instList,
   dataInfo,
