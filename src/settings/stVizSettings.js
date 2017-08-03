@@ -73,15 +73,17 @@ const stVizSettings = {
 				type: "ranking",
 				direction: "lowest",
 				variables: [
-					{variable: "netpriceinc", displayName:"Rank among all states for lowest net price for low-income students"},
+					{variable: "netpriceincpub", displayName:"Rank among all states for lowest net price for low-income students at public institutions"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, the average cost of attendance after grant aid was ", ", and the average for low-income students was ", " at ", " institutions."],
+				textSections: [["In @year, the average cost of attendance after grant aid was ", " at public institutions and ", " at private institutions; and the average for low-income students was ", " at public institutions and ", " at private institutions in ", "."],
 					["The following chart depicts trends over time."]],
 				variables: [
-					{variable:"netprice", format: "price" },
-					{variable:"netpriceinc", format: "price"},
+					{variable:"netpricepubc", format: "price" },
+					{variable:"netpriceincpub", format: "price"},
+					{variable:"netpricepriv", format: "price" },
+					{variable:"netpriceincpriv", format: "price"},
 					{variable:"name", format: "string"},
 				]
 			},
@@ -92,8 +94,10 @@ const stVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "Price",
 					variables: [
-						{variable:"netprice", displayName:"Net price", format: "price", color: colors.turquoise.light },
-						{variable:"netpriceinc", displayName:"Net price for low-income students", format: "price", color: colors.purple.light},
+						{variable:"netpricepubc", displayName:"Public institutions", format: "price", color: colors.turquoise.light },
+						{variable:"netpriceincpub", displayName:"Public institutions (low-income)", format: "price", color: colors.turquoise.medium },
+						{variable:"netpricepriv", displayName:"Private institutions", format: "price", color: colors.purple.light},
+						{variable:"netpriceincpriv", displayName:"Private institutions (low-income)", format: "price", color: colors.purple.medium},
 					]
 				}
 			}
