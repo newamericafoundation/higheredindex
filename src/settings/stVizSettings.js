@@ -28,6 +28,7 @@ const stVizSettings = {
 							variables: [
 								{variable:"degree", displayName:"Degree Granting", format: "number"},
 								{variable:"hbcu", displayName:"HBCU/MSI", format: "number"},
+								{variable:"prop_9010", displayName:"90/10 Proportion", format: "number"},
 							],
 						}
 					]
@@ -257,34 +258,6 @@ const stVizSettings = {
 					yAxisLabel: "",
 					variables: [
 						{variable:"endowment", displayName:"Endowment", format: "price", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "90/10 Proportion",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "prop_9010", displayName:"Share of state’s institutions which received over 90 percent of their revenue from federal sources", format: "percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, ", " of ", " institutions received over 90 percent of their revenue from federal sources, violating the 90/10 rule."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"prop_9010", format: "percent" },
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "Federal Student Aid",
-			indicatorLink: "90-10-proportion",
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"prop_9010", displayName:"90/10 proportion", format: "percent", color: colors.turquoise.light },
 					]
 				}
 			}
