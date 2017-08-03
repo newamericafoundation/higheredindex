@@ -997,21 +997,21 @@ const stVizSettings = {
 	], 
 	"Outcomes" : [
 		{
-			title: "Median Earnings",
+			title: "Mean Earnings",
 			calloutSettings: {
 				type: "ranking",
 				direction: "highest",
 				variables: [
-					{variable: "md_earn_wne_p10", displayName:"Rank among all states for greatest 10-year median earnings"},
+					{variable: "mn_earn_wne_p10", displayName:"Rank among all states for greatest 10-year mean earnings"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, median earnings six years after enrolling in school were ", ", median earnings after eight years were ", ", and median earnings after 10 years were ", " for graduates of ", " institutions."],
+				textSections: [["In @year, mean earnings six years after enrolling in school were ", ", mean earnings after eight years were ", ", and mean earnings after 10 years were ", " for graduates of ", " institutions."],
 					["The following chart depicts trends over time."]],
 				variables: [
-					{variable:"md_earn_wne_p6", format: "price"},
-					{variable:"md_earn_wne_p8", format: "price"},
-					{variable:"md_earn_wne_p10", format: "price"},
+					{variable:"mn_earn_wne_p6", format: "price"},
+					{variable:"mn_earn_wne_p8", format: "price"},
+					{variable:"mn_earn_wne_p10", format: "price"},
 					{variable:"name", format: "string"},
 				]
 			},
@@ -1035,7 +1035,7 @@ const stVizSettings = {
 				type: "ranking",
 				direction: "lowest",
 				variables: [
-					{variable: "", displayName:"Rank among all states for smallest difference between 10-year median earnings of men and women"},  // add variable
+					{variable: "", displayName:"Rank among all states for smallest difference between 10-year mean earnings of men and women"},  // add variable
 				]
 			},
 			paragraphSettings: {
