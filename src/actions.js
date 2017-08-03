@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { validateData, nestYears, addFullStateNames, addPathKeys, checkForVariables} from './helper_functions/process_uploaded_data.js';
+import { validateData, nestYears, addFullStateNames, addPathKeys} from './helper_functions/process_uploaded_data.js';
 
 /*
  * action types
