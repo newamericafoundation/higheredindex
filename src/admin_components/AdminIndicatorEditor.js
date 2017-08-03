@@ -57,7 +57,7 @@ class AdminIndicatorEditor extends React.Component {
           <div>
             <AdminStatusBar status={updateStatus} />
             <div className="admin__form">
-              <h1 className="admin__form__title">Edit Indicator: {this.indicatorData.data.name}</h1>
+              <h1 className="admin__form__title">Edit Indicator: {this.props.id}</h1>
               <Link to={'/admin/'}>
                 <h5 className="admin__form__main-link">Return to Admin Home</h5>
               </Link>

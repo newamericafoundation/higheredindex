@@ -201,7 +201,7 @@ const instVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "sat_avg_all", displayName:"SAT/ACT average", format: "number"},
+					{variable: "sat_avg_all", displayName:"SAT/ACT average", format: "year"},
 				]
 			},
 			paragraphSettings: {
@@ -209,7 +209,7 @@ const instVizSettings = {
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
-					{variable:"sat_avg_all", format: "number"},
+					{variable:"sat_avg_all", format: "year"},
 				]
 			},
 			source: "IPEDS",
@@ -219,7 +219,7 @@ const instVizSettings = {
 					type: "bar-chart",
 					yAxisLabel: "",
 					variables: [
-						{variable:"sat_avg_all", displayName:"SAT/ACT average", format: "number", color: colors.turquoise.light },
+						{variable:"sat_avg_all", displayName:"SAT/ACT average", format: "year", color: colors.turquoise.light },
 					]
 				}
 			}

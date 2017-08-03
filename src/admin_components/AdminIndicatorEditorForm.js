@@ -2,12 +2,34 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { updateIndicator } from '../actions';
+import RichTextEditor from 'react-rte';
 
 import { colors } from "../helper_functions/colors.js";
 
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError, submitForm } from 'react-form'
 
 class AdminIndicatorEditorForm extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      richTextDescription: RichTextEditor.createEmptyValue()
+    }
+  }
+
+  onRichTextChange(value) {
+    this.setState({
+      richTextDescription: value
+    });
+    if (this.props.onChange) {
+      // Send the changes up to the parent component as an HTML string. 
+      // This is here to demonstrate using `.toString()` but in a real app it 
+      // would be better to avoid generating a string on each change. 
+      this.props.onChange(
+        value.toString('html')
+      );
+    }
+  }
+
   render() {
     const { item, action } = this.props;
     console.log(item)
@@ -27,22 +49,18 @@ class AdminIndicatorEditorForm extends React.Component {
                 return d;
               })
             }
+            values.description = this.state.richTextDescription.toString('html');
             console.log(values);
             this.props.submitHandler(values, action);
           }}
           defaultValues={item}
         >
           {({submitForm, values, addValue, removeValue}) => {
-            console.log(submitForm, values)
             return (
               <form onSubmit={submitForm}>
                 <div className="admin__form__field">
                   <h5 className="admin__form__field-label">Name</h5>
                   <Text field='name' />
-                </div>
-                <div className="admin__form__field">
-                  <h5 className="admin__form__field-label">Path</h5>
-                  <Text field='path'/>
                 </div>
                 <div className="admin__form__field">
                   <h5 className="admin__form__field-label">Section</h5>
@@ -67,8 +85,10 @@ class AdminIndicatorEditorForm extends React.Component {
                 </div>
                 <div className="admin__form__field">
                   <h5 className="admin__form__field-label">Description</h5>
-                  <Textarea
-                    field='description' />
+                  <RichTextEditor
+                    value={this.state.richTextDescription}
+                    onChange={this.onRichTextChange.bind(this)}
+                  />
                 </div>
                 <div className="admin__form__field">
                   <h5 className="admin__form__field-label">Sources</h5>

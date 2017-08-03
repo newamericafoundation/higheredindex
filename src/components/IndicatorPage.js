@@ -6,7 +6,7 @@ import SectionNav from './SectionNav.jsx';
 import ProfileSection from './ProfileSection';
 import ProfileHeader from './ProfileHeader.jsx';
 import DataBlock from './DataBlock';
-import { indicatorVizSettings } from './indicatorVizSettings';
+import { indicatorVizSettings } from '../settings/indicatorVizSettings';
 import { connect } from 'react-redux'
 import { toggleTopNavProfileName } from '../actions'
 import $ from 'jquery';

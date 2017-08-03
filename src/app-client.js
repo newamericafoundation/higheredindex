@@ -1,8 +1,9 @@
 'use strict';
 
 require('./static/scss/index.scss');
-
-import 'babel-polyfill'
+if (!global._babelPolyfill) {
+   require('babel-polyfill');
+}
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AppRoutes from './components/AppRoutes';

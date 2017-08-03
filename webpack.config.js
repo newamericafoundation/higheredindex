@@ -33,6 +33,13 @@ module.exports = {
       },
       { test: /\.jpg$/,    loader: "url-loader?minetype=image/jpg" },
       {
+        test: /\.css$/,
+        loaders: [
+          'style-loader',
+          'css-loader?modules'
+        ]
+      },
+      {
         test: /\.scss$/,
         loaders: [ 'style', 'css', 'sass' ]
       },

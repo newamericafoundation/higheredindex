@@ -3,6 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { indicatorVizSettings } from "../settings/indicatorVizSettings";
 import { fetchProfileList, setDataFileUploadStatus, fetchDataInfo  } from '../actions';
 const d3 = require("d3")
 
@@ -12,9 +13,8 @@ class AdminHome extends React.Component {
   }
 
   componentWillMount() {
-    const { indicatorList, fetchProfileList, fetchDataInfo} = this.props;
+    const { fetchDataInfo} = this.props;
 
-    fetchProfileList("indicator")
     fetchDataInfo()
   }
 
@@ -31,9 +31,9 @@ class AdminHome extends React.Component {
           </Link>
           { dataInfo && dataInfo != "fetching" && dataInfo.length > 0 &&
             <ul className="admin__home__data-info-container">
-              {dataInfo.map((d) => {
+              {dataInfo.map((d, i) => {
                 return (
-                  <li className="admin__home__data-info">
+                  <li key={i} className="admin__home__data-info">
                     <span className="admin__home__data-info__title">{d.collection}:</span>
                     {d.last_updated && <span className="admin__home__data-info__value">{d3.timeFormat("%B %d, %Y - %I:%M %p")(new Date(d.last_updated))}</span>}
                   </li>
@@ -45,15 +45,12 @@ class AdminHome extends React.Component {
         <hr></hr>
         <div className="admin__home__section">
           <h5 className="admin__home__heading">Edit Indicators</h5>
-          <Link to={'/admin/indicators/new/'}>
-            <h5 className="admin__home__main-link">Create New Indicator</h5>
-          </Link>
           <ul className="admin__home__sub-link-list">
-            {indicatorList.map((d, i) => {
+            {Object.keys(indicatorVizSettings).map((key) => {
               return (
-                <li className="admin__home__sub-link-list-item">
-                  <Link to={'/admin/indicators/' + d.path}>
-                    <h5 className="admin__home__sub-link">{ d.name }</h5>
+                <li key={key} className="admin__home__sub-link-list-item">
+                  <Link to={'/admin/indicators/' + key}>
+                    <h5 className="admin__home__sub-link">{ key }</h5>
                   </Link>
                 </li>
               )
@@ -70,7 +67,6 @@ class AdminHome extends React.Component {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    indicatorList: state.indicatorList,
     dataFileUploadStatus: state.dataFileUploadStatus,
     dataInfo: state.dataInfo
   }
@@ -80,9 +76,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
       fetchDataInfo: () => {
         dispatch(fetchDataInfo());
-      },
-      fetchProfileList: (type) => {
-        dispatch(fetchProfileList(type));
       },
       resetFileUploadStatus: () => {
         dispatch(setDataFileUploadStatus("inactive"));
