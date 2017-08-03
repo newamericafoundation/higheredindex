@@ -234,65 +234,6 @@ const stVizSettings = {
 			}
 		},
 		{
-			title: "SAT/ACT Average",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "sat_avg_all", displayName:"SAT/ACT average", format: "number"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, students enrolled at ", " institutions scored an SAT/ACT average of ", "."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"name", format: "string"},
-					{variable:"sat_avg_all", format: "number"},
-				]
-			},
-			source: "IPEDS",
-			indicatorLink: "sat-act-average",
-			vizSettings: {
-				chart1Settings: {
-					type: "bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"sat_avg_all", displayName:"SAT/ACT average", format: "number", color: colors.turquoise.light },
-					]
-				}
-			}
-		},
-		{
-			title: "Instructional Expenses",
-			calloutSettings: {
-				type: "ranking",
-				direction: "highest",
-				variables: [
-					{variable: "inexpfte", displayName:"Rank among all states for greatest average instructional expenses per full-time equivalent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["Instructional expenses averaged ", " and tuition averaged ", " at ", " institutions in @year."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"inexpfte", format: "price" },
-					{variable:"tuitfte", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "instructional-expenses",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"inexpfte", displayName:"Instructional expenses per FTE", format: "price", color: colors.turquoise.light},
-						{variable:"tuitfte", displayName:"Tuition per FTE", format: "price", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		{
 			title: "Endowment",
 			calloutSettings: {
 				type: "value",
