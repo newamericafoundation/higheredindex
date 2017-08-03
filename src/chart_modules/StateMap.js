@@ -67,7 +67,24 @@ class StateMap extends React.Component {
         this.g = this.svg.append("g")
         	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        this.filterVar = {variable:"count", displayName: "Count", format: "number", scaleType:"quantize", numBins: 5, customRange:[colors.white, colors.turquoise.light, colors.turquoise.dark]}
+        let numBins;
+
+        let extent = d3.extent(this.districtCounts, (d) => { return d.count})
+        let valRange = extent[1] - extent[0];
+
+        if (valRange == 0) {
+            numBins = 1;
+        } else if (this.districtCounts.length == 2 || valRange < 3) {
+            numBins = 2;
+        } else if (this.districtCounts.length == 3 || valRange < 6) {
+            numBins = 3;
+        } else if (this.districtCounts.length == 4 || valRange < 9) {
+            numBins = 4;
+        } else {
+            numBins = 5;
+        }
+
+        this.filterVar = {variable:"count", displayName: "Count", format: "number", scaleType:"quantize", numBins: numBins, customRange:[colors.white, colors.turquoise.light, colors.turquoise.dark]}
 
         this.colorScale = getColorScale(
             this.districtCounts, 
@@ -126,8 +143,9 @@ class StateMap extends React.Component {
             this.update();
             content = this.state.chart.toReact();
             tooltip = <Tooltip settings={this.state.tooltipSettings} />
-            let legendVar = {numBins: 5}
-            legend = <LegendQuantize filter={this.filterVar} colorScale={this.colorScale} toggleChartVals={this.toggleVals.bind(this)} />
+            if (this.filterVar.numBins > 1) {
+                legend = <LegendQuantize filter={this.filterVar} colorScale={this.colorScale} toggleChartVals={this.toggleVals.bind(this)} />
+            }
         } else {
             content = "loading chart";
         }
