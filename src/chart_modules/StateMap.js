@@ -50,8 +50,10 @@ class StateMap extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (!this.state.chart && this.props.fetchedCongDistrictInfo[this.props.data.state] && this.props.fetchedCongDistrictInfo[this.props.data.state] != "fetching") {
-            this.districtCounts = this.props.fetchedCongDistrictInfo[this.props.data.state];
+        this.districtCounts = this.props.fetchedCongDistrictInfo[this.props.data.state];
+        console.log(this.districtCounts)
+        if (!this.state.chart && this.districtCounts && this.districtCounts != "fetching" && this.districtCounts.length > 0) {
+            
             const chart = this.initialize();
             
             this.setState({
@@ -146,16 +148,16 @@ class StateMap extends React.Component {
             if (this.filterVar.numBins > 1) {
                 legend = <LegendQuantize filter={this.filterVar} colorScale={this.colorScale} toggleChartVals={this.toggleVals.bind(this)} />
             }
+            return (
+                <div className="data-block__viz__rendering-area" ref="renderingArea">
+                    {content}
+                    {tooltip}
+                    {legend}
+                </div>
+            )
         } else {
-            content = "loading chart";
+            return null;
         }
-		return (
-            <div className="data-block__viz__rendering-area" ref="renderingArea">
-                {content}
-                {tooltip}
-                {legend}
-            </div>
-        )
 	}
 
 	resize() {

@@ -11,13 +11,17 @@ class DataBlockParagraph extends React.Component {
         }
 	}
 
-	componentDidUpdate(prevProps) {
+	componentDidUpdate(prevProps, prevState) {
+		console.log(prevProps, this.props)
+		console.log(prevState, this.state)
 		const {settings, maxYear, data, fetchedCongDistrictInfo} = this.props;
 
-		console.log(settings.usesCongressionalDistrictAggregate, this.state)
+		console.log(settings.usesCongressionalDistrictAggregate, this.state, fetchedCongDistrictInfo[data.state])
 
-        if (settings.usesCongressionalDistrictAggregate && !this.state.congressionalDistrictAggregate) {
+        if (settings.usesCongressionalDistrictAggregate && this.state.congressionalDistrictAggregate == null) {
+        	console.log("here!")
         	if (fetchedCongDistrictInfo[data.state] && fetchedCongDistrictInfo[data.state] != "fetching") {
+        		console.log("updating!!!");
 	            this.districtCounts = fetchedCongDistrictInfo[data.state];
 
 	     		let average = d3.sum(this.districtCounts, (d) => { return d.count})/this.districtCounts.length;
@@ -47,11 +51,11 @@ class DataBlockParagraph extends React.Component {
 					let variable = variables[variableCounter];
 					text = text.replace("@year", maxYear);
 					
-					textSection.push(<span>{text}</span>);
+					textSection.push(<span key={j + "_text"} >{text}</span>);
 
 					if (variable) {
 						if (variable.linkText) {
-							textSection.push(<a className="data-block__paragraph__link" href={variable.linkUrl}>{variable.linkText}</a>)
+							textSection.push(<a className="data-block__paragraph__link" key={j} href={variable.linkUrl}>{variable.linkText}</a>)
 						} else if (variable.congressionalDistrictAggregate) {
 							textSection.push(<span className="data-block__paragraph__data" key={j}>{this.state.congressionalDistrictAggregate}</span>)
 						} else {
@@ -76,7 +80,7 @@ class DataBlockParagraph extends React.Component {
 					}
 					variableCounter++;
 			    })
-			    fullText.push(<p>{textSection}</p>)
+			    fullText.push(<p key={i} >{textSection}</p>)
 			}
 		});
 
