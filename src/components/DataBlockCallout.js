@@ -23,9 +23,9 @@ class DataBlockCallout extends React.Component {
 
 	    if (variable.format == "number" || variable.format == "price") {
 	          if (value >= 1000000000) {
-	                value = Math.round(value/1000000000) + "B"
+	                value = Math.round(value/10000000)/100 + "B"
 	          } else if (value >= 1000000) {
-	                value = Math.round(value/1000000) + "M"
+	                value = Math.round(value/100000)/10 + "M"
 	          } else if (value >= 1000) {
 	                value = Math.round(value/1000) + "K"
 	          } else {
