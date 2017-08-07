@@ -2,6 +2,8 @@ import React from 'react';
 const d3 = require("d3");
 import {formatValue} from '../helper_functions/format_value';
 import { connect } from 'react-redux'
+import SvgIcon from './SvgIcon'
+const $ = require("jquery")
 
 class DataBlockParagraph extends React.Component {
 	constructor(props) {
@@ -29,11 +31,29 @@ class DataBlockParagraph extends React.Component {
         }
     }
 
+    explainerMouseOver(index) {
+    	console.log("mousing over ", index)
+    	let popup = $(this.refs["explainer-popup_" + index]);
+    	let hoverText = $(this.refs["explainer-text_" + index]);
+
+    	console.log(popup)
+
+    	popup.css("top", hoverText[0].offsetTop + 25)
+    	popup.removeClass("hidden");
+    }
+
+    explainerMouseOut(index) {
+    	console.log("mousing out ", index)
+
+    	$(this.refs["explainer-popup_" + index]).addClass("hidden");
+    }
+
 	render() {
 		const {settings, maxYear, data} = this.props,
 			{textSections, variables} = settings;
 
 	  	let fullText = []
+	  	let explainerPopups = [];
 
 	  	if (textSections.length == 0 || variables.length == 0) {
 	  		return (<div className="data-block__paragraph"></div>);
@@ -54,6 +74,10 @@ class DataBlockParagraph extends React.Component {
 							textSection.push(<a className="data-block__paragraph__link" href={variable.linkUrl}>{variable.linkText}</a>)
 						} else if (variable.congressionalDistrictAggregate) {
 							textSection.push(<span className="data-block__paragraph__data" key={j}>{this.state.congressionalDistrictAggregate}</span>)
+						} else if (variable.explainerText) {
+							let explainerIndex = explainerPopups.length
+							textSection.push(<div className="data-block__paragraph__explainer" ref={"explainer-text_" + explainerIndex} key={j} onMouseOver={() => { return this.explainerMouseOver(explainerIndex)}} onMouseOut={() => { return this.explainerMouseOut(explainerIndex)}}><SvgIcon name="question" /></div>)
+							explainerPopups.push(<div className="data-block__paragraph__explainer-popup" ref={"explainer-popup_" + explainerIndex}>{variable.explainerText}</div>)
 						} else {
 						 	if (data[variable.variable]) {
 						 		let value;
@@ -85,6 +109,7 @@ class DataBlockParagraph extends React.Component {
 	      	<div className="data-block__paragraph__text">
 	      		{fullText}
 	      	</div>
+	      	{explainerPopups}
 	      </div>
 	    )
 	}

@@ -476,7 +476,7 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions disbursed ", " in ", "; ", " in ","; ", " in ","; ", " in ","; and ", " in "," to students in @year."],
+				textSections: [["", " institutions disbursed ", " in ", "; ", " in ","; ", " in ","; ", " in ","; and ", " in ", " ", " to students in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
@@ -490,7 +490,7 @@ const stVizSettings = {
 					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"indicators/iraq-afghanistan-service-grants"},
 					{variable:"workdisburse", format: "price"},
 					{linkText:"Federal Work-Study", linkUrl:"indicators/campus-based-aid"},
-
+					{explainerText:"SEOG and Federal Work Study are campus-based aid programs. Dollars are distributed to selected schools, which then allocate awards to students at their discretion. Other grants are available to students at all institutions."},
 				]
 			},
 			source: "Federal Student Aid",
@@ -518,7 +518,7 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions awarded ", " ","; ", " ","; ", " ","; ", " ","; and ", " "," awards in @year."],
+				textSections: [["", " institutions awarded ", " ","; ", " ","; ", " ","; ", " ","; and ", " ", " ", " awards in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
@@ -532,6 +532,8 @@ const stVizSettings = {
 					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"indicators/iraq-afghanistan-service-grants"},
 					{variable:"workrecip", format: "number"},
 					{linkText:"Federal Work-Study", linkUrl:"indicators/campus-based-aid"},
+					{explainerText:"SEOG and Federal Work Study are campus-based aid programs. Dollars are distributed to selected schools, which then allocate awards to students at their discretion. Other grants are available to students at all institutions."},
+
 
 				]
 			},
@@ -627,486 +629,486 @@ const stVizSettings = {
 		},
 	], 
 	"Loans": [
-		{
-			title: "Loan Disbursements (Volume)",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "dltotaldisburse", displayName:"Total direct loan volume", format:"price"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["", " institutions disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates and graduates; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in "," to students in @year."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"name", format: "string"},
-					{variable:"allsubdisburse", format: "price"},
-					{variable:"allunsubdisburse", format: "price"},
-					{variable:"perkdisburse", format: "price"},
-					{variable:"allgraddisburse", format: "price"},
-					{variable:"allparentdisburse", format: "price"},
-					// {variable:"alltotaldisburse", format: "price"},
-					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
-				]
-			},
-			source: "Federal Student Aid",
-			indicatorLink: null,
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Students",
-					variables: [
-						{variable:"allsubdisburse", displayName:"Subsidized Stafford", format: "price", color: colors.turquoise.light},
-						{variable:"allunsubdisburse", displayName:"Unsubsidized Stafford", format: "price", color: colors.turquoise.medium},
-						{variable:"perkdisburse", displayName:"Perkins", format: "price", color: colors.blue.light},
-						{variable:"allgraddisburse", displayName:"Graduate PLUS", format: "price", color: colors.red.light},
-						{variable:"allparentdisburse", displayName:"Parent PLUS", format: "price", color: colors.purple.light}, 
-						{variable:"alltotaldisburse", displayName:"Total", format: "price", color: colors.grey.dark}, 
-					]
-				}
-			}
-		},
-		{
-			title: "Loan Recipients",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "dltotalrecip", displayName:"Total direct loan recipients", format:"number"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["", " institutions authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates and graduates; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " "," in @year."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"name", format: "string"},
-					{variable:"allsubrecip", format: "number"}, 
-					{variable:"allunsubrecip", format: "number"}, 
-					{variable:"perkrecip", format: "number"},
-					{variable:"allgradrecip", format: "number"}, 
-					{variable:"allparentrecip", format: "number"}, 
-					// {variable:"alltotalrecip", format: "number"},
-					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
-				]
-			},
-			source: "Federal Student Aid",
-			indicatorLink: null,
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Students",
-					variables: [
-						{variable:"allsubrecip", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light }, 
-						{variable:"allunsubrecip", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
-						{variable:"perkrecip", displayName:"Perkins", format: "number", color: colors.blue.light},
-						{variable:"allgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.red.light}, 
-						{variable:"allparentrecip", displayName:"Parent PLUS", format: "number", color: colors.purple.light}, 
-						{variable:"alltotalrecip", displayName:"Total", format: "number", color: colors.grey.dark}, 
-					]
-				}
-			}
-		},
-		{
-			title: "Repayment Rates by Gender",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "male_rpy_3yr_rt", displayName:"Male", format:"percent"},
-					{variable: "female_rpy_3yr_rt", displayName:"Female", format:"percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the three-year repayment rate was ", " for male students and ", " for female students at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"male_rpy_3yr_rt", format: "percent"},
-					{variable:"female_rpy_3yr_rt", format: "percent"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "three-year-repayment-rates",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Repayment Rate",
-					variables: [
-						{variable:"male_rpy_3yr_rt", displayName:"Male", format: "percent", color: colors.turquoise.light },
-						{variable:"female_rpy_3yr_rt", displayName:"Female", format: "percent", color: colors.purple.light},
-						{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Repayment Rates by Parental Education",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "firstgen_rpy_3yr_rt", displayName:"First generation", format:"percent"},
-					{variable: "notfirstgen__rpy_3yr_rt", displayName:"Non-first generation", format:"percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the three-year repayment rate was ", " for first-generation students and ", " for students with at least one parent who holds a college degree at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"firstgen_rpy_3yr_rt", format: "percent"},
-					{variable:"notfirstgen__rpy_3yr_rt", format: "percent"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "three-year-repayment-rates",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Repayment Rate",
-					variables: [
-						{variable:"firstgen_rpy_3yr_rt", displayName:"First generation", format: "percent", color: colors.turquoise.light },
-						{variable:"notfirstgen__rpy_3yr_rt", displayName:"Non-first generation", format: "percent", color: colors.purple.light},
-						{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Repayment Rates by Pell Status",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "pell_rpy_3yr_rt", displayName:"Pell recipients", format:"percent"},
-					{variable: "nopell_rpy_3yr_rt", displayName:"Non-Pell recipients", format:"percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the three-year repayment rate was ", " for Pell Grant recipients and ", " for students who did not receive Pell Grants at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"pell_rpy_3yr_rt", format: "percent"},
-					{variable:"nopell_rpy_3yr_rt", format: "percent"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "three-year-repayment-rates",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Repayment Rate",
-					variables: [
-						{variable:"pell_rpy_3yr_rt", displayName:"Received Pell Grant", format: "percent", color: colors.turquoise.light },
-						{variable:"nopell_rpy_3yr_rt", displayName:"Did not receive Pell Grant", format: "percent", color: colors.purple.light},
-						{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Repayment Rates by Completion Status",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "compl_rpy_3yr_rt", displayName:"Completers", format:"percent"},
-					{variable: "noncom_rpy_3yr_rt", displayName:"Students who withdrew", format:"percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the three-year repayment rate was ", " for graduates and ", " for students who withdrew from ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"compl_rpy_3yr_rt", format: "percent"},
-					{variable:"noncom_rpy_3yr_rt", format: "percent"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "three-year-repayment-rates",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Repayment Rate",
-					variables: [
-						{variable:"compl_rpy_3yr_rt", displayName:"Completed", format: "percent", color: colors.turquoise.light },
-						{variable:"noncom_rpy_3yr_rt", displayName:"Withdrew", format: "percent", color: colors.purple.light},
-						{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Repayment Rates by Income",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "lo_inc_rpy_3yr_rt", displayName:"Low-income", format:"percent"},
-					{variable: "md_inc_rpy_3yr_rt", displayName:"Middle-income", format:"percent"},
-					{variable: "hi_inc_rpy_3yr_rt", displayName:"High-income", format:"percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the three-year repayment rate was ", " for low-income students, ", " for middle-income students, and ", " for high-income students at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"lo_inc_rpy_3yr_rt", format: "percent"},
-					{variable:"md_inc_rpy_3yr_rt", format: "percent"},
-					{variable:"hi_inc_rpy_3yr_rt", format: "percent"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "three-year-repayment-rates",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Repayment Rate",
-					variables: [
-						{variable:"lo_inc_rpy_3yr_rt", displayName:"Low-income", format: "percent", color: colors.turquoise.light},
-						{variable:"md_inc_rpy_3yr_rt", displayName:"Middle-income", format: "percent", color: colors.turquoise.medium},
-						{variable:"hi_inc_rpy_3yr_rt", displayName:"High-income", format: "percent", color: colors.turquoise.dark},
-						{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Repayment Rates by Dependency Status",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "dep_rpy_3yr_rt", displayName:"Dependent", format:"percent"},
-					{variable: "ind_rpy_3yr_rt", displayName:"Independent", format:"percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the three-year repayment rate was ", " for dependent students and ", " for independent students at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"dep_rpy_3yr_rt", format: "percent"},
-					{variable:"ind_rpy_3yr_rt", format: "percent"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "three-year-repayment-rates",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Repayment Rate",
-					variables: [
-						{variable:"dep_rpy_3yr_rt", displayName:"Dependent", format: "percent", color: colors.turquoise.light },
-						{variable:"ind_rpy_3yr_rt", displayName:"Independent", format: "percent", color: colors.purple.light},
-						{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Cohort Default Rates",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "cdr3", displayName:"Three-year cohort default rate", format:"percent"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the three-year cohort default rate was ", " and the two-year cohort default rate was ", " at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"cdr2", format: "percent"},
-					{variable:"cdr3", format: "percent"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "cohort-default-rates",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "Default Rate",
-					variables: [
-						{variable:"cdr2", displayName:"Two-year default rates", format: "percent", color: colors.turquoise.light },
-						{variable:"cdr3", displayName:"Three-year default rates", format: "percent", color: colors.purple.light},
-					]
-				}
-			}
-		},
-		{
-			title: "Average Student Borrowing",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "avefedloan", displayName:"Average federal loan", format:"price"},
-					{variable: "aveotherloan", displayName:"Average other loan", format:"price"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the average federal student loan was ", ", and ", " of students received federal student loans; and the average other loan was ", ", and ", " of students received other loans at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"avefedloan", format: "price"},
-					{variable:"fedloanperc", format: "percent"},
-					{variable:"aveotherloan", format: "price"},
-					{variable:"otherloanperc", format: "percent"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "IPEDS",
-			indicatorLink: "student-loans",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"fedloanperc", displayName:"Percent receiving federal loans", format: "percent", color: colors.turquoise.dark },
-						{variable:"otherloanperc", displayName:"Percent receiving other loans", format: "percent", color: colors.purple.dark },
-					]
-				},
-				chart2Settings: {
-					type: "grouped-bar-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"avefedloan", displayName:"Average federal loan", format: "price", color: colors.turquoise.light },
-						{variable:"aveotherloan", displayName:"Average other loan", format: "price", color: colors.purple.light },
+		// {
+		// 	title: "Loan Disbursements (Volume)",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "dltotaldisburse", displayName:"Total direct loan volume", format:"price"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["", " institutions disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates and graduates; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in "," to students in @year."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"name", format: "string"},
+		// 			{variable:"allsubdisburse", format: "price"},
+		// 			{variable:"allunsubdisburse", format: "price"},
+		// 			{variable:"perkdisburse", format: "price"},
+		// 			{variable:"allgraddisburse", format: "price"},
+		// 			{variable:"allparentdisburse", format: "price"},
+		// 			// {variable:"alltotaldisburse", format: "price"},
+		// 			{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
+		// 		]
+		// 	},
+		// 	source: "Federal Student Aid",
+		// 	indicatorLink: null,
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Students",
+		// 			variables: [
+		// 				{variable:"allsubdisburse", displayName:"Subsidized Stafford", format: "price", color: colors.turquoise.light},
+		// 				{variable:"allunsubdisburse", displayName:"Unsubsidized Stafford", format: "price", color: colors.turquoise.medium},
+		// 				{variable:"perkdisburse", displayName:"Perkins", format: "price", color: colors.blue.light},
+		// 				{variable:"allgraddisburse", displayName:"Graduate PLUS", format: "price", color: colors.red.light},
+		// 				{variable:"allparentdisburse", displayName:"Parent PLUS", format: "price", color: colors.purple.light}, 
+		// 				{variable:"alltotaldisburse", displayName:"Total", format: "price", color: colors.grey.dark}, 
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Loan Recipients",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "dltotalrecip", displayName:"Total direct loan recipients", format:"number"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["", " institutions authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates and graduates; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " "," in @year."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"name", format: "string"},
+		// 			{variable:"allsubrecip", format: "number"}, 
+		// 			{variable:"allunsubrecip", format: "number"}, 
+		// 			{variable:"perkrecip", format: "number"},
+		// 			{variable:"allgradrecip", format: "number"}, 
+		// 			{variable:"allparentrecip", format: "number"}, 
+		// 			// {variable:"alltotalrecip", format: "number"},
+		// 			{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
+		// 		]
+		// 	},
+		// 	source: "Federal Student Aid",
+		// 	indicatorLink: null,
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Students",
+		// 			variables: [
+		// 				{variable:"allsubrecip", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light }, 
+		// 				{variable:"allunsubrecip", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
+		// 				{variable:"perkrecip", displayName:"Perkins", format: "number", color: colors.blue.light},
+		// 				{variable:"allgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.red.light}, 
+		// 				{variable:"allparentrecip", displayName:"Parent PLUS", format: "number", color: colors.purple.light}, 
+		// 				{variable:"alltotalrecip", displayName:"Total", format: "number", color: colors.grey.dark}, 
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Repayment Rates by Gender",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "male_rpy_3yr_rt", displayName:"Male", format:"percent"},
+		// 			{variable: "female_rpy_3yr_rt", displayName:"Female", format:"percent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the three-year repayment rate was ", " for male students and ", " for female students at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"male_rpy_3yr_rt", format: "percent"},
+		// 			{variable:"female_rpy_3yr_rt", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "three-year-repayment-rates",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Repayment Rate",
+		// 			variables: [
+		// 				{variable:"male_rpy_3yr_rt", displayName:"Male", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"female_rpy_3yr_rt", displayName:"Female", format: "percent", color: colors.purple.light},
+		// 				{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Repayment Rates by Parental Education",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "firstgen_rpy_3yr_rt", displayName:"First generation", format:"percent"},
+		// 			{variable: "notfirstgen__rpy_3yr_rt", displayName:"Non-first generation", format:"percent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the three-year repayment rate was ", " for first-generation students and ", " for students with at least one parent who holds a college degree at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"firstgen_rpy_3yr_rt", format: "percent"},
+		// 			{variable:"notfirstgen__rpy_3yr_rt", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "three-year-repayment-rates",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Repayment Rate",
+		// 			variables: [
+		// 				{variable:"firstgen_rpy_3yr_rt", displayName:"First generation", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"notfirstgen__rpy_3yr_rt", displayName:"Non-first generation", format: "percent", color: colors.purple.light},
+		// 				{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Repayment Rates by Pell Status",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "pell_rpy_3yr_rt", displayName:"Pell recipients", format:"percent"},
+		// 			{variable: "nopell_rpy_3yr_rt", displayName:"Non-Pell recipients", format:"percent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the three-year repayment rate was ", " for Pell Grant recipients and ", " for students who did not receive Pell Grants at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"pell_rpy_3yr_rt", format: "percent"},
+		// 			{variable:"nopell_rpy_3yr_rt", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "three-year-repayment-rates",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Repayment Rate",
+		// 			variables: [
+		// 				{variable:"pell_rpy_3yr_rt", displayName:"Received Pell Grant", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"nopell_rpy_3yr_rt", displayName:"Did not receive Pell Grant", format: "percent", color: colors.purple.light},
+		// 				{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Repayment Rates by Completion Status",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "compl_rpy_3yr_rt", displayName:"Completers", format:"percent"},
+		// 			{variable: "noncom_rpy_3yr_rt", displayName:"Students who withdrew", format:"percent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the three-year repayment rate was ", " for graduates and ", " for students who withdrew from ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"compl_rpy_3yr_rt", format: "percent"},
+		// 			{variable:"noncom_rpy_3yr_rt", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "three-year-repayment-rates",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Repayment Rate",
+		// 			variables: [
+		// 				{variable:"compl_rpy_3yr_rt", displayName:"Completed", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"noncom_rpy_3yr_rt", displayName:"Withdrew", format: "percent", color: colors.purple.light},
+		// 				{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Repayment Rates by Income",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "lo_inc_rpy_3yr_rt", displayName:"Low-income", format:"percent"},
+		// 			{variable: "md_inc_rpy_3yr_rt", displayName:"Middle-income", format:"percent"},
+		// 			{variable: "hi_inc_rpy_3yr_rt", displayName:"High-income", format:"percent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the three-year repayment rate was ", " for low-income students, ", " for middle-income students, and ", " for high-income students at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"lo_inc_rpy_3yr_rt", format: "percent"},
+		// 			{variable:"md_inc_rpy_3yr_rt", format: "percent"},
+		// 			{variable:"hi_inc_rpy_3yr_rt", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "three-year-repayment-rates",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Repayment Rate",
+		// 			variables: [
+		// 				{variable:"lo_inc_rpy_3yr_rt", displayName:"Low-income", format: "percent", color: colors.turquoise.light},
+		// 				{variable:"md_inc_rpy_3yr_rt", displayName:"Middle-income", format: "percent", color: colors.turquoise.medium},
+		// 				{variable:"hi_inc_rpy_3yr_rt", displayName:"High-income", format: "percent", color: colors.turquoise.dark},
+		// 				{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Repayment Rates by Dependency Status",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "dep_rpy_3yr_rt", displayName:"Dependent", format:"percent"},
+		// 			{variable: "ind_rpy_3yr_rt", displayName:"Independent", format:"percent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the three-year repayment rate was ", " for dependent students and ", " for independent students at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"dep_rpy_3yr_rt", format: "percent"},
+		// 			{variable:"ind_rpy_3yr_rt", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "three-year-repayment-rates",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Repayment Rate",
+		// 			variables: [
+		// 				{variable:"dep_rpy_3yr_rt", displayName:"Dependent", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"ind_rpy_3yr_rt", displayName:"Independent", format: "percent", color: colors.purple.light},
+		// 				{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Cohort Default Rates",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "cdr3", displayName:"Three-year cohort default rate", format:"percent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the three-year cohort default rate was ", " and the two-year cohort default rate was ", " at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"cdr2", format: "percent"},
+		// 			{variable:"cdr3", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "cohort-default-rates",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Default Rate",
+		// 			variables: [
+		// 				{variable:"cdr2", displayName:"Two-year default rates", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"cdr3", displayName:"Three-year default rates", format: "percent", color: colors.purple.light},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Average Student Borrowing",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "avefedloan", displayName:"Average federal loan", format:"price"},
+		// 			{variable: "aveotherloan", displayName:"Average other loan", format:"price"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the average federal student loan was ", ", and ", " of students received federal student loans; and the average other loan was ", ", and ", " of students received other loans at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"avefedloan", format: "price"},
+		// 			{variable:"fedloanperc", format: "percent"},
+		// 			{variable:"aveotherloan", format: "price"},
+		// 			{variable:"otherloanperc", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "IPEDS",
+		// 	indicatorLink: "student-loans",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"fedloanperc", displayName:"Percent receiving federal loans", format: "percent", color: colors.turquoise.dark },
+		// 				{variable:"otherloanperc", displayName:"Percent receiving other loans", format: "percent", color: colors.purple.dark },
+		// 			]
+		// 		},
+		// 		chart2Settings: {
+		// 			type: "grouped-bar-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"avefedloan", displayName:"Average federal loan", format: "price", color: colors.turquoise.light },
+		// 				{variable:"aveotherloan", displayName:"Average other loan", format: "price", color: colors.purple.light },
 
-					]
-				},
+		// 			]
+		// 		},
 				
-			}
-		},
+		// 	}
+		// },
 	], 
 	"Outcomes" : [
-		{
-			title: "Mean Earnings",
-			calloutSettings: {
-				type: "ranking",
-				direction: "highest",
-				variables: [
-					{variable: "mn_earn_wne_p10", displayName:"Rank among all states for greatest 10-year mean earnings"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, mean earnings six years after enrolling in school were ", ", mean earnings after eight years were ", ", and mean earnings after 10 years were ", " for graduates of ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"mn_earn_wne_p6", format: "price"},
-					{variable:"mn_earn_wne_p8", format: "price"},
-					{variable:"mn_earn_wne_p10", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "postgraduate-earnings",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"md_earn_wne_p6", displayName:"6-year", format: "price", color: colors.turquoise.light },
-						{variable:"md_earn_wne_p8", displayName:"8-year", format: "price", color: colors.turquoise.medium},
-						{variable:"md_earn_wne_p10", displayName:"10-year", format: "price", color: colors.turquoise.dark},
-					]
-				}
-			}
-		},
-		{
-			title: "Mean Earnings by Gender",
-			calloutSettings: {
-				type: "ranking",
-				direction: "lowest",
-				variables: [
-					{variable: "", displayName:"Rank among all states for smallest difference between 10-year mean earnings of men and women"},  // add variable
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the mean earnings 10 years after enrolling in school were ", " for men and ", " for women at ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"mn_earn_wne_male1_p10", format: "price"},
-					{variable:"mn_earn_wne_male0_p10", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "postgraduate-earnings",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"mn_earn_wne_male1_p10", displayName:"Male", format: "price", color: colors.turquoise.light},
-						{variable:"mn_earn_wne_male0_p10", displayName:"Female", format: "price", color: colors.purple.light},
-						{variable:"mn_earn_wne_p10", displayName:"Overall", format: "price", color: colors.grey.dark },
-					]
-				}
-			}
-		},
-		{
-			title: "Mean Earnings by Dependency Status",
-			calloutSettings: {
-				type: "value",
-				variables: [
-					{variable: "mn_earn_wne_indep0_p10", displayName:"Dependent", format:"price"},
-					{variable: "mn_earn_wne_indep1_p10", displayName:"Independent", format:"price"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the mean earnings 10 years after enrolling in school were ", " for independent graduates and ", " for dependent graduates of ", " institutions."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"mn_earn_wne_indep0_p10", format: "price"},
-					{variable:"mn_earn_wne_indep1_p10", format: "price"},
-					{variable:"name", format: "string"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "postgraduate-earnings",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"mn_earn_wne_indep0_p10", displayName:"Dependent", format: "price", color: colors.turquoise.light},
-						{variable:"mn_earn_wne_indep1_p10", displayName:"Independent", format: "price", color: colors.purple.light},
-						{variable:"mn_earn_wne_p10", displayName:"Overall", format: "price", color: colors.grey.dark },
-					]
-				}
-			}
-		},
-		{
-			title: "Share Earning Over $25,000",
-			calloutSettings: {
-				type: "ranking",
-				direction: "highest",
-				variables: [
-					{variable: "gt_25k_p10", displayName:"Rank among all states for greatest share of students earning more than $25,000 per year"},
-				]
-			},
-			paragraphSettings: {
-				textSections: [["In @year, the share of former students of ", " institutions earning over $25,000 was ", " seven years after entry, ", " eight years after entry, ", " nine years after entry, and ", " 10 years after initially enrolling in school."],
-					["The following chart depicts trends over time."]],
-				variables: [
-					{variable:"name", format: "string"},
-					{variable:"gt_25k_p7", format: "percent"},
-					{variable:"gt_25k_p8", format: "percent"},
-					{variable:"gt_25k_p9", format: "percent"},
-					{variable:"gt_25k_p10", format: "percent"},
-				]
-			},
-			source: "College Scorecard",
-			indicatorLink: "postgraduate-earnings",
-			vizSettings: {
-				chart1Settings: {
-					type: "line-chart",
-					yAxisLabel: "",
-					variables: [
-						{variable:"gt_25k_p7", displayName:"7 years out", format: "percent", color: colors.turquoise.light},
-						{variable:"gt_25k_p8", displayName:"8 years out", format: "percent", color: colors.turquoise.medium},
-						{variable:"gt_25k_p9", displayName:"9 years out", format: "percent", color: colors.turquoise.dark},
-						{variable:"gt_25k_p10", displayName:"10 years out", format: "percent", color: colors.black},
-					]
-				}
-			}
-		},
+		// {
+		// 	title: "Mean Earnings",
+		// 	calloutSettings: {
+		// 		type: "ranking",
+		// 		direction: "highest",
+		// 		variables: [
+		// 			{variable: "mn_earn_wne_p10", displayName:"Rank among all states for greatest 10-year mean earnings"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, mean earnings six years after enrolling in school were ", ", mean earnings after eight years were ", ", and mean earnings after 10 years were ", " for graduates of ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"mn_earn_wne_p6", format: "price"},
+		// 			{variable:"mn_earn_wne_p8", format: "price"},
+		// 			{variable:"mn_earn_wne_p10", format: "price"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "postgraduate-earnings",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"md_earn_wne_p6", displayName:"6-year", format: "price", color: colors.turquoise.light },
+		// 				{variable:"md_earn_wne_p8", displayName:"8-year", format: "price", color: colors.turquoise.medium},
+		// 				{variable:"md_earn_wne_p10", displayName:"10-year", format: "price", color: colors.turquoise.dark},
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Mean Earnings by Gender",
+		// 	calloutSettings: {
+		// 		type: "ranking",
+		// 		direction: "lowest",
+		// 		variables: [
+		// 			{variable: "", displayName:"Rank among all states for smallest difference between 10-year mean earnings of men and women"},  // add variable
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the mean earnings 10 years after enrolling in school were ", " for men and ", " for women at ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"mn_earn_wne_male1_p10", format: "price"},
+		// 			{variable:"mn_earn_wne_male0_p10", format: "price"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "postgraduate-earnings",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"mn_earn_wne_male1_p10", displayName:"Male", format: "price", color: colors.turquoise.light},
+		// 				{variable:"mn_earn_wne_male0_p10", displayName:"Female", format: "price", color: colors.purple.light},
+		// 				{variable:"mn_earn_wne_p10", displayName:"Overall", format: "price", color: colors.grey.dark },
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Mean Earnings by Dependency Status",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "mn_earn_wne_indep0_p10", displayName:"Dependent", format:"price"},
+		// 			{variable: "mn_earn_wne_indep1_p10", displayName:"Independent", format:"price"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the mean earnings 10 years after enrolling in school were ", " for independent graduates and ", " for dependent graduates of ", " institutions."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"mn_earn_wne_indep0_p10", format: "price"},
+		// 			{variable:"mn_earn_wne_indep1_p10", format: "price"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "postgraduate-earnings",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"mn_earn_wne_indep0_p10", displayName:"Dependent", format: "price", color: colors.turquoise.light},
+		// 				{variable:"mn_earn_wne_indep1_p10", displayName:"Independent", format: "price", color: colors.purple.light},
+		// 				{variable:"mn_earn_wne_p10", displayName:"Overall", format: "price", color: colors.grey.dark },
+		// 			]
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	title: "Share Earning Over $25,000",
+		// 	calloutSettings: {
+		// 		type: "ranking",
+		// 		direction: "highest",
+		// 		variables: [
+		// 			{variable: "gt_25k_p10", displayName:"Rank among all states for greatest share of students earning more than $25,000 per year"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, the share of former students of ", " institutions earning over $25,000 was ", " seven years after entry, ", " eight years after entry, ", " nine years after entry, and ", " 10 years after initially enrolling in school."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"name", format: "string"},
+		// 			{variable:"gt_25k_p7", format: "percent"},
+		// 			{variable:"gt_25k_p8", format: "percent"},
+		// 			{variable:"gt_25k_p9", format: "percent"},
+		// 			{variable:"gt_25k_p10", format: "percent"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "postgraduate-earnings",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "",
+		// 			variables: [
+		// 				{variable:"gt_25k_p7", displayName:"7 years out", format: "percent", color: colors.turquoise.light},
+		// 				{variable:"gt_25k_p8", displayName:"8 years out", format: "percent", color: colors.turquoise.medium},
+		// 				{variable:"gt_25k_p9", displayName:"9 years out", format: "percent", color: colors.turquoise.dark},
+		// 				{variable:"gt_25k_p10", displayName:"10 years out", format: "percent", color: colors.black},
+		// 			]
+		// 		}
+		// 	}
+		// },
 		
 	]
 }
