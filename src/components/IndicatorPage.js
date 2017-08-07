@@ -54,12 +54,12 @@ class IndicatorPage extends React.Component {
 
         // <ProfileSection title="Trends" />
 
-    const {path, name, description, rankingVariables} = this.props.indicatorData;
+    const {path, name, description, rankingVariables, section} = this.props.indicatorData;
     return (
       <div className="location-profile indicator">
-        <ProfileHeader id={ path } name={ name } />
-        <SectionNav type="indicator"/>
-        <ProfileSection 
+        <ProfileHeader id={ this.props.indicatorData.path } name={ this.props.indicatorData.name }/>
+        <SectionNav type="indicators" />
+         <ProfileSection
           title="About"
           index="0"
           type="description"
@@ -68,8 +68,8 @@ class IndicatorPage extends React.Component {
           title="Rankings"
           index="1"
           type="rankingDashboard"
-          settings={rankingVariables} />
-
+          settings={rankingVariables} 
+          collectionName={"states_" + section} />
         <Footer />
       </div>
     )

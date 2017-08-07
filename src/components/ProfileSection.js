@@ -45,21 +45,20 @@ class ProfileSection extends React.Component {
 	}
 
 	getSectionContent() {
-		const {type, data, settings, description, collectionName} = this.props;
+		const {type, data, settings, text, collectionName} = this.props;
 
 		console.log(this.props)
 
 		switch(type) {
 			case "description":
 				return (
-			        <div className="location-profile__body-paragraph">
-			          <p>{ description }</p>
+			        <div className="location-profile__body-paragraph" dangerouslySetInnerHTML={{ __html: text }}>
 			        </div>
 				)
 			case "rankingDashboard":
 				return (
 			        <div>
-			        	{settings && <RankingsDashboard filters={settings} />}
+			        	{settings && <RankingsDashboard filters={settings} collectionName={collectionName} />}
 			        </div>
 				)
 			default:

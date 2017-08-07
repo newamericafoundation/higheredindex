@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, CHANGE_CURR_PROFILE_SECTION, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO, SET_INDICATOR_UPDATE_STATUS, SET_DATA_FILE_UPLOAD_STATUS, SET_ADMIN_LOGIN_STATUS, REQUEST_DATA_INFO, RECEIVE_DATA_INFO, REQUEST_RANKING, RECEIVE_RANKING, REQUEST_CONG_DISTRICT_INFO, RECEIVE_CONG_DISTRICT_INFO} from './actions'
+import { TOGGLE_MENU_EXPANSION, TOGGLE_TOP_NAV_PROFILE_NAME, CHANGE_CURR_PROFILE, CHANGE_CURR_PROFILE_SECTION, REQUEST_PROFILE, RECEIVE_PROFILE, REQUEST_PROFILE_LIST, RECEIVE_PROFILE_LIST, REQUEST_PROFILE_PHOTO, RECEIVE_PROFILE_PHOTO, SET_INDICATOR_UPDATE_STATUS, SET_DATA_FILE_UPLOAD_STATUS, SET_ADMIN_LOGIN_STATUS, REQUEST_DATA_INFO, RECEIVE_DATA_INFO, REQUEST_RANKING, RECEIVE_RANKING, REQUEST_CONG_DISTRICT_INFO, RECEIVE_CONG_DISTRICT_INFO, REQUEST_ALL_STATES_DATA, RECEIVE_ALL_STATES_DATA} from './actions'
 
 function menuExpanded(state = false, action) {
   switch (action.type) {
@@ -214,6 +214,21 @@ function dataInfo(state = null, action) {
   }
 }
 
+function fetchedAllStatesData(state = {}, action) {
+  switch (action.type) {
+    case REQUEST_ALL_STATES_DATA:
+      return Object.assign({}, state, {
+        [action.collection] : "fetching"
+      })
+    case RECEIVE_ALL_STATES_DATA:
+      return Object.assign({}, state, {
+        [action.collection] : action.data
+      })
+    default:
+      return state
+  }
+}
+
 function fetchedRankings(state = {}, action) {
   switch (action.type) {
     case REQUEST_RANKING:
@@ -294,6 +309,7 @@ const rootReducer = combineReducers({
   fetchedInstPhotos,
   fetchedRankings,
   fetchedCongDistrictInfo,
+  fetchedAllStatesData,
   stList,
   instList,
   dataInfo,

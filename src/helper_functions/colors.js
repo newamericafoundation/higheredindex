@@ -6,7 +6,7 @@ export var colors = {
 	"grey": { "light": "#EAEAEB", "medium_light":"#CBCBCD" ,"medium": "#ABACAE","dark": "#2C2F35"},
 	"white": "#FFFFFF",
 	"black": "#2c2f35",
-	"orange": "#f19348",
-	"yellow": "#f4dc70",
-	"brown": "#bf9963",
+	"orange": {"light": "#f19348", "medium":"#ac6a31", "dark": "#6d3f13" },
+	"yellow": {"light": "#f4dc70", "medium":"#ae9f51", "dark": "#6c642f" },
+	"brown": {"light": "#bf9963", "medium":"#8d7248", "dark": "#574527" },
 }

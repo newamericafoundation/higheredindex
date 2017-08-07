@@ -26,6 +26,8 @@ export const RECEIVE_RANKING = 'RECEIVE_RANKING'
 export const REQUEST_RANKING = 'REQUEST_RANKING'
 export const RECEIVE_CONG_DISTRICT_INFO = 'RECEIVE_CONG_DISTRICT_INFO'
 export const REQUEST_CONG_DISTRICT_INFO = 'REQUEST_CONG_DISTRICT_INFO'
+export const RECEIVE_ALL_STATES_DATA = 'RECEIVE_ALL_STATES_DATA'
+export const REQUEST_ALL_STATES_DATA = 'REQUEST_ALL_STATES_DATA'
 
 let GoogleMapsLoader = require('google-maps');
 
@@ -243,6 +245,34 @@ export function fetchRanking(collection, direction, variable, year, value, profi
       .then(response => { return response.json()})
       .then(json => {
         dispatch(receiveRanking(variable, profilePath, json))
+      })
+  }
+}
+
+export function requestAllStatesData(collection) {
+  return { type: REQUEST_ALL_STATES_DATA }
+}
+
+export function receiveAllStatesData(collection, json) {
+  return { 
+    type: RECEIVE_ALL_STATES_DATA,
+    collection,
+    data: json
+  }
+}
+
+export function fetchAllStatesData(collection) {
+  console.log("fetching " + collection);
+  return function (dispatch) {
+
+    dispatch(requestAllStatesData(collection))
+
+    return fetch(dbPath + 'all-states-data/' + collection)
+      .then(response => { return response.json()})
+      .then(json => {
+        console.log("this is the json response")
+        console.log(json);
+        dispatch(receiveAllStatesData(collection, json))
       })
   }
 }

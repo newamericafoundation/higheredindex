@@ -18,8 +18,6 @@ export default class UsMap extends React.Component {
 
         this.geometry = usStates.features;
 
-        this.data = props.data;
-
 		this.state = {
             width: 0,
             height: 0,
@@ -40,6 +38,15 @@ export default class UsMap extends React.Component {
         })
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log("UPDATING!!!!")
+        console.log(this.props, nextProps)
+
+        if (this.props.filter.variable != nextProps.filter.variable) {
+            this.filterChanged(nextProps);
+        }
+    }
+
     initialize() {
         const div = new ReactFauxDOM.Element('div');
         console.log(this.state);
@@ -48,13 +55,7 @@ export default class UsMap extends React.Component {
         this.g = this.svg.append("g")
         	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        this.colorScale = this.props.colorScale;
-        console.log(this.colorScale.domain());
-
-        // this.initializeYAxes();
-        // this.initializeXAxis();
-
-        this.bindDataToGeom();
+        // this.bindDataToGeom();
         this.initializeMap();
 
         return div;
@@ -73,16 +74,23 @@ export default class UsMap extends React.Component {
             .on("mouseout", (d, index, paths) => { return this.mouseout(paths[index]) });
     }
 
-    bindDataToGeom() {
-        for (let dataElem of this.data) {
-            let dataId = dataElem.state_id;
-            for (let geogElem of this.geometry) {
-                if (dataId == geogElem.id) {
-                    geogElem.data = dataElem;
-                    break;
-                }
-            }
-        }
+    // bindDataToGeom() {
+    //     console.log(this.props.data)
+    //     for (let dataElem of this.props.data) {
+    //         let dataId = dataElem.state_id;
+    //         console.log(dataId)
+    //         for (let geogElem of this.geometry) {
+    //             if (dataId == geogElem.id) {
+    //                 geogElem.data = dataElem;
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     console.log(this.geometry)
+    // }
+
+    filterChanged(nextProps) {
+
     }
 
     update() {
@@ -115,13 +123,13 @@ export default class UsMap extends React.Component {
         this.paths
             .attr("d", (d) => { return this.pathGenerator(d); })
             .attr("fill", (d) => { return this.setFill(d); })
-            .attr("stroke-width", (d) => { 
-                if (d.data) {
-                    if (currHovered && currHovered == d.data.state_id) {
-                        return "5px";
-                    }
+            .attr("fill-opacity", (d) => { 
+                if (currHovered && currHovered == d.id) {
+                    return ".5";
+                } else {
+                
+                    return "1";
                 }
-                return "1px";
             });
     }
 
@@ -168,14 +176,22 @@ export default class UsMap extends React.Component {
 
     mouseover(datum, path, eventObject) {
         const {filter, hoverChangeFunc} = this.props;
-        hoverChangeFunc(datum.data.state_id);
+        console.log(datum)
+        let dataVal = this.getDataPoint(datum.id)
+        console.log(dataVal)
+        hoverChangeFunc(datum.id);
+        let varSettings = filter;
+        varSettings.color = dataVal && dataVal[filter.variable] ? this.props.colorScale(dataVal[filter.variable]) : colors.grey.light
+
+        console.log(varSettings)
+        
     	this.setState({
             tooltipSettings: {
                 x: eventObject.offsetX + 20,
                 y: eventObject.offsetY - 30,
-                title: datum.data.state,
-                value: datum.data[filter.variable],
-                format: filter.format
+                renderingAreaWidth: this.state.width,
+                title: datum.properties.name,
+                valArray: dataVal ? [{ variable: varSettings, value: dataVal[filter.variable] }] : [],
             }
         })
     }
@@ -193,17 +209,29 @@ export default class UsMap extends React.Component {
         return $(this.refs.renderingArea).width() - margin.left - margin.right;
     }
 
+    getDataPoint(id) {
+        let retVal;
+        this.props.data.forEach((d) => {
+            if (d.state_id === id) {
+                retVal = d;
+                return;
+            }
+        })
+
+        return retVal;
+    }
+
     setFill(d) {
         const {currHovered, valsShown, colorScale, filter} = this.props;
-        
-        if (d.data) {
-            let value = d.data[filter.variable];
+
+        let dataPoint = this.getDataPoint(d.id);
+
+        if (dataPoint) {
+            let value = dataPoint[filter.variable];
             let binIndex = colorScale.range().indexOf(colorScale(value));
             if (valsShown.indexOf(binIndex) > -1) {
-                return value ? colorScale(value) : "white";
+                return value ? colorScale(value) : colors.grey.light;
             } 
-        } else {
-            return "white";
         }
 
         return colors.grey.light;

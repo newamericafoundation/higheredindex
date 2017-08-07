@@ -12,7 +12,7 @@ class AdminIndicatorEditorForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      richTextDescription: RichTextEditor.createEmptyValue()
+      richTextDescription: RichTextEditor.createValueFromString(props.item.description, 'html')
     }
   }
 
@@ -39,7 +39,11 @@ class AdminIndicatorEditorForm extends React.Component {
       <div>
         <Form
           onSubmit={(values) => {
-            if (values && values.rankingVariables) {
+            if (!values || !values.name) {
+              alert("Please provide a name for this indicator.")
+              return;
+            }
+            if (values.rankingVariables) {
               values.rankingVariables.map((d, i) => {
                 d.index = i;
                 d.numBins = 5;
@@ -149,6 +153,15 @@ class AdminIndicatorEditorForm extends React.Component {
                                   label: 'Red',
                                   value: 'red'
                                 }, {
+                                  label: 'Orange',
+                                  value: 'orange'
+                                }, {
+                                  label: 'Yellow',
+                                  value: 'yellow'
+                                }, {
+                                  label: 'Brown',
+                                  value: 'brown'
+                                }, {
                                   label: 'Grey',
                                   value: 'grey'
                                 }]} />
@@ -163,8 +176,7 @@ class AdminIndicatorEditorForm extends React.Component {
                 </div>
 
                 <button className="admin__form__button" type='submit'>Submit</button>
-                {action == "update" &&
-                  <button className="admin__form__button" type='delete' onClick={() => { this.props.submitHandler(item, "delete"); }}>Delete Indicator</button>}
+                
               </form>
             )
           }}

@@ -9,15 +9,11 @@ export default class LegendQuantize extends React.Component {
 		console.log("in legend quantize!");
 
 		this.fullValList = Array.from(Array(props.filter.numBins).keys());
-
-		this.state = {
-			valsShown: this.fullValList
-		};
 	}
 
 	toggleVals(valToggled) {
+		const {valsShown} = this.props;
 		const {numBins} = this.props.filter;
-		const {valsShown} = this.state;
 		let newValsShownList = [];
 
 		if (valsShown.length == numBins) {
@@ -39,16 +35,12 @@ export default class LegendQuantize extends React.Component {
 		}
 
 		this.props.toggleChartVals(newValsShownList);
-
-		this.setState({
-			valsShown: newValsShownList
-		});
 	}
 
 	renderCells() {
-		const {colorScale, filter, toggleChartVals} = this.props;
+		const {colorScale, filter, toggleChartVals, valsShown} = this.props;
 		const {numBins, format} = filter;
-		const {valsShown} = this.state;
+
 		let [dataMin, dataMax] = colorScale.domain();
 		let dataSpread = dataMax - dataMin;
 		let binInterval = dataSpread/numBins;

@@ -12,6 +12,11 @@ const sectionSettings = {
 		{name:"Grants", collection:"inst_grants", dataDivision:"grants"}, 
 		{name:"Loans", collection:"inst_loans", dataDivision:"loans"}, 
 		{name:"Outcomes", collection:"inst_outcomes", dataDivision:"outcomes"}
+	],
+	"indicators": [
+		{name:"About", dataDivision:"about"}, 
+		{name:"Rankings", dataDivision:"rankings"}, 
+		{name:"Trends", dataDivision:"trends"}, 
 	]
 };
 

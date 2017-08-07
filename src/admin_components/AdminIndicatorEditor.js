@@ -36,22 +36,7 @@ class AdminIndicatorEditor extends React.Component {
     const { fetchedIndicators, id, updateStatus } = this.props
     this.indicatorData = fetchedIndicators[id]
 
-    if (id == "new") {
-      return (
-        <div>
-          <AdminStatusBar status={updateStatus} />
-          <div className="admin__form">
-
-            <h1 className="admin__form__title">Create New Indicator</h1>
-            <Link to={'/admin/'}>
-              <h5 className="admin__form__main-link">Return to Admin Home</h5>
-            </Link>
-            
-            <AdminIndicatorEditorForm item={{}} action="insert" />
-          </div>
-        </div>
-      )
-    } else if (this.indicatorData && !this.indicatorData.isFetching) {
+    if (this.indicatorData && !this.indicatorData.isFetching) {
       if (this.indicatorData.data) {
         return (
           <div>
