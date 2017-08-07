@@ -2,7 +2,40 @@ import { colors } from './../helper_functions/colors.js';
 
 const instVizSettings = {
 	"Overview" : [
-		// add fact boxes for school data
+		{
+			title: "Institution Data",
+			calloutSettings: null,
+			paragraphSettings: null,
+			source: "",
+			indicatorLink: null,
+			vizSettings: {
+				chart1Settings: {
+					type: "table",
+					tableSettingsList: 
+					[
+						{
+							headingLabels: ["Category", "Info"],
+							variables: [
+								{variable:"city", displayName:"City", format: "string"},
+								{variable:"postal", displayName:"State", format: "string"},
+								{variable:"zip", displayName:"Zip Code", format: "number"},
+							],
+						},
+						{
+							headingLabels: ["Category", "Info"],
+							variables: [
+								{variable:"hbcu", displayName:"HBCU/MSI", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"hcm2", displayName:"HCM2", format: "number"},
+								{variable:"accredagency", displayName:"Accrediting Agency", format: "string"},
+								{variable:"sector", displayName:"Sector", format: "number"},
+								{variable:"degree", displayName:"Degree Granting", format: "number"},
+								{variable:"maincampustype", displayName:"Main Campus Type", format: "string"},
+							],
+						},
+					]
+				}
+			}
+		},
 		{
 			title: "Sticker Price",
 			calloutSettings: {

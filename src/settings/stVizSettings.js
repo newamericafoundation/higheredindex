@@ -27,8 +27,8 @@ const stVizSettings = {
 							headingLabels: ["Category", "Count"],
 							variables: [
 								{variable:"degree", displayName:"Degree Granting", format: "number"},
-								{variable:"hbcu", displayName:"HBCU/MSI", format: "number"},
-								{variable:"prop_9010", displayName:"90/10 Proportion", format: "number"},
+								{variable:"hbcu", displayName:"HBCU/MSI", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"prop_9010", displayName:"90/10 Proportion", format: "number", linkTo: "/indicator/90-10-proportion"},
 							],
 						}
 					]
@@ -697,7 +697,7 @@ const stVizSettings = {
 					variables: [
 						{variable:"allsubrecip", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light }, 
 						{variable:"allunsubrecip", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
-						{variable:"perkrecip", displayName:"Perkins", format: "number", color: colors.blue.,light},
+						{variable:"perkrecip", displayName:"Perkins", format: "number", color: colors.blue.light},
 						{variable:"allgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.red.light}, 
 						{variable:"allparentrecip", displayName:"Parent PLUS", format: "number", color: colors.purple.light}, 
 						{variable:"alltotalrecip", displayName:"Total", format: "number", color: colors.grey.dark}, 
