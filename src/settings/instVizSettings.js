@@ -348,7 +348,7 @@ const instVizSettings = {
 						{variable:"ugenroll", displayName:"Undergraduate", format: "number", color: colors.turquoise.light },
 						{variable:"gradenroll", displayName:"Graduate", format: "number", color: colors.turquoise.dark},
 						{variable:"ftenroll", displayName:"Full-time", format: "number", color: colors.purple.light},
-						{variable:"ptenroll", displayName:"Part-time", format: "number", color: colors.purple.dark},
+						{variable:"ptenroll", displayName:"Part-time", format: "number", color: colors.purple.medium},
 						{variable:"enroll", displayName:"Total", format: "number", color: colors.grey.dark},
 					]
 				}
@@ -384,9 +384,9 @@ const instVizSettings = {
 						{variable:"afam", displayName:"Black", format: "percent", color: colors.blue.light},
 						{variable:"hisp", displayName:"Hispanic", format: "percent", color: colors.red.light},
 						{variable:"asia", displayName:"Asian", format: "percent", color: colors.purple.light},
-						{variable:"nhpi", displayName:"Hawaiian/Pacific Islander", format: "percent", color: colors.orange},
-						{variable:"amin", displayName:"American Indian", format: "percent", color: colors.yellow},
-						{variable:"twoormore", displayName:"Two or more", format: "percent", color: colors.brown},
+						{variable:"nhpi", displayName:"Hawaiian/Pacific Islander", format: "percent", color: colors.orange.light},
+						{variable:"amin", displayName:"American Indian", format: "percent", color: colors.yellow.light},
+						{variable:"twoormore", displayName:"Two or more", format: "percent", color: colors.brown.light},
 						{variable:"nonresident", displayName:"International", format: "percent", color: colors.grey.medium},
 						{variable:"unk", displayName:"Unknown race", format: "percent", color: colors.grey.light},
 					]
