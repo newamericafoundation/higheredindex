@@ -37,6 +37,10 @@ $side-padding: 25px;
 			}
 		}
 
+		&__label, &__value {
+			line-height: 1.3
+		}
+
 		&__value {
 			font-weight: bold;
 			border-left: 1px solid palette-get(na-black-10);

@@ -27,8 +27,8 @@ const stVizSettings = {
 							headingLabels: ["Category", "Count"],
 							variables: [
 								{variable:"degree", displayName:"Degree Granting", format: "number"},
-								{variable:"hbcu", displayName:"HBCU/MSI", format: "number"},
-								{variable:"prop_9010", displayName:"90/10 Proportion", format: "number"},
+								{variable:"hbcu", displayName:"HBCU/MSI", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"prop_9010", displayName:"90/10 Proportion", format: "number", linkTo: "/indicator/90-10-proportion"},
 							],
 						}
 					]
@@ -476,7 +476,7 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions disbursed ", " in ", "; ", " in ","; ", " in ","; ", " in ","; and ", " in "," to students in @year."],
+				textSections: [["", " institutions disbursed ", " in ", "; ", " in ","; ", " in ","; ", " in ","; and ", " in ", " ", " to students in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
@@ -490,7 +490,7 @@ const stVizSettings = {
 					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"indicators/iraq-afghanistan-service-grants"},
 					{variable:"workdisburse", format: "price"},
 					{linkText:"Federal Work-Study", linkUrl:"indicators/campus-based-aid"},
-
+					{explainerText:"SEOG and Federal Work Study are campus-based aid programs. Dollars are distributed to selected schools, which then allocate awards to students at their discretion. Other grants are available to students at all institutions."},
 				]
 			},
 			source: "Federal Student Aid",
@@ -518,7 +518,7 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions awarded ", " ","; ", " ","; ", " ","; ", " ","; and ", " "," awards in @year."],
+				textSections: [["", " institutions awarded ", " ","; ", " ","; ", " ","; ", " ","; and ", " ", " ", " awards in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
@@ -532,6 +532,8 @@ const stVizSettings = {
 					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"indicators/iraq-afghanistan-service-grants"},
 					{variable:"workrecip", format: "number"},
 					{linkText:"Federal Work-Study", linkUrl:"indicators/campus-based-aid"},
+					{explainerText:"SEOG and Federal Work Study are campus-based aid programs. Dollars are distributed to selected schools, which then allocate awards to students at their discretion. Other grants are available to students at all institutions."},
+
 
 				]
 			},
@@ -967,6 +969,7 @@ const stVizSettings = {
 					variables: [
 						{variable:"avefedloan", displayName:"Average federal loan", format: "price", color: colors.turquoise.light },
 						{variable:"aveotherloan", displayName:"Average other loan", format: "price", color: colors.purple.light },
+
 
 					]
 				},
