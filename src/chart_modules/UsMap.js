@@ -14,26 +14,19 @@ export default class UsMap extends React.Component {
 	constructor(props) {
 		super(props);
 
-        this.resizeFunc = this.resize.bind(this);
-
         this.geometry = usStates.features;
 
 		this.state = {
-            width: 0,
-            height: 0,
             tooltipSettings: null,
         }
 	}
 
 	componentDidMount() {
-        $(window).resize(this.resizeFunc);
 
         const chart = this.initialize();
 
-        let w = this.getCurrWidth();
         this.setState({
             chart: chart,
-            width: w,
             height: 3*w/5
         })
     }
@@ -73,7 +66,7 @@ export default class UsMap extends React.Component {
     }
 
     update() {
-        const {width, height} = this.state;
+        const {width, height} = this.props;
 
         this.svg
             .attr("width", "100%")
@@ -137,23 +130,14 @@ export default class UsMap extends React.Component {
         )
 	}
 
-	resize() {
-        let w = this.getCurrWidth();
-        this.setState({
-          width: w,
-          height: 3*w/5
-        })
-        console.log("resizing!");
-    }
+	
 
-    componentWillUnmount() {
-        $(window).off("resize", this.resizeFunc);
-    }
+    
 
     // callback functions
 
     mouseover(datum, path, eventObject) {
-        const {filter, hoverChangeFunc} = this.props;
+        const {filter, hoverChangeFunc, width} = this.props;
         let dataVal = this.getDataPoint(datum.id)
         hoverChangeFunc(datum.id);
         let varSettings = {};
@@ -164,7 +148,7 @@ export default class UsMap extends React.Component {
             tooltipSettings: {
                 x: eventObject.offsetX + 20,
                 y: eventObject.offsetY - 30,
-                renderingAreaWidth: this.state.width,
+                renderingAreaWidth: width,
                 title: datum.properties.name,
                 valArray: dataVal ? [{ variable: varSettings, value: dataVal[filter.variable] }] : [],
             }
@@ -180,10 +164,7 @@ export default class UsMap extends React.Component {
     }
 
 	// helper functions
-	getCurrWidth() {
-        return $(this.refs.renderingArea).width() - margin.left - margin.right;
-    }
-
+	
     getDataPoint(id) {
         let retVal;
         this.props.data.forEach((d) => {
