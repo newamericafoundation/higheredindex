@@ -9,7 +9,7 @@ export const stateIdMappings = {
 	"Delaware":	10,
 	"District of Columbia":	11,
 	"Florida":	12,
-	"Geogia":	13,
+	"Georgia":	13,
 	"Hawaii":	15,
 	"Idaho":	16,
 	"Illinois":	17,

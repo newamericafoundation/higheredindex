@@ -16,58 +16,42 @@ export default class RankChart extends React.Component {
 		super(props);
         let { data } = props;
 
-		this.resizeFunc = this.resize.bind(this);
-
-        console.log(data);
-
-        // for (let i = 0; i < chart1Settings.variables.length; i++) {
-        //     let varName = chart1Settings.variables[i].variable;
-        //     if (data[varName]) {
-        //         fullValList.push(varName);
-        //     } else {
-        //         this.missingVars.push(varName);
-        //         chart1Settings.variables.splice(i, 1);
-        //         i--;
-        //     }
-        // }
-
-        // console.log(chart1Settings.variables);
-
-        // if (chart2Settings) {
-        //     for (let i = 0; i < chart2Settings.variables.length; i++) {
-        //         let varName = chart2Settings.variables[i].variable;
-        //         if (data[varName]) {
-        //             fullValList.push(varName);
-        //         } else {
-        //             this.missingVars.push(varName);
-        //             chart2Settings.variables.splice(i, 1);
-        //             i--;
-        //         }
-        //     }
-
-        //     margin.right = 60;
-        // }
-
-        // console.log(fullValList);
-
-
 		this.state = {
-            width: 0,
-            height: 0,
             tooltipSettings: null,
         }
 	}
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.filter.variable != nextProps.filter.variable) {
+            this.filterChanged(nextProps);
+        }
+    }
+
+    filterChanged(nextProps) {
+        const { data, filter} = nextProps;
+        this.dataBars.remove()
+        this.dataLabels.remove()
+
+        this.y.domain(this.getYExtents(nextProps))
+
+        let keyList = [];
+        let sortedData = data.sort((a, b) => { return a[filter.variable] - b[filter.variable]; });
+
+        sortedData.map((d) => {
+            keyList.push(d.state_id);
+        });
+
+        this.x.domain(keyList);
+
+
+        this.initializeDataElements(nextProps)
+
+    }
+
 	componentDidMount() {
-        $(window).resize(this.resizeFunc);
-
         const chart = this.initializeChart();
-
-        let w = this.getCurrWidth();
         this.setState({
             chart: chart,
-            width: w,
-            height: w/5
         })
     }
 
@@ -80,7 +64,7 @@ export default class RankChart extends React.Component {
 
         this.initializeYAxis();
         this.initializeXAxis();
-        this.initializeDataElements();
+        this.initializeDataElements(this.props);
 
         return div;
     }
@@ -98,7 +82,7 @@ export default class RankChart extends React.Component {
         //     .text("Value");
 
         this.y = d3.scaleLinear()
-        	.domain(this.getYExtents());
+        	.domain(this.getYExtents(this.props));
     }
 
     initializeXAxis() {
@@ -111,11 +95,11 @@ export default class RankChart extends React.Component {
             .paddingInner(0)
     }
 
-    initializeDataElements() {
-    	const { data, filter, colorScale } = this.props;
+    initializeDataElements(propsObject) {
+    	const { data, filter, colorScale } = propsObject;
 
 	    this.dataBars = this.g.selectAll("rect")
-	    	.data(data)
+	    	.data(data.filter((d) => { return !isNaN(d[filter.variable])}))
 	    	.enter().append("rect")
 	    	.attr("class", "bar-chart__data-bar")
             .style("stroke", "white")
@@ -125,13 +109,13 @@ export default class RankChart extends React.Component {
             .on("mouseout", () => this.mouseoutFunc());
 
         this.dataLabels = this.g.selectAll("text")
-            .data(data)
+            .data(data.filter((d) => { return !isNaN(d[filter.variable])}))
             .enter().append("text")
             .attr("class", "bar-chart__data-label")
     }
 
     updateChart() {
-        const {width, height} = this.state;
+        const {width, height} = this.props;
 
         this.svg
             .attr("width", "100%")
@@ -147,7 +131,7 @@ export default class RankChart extends React.Component {
     }
 
     updateYAxis() {
-        const {width, height} = this.state;
+        const {width, height} = this.props;
         
         this.y.range([height, 0]);
         
@@ -159,9 +143,8 @@ export default class RankChart extends React.Component {
     }
 
     updateXAxis() {
-        const {width, height} = this.state;
-        const {data, filter} = this.props;
-        this.x.rangeRound([0, width]);
+        const {data, filter, width, height} = this.props;
+        this.x.range([0, width]);
 
         let keyList = [];
         let sortedData = data.sort((a, b) => { return a[filter.variable] - b[filter.variable]; });
@@ -178,18 +161,20 @@ export default class RankChart extends React.Component {
     }
 
     updateDataElements() {
-    	const {filter} = this.props;
+    	const {filter, height} = this.props;
+
     	this.dataBars
     		.attr("x", (d) => { return this.x(d.state_id); })
             .attr("y", (d) => { return this.y(d[filter.variable]); })
-            .attr("height", (d) => { return this.state.height - this.y(d[filter.variable]); })
+            .attr("height", (d) => { return height - this.y(d[filter.variable]); })
             .attr("width", this.x.bandwidth())
             .style("fill", (d) => { return this.setFill(d); })
+            .style("pointer-events", (d) => { return this.setFill(d) == colors.grey.light ? "none" : "auto"; })
 
         this.dataLabels
             .attr("x", (d) => { return this.x(d.state_id) + this.x.bandwidth()/2; })
             .attr("y", (d) => { return this.y(d[filter.variable]) + 5; })
-            .attr("display", (d) => { return (this.state.height - this.y(d[filter.variable])) < 15 ? "none" : "block"})
+            .attr("display", (d) => { return this.state.w < 750 || (height - this.y(d[filter.variable])) < 15 ? "none" : "block"})
             .style("fill", "white")
             .style("font-size", "10px")
             .style("font-weight", "bold")
@@ -204,7 +189,9 @@ export default class RankChart extends React.Component {
 
         let content, legend, tooltip;
 
-		if (this.state.chart) {
+		if (this.state.width < 600) {
+            content = null;
+        } else if (this.state.chart) {
             this.updateChart();
             content = this.state.chart.toReact();
             tooltip = <Tooltip settings={this.state.tooltipSettings} />
@@ -220,33 +207,25 @@ export default class RankChart extends React.Component {
         )
 	}
 
-	resize() {
-        let w = this.getCurrWidth();
-        this.setState({
-          width: w,
-          height: w/5
-        })
-        console.log("resizing!");
-    }
-
-    componentWillUnmount() {
-        $(window).off("resize", this.resizeFunc);
-    }
-
     // callback functions
 
     mouseoverFunc(datum, path, eventObject, variable) {
-    	const {filter, hoverChangeFunc} = this.props;
+    	const {filter, hoverChangeFunc, colorScale, width} = this.props;
     	hoverChangeFunc(datum.state_id);
+        let varSettings = {};
+        Object.assign(varSettings, filter);
+        varSettings.color = colorScale(datum[filter.variable])
     	this.setState({
             tooltipSettings: {
                 x: eventObject.offsetX + 20,
                 y: eventObject.offsetY - 30,
-                title: datum.state,
+                renderingAreaWidth: width,
+                title: datum.name,
                 value: datum[filter.variable],
-                format: filter.format
+                valArray: [{ variable: varSettings, value:datum[filter.variable] }],
             }
         })
+                
     }
 
     mouseoutFunc() {
@@ -258,12 +237,9 @@ export default class RankChart extends React.Component {
     }
 
 	// helper functions
-	getCurrWidth() {
-        return $(this.refs.renderingArea).width() - margin.left - margin.right;
-    }
 
-    getYExtents() {
-    	const { filter, data } = this.props;
+    getYExtents(propsObject) {
+    	const { filter, data } = propsObject;
         if (filter.format == "percent") {
             return [0,1];
         }
@@ -274,11 +250,13 @@ export default class RankChart extends React.Component {
     setFill(d) {
     	const {currHovered, colorScale, filter, valsShown} = this.props;
 
-        if (!currHovered || (currHovered && currHovered == d.state_id)) {
-            let value = d[filter.variable];
-            let binIndex = colorScale.range().indexOf(colorScale(value));
-            if (valsShown.indexOf(binIndex) > -1) {
-                return colorScale(value);
+        let value = d[filter.variable];
+        let binIndex = colorScale.range().indexOf(colorScale(value));
+        if (valsShown.indexOf(binIndex) > -1) {
+            if (!currHovered || (currHovered && currHovered == d.state_id)) {
+                return value ? colorScale(value) : colors.grey.medium;
+            } else {
+                return colors.grey.medium;
             }
         }
 

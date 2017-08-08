@@ -49,7 +49,6 @@ class AdminIndicatorEditorForm extends React.Component {
                 d.numBins = 5;
                 d.scaleType = "quantize";
                 d.customRange = [colors.white, colors[d.color].light, colors[d.color].dark];
-                d.format = "number";
                 return d;
               })
             }
@@ -135,6 +134,24 @@ class AdminIndicatorEditorForm extends React.Component {
                             <div className="admin__form__sub-field">
                               <h5 className="admin__form__sub-field-label">Category</h5>
                               <Text field={['rankingVariables', i, 'category']} />
+                            </div>
+                            <div className="admin__form__sub-field">
+                              <h5 className="admin__form__sub-field-label">Format</h5>
+                              <Select
+                                field={['rankingVariables', i, 'format']}
+                                options={[{
+                                  label: 'Number (with commas)',
+                                  value: 'number'
+                                }, {
+                                  label: 'Number (Without commas)',
+                                  value: 'year'
+                                }, {
+                                  label: 'Percent',
+                                  value: 'percent'
+                                }, {
+                                  label: 'Text',
+                                  value: 'string'
+                                }]} />
                             </div>
                             <div className="admin__form__sub-field">
                               <h5 className="admin__form__sub-field-label">Color</h5>

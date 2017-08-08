@@ -3,13 +3,23 @@
 	text-align: center;
 	display: table;
 	border-collapse: collapse;
+	height: 46px;
+    white-space: nowrap;
+    overflow: hidden;
 
 	&__category {
 		border: 2px solid palette-get(na-black-10);
 		
 		color: palette-get(na-black-70);
 		text-align: center;
-		display: table-cell;
+
+		.horizontal & {
+			display: table-cell;
+		}
+		.vertical & {
+			display: table;
+			width: 100%;
+		}
 		height: 46px;
 		vertical-align: middle;
 		&.active {
@@ -40,9 +50,13 @@
 			color: palette-get(na-black-40);
 			cursor: pointer;
 
+			&:hover {
+				background-color: palette-get(na-black-30);
+				color: white;
+			}
+
 			.active & {
 				cursor: auto;
-				background-color: palette-get(na-black-40);
 				color: white;
 				
 			}
@@ -50,15 +64,25 @@
 
 		&__select {
 			margin: 0px;
-			display: none;
+			display: table-cell;
+			max-width: 0px;
 			font-weight: normal;
 			color: palette-get(na-black);
 			outline: 0;
-			border: none;
+			border: none !important;
+			padding: 0px;
+			background-position-x: 95%;
+			-webkit-transition: max-width 250ms linear;
+		    -moz-transition: max-width 250ms linear;
+		    -o-transition: max-width 250ms linear;
+		    transition: max-width 250ms linear;
+			
 			-webkit-appearance: none;
 
 			.active & {
-				display: table-cell;
+				padding-left: 15px;
+				padding-right: 30px;
+				max-width: 500px;
 			}
 		}
 	}

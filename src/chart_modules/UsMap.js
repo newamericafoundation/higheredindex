@@ -39,9 +39,6 @@ export default class UsMap extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("UPDATING!!!!")
-        console.log(this.props, nextProps)
-
         if (this.props.filter.variable != nextProps.filter.variable) {
             this.filterChanged(nextProps);
         }
@@ -49,7 +46,6 @@ export default class UsMap extends React.Component {
 
     initialize() {
         const div = new ReactFauxDOM.Element('div');
-        console.log(this.state);
 
         this.svg = d3.select(div).append("svg");
         this.g = this.svg.append("g")
@@ -62,8 +58,6 @@ export default class UsMap extends React.Component {
     }
 
     initializeMap() {
-        console.log(this.geometry);
-
         this.paths = this.g.selectAll("path")
             .data(this.geometry)
             .enter()
@@ -73,21 +67,6 @@ export default class UsMap extends React.Component {
             .on("mouseover", (d, index, paths) => { return this.mouseover(d, paths[index], d3.event) })
             .on("mouseout", (d, index, paths) => { return this.mouseout(paths[index]) });
     }
-
-    // bindDataToGeom() {
-    //     console.log(this.props.data)
-    //     for (let dataElem of this.props.data) {
-    //         let dataId = dataElem.state_id;
-    //         console.log(dataId)
-    //         for (let geogElem of this.geometry) {
-    //             if (dataId == geogElem.id) {
-    //                 geogElem.data = dataElem;
-    //                 break;
-    //             }
-    //         }
-    //     }
-    //     console.log(this.geometry)
-    // }
 
     filterChanged(nextProps) {
 
@@ -111,8 +90,6 @@ export default class UsMap extends React.Component {
         this.pathGenerator = d3.geoPath()
             .projection(this.projection);
 
-        console.log(this.geometry);
-
         this.updateMap();
         // this.updateXAxis();
         // this.updateDataElements();
@@ -123,14 +100,15 @@ export default class UsMap extends React.Component {
         this.paths
             .attr("d", (d) => { return this.pathGenerator(d); })
             .attr("fill", (d) => { return this.setFill(d); })
-            .attr("fill-opacity", (d) => { 
-                if (currHovered && currHovered == d.id) {
-                    return ".5";
-                } else {
+            .style("pointer-events", (d) => { return this.setFill(d) == colors.grey.light ? "none" : "auto"; })
+            // .attr("fill-opacity", (d) => { 
+            //     if (currHovered && currHovered == d.id) {
+            //         return ".5";
+            //     } else {
                 
-                    return "1";
-                }
-            });
+            //         return "1";
+            //     }
+            // });
     }
 
 	render() {
@@ -176,14 +154,11 @@ export default class UsMap extends React.Component {
 
     mouseover(datum, path, eventObject) {
         const {filter, hoverChangeFunc} = this.props;
-        console.log(datum)
         let dataVal = this.getDataPoint(datum.id)
-        console.log(dataVal)
         hoverChangeFunc(datum.id);
-        let varSettings = filter;
+        let varSettings = {};
+        Object.assign(varSettings, filter);
         varSettings.color = dataVal && dataVal[filter.variable] ? this.props.colorScale(dataVal[filter.variable]) : colors.grey.light
-
-        console.log(varSettings)
         
     	this.setState({
             tooltipSettings: {
@@ -230,8 +205,12 @@ export default class UsMap extends React.Component {
             let value = dataPoint[filter.variable];
             let binIndex = colorScale.range().indexOf(colorScale(value));
             if (valsShown.indexOf(binIndex) > -1) {
-                return value ? colorScale(value) : colors.grey.light;
-            } 
+                if (!currHovered || (currHovered && currHovered == d.id)) {
+                    return value ? colorScale(value) : colors.grey.medium;
+                } else {
+                    return colors.grey.medium;
+                }
+            }
         }
 
         return colors.grey.light;
