@@ -29,12 +29,24 @@ class RankingsDashboard extends React.Component {
 	}
 
 	componentWillMount() {
+		console.log("in component will mount")
 		$(window).resize(this.resizeFunc);
 		const { fetchedAllStatesData, collectionName, getAllStatesData } = this.props;
 		if (!fetchedAllStatesData[collectionName] && fetchedAllStatesData[collectionName] != "fetching") {
 			getAllStatesData(collectionName)
+		} else {
+			let currData = this.getCurrData(this.props, this.state.currFilter)
+			this.setState({
+				currData: currData,
+				currColorScale: getColorScale(currData, this.state.currFilter)
+			})
 		}
-		
+	}
+
+	componentDidMount() {
+		if (this.state.currData) {
+			this.resize();
+		}
 	}
 
 	componentWillUnmount() {
@@ -55,7 +67,9 @@ class RankingsDashboard extends React.Component {
     }
 
 	componentWillReceiveProps(nextProps) {
-		const {fetchedAllStatesData, collectionName, filters} = this.props
+		const {fetchedAllStatesData, collectionName, filters} = this.props;
+
+		console.log("in component will receive props", nextProps, this.props, this.state)
 
 		if ((!fetchedAllStatesData[collectionName] || fetchedAllStatesData[collectionName] == "fetching") && (nextProps.fetchedAllStatesData[collectionName] && nextProps.fetchedAllStatesData[collectionName] != "fetching")) {
 			let currData = this.getCurrData(nextProps, this.state.currFilter)

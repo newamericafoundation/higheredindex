@@ -22,12 +22,9 @@ export default class UsMap extends React.Component {
 	}
 
 	componentDidMount() {
-
         const chart = this.initialize();
-
         this.setState({
             chart: chart,
-            height: 3*w/5
         })
     }
 
