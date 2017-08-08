@@ -76,8 +76,13 @@
 		}
 
 		&__explainer {
-			
 			display: inline-block;
+
+			&:hover  {
+				svg {
+					fill: palette-get(na-black);
+				}
+			}
 
 			svg {
 				width: 18px;
@@ -85,10 +90,6 @@
 				position: relative;
 				top: 3px;
 				fill: palette-get(na-black-30);
-
-				&:hover {
-					fill: palette-get(na-black);
-				}
 			}
 
 			&-popup {

@@ -659,8 +659,11 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates and graduates; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in "," to students in @year."],
-					["The following chart depicts trends over time."]],
+				textSections: [["", " disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates and graduates; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in ", " ", " to students in @year."],
+					["The following chart depicts trends over time."],
+					["", ""],
+					["", ""]
+					],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"allsubdisburse", format: "price"},
@@ -670,12 +673,18 @@ const instVizSettings = {
 					{variable:"allparentdisburse", format: "price"},
 					// {variable:"alltotaldisburse", format: "price"},
 					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
-
+					{explainerText: "Perkins Loans are a campus-based aid program, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other loans are available to students at all institutions."},
+					{},
+					{},
+					{linkText:"Learn more about Direct Loans.", linkUrl:"/indicators/direct-loans"},
+					{},
+					{linkText:"Learn more about FFEL Loans.", linkUrl:"/indicators/ffel-loans"},
 				]
 			},
 			source: "Federal Student Aid",
 			indicatorLink: null,
 			vizSettings: {
+				dividingLine: {year: 2010, text:"Prior to 2010, the Department of Education authorized loans through Direct Lending, and guaranteed loans from private lenders through the Family Federal Education Loan program. After 2010, all loans were made through direct lending. This graphic includes both FFEL and DL prior to 2010, and DL only after that point."},
 				chart1Settings: {
 					type: "line-chart",
 					yAxisLabel: "Students",
@@ -699,8 +708,11 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates and graduates; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " "," in @year."],
-					["The following chart depicts trends over time."]],
+				textSections: [["", " authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates and graduates; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " ", " ", " in @year."],
+					["The following chart depicts trends over time."],
+					["", ""],
+					["", ""]
+					],
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"allsubrecip", format: "number"}, 
@@ -710,12 +722,18 @@ const instVizSettings = {
 					{variable:"allparentrecip", format: "number"}, 
 					// {variable:"alltotalrecip", format: "number"},
 					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
-
+					{explainerText: "Perkins Loans are a campus-based aid program, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other loans are available to students at all institutions."},
+					{},
+					{},
+					{linkText:"Learn more about Direct Loans.", linkUrl:"/indicators/direct-loans"},
+					{},
+					{linkText:"Learn more about FFEL Loans.", linkUrl:"/indicators/ffel-loans"},
 				]
 			},
 			source: "Federal Student Aid",
 			indicatorLink: null,
 			vizSettings: {
+				dividingLine: {year: 2010, text:"Prior to 2010, the Department of Education authorized loans through Direct Lending, and guaranteed loans from private lenders through the Family Federal Education Loan program. After 2010, all loans were made through direct lending. This graphic includes both FFEL and DL prior to 2010, and DL only after that point."},
 				chart1Settings: {
 					type: "line-chart",
 					yAxisLabel: "Students",

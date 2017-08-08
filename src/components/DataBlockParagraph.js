@@ -85,7 +85,7 @@ class DataBlockParagraph extends React.Component {
 								let explainerIndex = explainerPopups.length
 								textSection.push(<div className="data-block__paragraph__explainer" ref={"explainer-text_" + explainerIndex} key={j} onMouseOver={() => { return this.explainerMouseOver(explainerIndex)}} onMouseOut={() => { return this.explainerMouseOut(explainerIndex)}}><SvgIcon name="question" /></div>)
 								explainerPopups.push(<div className="data-block__paragraph__explainer-popup hidden" ref={"explainer-popup_" + explainerIndex}>{variable.explainerText}</div>)
-							} else {
+							} else if (variable.variable) {
 							 	if (data[variable.variable]) {
 							 		let value;
 									let varName = variable.variable,
@@ -103,7 +103,7 @@ class DataBlockParagraph extends React.Component {
 								} else {
 									textSection.push(<span className="data-block__paragraph__data" key={j}>N/A</span>);
 								}
-							}
+							} 
 						}
 						variableCounter++;
 				    })

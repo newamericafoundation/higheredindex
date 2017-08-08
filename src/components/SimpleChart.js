@@ -8,6 +8,8 @@ import LineChart from "../chart_modules/LineChart.js";
 import BarChart from "../chart_modules/BarChart.js";
 import GroupedBarChart from "../chart_modules/GroupedBarChart.js";
 import { formatValue } from "../helper_functions/format_value.js";
+import SvgIcon from './SvgIcon';
+
 
 const range = (start, end) => [...Array(end - start + 1)].map((_, i) => start + i);
 
@@ -187,12 +189,18 @@ export default class SimpleChart extends React.Component {
 
     initializeDataElements() {
     	const { data, settings } = this.props,
-            {chart1Settings, chart2Settings} = settings;
+            {chart1Settings, chart2Settings, dividingLine} = settings;
 
         if (chart2Settings) {
             this.dataElement2 = this.initializeChartModule(data, chart2Settings);
         }
         this.dataElement1 = this.initializeChartModule(data, chart1Settings);
+
+        if (dividingLine) {
+            this.dividingLineLine = this.g.append("line")
+                .attr("class", "line-chart__dividing-line")
+                .attr("stroke-dasharray", "5, 5");
+        }
     }
 
     initializeChartModule(data, chart) {
@@ -296,6 +304,26 @@ export default class SimpleChart extends React.Component {
     }
 
     updateDataElements() {
+        const {dividingLine} = this.props.settings;
+
+        if (dividingLine) {
+            let xCoord = this.x(dividingLine.year)
+
+            this.dividingLineLine
+                .attr("x1", xCoord)
+                .attr("y1", this.y1.range()[0])
+                .attr("x2", xCoord)
+                .attr("y2", this.y1.range()[1])
+                
+
+            let iconStyle = {
+                left: xCoord + this.margin.left
+            }
+
+            this.dividingLineIcon = <div className="line-chart__dividing-line-icon" style={iconStyle} ><SvgIcon name="question" /></div>
+            this.dividingLinePopup = <div className="line-chart__dividing-line-popup">{dividingLine.text}</div>
+        }
+            
         this.updateChartModule(this.dataElement1, this.y1);
         this.y2 ? this.updateChartModule(this.dataElement2, this.y2) : null;
     }
@@ -343,6 +371,8 @@ export default class SimpleChart extends React.Component {
         }
 		return (
             <div className="data-block__viz__rendering-area" ref="renderingArea">
+                {this.dividingLineIcon}
+                {this.dividingLinePopup}
                 {content}
                 {legend}
                 {tooltip}
