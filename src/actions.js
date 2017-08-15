@@ -38,8 +38,8 @@ GoogleMapsLoader.load(function(google) {
   googlePlacesService = new google.maps.places.PlacesService(document.createElement('div'));
 });
 
-// const dbPath = process.env.NODE_ENV == 'production' ? 'https://febp-backend.herokuapp.com/api/' : 'http://localhost:3000/api/';
-const dbPath = 'https://febp-backend.herokuapp.com/api/';
+const dbPath = process.env.NODE_ENV == 'production' ? 'https://febp-backend.herokuapp.com/api/' : 'http://localhost:3000/api/';
+// const dbPath = 'https://febp-backend.herokuapp.com/api/';
 
 console.log(dbPath);
 
@@ -311,7 +311,7 @@ export function setDataFileUploadStatus(status) {
    }
 }
 
-export function uploadDataFile(collection, newFile) {
+export function uploadDataFile(type, section, sector, newFile) {
   console.log(newFile);
 
   return function (dispatch) {
@@ -329,7 +329,7 @@ export function uploadDataFile(collection, newFile) {
 
     dispatch(setDataFileUploadStatus("Uploading Data to Database - " + processedData.length + " rows"))
     
-    fetch(dbPath + 'update_data/' + collection, { 
+    fetch(dbPath + 'update_data/' + type + "/" + section + "/" + sector, { 
         method: "POST", 
         headers: new Headers({
           'Content-Type': 'application/json',

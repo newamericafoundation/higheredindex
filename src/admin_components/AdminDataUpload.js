@@ -24,6 +24,7 @@ class AdminDataUpload extends React.Component {
       fileData: null,
       type: null,
       granularity: null,
+      sector: null,
       variableCheck: null
     }
   }
@@ -57,18 +58,19 @@ class AdminDataUpload extends React.Component {
     reader.readAsText(files[0]);
   }
 
-  onChange({type, granularity}) {
+  onChange({type, granularity, sector}) {
     this.setState({
       type: type,
-      granularity: granularity
+      granularity: granularity, 
+      sector: sector
     })
   }
 
-  onSubmit(type, granularity) {
+  onSubmit(type, granularity, sector) {
     const {uploadFile} = this.props;
 
     if (this.state.fileData) {
-      uploadFile(granularity + "_" + type, this.state.fileData);
+      uploadFile(granularity, type, sector, this.state.fileData);
     }
   }
 
@@ -95,7 +97,7 @@ class AdminDataUpload extends React.Component {
             <h5 className="admin__form__main-link">Return to Admin Home</h5>
           </Link>
           <Form
-            onSubmit={({type, granularity}) => {
+            onSubmit={({type, granularity, sector}) => {
               
               if (!type && !granularity) {
                 alert("Please select a data level and type");
@@ -105,7 +107,7 @@ class AdminDataUpload extends React.Component {
                 alert("Please select a data level");
               } else {
                 console.log('Success!')
-                this.onSubmit(type, granularity);
+                this.onSubmit(type, granularity, sector);
               }
             }}
 
@@ -152,6 +154,29 @@ class AdminDataUpload extends React.Component {
                         value: 'students'
                       }]} />
                   </div>
+                  { this.state.granularity == "states" && this.state.type == "schools" &&
+                    <div className="admin__form__field">
+                      <h5 className="admin__form__field-label">Sector</h5>
+                      <Select
+                        field='sector'
+                        options={[{
+                          label: 'All',
+                          value: 'all'
+                        }, {
+                          label: 'Public 4 Year',
+                          value: 'public4'
+                        }, {
+                          label: 'Public 2 Year',
+                          value: 'public2'
+                        }, {
+                          label: 'Non-Profits',
+                          value: 'nonprofits'
+                        }, {
+                          label: 'For-Profits',
+                          value: 'forprofits'
+                        }]} />
+                    </div>
+                  }
                   <div className="admin__form__field">
                     <section>
                       <h5 className="admin__form__field-label">File Upload</h5>
@@ -209,8 +234,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      uploadFile: (collection, file) => {
-        dispatch(uploadDataFile(collection, file));
+      uploadFile: (granularity, type, sector, file) => {
+        dispatch(uploadDataFile(granularity, type, sector, file));
       },
       resetFileUploadStatus: () => {
         dispatch(setDataFileUploadStatus("inactive"));
