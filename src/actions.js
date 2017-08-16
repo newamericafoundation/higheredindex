@@ -311,7 +311,7 @@ export function setDataFileUploadStatus(status) {
    }
 }
 
-export function uploadDataFile(type, section, sector, newFile) {
+export function uploadDataFile(collection, newFile) {
   console.log(newFile);
 
   return function (dispatch) {
@@ -329,7 +329,7 @@ export function uploadDataFile(type, section, sector, newFile) {
 
     dispatch(setDataFileUploadStatus("Uploading Data to Database - " + processedData.length + " rows"))
     
-    fetch(dbPath + 'update_data/' + type + "/" + section + "/" + sector, { 
+    fetch(dbPath + 'update_data/' + collection, { 
         method: "POST", 
         headers: new Headers({
           'Content-Type': 'application/json',

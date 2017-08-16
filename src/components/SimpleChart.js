@@ -68,20 +68,32 @@ export default class SimpleChart extends React.Component {
 	componentDidMount() {
         $(window).resize(this.resizeFunc);
 
-        const chart = this.initializeChart();
+        this.fauxDiv = new ReactFauxDOM.Element('div');
+
+        this.initializeChart();
 
         let w = this.getCurrWidth();
         this.setState({
-            chart: chart,
+            chart: this.fauxDiv,
             width: w,
             height: w/2
         })
     }
 
-    initializeChart() {
-        const div = new ReactFauxDOM.Element('div');
+    componentWillReceiveProps(nextProps) {
+        if (this.props.data != nextProps.data) {
+            console.log("CHANGED!!!")
+            this.svg.remove()
+            this.initializeChart();
 
-        this.svg = d3.select(div).append("svg");
+            this.setState({
+                chart: this.fauxDiv
+            })
+        }
+    }
+
+    initializeChart() {
+        this.svg = d3.select(this.fauxDiv).append("svg");
         this.g = this.svg.append("g")
 
         this.initializeYScales();
@@ -94,8 +106,6 @@ export default class SimpleChart extends React.Component {
 
         this.initializeXAxis();
         this.initializeDataElements();
-
-        return div;
     }
 
     initializeYScales() {

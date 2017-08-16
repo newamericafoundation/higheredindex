@@ -32,7 +32,7 @@ class DataBlock extends React.Component {
       	<h5 className="data-block__title">{title}</h5>
       	<div className="data-block__content">
 	      	{ paragraphSettings && <DataBlockInfo settings={settings} data={data} collectionName={collectionName} /> }
-          { vizSettings && <DataBlockViz settings={vizSettings} data={data}/> }
+          { vizSettings && <DataBlockViz settings={vizSettings} data={data} collectionName={collectionName}/> }
         </div>
       </div>
     )

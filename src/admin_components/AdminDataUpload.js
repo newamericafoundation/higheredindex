@@ -70,7 +70,9 @@ class AdminDataUpload extends React.Component {
     const {uploadFile} = this.props;
 
     if (this.state.fileData) {
-      uploadFile(granularity, type, sector, this.state.fileData);
+      let collectionName = granularity + "_" + type;
+      collectionName += sector ? "_" + sector : "";
+      uploadFile(collectionName, this.state.fileData);
     }
   }
 
@@ -234,8 +236,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      uploadFile: (granularity, type, sector, file) => {
-        dispatch(uploadDataFile(granularity, type, sector, file));
+      uploadFile: (collectionName, file) => {
+        dispatch(uploadDataFile(collectionName, file));
       },
       resetFileUploadStatus: () => {
         dispatch(setDataFileUploadStatus("inactive"));
