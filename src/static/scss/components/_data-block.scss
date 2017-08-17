@@ -52,6 +52,17 @@
 		&:first-child {
 			width: 100% !important;
 		}
+
+		&__sector-selector {
+			position: absolute;
+			width: 200px;
+			right: 0px;
+
+			&-container {
+				min-height: 55px;
+				position: relative;
+			}
+		}
 	}
 
 	&__paragraph {

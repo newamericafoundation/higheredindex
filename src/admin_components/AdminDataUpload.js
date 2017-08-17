@@ -172,10 +172,10 @@ class AdminDataUpload extends React.Component {
                           value: 'public2'
                         }, {
                           label: 'Non-Profits',
-                          value: 'nonprofits'
+                          value: 'nonprofit'
                         }, {
                           label: 'For-Profits',
-                          value: 'forprofits'
+                          value: 'forprofit'
                         }]} />
                     </div>
                   }

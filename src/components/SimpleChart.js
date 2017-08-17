@@ -70,7 +70,7 @@ export default class SimpleChart extends React.Component {
 
         this.fauxDiv = new ReactFauxDOM.Element('div');
 
-        this.initializeChart();
+        this.initializeChart(this.props.data);
 
         let w = this.getCurrWidth();
         this.setState({
@@ -83,8 +83,10 @@ export default class SimpleChart extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (this.props.data != nextProps.data) {
             console.log("CHANGED!!!")
-            this.svg.remove()
-            this.initializeChart();
+            console.log(this.svg)
+            this.svg
+                .remove()
+            this.initializeChart(nextProps.data);
 
             this.setState({
                 chart: this.fauxDiv
@@ -92,27 +94,27 @@ export default class SimpleChart extends React.Component {
         }
     }
 
-    initializeChart() {
+    initializeChart(data) {
         this.svg = d3.select(this.fauxDiv).append("svg");
         this.g = this.svg.append("g")
 
-        this.initializeYScales();
+        this.initializeYScales(data);
 
         this.g.attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
         
-        this.initializeXScale();
+        this.initializeXScale(data);
         this.initializeYAxes();
         
 
         this.initializeXAxis();
-        this.initializeDataElements();
+        this.initializeDataElements(data);
     }
 
-    initializeYScales() {
+    initializeYScales(data) {
         let {chart1Settings, chart2Settings} = this.props.settings;
 
         this.y1 = d3.scaleLinear()
-            .domain(this.getYExtents(chart1Settings));
+            .domain(this.getYExtents(chart1Settings, data));
 
         if (this.y1.domain()[1] > 1000000) {
             this.margin.left = 80;
@@ -120,7 +122,7 @@ export default class SimpleChart extends React.Component {
 
         if (chart2Settings) {
             this.y2 = d3.scaleLinear()
-                .domain(this.getYExtents(chart2Settings));
+                .domain(this.getYExtents(chart2Settings, data));
 
             if (this.y2.domain()[1] > 1000000) {
                 this.margin.right = 80;
@@ -128,7 +130,7 @@ export default class SimpleChart extends React.Component {
         }
     }
 
-    initializeXScale() {
+    initializeXScale(currData) {
         let {chart1Settings, chart2Settings} = this.props.settings;
 
         this.x = d3.scaleBand()
@@ -138,7 +140,7 @@ export default class SimpleChart extends React.Component {
         let keyList = [];
 
         chart1Settings.variables.map((d) => {
-            let data = this.props.data[d.variable];
+            let data = currData[d.variable];
             let keys = Object.keys(data);
             keys = keys.filter((key) => {
                 return !isNaN(data[key]);
@@ -148,7 +150,7 @@ export default class SimpleChart extends React.Component {
 
         if (chart2Settings) {
             chart2Settings.variables.map((d) => {
-                let data = this.props.data[d.variable];
+                let data = currData[d.variable];
                 let keys = Object.keys(data);
                 keys = keys.filter((key) => {
                     return !isNaN(data[key]);
@@ -197,8 +199,8 @@ export default class SimpleChart extends React.Component {
             .attr("class", "axis axis--x");
     }
 
-    initializeDataElements() {
-    	const { data, settings } = this.props,
+    initializeDataElements(data) {
+    	const { settings } = this.props,
             {chart1Settings, chart2Settings, dividingLine} = settings;
 
         if (chart2Settings) {
@@ -437,11 +439,10 @@ export default class SimpleChart extends React.Component {
         return $(this.refs.renderingArea).width() - this.margin.left - this.margin.right;
     }
 
-    getYExtents(chart) {
+    getYExtents(chart, data) {
         if (chart.variables[0] && chart.variables[0].format == "percent") {
             return [0,1];
         }
-    	const { data } = this.props;
         const variables = chart.variables;
 
     	let valList = [];
