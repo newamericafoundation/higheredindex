@@ -56,6 +56,10 @@ class StPage extends React.Component {
         { sectionSettings.states.map((section, i) => {
           let name = section.name;
 
+          console.log(this.props.stData)
+
+          // let data = section.dataDivision == "schools" ? this.props.stData["schools"].all : this.props.stData[section.dataDivision];
+          let data = this.props.stData[section.dataDivision];
           return (
             <ProfileSection
               key={name}
@@ -64,7 +68,7 @@ class StPage extends React.Component {
               subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
               settings={stVizSettings[name]}
               collectionName={"states_" + section.dataDivision}
-              data= {this.props.stData[section.dataDivision] }/>
+              data= {data} />
           )
         })}
         <Footer />

@@ -32,10 +32,12 @@ select {
 	border: $standard-border;
 	cursor: pointer;
 	background: url(shape-urls-get(down-arrow-na-black)) no-repeat;
-	background-size: 12px 12px;
-	padding-right: 30px;
+	background-size: 12px 12px;  
+	padding: 0px 30px 0px 10px;
 	background-position-y: center;
 	background-position-x: 97%;
+	-webkit-appearance: none;
+    -moz-appearance: none;
 		
 }
 	

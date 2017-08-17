@@ -133,13 +133,14 @@ export function checkForVariables(inputData, type, granularity) {
 
 
 	sectionSettings.forEach((section) => {
+		console.log(section)
 		if (section.calloutSettings) {
 			retObject = checkSettingsSection(section.calloutSettings.variables, retObject)
 		}
 		if (section.paragraphSettings) {
 			retObject = checkSettingsSection(section.paragraphSettings.variables, retObject)
 		}
-		if (section.vizSettings) {
+		if (section.vizSettings && section.vizSettings.chart1Settings.variables) {
 			retObject = checkSettingsSection(section.vizSettings.chart1Settings.variables, retObject)
 			if (section.vizSettings.chart2Settings) {
 				retObject = checkSettingsSection(section.vizSettings.chart2Settings.variables, retObject)

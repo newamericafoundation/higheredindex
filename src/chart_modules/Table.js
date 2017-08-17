@@ -21,8 +21,11 @@ const Table = ({settings, data}) => {
               {tableSettings.variables.map((d) => {
                 let dataVal = data[d.variable];
 
+                console.log(d.variable, dataVal)
+
                 if (dataVal) {
                   usingVars.push(d.variable)
+                  console.log(dataVal)
                   if (typeof dataVal === "object") {
                     let maxYear = d3.max(Object.keys(dataVal));
                     console.log(maxYear)
@@ -30,7 +33,7 @@ const Table = ({settings, data}) => {
                   }
 
                   let label;
-
+                  console.log(dataVal)
                   if (d.linkTo) {
                     label = <div className="table__row__label"><a href={d.linkTo}>{d.displayName}</a></div>;
                   } else {

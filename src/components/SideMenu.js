@@ -44,7 +44,7 @@ class SideMenu extends React.Component {
                 <li className="side-menu__menu-item"><Link to={'/search/#states'}>States</Link></li>
                 <li className="side-menu__menu-item"><Link to={'/search/#institutions'}>Institutions</Link></li>
                 <li className="side-menu__menu-item"><Link to={'/search/#indicators'}>Indicators</Link></li>
-                <li className="side-menu__menu-item"><Link to={'/'}>Download Dataset</Link></li>
+                <li className="side-menu__menu-item"><Link to={'/download'}>Download Dataset</Link></li>
                 <li className="side-menu__menu-item"><Link to={'/'}>Methodology</Link></li>
             </ul>
         </div>
