@@ -53,9 +53,9 @@ class DownloadHomePage extends React.Component {
               <div className="download-home-page__section__icon">
                 <SvgIcon name='state' />
               </div>
-           	  <h5 className="download-home-page__section__title">States</h5>
+              <h5 className="download-home-page__section__title">National</h5>
               <ul className="download-home-page__section__list">
-                  {sectionSettings.states.map((section) => {
+                  {sectionSettings.national.map((section) => {
                     let lastUpdated = null;
                     if (dataInfo && dataInfo != "fetching") {
                       lastUpdated = this.getLastUpdated(section.collection);
@@ -69,6 +69,52 @@ class DownloadHomePage extends React.Component {
                       
                       </li>
                     )
+                  })}
+              </ul>
+            </div>
+            <div className="download-home-page__section">
+              <div className="download-home-page__section__icon">
+                <SvgIcon name='state' />
+              </div>
+           	  <h5 className="download-home-page__section__title">States</h5>
+              <ul className="download-home-page__section__list">
+                  {sectionSettings.states.map((section) => {
+                    if (section.collection == "states_schools") {
+                      return (
+                         <li className="download-home-page__section__item" key={section.name}>
+                          <h5 className="download-home-page__section__item__label">{section.name}</h5>
+                          <ul className="download-home-page__section__sub-list">
+                            {section.subSections.map((subsection) => {
+                              let lastUpdated = null;
+                              if (dataInfo && dataInfo != "fetching") {
+                                lastUpdated = this.getLastUpdated(subsection.collection);
+                              }
+                              return (
+                                <li className="download-home-page__section__sub-list__item" key={subsection.name}>
+                                  <h5 className="download-home-page__section__sub-list__item__label">{subsection.name}</h5>
+                                  { lastUpdated && <h5 className="download-home-page__section__sub-list__item__last-updated">{"Last Updated: " + lastUpdated}</h5> }
+                                  <h5 className="download-home-page__section__sub-list__item__text" onClick={() => { return downloadFile(subsection.collection); }}>Data</h5>
+                                  <h5 className="download-home-page__section__sub-list__item__text">Codebook</h5>
+                                </li>
+                              )
+                            })}
+                          </ul>
+                        </li>
+                      )
+                    } else {
+                      let lastUpdated = null;
+                      if (dataInfo && dataInfo != "fetching") {
+                        lastUpdated = this.getLastUpdated(section.collection);
+                      }
+                      return (
+                        <li className="download-home-page__section__item" key={section.name}>
+                          <h5 className="download-home-page__section__item__label">{section.name}</h5>
+                          { lastUpdated && <h5 className="download-home-page__section__item__last-updated">{"Last Updated: " + lastUpdated}</h5> }
+                          <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile(section.collection); }}>Data</h5>
+                          <h5 className="download-home-page__section__item__text">Codebook</h5>
+                        </li>
+                      )
+                    }
                   })}
               </ul>
             </div>
