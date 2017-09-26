@@ -27,11 +27,13 @@ class DataBlock extends React.Component {
     if (!data) { return null }
       console.log(title, paragraphSettings)
 
+    console.log(collectionName)
+
     return (
       <div className="data-block">
       	<h5 className="data-block__title">{title}</h5>
       	<div className="data-block__content">
-	      	{ paragraphSettings && <DataBlockInfo settings={settings} data={data} collectionName={collectionName} /> }
+	      	{ paragraphSettings && <DataBlockInfo settings={settings} data={collectionName == "states_schools" ? data.all : data} collectionName={collectionName} /> }
           { vizSettings && <DataBlockViz settings={vizSettings} data={data} collectionName={collectionName}/> }
         </div>
       </div>

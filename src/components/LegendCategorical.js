@@ -53,7 +53,7 @@ export default class LegendCategorical extends React.Component {
 						let classes = "legend__cell";
 						classes += this.state.valsShown.indexOf(variable.variable) > -1 ? "" : " disabled";
 			          return (
-			          	<li className={classes} onClick={() => this.toggleVals(variable.variable)}>
+			          	<li key={variable.variable} className={classes} onClick={() => this.toggleVals(variable.variable)}>
 			          		<svg height="8" width="8" className="legend__cell__color-swatch-container">
 			          			<circle key={variable.variable} fill={variable.color} cx="4" cy="4" r="4" className="legend__cell__color-swatch"></circle>
 			          		</svg>

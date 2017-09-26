@@ -15,7 +15,8 @@ class StPageContainer extends React.Component {
     const { dispatch, fetchedSts, id, dataInfo } = this.props
 
     if (fetchedSts[id]) {
-      this.stData = fetchedSts[id].data;
+      console.log(fetchedSts[id])
+      this.stData = fetchedSts[id];
       dispatch(changeCurrProfile(id, this.stData.data.name, "state"))
     } else {
       dispatch(fetchProfile(id, "state"))

@@ -14,6 +14,27 @@ class DataBlockCallout extends React.Component {
         super();
     }
 
+    componentWillMount() {
+    	const {settings, maxYear, data} = this.props;
+		const {type, direction, variables} = settings;
+
+    	{variables.map((variable) => {
+      		if (type == "ranking" && data[variable.variable] && data[variable.variable][maxYear]) {
+                let value;
+                
+				let rankingKey = data.path + "_" + variable.variable;
+				console.log(this.props.fetchedRankings)
+				console.log(rankingKey)
+
+				if (!this.props.fetchedRankings[rankingKey] && !this.props.fetchedRankings[rankingKey] != "fetching") {
+					this.sendRankCalloutRequest(data, variable, direction)
+				}
+	      	} 
+	      	return null;
+	      	
+      	})}
+    }
+
     getValueCallout(data, variable) {
 		const {collectionName, maxYear} = this.props;
 	    
@@ -42,8 +63,10 @@ class DataBlockCallout extends React.Component {
 
     sendRankCalloutRequest(data, variable, direction) {
         const {collectionName, maxYear} = this.props;
+
+        console.log(collectionName, direction, variable.variable, maxYear, data[variable.variable][maxYear], data.path)
             
-        this.props.fetchRanking(collectionName, direction, variable.variable, maxYear, data[variable.variable][maxYear], data.path)
+        this.props.fetchRanking(collectionName == "states_schools" ? "states_schools_all" : collectionName, direction, variable.variable, maxYear, data[variable.variable][maxYear], data.path)
     }
 
     render() {
@@ -70,14 +93,12 @@ class DataBlockCallout extends React.Component {
 								value = getOrdinal(value);
 							} else if (this.props.fetchedRankings[rankingKey] == "fetching") {
 								value = null
-							} else {
-								this.sendRankCalloutRequest(data, variable, direction)
 							}
                         }
 
                         if (value) {
 		    	      		return (
-		    	      			<div className="data-block__callout">
+		    	      			<div className="data-block__callout" key={variable.variable}>
 		    	      				<h5 className="data-block__callout__value">{value}</h5>
 		    	      				<h5 className="data-block__callout__label">{variable.displayName}</h5>
 		    	      			</div>
