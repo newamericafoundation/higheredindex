@@ -14,6 +14,8 @@ class RankingsDashboard extends React.Component {
 	constructor(props) {
 		super(props);
 
+		console.log(props)
+
 		this.resizeFunc = this.resize.bind(this);
 
 		let initialFilter = props.filters[0];
@@ -31,16 +33,13 @@ class RankingsDashboard extends React.Component {
 	componentWillMount() {
 		console.log("in component will mount")
 		$(window).resize(this.resizeFunc);
-		const { fetchedAllStatesData, collectionName, getAllStatesData } = this.props;
-		if (!fetchedAllStatesData[collectionName] && fetchedAllStatesData[collectionName] != "fetching") {
-			getAllStatesData(collectionName)
-		} else {
-			let currData = this.getCurrData(this.props, this.state.currFilter)
-			this.setState({
-				currData: currData,
-				currColorScale: getColorScale(currData, this.state.currFilter)
-			})
-		}
+		
+		console.log(this.props)
+		let currData = this.getCurrData(this.props, this.state.currFilter)
+		this.setState({
+			currData: currData,
+			currColorScale: getColorScale(currData, this.state.currFilter)
+		})
 	}
 
 	componentDidMount() {
@@ -66,20 +65,20 @@ class RankingsDashboard extends React.Component {
         return $(this.refs.renderingArea).width();
     }
 
-	componentWillReceiveProps(nextProps) {
-		const {fetchedAllStatesData, collectionName, filters} = this.props;
+	// componentWillReceiveProps(nextProps) {
+	// 	const {fetchedAllStatesData, collectionName, filters} = this.props;
 
-		console.log("in component will receive props", nextProps, this.props, this.state)
+	// 	console.log("in component will receive props", nextProps, this.props, this.state)
 
-		if ((!fetchedAllStatesData[collectionName] || fetchedAllStatesData[collectionName] == "fetching") && (nextProps.fetchedAllStatesData[collectionName] && nextProps.fetchedAllStatesData[collectionName] != "fetching")) {
-			let currData = this.getCurrData(nextProps, this.state.currFilter)
-			this.setState({
-				currData: currData,
-				currColorScale: getColorScale(currData, this.state.currFilter)
-			})
+	// 	if ((!fetchedAllStatesData[collectionName] || fetchedAllStatesData[collectionName] == "fetching") && (nextProps.fetchedAllStatesData[collectionName] && nextProps.fetchedAllStatesData[collectionName] != "fetching")) {
+	// 		let currData = this.getCurrData(nextProps, this.state.currFilter)
+	// 		this.setState({
+	// 			currData: currData,
+	// 			currColorScale: getColorScale(currData, this.state.currFilter)
+	// 		})
 
-		}
-	}
+	// 	}
+	// }
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.currData == null && this.state.currData) {
@@ -112,11 +111,11 @@ class RankingsDashboard extends React.Component {
 	}
 
 	getCurrData(props, filter) {
-		const { fetchedAllStatesData, collectionName} = props;
+		const { data, collectionName} = props;
 
 		let currFilterVar = filter.variable;
 		
-		let fullStatesData = fetchedAllStatesData[collectionName];
+		let fullStatesData = data.filter(d => d.state != "US")
 		let sampleDataPoint = fullStatesData[0][currFilterVar]
 		
 		if (sampleDataPoint && typeof sampleDataPoint === 'object') {
@@ -146,7 +145,7 @@ class RankingsDashboard extends React.Component {
 	}
 
 	render() {
-		const { fetchedAllStatesData, collectionName } = this.props;
+		const { collectionName } = this.props;
 
 		if (this.state.currData) {
 			return (
@@ -188,19 +187,4 @@ class RankingsDashboard extends React.Component {
 	}
 }
 
-const mapStateToProps = (state) => {
-  return {
-    fetchedAllStatesData: state.fetchedAllStatesData
-  }
-}
-
-const mapDispatchToProps = (dispatch) => { 
-  return {
-    getAllStatesData: (collection) => {
-      dispatch(fetchAllStatesData(collection))
-    }
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(RankingsDashboard)
+export default RankingsDashboard

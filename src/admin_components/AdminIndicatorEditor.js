@@ -11,7 +11,7 @@ class AdminIndicatorEditor extends React.Component {
   }
 
   componentWillMount() {
-    const { dispatch, fetchedIndicators, id } = this.props
+    const { dispatch, fetchedIndicatorSettings, id } = this.props
 
     if (id != "new") {
       dispatch(fetchProfile(id, "indicator"))
@@ -24,7 +24,7 @@ class AdminIndicatorEditor extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.id != this.props.id) {
-      const { dispatch, fetchedIndicators, id } = nextProps
+      const { dispatch, fetchedIndicatorSettings, id } = nextProps
 
       if (id != "new") {
         dispatch(fetchProfile(id, "indicator"))
@@ -33,8 +33,8 @@ class AdminIndicatorEditor extends React.Component {
   }
 
   render() {
-    const { fetchedIndicators, id, updateStatus } = this.props
-    this.indicatorData = fetchedIndicators[id]
+    const { fetchedIndicatorSettings, id, updateStatus } = this.props
+    this.indicatorData = fetchedIndicatorSettings[id]
 
     if (this.indicatorData && !this.indicatorData.isFetching) {
       if (this.indicatorData.data) {
@@ -67,7 +67,7 @@ class AdminIndicatorEditor extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     id: ownProps.params.id,
-    fetchedIndicators: state.fetchedIndicators || {},
+    fetchedIndicatorSettings: state.fetchedIndicatorSettings || {},
     updateStatus: state.indicatorUpdateStatus
   }
 }

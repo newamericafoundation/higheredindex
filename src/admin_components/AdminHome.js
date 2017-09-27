@@ -3,7 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { indicatorVizSettings } from "../settings/indicatorVizSettings";
+import { indicatorTrendsSettings } from "../settings/indicatorTrendsSettings";
 import { fetchProfileList, setDataFileUploadStatus, fetchDataInfo  } from '../actions';
 const d3 = require("d3")
 
@@ -46,7 +46,7 @@ class AdminHome extends React.Component {
         <div className="admin__home__section">
           <h5 className="admin__home__heading">Edit Indicators</h5>
           <ul className="admin__home__sub-link-list">
-            {Object.keys(indicatorVizSettings).map((key) => {
+            {Object.keys(indicatorTrendsSettings).map((key) => {
               return (
                 <li key={key} className="admin__home__sub-link-list-item">
                   <Link to={'/admin/indicators/' + key}>

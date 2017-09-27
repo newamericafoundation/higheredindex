@@ -1,8 +1,9 @@
 import { connect } from 'react-redux'
-import { changeCurrProfile, fetchProfile } from '../actions'
+import { changeCurrProfile, fetchProfile, fetchAllStatesData } from '../actions'
 import IndicatorPage from './IndicatorPage'
 import NotFoundPage from './NotFoundPage';
 import LoadingIcon from './LoadingIcon';
+import { indicatorTrendsSettings } from '../settings/indicatorTrendsSettings';
 
 import React from 'react';
 
@@ -12,15 +13,22 @@ class IndicatorPageContainer extends React.Component {
   }
 
   componentWillMount() {
-    const { dispatch, fetchedIndicators, id } = this.props
+    const { dispatch, fetchedIndicatorSettings, fetchedAllStatesData, id } = this.props
 
     console.log(id)
+    this.collection = indicatorTrendsSettings[id].collection
 
-    if (fetchedIndicators[id]) {
-      this.indicatorData = fetchedIndicators[id].data;
-      dispatch(changeCurrProfile(id, this.indicatorData.name, "indicator"))
+    if (fetchedIndicatorSettings[id]) {
+      this.indicatorSettings = fetchedIndicatorSettings[id].data;
+      dispatch(changeCurrProfile(id, this.indicatorSettings.name, "indicator"))
     } else {
       dispatch(fetchProfile(id, "indicator"))
+    }
+
+    if (fetchedAllStatesData[this.collection]) {
+      this.data = fetchedAllStatesData[this.collection];
+    } else {
+      dispatch(fetchAllStatesData(this.collection))
     }
   }
 
@@ -30,28 +38,37 @@ class IndicatorPageContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.id != this.props.id) {
-      const { dispatch, fetchedIndicators, id } = nextProps
+      const { dispatch, fetchedIndicatorSettings, fetchedAllStatesData, id } = nextProps
 
-      if (fetchedIndicators[id]) {
-        this.indicatorData = fetchedIndicators[id]
-        dispatch(changeCurrProfile(id, this.indicatorData.name, "indicator"))
+      this.collection = indicatorTrendsSettings[id].this.collection
+
+      if (fetchedIndicatorSettings[id]) {
+        this.indicatorSettings = fetchedIndicatorSettings[id]
+        dispatch(changeCurrProfile(id, this.indicatorSettings.name, "indicator"))
       } else {
         dispatch(fetchProfile(id, "indicator"))
+      }
+
+      if (fetchedAllStatesData[this.collection]) {
+        this.data = fetchedAllStatesData[this.collection];
+      } else {
+        dispatch(fetchAllStatesData(this.collection))
       }
     }
   }
 
   render() {
-    const { fetchedIndicators, id } = this.props
-    this.indicatorData = fetchedIndicators[id]
+    const { fetchedIndicatorSettings, fetchedAllStatesData, id } = this.props
+    this.indicatorSettings = fetchedIndicatorSettings[id]
+    this.indicatorData = fetchedAllStatesData[this.collection]
 
-    console.log(fetchedIndicators)
-    console.log(this.indicatorData)
+    console.log(fetchedIndicatorSettings)
+    console.log(fetchedAllStatesData)
 
-    if (this.indicatorData && !this.indicatorData.isFetching) {
-      if (this.indicatorData.data) {
+    if (this.indicatorSettings && !this.indicatorSettings.isFetching && this.indicatorData && !this.indicatorData.isFetching) {
+      if (this.indicatorSettings.data) {
         console.log("rendering indicator page")
-        return <IndicatorPage indicatorData={ this.indicatorData.data } />
+        return <IndicatorPage indicatorSettings={ this.indicatorSettings.data } indicatorData={this.indicatorData} />
       }
       else {
         return <NotFoundPage/>
@@ -65,7 +82,8 @@ class IndicatorPageContainer extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     id: ownProps.params.id,
-    fetchedIndicators: state.fetchedIndicators || {}
+    fetchedIndicatorSettings: state.fetchedIndicatorSettings || {},
+    fetchedAllStatesData: state.fetchedAllStatesData || {}
   }
 }
 

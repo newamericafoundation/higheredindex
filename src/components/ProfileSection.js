@@ -19,6 +19,8 @@ class ProfileSection extends React.Component {
 			fixed: false
 		}
 
+		console.log("in profile section")
+
 		this.handlerFunc = this.handleScroll.bind(this);
 	}
 	componentDidMount() {
@@ -58,7 +60,7 @@ class ProfileSection extends React.Component {
 			case "rankingDashboard":
 				return (
 			        <div>
-			        	{settings && <RankingsDashboard filters={settings} collectionName={collectionName} />}
+			        	{settings && <RankingsDashboard filters={settings} data={data} collectionName={collectionName} />}
 			        </div>
 				)
 			default:
@@ -89,6 +91,7 @@ class ProfileSection extends React.Component {
 
 	render() {
 		const {title, subtitle, data, settings, collectionName, dataInfo} = this.props;
+		console.log(this.props)
 
 		let lastUpdated = dataInfo && collectionName ? this.getLastUpdated(dataInfo, collectionName) : null;
 		

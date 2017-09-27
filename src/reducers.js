@@ -97,7 +97,7 @@ function fetchedInsts(state = {}, action) {
   }
 }
 
-function fetchedIndicators(state = {}, action) {
+function fetchedIndicatorSettings(state = {}, action) {
   switch (action.type) {
     case REQUEST_PROFILE:
       if (action.profileType == "indicator") {
@@ -304,7 +304,7 @@ const rootReducer = combineReducers({
   topNavProfileNameShown,
   fetchedSts,
   fetchedInsts,
-  fetchedIndicators,
+  fetchedIndicatorSettings,
   fetchedStPhotos,
   fetchedInstPhotos,
   fetchedRankings,

@@ -6,7 +6,7 @@ import SectionNav from './SectionNav.jsx';
 import ProfileSection from './ProfileSection';
 import ProfileHeader from './ProfileHeader.jsx';
 import DataBlock from './DataBlock';
-import { indicatorVizSettings } from '../settings/indicatorVizSettings';
+import { indicatorTrendsSettings } from '../settings/indicatorTrendsSettings';
 import { connect } from 'react-redux'
 import { toggleTopNavProfileName } from '../actions'
 import $ from 'jquery';
@@ -47,17 +47,30 @@ class IndicatorPage extends React.Component {
   render() {
     console.log(this.props);
     
-    if (!this.props.indicatorData) {
+    if (!this.props.indicatorSettings) {
       return <NotFoundPage/>;
     }
-    // ad these to render return when ready
 
-        // <ProfileSection title="Trends" />
+    const {path, name, description, rankingVariables, section} = this.props.indicatorSettings;
 
-    const {path, name, description, rankingVariables, section} = this.props.indicatorData;
+    console.log(indicatorTrendsSettings[path].trendsSettings)
+    console.log(this.props.indicatorData)
+
+    let usData;
+
+    this.props.indicatorData.forEach((d) => {
+      if (d.state === "US") {
+        usData = d;
+        return;
+      }
+    });
+
+    console.log(usData)
+    
+    console.log(this.props.indicatorSettings)
     return (
       <div className="location-profile indicator">
-        <ProfileHeader id={ this.props.indicatorData.path } name={ this.props.indicatorData.name }/>
+        <ProfileHeader id={ this.props.indicatorSettings.path } name={ this.props.indicatorSettings.name }/>
         <SectionNav type="indicators" />
          <ProfileSection
           title="About"
@@ -69,7 +82,15 @@ class IndicatorPage extends React.Component {
           index="1"
           type="rankingDashboard"
           settings={rankingVariables} 
-          collectionName={"states_" + section} />
+          collectionName={"states_" + section} 
+          data= {this.props.indicatorData} />
+        <ProfileSection
+          title="Trends"
+          index="2"
+          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
+          settings={indicatorTrendsSettings[path].trendsSettings} 
+          collectionName={"states_" + section}
+          data= {usData} />
         <Footer />
       </div>
     )
