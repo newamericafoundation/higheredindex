@@ -406,8 +406,8 @@ const instVizSettings = {
 				textSections: [["In @year, ", " of students identified as male and ", " as female at ", "."],
 					["The following chart depicts trends over time."]],
 				variables: [
-					{variable:"male", format: "percent"},
-					{variable:"female", format: "percent"},
+					{variable:"men", format: "percent"},
+					{variable:"fem", format: "percent"},
 					{variable:"name", format: "string"},
 				]
 			},
@@ -492,7 +492,6 @@ const instVizSettings = {
 		},
 	],
 	"Grants": [
-		// Federal work Study and SEOG need an * with the following, on this graphic and the next one: SEOG and Federal Work Study are campus-based aid programs, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other grants are available to students at all institutions.
 		{
 			title: "Grant Disbursments (Volume)",
 			calloutSettings: {
@@ -659,7 +658,7 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates and graduates; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in ", " ", " to students in @year."],
+				textSections: [["", " disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates and graduates; ", " in ", " ", ", ", " in Graduate PLUS Loans and ", " in Parent PLUS Loans to students in @year."],
 					["The following chart depicts trends over time."],
 					["", ""],
 					["", ""]
@@ -669,11 +668,11 @@ const instVizSettings = {
 					{variable:"allsubdisburse", format: "price"},
 					{variable:"allunsubdisburse", format: "price"},
 					{variable:"perkdisburse", format: "price"},
+					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
+					{explainerText: "Perkins Loans are a campus-based aid program, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other loans are available to students at all institutions."},
 					{variable:"allgraddisburse", format: "price"},
 					{variable:"allparentdisburse", format: "price"},
 					// {variable:"alltotaldisburse", format: "price"},
-					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
-					{explainerText: "Perkins Loans are a campus-based aid program, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other loans are available to students at all institutions."},
 					{},
 					{},
 					{linkText:"Learn more about Direct Loans.", linkUrl:"/indicators/direct-loans"},
@@ -708,7 +707,7 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates and graduates; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " ", " ", " in @year."],
+				textSections: [["", " authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates and graduates; ", " ", " ", ", ", " Graduate PLUS Loans; and ", " Parent PLUS Loans in @year."],
 					["The following chart depicts trends over time."],
 					["", ""],
 					["", ""]
@@ -718,11 +717,11 @@ const instVizSettings = {
 					{variable:"allsubrecip", format: "number"}, 
 					{variable:"allunsubrecip", format: "number"}, 
 					{variable:"perkrecip", format: "number"},
+					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
+					{explainerText: "Perkins Loans are a campus-based aid program, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other loans are available to students at all institutions."},
 					{variable:"allgradrecip", format: "number"}, 
 					{variable:"allparentrecip", format: "number"}, 
 					// {variable:"alltotalrecip", format: "number"},
-					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
-					{explainerText: "Perkins Loans are a campus-based aid program, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other loans are available to students at all institutions."},
 					{},
 					{},
 					{linkText:"Learn more about Direct Loans.", linkUrl:"/indicators/direct-loans"},

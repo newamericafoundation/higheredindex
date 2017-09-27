@@ -96,8 +96,10 @@ class DataBlockParagraph extends React.Component {
 									} else {
 										value = data[varName];
 									}
+
+									console.log(value)
 									
-									value = value ? formatValue(value, variable.format) : "N/A";	
+									value = value === 0 || (value && value != "NA" && value != NaN) ? formatValue(value, variable.format) : "N/A";	
 									textSection.push(<span className={variableClass} key={j}>{value}</span>);
 
 								} else {
