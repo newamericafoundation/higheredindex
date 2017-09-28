@@ -119,8 +119,20 @@ class RankingsDashboard extends React.Component {
 		let sampleDataPoint = fullStatesData[0][currFilterVar]
 		
 		if (sampleDataPoint && typeof sampleDataPoint === 'object') {
-		 	this.currMaxYear = Object.keys(sampleDataPoint).reduce(function(a, b){ return +sampleDataPoint[a] > +sampleDataPoint[b] ? a : b });
+		 	this.currMaxYear = Object.keys(sampleDataPoint).reduce((a, b) => {
+		 		console.log(a, b)
+		 		console.log(!isNaN(sampleDataPoint[a]), +a > +b)
+		 		if (isNaN(sampleDataPoint[b])) {
+		 			return a
+		 		} else if (isNaN(sampleDataPoint[a])) {
+		 			return b
+		 		} else {
+		 			return +a > +b ? a : b
+		 		}
+		 	});
 		}
+
+		console.log(this.currMaxYear)
 
 		let currData = fullStatesData.map((d) => {
 			let dataVal = d[currFilterVar]

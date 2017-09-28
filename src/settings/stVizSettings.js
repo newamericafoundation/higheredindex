@@ -504,7 +504,7 @@ const stVizSettings = {
 						{variable:"seogdisburse", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "price", color: colors.blue.light},
 						{variable:"teachdisburse", displayName:"TEACH Grants", format: "price", color: colors.red.light},
 						{variable:"iraqdisburse", displayName:"Iraq/Afghanistan Service Grants", format: "price", color: colors.purple.light},
-						{variable:"workdisburse", displayName:"Federal Work-Study", format: "price", color: colors.yellow},
+						{variable:"workdisburse", displayName:"Federal Work-Study", format: "price", color: colors.yellow.light},
 					]
 				}
 			}
@@ -548,7 +548,7 @@ const stVizSettings = {
 						{variable:"seogrecip", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "number", color: colors.blue.light},
 						{variable:"teachrecip", displayName:"TEACH Grants", format: "number", color: colors.red.light},
 						{variable:"iraqrecip", displayName:"Iraq/Afghanistan Service Grants", format: "number", color: colors.purple.light},
-						{variable:"workrecip", displayName:"Federal Work-Study", format: "number", color: colors.yellow},
+						{variable:"workrecip", displayName:"Federal Work-Study", format: "number", color: colors.yellow.light},
 					]
 				}
 			}
@@ -1025,9 +1025,9 @@ const stVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "",
 					variables: [
-						{variable:"md_earn_wne_p6", displayName:"6-year", format: "price", color: colors.turquoise.light },
-						{variable:"md_earn_wne_p8", displayName:"8-year", format: "price", color: colors.turquoise.medium},
-						{variable:"md_earn_wne_p10", displayName:"10-year", format: "price", color: colors.turquoise.dark},
+						{variable:"mn_earn_wne_p6", displayName:"6-year", format: "price", color: colors.turquoise.light },
+						{variable:"mn_earn_wne_p8", displayName:"8-year", format: "price", color: colors.turquoise.medium},
+						{variable:"mn_earn_wne_p10", displayName:"10-year", format: "price", color: colors.turquoise.dark},
 					]
 				}
 			}

@@ -17,7 +17,7 @@ export default function Footer() {
 					<div className="footer__link-list">
 						<h5 className="footer__link-list__title">About</h5>
 						<h5 className="footer__link-list__link"><Link to={'/download'}>Data Download</Link></h5>
-						<h5 className="footer__link-list__link"><Link to={'/'}>Methodology</Link></h5>
+						<h5 className="footer__link-list__link"><Link to={'/methodology'}>Methodology</Link></h5>
 					</div>
 				</div>
 			</div>

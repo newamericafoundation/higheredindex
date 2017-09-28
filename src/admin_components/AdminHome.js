@@ -44,6 +44,13 @@ class AdminHome extends React.Component {
         </div>
         <hr></hr>
         <div className="admin__home__section">
+          <h5 className="admin__home__heading">Edit Methodology</h5>
+          <Link to={'/admin/methodology/'}>
+            <h5 className="admin__home__main-link">Edit Methodology Text</h5>
+          </Link>
+        </div>
+        <hr></hr>
+        <div className="admin__home__section">
           <h5 className="admin__home__heading">Edit Indicators</h5>
           <ul className="admin__home__sub-link-list">
             {Object.keys(indicatorTrendsSettings).map((key) => {

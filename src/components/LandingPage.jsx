@@ -43,7 +43,7 @@ const LandingPage = () => {
             </Link>
           </div>
           <div className="landing-page__methodology-link">
-            <Link to={'/'}>
+            <Link to={'/methodology'}>
               <SvgIcon name='trends' />
               <h5 className="landing-page__methodology-link__primary">Methodology</h5>
             </Link>

@@ -43,35 +43,12 @@ class DownloadHomePage extends React.Component {
     const { dataInfo } = this.props;
 
     return (
-      <div className="download-home-page">
-        <div className="download-home-page__overlay"></div>
-        <div className="download-home-page__content">
-          <h5 className="download-home-page__title">Download Data</h5>
+      <div className="simple-page download-home-page">
+        <div className="simple-page__overlay"></div>
+        <div className="simple-page__content">
+          <h5 className="simple-page__title">Download Data</h5>
           <p className="download-home-page__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor at elit sed sodales. Maecenas volutpat diam ac enim tempus, nec fringilla purus interdum. Duis ut posuere sem. Curabitur lacinia neque rutrum augue dapibus fermentum. Phasellus ligula turpis, sagittis ut lacinia vel, consequat a nibh. In sodales varius consectetur. Praesent luctus eleifend quam in euismod. Ut gravida egestas feugiat. Morbi vestibulum euismod tincidunt. Proin consectetur ante at ipsum venenatis, sit amet sodales nunc accumsan. Sed nec libero a justo fermentum ornare vitae a leo. Ut blandit luctus ligula, porttitor luctus nisi cursus ac.</p>
           <div className="download-home-page__section-container">
-            <div className="download-home-page__section">
-              <div className="download-home-page__section__icon">
-                <SvgIcon name='state' />
-              </div>
-              <h5 className="download-home-page__section__title">National</h5>
-              <ul className="download-home-page__section__list">
-                  {sectionSettings.national.map((section) => {
-                    let lastUpdated = null;
-                    if (dataInfo && dataInfo != "fetching") {
-                      lastUpdated = this.getLastUpdated(section.collection);
-                    }
-                    return (
-                      <li className="download-home-page__section__item" key={section.name}>
-                        <h5 className="download-home-page__section__item__label">{section.name}</h5>
-                        { lastUpdated && <h5 className="download-home-page__section__item__last-updated">{"Last Updated: " + lastUpdated}</h5> }
-                        <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile(section.collection); }}>Data</h5>
-                        <h5 className="download-home-page__section__item__text">Codebook</h5>
-                      
-                      </li>
-                    )
-                  })}
-              </ul>
-            </div>
             <div className="download-home-page__section">
               <div className="download-home-page__section__icon">
                 <SvgIcon name='state' />

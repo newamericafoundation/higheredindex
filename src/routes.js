@@ -4,6 +4,7 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router';
 import AdminHome from './admin_components/AdminHome';
 import AdminDataUpload from './admin_components/AdminDataUpload';
+import AdminMethodology from './admin_components/AdminMethodology';
 import AdminLogin from './admin_components/AdminLogin';
 import AdminIndicatorEditor from './admin_components/AdminIndicatorEditor';
 import SideMenuLayout from './components/SideMenuLayout';
@@ -14,6 +15,7 @@ import StPageContainer from './components/StPageContainer';
 import InstPageContainer from './components/InstPageContainer';
 import IndicatorPageContainer from './components/IndicatorPageContainer';
 import DownloadHomePage from './components/DownloadHomePage';
+import MethodologyPage from './components/MethodologyPage';
 import NotFoundPage from './components/NotFoundPage';
 import store from './store';
 
@@ -45,9 +47,11 @@ const routes = (
 		    <Route path="institution/:id" component={InstPageContainer}/>
 		    <Route path="indicator/:id" component={IndicatorPageContainer}/>
 		    <Route path="download" component={DownloadHomePage}/>
+		    <Route path="methodology" component={MethodologyPage}/>
 		    <Route path="admin" component={AdminHome} onEnter={requireAuth}/>
 		    <Route path="admin/login" component={AdminLogin} />
 		    <Route path="admin/data-upload" component={AdminDataUpload} onEnter={requireAuth}/>
+		    <Route path="admin/methodology" component={AdminMethodology} onEnter={requireAuth}/>
 		    <Route path="admin/indicators/:id" component={AdminIndicatorEditor} onEnter={requireAuth}/>
 		    <Route path="*" component={NotFoundPage}/>
 		</Route>

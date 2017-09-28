@@ -15,7 +15,6 @@ class IndicatorPageContainer extends React.Component {
   componentWillMount() {
     const { dispatch, fetchedIndicatorSettings, fetchedAllStatesData, id } = this.props
 
-    console.log(id)
     this.collection = indicatorTrendsSettings[id].collection
 
     if (fetchedIndicatorSettings[id]) {
@@ -40,7 +39,9 @@ class IndicatorPageContainer extends React.Component {
     if (nextProps.id != this.props.id) {
       const { dispatch, fetchedIndicatorSettings, fetchedAllStatesData, id } = nextProps
 
-      this.collection = indicatorTrendsSettings[id].this.collection
+      console.log(this)
+
+      this.collection = indicatorTrendsSettings[id].collection
 
       if (fetchedIndicatorSettings[id]) {
         this.indicatorSettings = fetchedIndicatorSettings[id]

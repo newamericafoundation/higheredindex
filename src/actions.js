@@ -17,7 +17,6 @@ export const RECEIVE_DATA_INFO = 'RECEIVE_DATA_INFO'
 export const REQUEST_PROFILE_PHOTO = 'REQUEST_PROFILE_PHOTO'
 export const RECEIVE_PROFILE_PHOTO = 'RECEIVE_PROFILE_PHOTO'
 export const TOGGLE_TOP_NAV_PROFILE_NAME = 'TOGGLE_TOP_NAV_PROFILE_NAME'
-export const UPDATE_INDICATOR = 'UPDATE_INDICATOR'
 export const SET_INDICATOR_UPDATE_STATUS = 'SET_INDICATOR_UPDATE_STATUS'
 export const UPLOAD_DATA_FILE = 'UPLOAD_DATA_FILE'
 export const SET_DATA_FILE_UPLOAD_STATUS = 'SET_DATA_FILE_UPLOAD_STATUS'
@@ -28,6 +27,7 @@ export const RECEIVE_CONG_DISTRICT_INFO = 'RECEIVE_CONG_DISTRICT_INFO'
 export const REQUEST_CONG_DISTRICT_INFO = 'REQUEST_CONG_DISTRICT_INFO'
 export const RECEIVE_ALL_STATES_DATA = 'RECEIVE_ALL_STATES_DATA'
 export const REQUEST_ALL_STATES_DATA = 'REQUEST_ALL_STATES_DATA'
+export const RECEIVE_METHODOLOGY = 'RECEIVE_METHODOLOGY'
 
 let GoogleMapsLoader = require('google-maps');
 
@@ -372,10 +372,26 @@ export function updateIndicator(newData, action) {
       .then((res) => {
         dispatch(setIndicatorUpdateStatus(res.status))
       })
-    
-    return { 
-        type: UPDATE_INDICATOR, 
+  }
+}
+
+export function receiveMethodology(json) {
+  return { 
+      type: RECEIVE_METHODOLOGY, 
+      data: json
     }
+}
+
+export function fetchMethodology() {
+  return function (dispatch) {
+    return fetch(dbPath + "methodology")
+      .then(response => { return response.json()})
+      .then(json => {
+        console.log("this is the json response")
+        console.log(json);
+
+        dispatch(receiveMethodology(json))
+      })
   }
 }
 
@@ -384,6 +400,27 @@ export function setAdminLoginStatus(status) {
       type: SET_ADMIN_LOGIN_STATUS, 
       status: status
    }
+}
+
+export function updateMethodology(newData) {
+  console.log(newData);
+  console.log(JSON.stringify(newData))
+
+  return function (dispatch) {
+    dispatch(setIndicatorUpdateStatus("in progress"))
+    
+    fetch(dbPath + 'update_methodology/', { 
+        method: "POST", 
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        }),
+        body: JSON.stringify(newData)
+      })
+      .then((res) => {
+        dispatch(setIndicatorUpdateStatus(res.status))
+      })
+  }
 }
 
 

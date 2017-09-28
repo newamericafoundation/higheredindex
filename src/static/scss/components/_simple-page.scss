@@ -1,0 +1,44 @@
+.simple-page {
+	background-image: url('../img/school.jpg');
+	background-size: cover;
+	background-position: 50% 50%;
+	overflow: hidden;
+	color: white;
+
+	&__title {
+		text-align: center;
+		font-size: 38px;
+		font-weight: bold;
+		color: palette-get(na-turquoise);
+		padding: 30px 0px;
+	}
+
+	&__content {
+		z-index: 5;
+		position: relative;
+		overflow: scroll;
+	}
+
+	&__overlay {
+		$gradient-top: rgba(44,47,53,1);
+		$gradient-bottom: rgba(44,47,53,.8);
+		position: absolute;
+		height: calc(100vh - #{$top-nav-height});
+		width: 100%;
+		z-index: 1;
+
+		 /* fallback color if gradients are not supported */
+		background-image: -webkit-linear-gradient(top, $gradient-top, $gradient-bottom); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+		background-image:    -moz-linear-gradient(top, $gradient-top, $gradient-bottom); /* For Firefox (3.6 to 15) */
+		background-image:      -o-linear-gradient(top, $gradient-top, $gradient-bottom); /* For old Opera (11.1 to 12.0) */ 
+		background-image:         linear-gradient(to bottom, $gradient-top, $gradient-bottom); /* Standard syntax; must be last */
+	}
+
+	&__text {
+		max-width: 800px;
+		padding: 0px 25px 25px;
+		line-height: 1.3;
+		margin: auto;
+		text-align: left;
+	}
+}
