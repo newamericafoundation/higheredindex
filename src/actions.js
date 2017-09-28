@@ -390,7 +390,9 @@ export function fetchMethodology() {
         console.log("this is the json response")
         console.log(json);
 
-        dispatch(receiveMethodology(json))
+        if (json && json.text) {
+          dispatch(receiveMethodology(json.text))
+        }
       })
   }
 }
