@@ -48,6 +48,9 @@ module.exports = {
       }
     ]
   },
+  externals:[{
+    xmlhttprequest: '{XMLHttpRequest:XMLHttpRequest}'
+  }],
   plugins: debug ? [
       new webpack.DefinePlugin({
         'process.env': {
