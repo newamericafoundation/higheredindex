@@ -57,7 +57,7 @@ class SectionNav extends React.Component {
 	}
 
 	render() {
-		let sections = sectionSettings[this.props.type];
+		let sections = this.props.customSections || sectionSettings[this.props.type];
 
 		let sectionNavClass = "section-nav";
 		sectionNavClass += this.state.fixed ? " fixed" : "";

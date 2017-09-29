@@ -1,6 +1,6 @@
 import React from 'react';
 var d3 = require("d3");
-import { formatValue } from "../helper_functions/format_value.js";
+import { formatValue, roundLegendAxisVal } from "../helper_functions/format_value.js";
 
 export default class LegendQuantize extends React.Component {
 	constructor(props) {
@@ -52,7 +52,10 @@ export default class LegendQuantize extends React.Component {
 			if (format == "percent") {
 				cellText = formatValue(Math.ceil(100*this.calcBinVal(i, dataMin, binInterval))/100, format) + " to " + formatValue(Math.floor(100*this.calcBinVal(i+1, dataMin, binInterval))/100, format);
 			} else {
-				cellText = formatValue(Math.ceil(this.calcBinVal(i, dataMin, binInterval)), format) + " to " + formatValue(Math.floor(this.calcBinVal(i+1, dataMin, binInterval)), format);
+				let min = roundLegendAxisVal(Math.ceil(this.calcBinVal(i, dataMin, binInterval)), format),
+					max = roundLegendAxisVal(Math.floor(this.calcBinVal(i+1, dataMin, binInterval)), format);
+				
+				cellText = min + " to " + max;
 			}
 
 			classes="legend__cell";

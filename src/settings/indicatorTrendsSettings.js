@@ -855,9 +855,6 @@ export const indicatorTrendsSettings = {
 	},
 	"instructional-expenses": {
 		collection: "states_schools_all",
-		trendsSettings: [
-
-		]
 	},
 	"retention-rate": {
 		collection: "states_schools_all",
@@ -932,11 +929,11 @@ export const indicatorTrendsSettings = {
 				calloutSettings: {
 					type: "value",
 					variables: [
-						{variable: "endowment", displayName:"Average endowment of U.S. institutions", format: "price"},
+						{variable: "endowment", displayName:"Total endowment of U.S. institutions", format: "price"},
 					]
 				},
 				paragraphSettings: {
-					textSections: [["Endowment averaged ", " at U.S. institutions in @year."],
+					textSections: [["The total combined endowment at U.S. institutions in @year was ", "."],
 						["The following chart depicts trends over time."]],
 					variables: [
 						{variable:"endowment", format: "price" },
@@ -957,27 +954,15 @@ export const indicatorTrendsSettings = {
 	},
 	"90-10-proportion": {
 		collection: "states_schools_all",
-		trendsSettings: [
-
-		]
 	},
 	"sat-act-average": {
 		collection: "states_schools_all",
-		trendsSettings: [
-
-		]
 	},
 	"hcm2": {
 		collection: "states_schools_all",
-		trendsSettings: [
-
-		]
 	},
 	"hbcu-msi": {
 		collection: "states_schools_all",
-		trendsSettings: [
-
-		]
 	},
 	"student-aid": {
 		collection: "states_schools_all",
@@ -1156,8 +1141,5 @@ export const indicatorTrendsSettings = {
 	},
 	"cumulative-loan-debt": {
 		collection: "states_loans",
-		trendsSettings: [
-
-		]
 	},
 }

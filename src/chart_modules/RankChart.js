@@ -6,7 +6,7 @@ import LegendQuantize from "../components/LegendQuantize.js";
 import Tooltip from "../components/Tooltip.js";
 import LineChart from "../chart_modules/LineChart.js";
 import BarChart from "../chart_modules/BarChart.js";
-import { formatValue } from "../helper_functions/format_value.js";
+import { formatValue, roundLegendAxisVal } from "../helper_functions/format_value.js";
 import { colors } from "../helper_functions/colors.js";
 
 let margin = {top: 10, right: 30, bottom: 30, left: 60};
@@ -136,7 +136,7 @@ export default class RankChart extends React.Component {
         this.y.range([height, 0]);
         
         this.yAxis
-            .call(d3.axisLeft(this.y).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10).tickFormat((d) => { return formatValue(d, this.props.filter.format); }));
+            .call(d3.axisLeft(this.y).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10).tickFormat((d) => { return roundLegendAxisVal(d, this.props.filter.format); }));
 
         // this.yAxisLabel
         //     .attr("x", -height/2);

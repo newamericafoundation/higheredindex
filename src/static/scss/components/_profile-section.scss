@@ -9,6 +9,7 @@
 	}
 	&__title {
 		font-weight: bold;
+		margin-bottom: 0px !important;
 	}
 	&__subtitle, &__last-updated {
 		font-weight: normal;
@@ -22,5 +23,4 @@
 	    top: -$top-nav-height*2;
 	    visibility: hidden;
 	}
-
 }

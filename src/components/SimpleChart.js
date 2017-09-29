@@ -7,7 +7,7 @@ import Tooltip from "./Tooltip.js";
 import LineChart from "../chart_modules/LineChart.js";
 import BarChart from "../chart_modules/BarChart.js";
 import GroupedBarChart from "../chart_modules/GroupedBarChart.js";
-import { formatValue } from "../helper_functions/format_value.js";
+import { formatValue, roundLegendAxisVal } from "../helper_functions/format_value.js";
 import SvgIcon from './SvgIcon';
 
 
@@ -25,7 +25,7 @@ export default class SimpleChart extends React.Component {
 		let fullValList = [];
 
         this.missingVars = [];
-        this.margin = {top: 10, right: 0, bottom: 30, left: 60};
+        this.margin = {top: 10, right: 0, bottom: 30, left: 50};
 
         for (let i = 0; i < chart1Settings.variables.length; i++) {
             let varName = chart1Settings.variables[i].variable;
@@ -50,7 +50,7 @@ export default class SimpleChart extends React.Component {
                 }
             }
 
-            this.margin.right = 60;
+            this.margin.right = 50;
         }
 
         //for development only
@@ -82,8 +82,6 @@ export default class SimpleChart extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.data != nextProps.data) {
-            console.log("CHANGED!!!")
-            console.log(this.svg)
             this.svg
                 .remove()
             this.initializeChart(nextProps.data);
@@ -274,7 +272,7 @@ export default class SimpleChart extends React.Component {
                 .tickSize(-width, 0, 0)
                 .tickSizeOuter(0)
                 .tickPadding(10)
-                .tickFormat((d) => { return formatValue(d, this.props.settings.chart1Settings.variables[0].format); })
+                .tickFormat((d) => { return roundLegendAxisVal(d, this.props.settings.chart1Settings.variables[0].format); })
                 .ticks(width > 350 ? 8 : 5));
 
         // this.yAxis1Label
@@ -289,7 +287,7 @@ export default class SimpleChart extends React.Component {
                     .tickSizeOuter(0)
                     .tickSizeInner(0)
                     .tickPadding(10)
-                    .tickFormat((d) => { return formatValue(d, this.props.settings.chart2Settings.variables[0].format); })
+                    .tickFormat((d) => { return roundLegendAxisVal(d, this.props.settings.chart2Settings.variables[0].format); })
                     .ticks(width > 350 ? 8 : 5));
 
             // this.yAxis2Label

@@ -40,5 +40,16 @@
 		line-height: 1.3;
 		margin: auto;
 		text-align: left;
+
+		ul {
+			margin-left: 25px;
+			margin-bottom: 10px;
+		}
+
+		li {
+			display: list-item;
+			list-style-type: disc;
+			padding-bottom: 10px;
+		}
 	}
 }

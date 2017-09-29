@@ -65,32 +65,37 @@ class IndicatorPage extends React.Component {
       }
     });
 
-    console.log(usData)
-    
-    console.log(this.props.indicatorSettings)
+    let customSections = [{name:"About", dataDivision:"about"}]
+    if (rankingVariables) { 
+      customSections.push({name:"Rankings", dataDivision:"rankings"})
+    }
+    if (indicatorTrendsSettings[path] && indicatorTrendsSettings[path].trendsSettings) { 
+      customSections.push({name:"Trends", dataDivision:"trends"}) 
+    }
+
     return (
       <div className="location-profile indicator">
         <ProfileHeader id={ this.props.indicatorSettings.path } name={ this.props.indicatorSettings.name }/>
-        <SectionNav type="indicators" />
-         <ProfileSection
+        { customSections.length > 1 && <SectionNav type="indicators" customSections={customSections} /> }
+        <ProfileSection
           title="About"
           index="0"
           type="description"
           text={description} />
-        <ProfileSection 
+        { rankingVariables && <ProfileSection 
           title="Rankings"
           index="1"
           type="rankingDashboard"
           settings={rankingVariables} 
           collectionName={"states_" + section} 
-          data= {this.props.indicatorData} />
-        <ProfileSection
+          data= {this.props.indicatorData} /> }
+        { indicatorTrendsSettings[path] && indicatorTrendsSettings[path].trendsSettings && <ProfileSection
           title="Trends"
-          index="2"
+          index={rankingVariables ? "2" : "1"}
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
           settings={indicatorTrendsSettings[path].trendsSettings} 
           collectionName={"states_" + section}
-          data= {usData} />
+          data= {usData} /> }
         <Footer />
       </div>
     )

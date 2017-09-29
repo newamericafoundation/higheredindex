@@ -1,11 +1,4 @@
 const sectionSettings = {
-	"national": [
-		{name:"Schools", collection:"national_schools", dataDivision:"schools"}, 
-		{name:"Students", collection:"national_students", dataDivision:"students"}, 
-		{name:"Grants", collection:"national_grants", dataDivision:"grants"}, 
-		{name:"Loans", collection:"national_loans", dataDivision:"loans"}, 
-		{name:"Outcomes", collection:"national_outcomes", dataDivision:"outcomes"}
-	],
 	"states": [
 		{name:"Schools", collection:"states_schools", dataDivision:"schools", subSections:[
 			{name:"All Sectors", collection:"states_schools_all"},
@@ -25,11 +18,6 @@ const sectionSettings = {
 		{name:"Grants", collection:"inst_grants", dataDivision:"grants"}, 
 		{name:"Loans", collection:"inst_loans", dataDivision:"loans"}, 
 		{name:"Outcomes", collection:"inst_outcomes", dataDivision:"outcomes"}
-	],
-	"indicators": [
-		{name:"About", dataDivision:"about"}, 
-		{name:"Rankings", dataDivision:"rankings"}, 
-		{name:"Trends", dataDivision:"trends"}, 
 	]
 };
 

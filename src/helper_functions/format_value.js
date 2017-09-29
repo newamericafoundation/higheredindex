@@ -8,6 +8,8 @@ export function formatValue(value, format) {
 	switch(format) {
 		case "number":
 			return d3.format(",")(value);
+		case "number_with_decimal_1":
+			return d3.format(",.1f")(value);
 		case "number_with_decimal_2":
 			return d3.format(",.2f")(value);
 		case "number_per_ten_thousand":
@@ -20,6 +22,8 @@ export function formatValue(value, format) {
 			return d3.format("$,.0f")(value);
 		case "price_with_decimal_1":
 			return d3.format("$,.1f")(value);
+		case "price_with_decimal_2":
+			return d3.format("$,.2f")(value);
 		case "percent_no_multiply":
 			return d3.format(".1f")(value) + "%";
 		case "percent":
@@ -35,4 +39,32 @@ export function formatValue(value, format) {
 		case "link":
 			return value;
 	}
+}
+
+export function roundLegendAxisVal(value, format) {
+	if (value >= 1000000000) {
+		let roundedVal = Math.round(value/10000000)
+
+        return setRoundedDecimalPlace(roundedVal, format) + " billion"
+	} else if (value >= 1000000) {
+	    let roundedVal = Math.round(value/10000)
+	    return setRoundedDecimalPlace(roundedVal, format) + " million"
+	} else {
+		return formatValue(value, format)
+	}
+}
+
+function setRoundedDecimalPlace(value, format) {
+	let formattedVal
+	if (value % 10 != 0) {
+		format = format + "_with_decimal_2"
+		formattedVal = formatValue(value/100, format)
+	} else if (value % 100 != 0) {
+		format = format + "_with_decimal_1"
+		formattedVal = formatValue(value/100, format)
+	} else {
+		formattedVal = formatValue(value/100, format)
+	}
+
+	return formattedVal;
 }
