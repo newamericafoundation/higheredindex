@@ -136,7 +136,7 @@ export default class RankChart extends React.Component {
         this.y.range([height, 0]);
         
         this.yAxis
-            .call(d3.axisLeft(this.y).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10).tickFormat((d) => { return roundLegendAxisVal(d, this.props.filter.format); }));
+            .call(d3.axisLeft(this.y).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10).tickFormat((d) => { return this.props.filter.format == "percent" ? formatValue(d, "percent") : roundLegendAxisVal(d, this.props.filter.format); }));
 
         // this.yAxisLabel
         //     .attr("x", -height/2);

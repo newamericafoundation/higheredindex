@@ -1,5 +1,6 @@
 import React from 'react';
 import {formatValue} from '../helper_functions/format_value'
+import {isFiftyState} from '../helper_functions/is_fifty_state'
 import {fetchRanking} from '../actions.js'
 import { connect } from 'react-redux';
 
@@ -18,8 +19,10 @@ class DataBlockCallout extends React.Component {
     	const {settings, maxYear, data} = this.props;
 		const {type, direction, variables} = settings;
 
+		console.log(data)
+
     	{variables.map((variable) => {
-      		if (type == "ranking" && data[variable.variable] && data[variable.variable][maxYear]) {
+      		if (type == "ranking" && isFiftyState(data.state) && data[variable.variable] && data[variable.variable][maxYear]) {
                 let value;
                 
 				let rankingKey = data.path + "_" + variable.variable;

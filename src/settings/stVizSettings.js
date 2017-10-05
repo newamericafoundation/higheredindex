@@ -19,6 +19,7 @@ const stVizSettings = {
 								{variable:"pub4yr", displayName:"Public Four-Year", format: "number" },
 								{variable:"twoyrlesspublic", displayName:"Public Two-Year or Less", format: "number"},
 								{variable:"nonprof4yr", displayName:"Non-Profit Four-Year", format: "number"},
+								{variable:"nonprof2yrorless", displayName:"Non-Profit Two-Year", format: "number"},
 								{variable:"forprofit", displayName:"For-Profit", format: "number"},
 								{variable:"schools", displayName:"Total", format: "number", bold: true},
 							],
