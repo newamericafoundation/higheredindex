@@ -143,6 +143,7 @@ class RankingsDashboard extends React.Component {
 
 			let retVal = {
 				name: d.name,
+				path: d.path,
 				abbreviation: d.state_abbrev,
 				state_id: stateIdMappings[d.name],
 			}

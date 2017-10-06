@@ -57,7 +57,7 @@ class SearchBox extends React.Component {
 		      this.props.suggestionsChangedCallback(counts);
 		    }
 			this.setState({
-				suggestions: newSuggestions
+				suggestions: newSuggestions.sort(sortAlpha)
 			})
 		}
 
@@ -107,7 +107,7 @@ class SearchBox extends React.Component {
 
 		if (updateState) {
 			this.setState({
-				suggestions: newSuggestions
+				suggestions: newSuggestions.sort(sortAlpha)
 			})
 		}
 	}

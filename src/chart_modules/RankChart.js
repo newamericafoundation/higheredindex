@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactFauxDOM from 'react-faux-dom';
+import { browserHistory } from 'react-router';
 var d3 = require("d3");
 import $ from 'jquery';
 import LegendQuantize from "../components/LegendQuantize.js";
@@ -106,7 +107,8 @@ export default class RankChart extends React.Component {
             .style("stroke-width", "1px")
             .style("cursor", "pointer")
             .on("mouseover", (d, index, paths) => { return this.mouseoverFunc(d, paths[index], d3.event); })
-            .on("mouseout", () => this.mouseoutFunc());
+            .on("mouseout", () => this.mouseoutFunc())
+            .on("click", (d) => { console.log(d); browserHistory.push("/state/" + d.path) })
 
         this.dataLabels = this.g.selectAll("text")
             .data(data.filter((d) => { return !isNaN(d[filter.variable])}))

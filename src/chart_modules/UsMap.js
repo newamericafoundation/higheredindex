@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactFauxDOM from 'react-faux-dom';
+import { browserHistory } from 'react-router';
 var d3 = require("d3");
 import $ from 'jquery';
 import LegendQuantize from "../components/LegendQuantize.js";
@@ -55,7 +56,8 @@ export default class UsMap extends React.Component {
             .attr("class", "us-map__state")
             .attr("stroke", "white")
             .on("mouseover", (d, index, paths) => { return this.mouseover(d, paths[index], d3.event) })
-            .on("mouseout", (d, index, paths) => { return this.mouseout(paths[index]) });
+            .on("mouseout", (d, index, paths) => { return this.mouseout(paths[index]) })
+            .on("click", (d) => { browserHistory.push("/state/" + d.properties.path) })
     }
 
     filterChanged(nextProps) {
