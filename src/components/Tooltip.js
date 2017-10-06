@@ -11,10 +11,12 @@ export default function Tooltip(props) {
 			top: props.settings.y + "px"
 		};
 
+		console.log(props.settings.x, props.settings.renderingAreaWidth)
+
 		if (props.settings.x < (props.settings.renderingAreaWidth - 200)) {
 			styleObject.left = (props.settings.x + 10) + "px";
 		} else {
-			styleObject.right = (props.settings.renderingAreaWidth - props.settings.x + 10) + "px";
+			styleObject.right = (props.settings.renderingAreaWidth - props.settings.x - 10) + "px";
 		}
 	} else {
 		styleObject = {

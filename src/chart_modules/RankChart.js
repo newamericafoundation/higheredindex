@@ -44,7 +44,6 @@ export default class RankChart extends React.Component {
 
         this.x.domain(keyList);
 
-
         this.initializeDataElements(nextProps)
 
     }
@@ -146,7 +145,7 @@ export default class RankChart extends React.Component {
 
     updateXAxis() {
         const {data, filter, width, height} = this.props;
-        this.x.range([0, width]);
+        this.x.range([0, width - margin.left - margin.right]);
 
         let keyList = [];
         let sortedData = data.sort((a, b) => { return a[filter.variable] - b[filter.variable]; });

@@ -9,7 +9,7 @@ import { formatValue } from "../helper_functions/format_value.js";
 import { colors } from "../helper_functions/colors.js";
 import { usStates } from './us-states.js';
 
-let margin = {top: 10, right: 0, bottom: 30, left: 60};
+let margin = {top: 10, right: 0, bottom: 30, left: 0};
 
 export default class UsMap extends React.Component {
 	constructor(props) {
