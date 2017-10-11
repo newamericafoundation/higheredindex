@@ -54,16 +54,6 @@ class IndicatorPage extends React.Component {
     const {path, name, description, rankingVariables, section} = this.props.indicatorSettings;
 
     console.log(indicatorTrendsSettings[path].trendsSettings)
-    console.log(this.props.indicatorData)
-
-    let usData;
-
-    this.props.indicatorData.forEach((d) => {
-      if (d.state === "US") {
-        usData = d;
-        return;
-      }
-    });
 
     let customSections = [{name:"About", dataDivision:"about"}]
     if (rankingVariables) { 
@@ -88,14 +78,14 @@ class IndicatorPage extends React.Component {
           type="rankingDashboard"
           settings={rankingVariables} 
           collectionName={"states_" + section} 
-          data= {this.props.indicatorData} /> }
+          data= {this.props.statesData} /> }
         { indicatorTrendsSettings[path] && indicatorTrendsSettings[path].trendsSettings && <ProfileSection
           title="Trends"
           index={rankingVariables ? "2" : "1"}
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
           settings={indicatorTrendsSettings[path].trendsSettings} 
           collectionName={"states_" + section}
-          data= {usData} /> }
+          data= {this.props.usData} /> }
         <Footer />
       </div>
     )

@@ -8,15 +8,15 @@
     overflow: hidden;
 
 	&__category {
-		border: 2px solid palette-get(na-black-10);
-		
 		color: palette-get(na-black-70);
 		text-align: center;
 
 		.horizontal & {
+			border: 2px solid palette-get(na-black-10);
 			display: table-cell;
 		}
 		.vertical & {
+			border: 1px solid palette-get(na-black-10);
 			display: table;
 			width: 100%;
 		}
@@ -64,7 +64,7 @@
 
 		&__select {
 			margin: 0px;
-			display: table-cell;
+			display: none;
 			max-width: 0px;
 			font-weight: normal;
 			color: palette-get(na-black);
@@ -83,6 +83,7 @@
 				padding-left: 15px;
 				padding-right: 30px;
 				max-width: 500px;
+				display: table-cell;
 			}
 		}
 	}

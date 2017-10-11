@@ -137,7 +137,7 @@ export default class RankChart extends React.Component {
         this.y.range([height, 0]);
         
         this.yAxis
-            .call(d3.axisLeft(this.y).tickSize(-width, 0, 0).tickSizeOuter(0).tickPadding(10).tickFormat((d) => { return this.props.filter.format == "percent" ? formatValue(d, "percent") : roundLegendAxisVal(d, this.props.filter.format); }));
+            .call(d3.axisLeft(this.y).tickSize(-width + margin.left + margin.right, 0, 0).tickSizeOuter(0).tickPadding(10).tickFormat((d) => { return this.props.filter.format == "percent" ? formatValue(d, "percent") : roundLegendAxisVal(d, this.props.filter.format); }));
 
         // this.yAxisLabel
         //     .attr("x", -height/2);
@@ -162,7 +162,7 @@ export default class RankChart extends React.Component {
     }
 
     updateDataElements() {
-    	const {filter, height} = this.props;
+    	const {filter, height, width} = this.props;
 
     	this.dataBars
     		.attr("x", (d) => { return this.x(d.state_id); })
@@ -175,7 +175,7 @@ export default class RankChart extends React.Component {
         this.dataLabels
             .attr("x", (d) => { return this.x(d.state_id) + this.x.bandwidth()/2; })
             .attr("y", (d) => { return this.y(d[filter.variable]) + 5; })
-            .attr("display", (d) => { return this.state.w < 750 || (height - this.y(d[filter.variable])) < 15 ? "none" : "block"})
+            .attr("display", (d) => { return width < 800 || (height - this.y(d[filter.variable])) < 15 ? "none" : "block"})
             .style("fill", "white")
             .style("font-size", "10px")
             .style("font-weight", "bold")
@@ -190,9 +190,7 @@ export default class RankChart extends React.Component {
 
         let content, legend, tooltip;
 
-		if (this.state.width < 600) {
-            content = null;
-        } else if (this.state.chart) {
+		if (this.state.chart) {
             this.updateChart();
             content = this.state.chart.toReact();
             tooltip = <Tooltip settings={this.state.tooltipSettings} />

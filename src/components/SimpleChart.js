@@ -24,7 +24,7 @@ export default class SimpleChart extends React.Component {
 
 		let fullValList = [];
 
-        this.missingVars = [];
+  //       this.missingVars = [];
         this.margin = {top: 10, right: 0, bottom: 30, left: 50};
 
         for (let i = 0; i < chart1Settings.variables.length; i++) {
@@ -32,7 +32,7 @@ export default class SimpleChart extends React.Component {
             if (data[varName]) {
                 fullValList.push(varName);
             } else {
-                this.missingVars.push(varName);
+                // this.missingVars.push(varName);
                 chart1Settings.variables.splice(i, 1);
                 i--;
             }
@@ -44,7 +44,7 @@ export default class SimpleChart extends React.Component {
                 if (data[varName]) {
                     fullValList.push(varName);
                 } else {
-                    this.missingVars.push(varName);
+                    // this.missingVars.push(varName);
                     chart2Settings.variables.splice(i, 1);
                     i--;
                 }
@@ -54,7 +54,7 @@ export default class SimpleChart extends React.Component {
         }
 
         //for development only
-        this.fullValList = fullValList;
+        // this.fullValList = fullValList;
 
 		this.state = {
             width: 0,
@@ -373,9 +373,9 @@ export default class SimpleChart extends React.Component {
             content = this.state.chart.toReact();
             legend = <LegendCategorical variables={variables} toggleChartVals={this.toggleVals.bind(this)}/>;
             tooltip = <Tooltip settings={this.state.tooltipSettings} />
-            presentVarsList = this.fullValList.length > 0 ? <h5 className="data-block__viz__debugging-list">Using variables: {this.fullValList.toString()}</h5> : null;
-            missingVarsList = this.missingVars.length > 0 ? <h5 className="data-block__viz__debugging-list">Missing variables: {this.missingVars.toString()}</h5> : null;
-            fullVarsList = this.missingVars.length > 0 ? <h5 className="data-block__viz__debugging-list">Full list of variables for this entry: {Object.keys(data).toString()}</h5> : null;
+            // presentVarsList = this.fullValList.length > 0 ? <h5 className="data-block__viz__debugging-list">Using variables: {this.fullValList.toString()}</h5> : null;
+            // missingVarsList = this.missingVars.length > 0 ? <h5 className="data-block__viz__debugging-list">Missing variables: {this.missingVars.toString()}</h5> : null;
+            // fullVarsList = this.missingVars.length > 0 ? <h5 className="data-block__viz__debugging-list">Full list of variables for this entry: {Object.keys(data).toString()}</h5> : null;
         } else {
             content = "loading chart";
         }
@@ -386,9 +386,9 @@ export default class SimpleChart extends React.Component {
                 {content}
                 {legend}
                 {tooltip}
-                {presentVarsList}
+                {/*{presentVarsList}
                 {missingVarsList}
-                {fullVarsList}
+                {fullVarsList}*/}
             </div>
         )
 	}

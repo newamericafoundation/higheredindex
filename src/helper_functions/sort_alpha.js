@@ -4,9 +4,7 @@ export function sortAlpha(a, b) {
 
   if (A < B){
     return -1;
-  } else if (A > B){
-    return  1;
   } else {
-    return 0;
+    return  1;
   }
 }

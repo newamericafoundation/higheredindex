@@ -8,7 +8,8 @@ let d3 = require("d3")
 
 
 const downloadFile = (collection) => {
-   window.open('http://localhost:3000/api/download_data/' + collection);
+  console.log(process)
+   window.open('https://febp-backend.herokuapp.com/api/download_data/' + collection);
 }
 
 class DownloadHomePage extends React.Component {

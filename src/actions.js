@@ -27,6 +27,8 @@ export const RECEIVE_CONG_DISTRICT_INFO = 'RECEIVE_CONG_DISTRICT_INFO'
 export const REQUEST_CONG_DISTRICT_INFO = 'REQUEST_CONG_DISTRICT_INFO'
 export const RECEIVE_ALL_STATES_DATA = 'RECEIVE_ALL_STATES_DATA'
 export const REQUEST_ALL_STATES_DATA = 'REQUEST_ALL_STATES_DATA'
+export const RECEIVE_US_DATA = 'RECEIVE_US_DATA'
+export const REQUEST_US_DATA = 'REQUEST_US_DATA'
 export const RECEIVE_METHODOLOGY = 'RECEIVE_METHODOLOGY'
 
 let GoogleMapsLoader = require('google-maps');
@@ -277,6 +279,34 @@ export function fetchAllStatesData(collection) {
   }
 }
 
+export function requestUsData(collection) {
+  return { type: REQUEST_US_DATA }
+}
+
+export function receiveUsData(collection, json) {
+  return { 
+    type: RECEIVE_US_DATA,
+    collection,
+    data: json
+  }
+}
+
+export function fetchUsData(collection) {
+  console.log("fetching " + collection);
+  return function (dispatch) {
+
+    dispatch(requestUsData(collection))
+
+    return fetch(dbPath + 'us-data/' + collection)
+      .then(response => { return response.json()})
+      .then(json => {
+        console.log("this is the json response")
+        console.log(json);
+        dispatch(receiveUsData(collection, json))
+      })
+  }
+}
+
 export function requestCongDistrictInfo(stateAbbrev) {
   return { 
     type: REQUEST_CONG_DISTRICT_INFO,
@@ -321,8 +351,10 @@ export function uploadDataFile(collection, newFile) {
     dispatch(setDataFileUploadStatus("Nesting Years"))
     processedData = nestYears(processedData);
 
-    dispatch(setDataFileUploadStatus("Setting Full State Names"))
-    processedData = addFullStateNames(processedData);
+    if (collection[0] === "s") {
+      dispatch(setDataFileUploadStatus("Setting Full State Names"))
+      processedData = addFullStateNames(processedData);
+    }
 
     dispatch(setDataFileUploadStatus("Adding Path Keys"))
     processedData = addPathKeys(processedData);
