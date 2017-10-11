@@ -50,7 +50,7 @@ const instVizSettings = {
 				variables: [
 					{variable:"indistprice", format: "price"},
 					{variable:"instateprice", format: "price"},
-					{variable:"outstate", format: "price"},
+					{variable:"outstateprice", format: "price"},
 					{variable:"name", format: "string"},
 				]
 			},
@@ -63,7 +63,7 @@ const instVizSettings = {
 					variables: [
 						{variable:"indistprice", displayName:"In-district", format: "price", color: colors.turquoise.light },
 						{variable:"instateprice", displayName:"In-state", format: "price", color: colors.turquoise.medium},
-						{variable:"outstate", displayName:"Out-of-state", format: "price", color: colors.turquoise.dark},
+						{variable:"outstateprice", displayName:"Out-of-state", format: "price", color: colors.turquoise.dark},
 					]
 				}
 			}
@@ -234,7 +234,7 @@ const instVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "sat_avg_all", displayName:"SAT/ACT average", format: "year"},
+					{variable: "sat_avg", displayName:"SAT/ACT average", format: "year"},
 				]
 			},
 			paragraphSettings: {
@@ -242,7 +242,7 @@ const instVizSettings = {
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
-					{variable:"sat_avg_all", format: "year"},
+					{variable:"sat_avg", format: "year"},
 				]
 			},
 			source: "IPEDS",
@@ -252,7 +252,7 @@ const instVizSettings = {
 					type: "bar-chart",
 					yAxisLabel: "",
 					variables: [
-						{variable:"sat_avg_all", displayName:"SAT/ACT average", format: "year", color: colors.turquoise.light },
+						{variable:"sat_avg", displayName:"SAT/ACT average", format: "year", color: colors.turquoise.light },
 					]
 				}
 			}
@@ -528,6 +528,8 @@ const instVizSettings = {
 						{variable:"seogdisburse", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "price", color: colors.blue.light},
 						{variable:"teachdisburse", displayName:"TEACH Grants", format: "price", color: colors.red.light},
 						{variable:"iraqdisburse", displayName:"Iraq/Afghanistan Service Grants", format: "price", color: colors.purple.light},
+						{variable:"acgdisburse", displayName:"Academic Competitiveness Grants", format: "price", color: colors.orange.light},
+						{variable:"smartdisburse", displayName:"SMART Grants", format: "price", color: colors.brown.light},
 						{variable:"workdisburse", displayName:"Federal Work-Study", format: "price", color: colors.yellow},
 					]
 				}
@@ -569,6 +571,8 @@ const instVizSettings = {
 						{variable:"seogrecip", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "number", color: colors.blue.light},
 						{variable:"teachrecip", displayName:"TEACH Grants", format: "number", color: colors.red.light},
 						{variable:"iraqrecip", displayName:"Iraq/Afghanistan Service Grants", format: "number", color: colors.purple.light},
+						{variable:"acgrecip", displayName:"Academic Competitiveness Grants", format: "number", color: colors.orange.light},
+						{variable:"smartrecip", displayName:"SMART Grants", format: "number", color: colors.brown.light},
 						{variable:"workrecip", displayName:"Federal Work-Study", format: "number", color: colors.yellow},
 					]
 				}
@@ -785,7 +789,7 @@ const instVizSettings = {
 				type: "value",
 				variables: [
 					{variable: "firstgen_rpy_3yr_rt", displayName:"First generation", format:"percent"},
-					{variable: "notfirstgen__rpy_3yr_rt", displayName:"Non-first generation", format:"percent"},
+					{variable: "notfirstgen_rpy_3yr_rt", displayName:"Non-first generation", format:"percent"},
 				]
 			},
 			paragraphSettings: {
@@ -793,7 +797,7 @@ const instVizSettings = {
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"firstgen_rpy_3yr_rt", format: "percent"},
-					{variable:"notfirstgen__rpy_3yr_rt", format: "percent"},
+					{variable:"notfirstgen_rpy_3yr_rt", format: "percent"},
 					{variable:"name", format: "string"},
 				]
 			},
@@ -805,7 +809,7 @@ const instVizSettings = {
 					yAxisLabel: "Repayment Rate",
 					variables: [
 						{variable:"firstgen_rpy_3yr_rt", displayName:"First generation", format: "percent", color: colors.turquoise.light },
-						{variable:"notfirstgen__rpy_3yr_rt", displayName:"Non-first generation", format: "percent", color: colors.purple.light},
+						{variable:"notfirstgen_rpy_3yr_rt", displayName:"Non-first generation", format: "percent", color: colors.purple.light},
 						{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
 					]
 				}

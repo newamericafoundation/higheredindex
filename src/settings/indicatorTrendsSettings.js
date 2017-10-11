@@ -84,7 +84,7 @@ export const indicatorTrendsSettings = {
 						{variable:"amin", format: "percent" },
 						{variable:"twoormore", format: "percent"},
 						{variable:"nonresident", format: "percent"},
-						{variable:"unknown", format: "percent"},
+						{variable:"unk", format: "percent"},
 					]
 				},
 				source: "IPEDS",
@@ -393,7 +393,7 @@ export const indicatorTrendsSettings = {
 					type: "value",
 					variables: [
 						{variable: "firstgen_rpy_3yr_rt", displayName:"First generation", format:"percent"},
-						{variable: "notfirstgen__rpy_3yr_rt", displayName:"Non-first generation", format:"percent"},
+						{variable: "notfirstgen_rpy_3yr_rt", displayName:"Non-first generation", format:"percent"},
 					]
 				},
 				paragraphSettings: {
@@ -401,7 +401,7 @@ export const indicatorTrendsSettings = {
 						["The following chart depicts trends over time."]],
 					variables: [
 						{variable:"firstgen_rpy_3yr_rt", format: "percent"},
-						{variable:"notfirstgen__rpy_3yr_rt", format: "percent"}
+						{variable:"notfirstgen_rpy_3yr_rt", format: "percent"}
 					]
 				},
 				source: "College Scorecard",
@@ -411,7 +411,7 @@ export const indicatorTrendsSettings = {
 						yAxisLabel: "Repayment Rate",
 						variables: [
 							{variable:"firstgen_rpy_3yr_rt", displayName:"First generation", format: "percent", color: colors.turquoise.light },
-							{variable:"notfirstgen__rpy_3yr_rt", displayName:"Non-first generation", format: "percent", color: colors.purple.light},
+							{variable:"notfirstgen_rpy_3yr_rt", displayName:"Non-first generation", format: "percent", color: colors.purple.light},
 							{variable:"rpy_3yr_rt", displayName:"Overall", format: "percent", color: colors.grey.dark},
 						]
 					}
@@ -801,7 +801,7 @@ export const indicatorTrendsSettings = {
 					variables: [
 						{variable:"indistprice", format: "price" },
 						{variable:"instateprice", format: "price"},
-						{variable:"outstate", format: "price"},
+						{variable:"outstateprice", format: "price"},
 					]
 				},
 				source: "College Scorecard",
@@ -812,7 +812,7 @@ export const indicatorTrendsSettings = {
 						variables: [
 							{variable:"indistprice", displayName:"In-district", format: "price", color: colors.turquoise.light },
 							{variable:"instateprice", displayName:"In-state", format: "price", color: colors.turquoise.medium},
-							{variable:"outstate", displayName:"Out-of-state", format: "price", color: colors.turquoise.dark},
+							{variable:"outstateprice", displayName:"Out-of-state", format: "price", color: colors.turquoise.dark},
 						]
 					}
 				}
