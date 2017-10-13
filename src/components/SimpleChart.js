@@ -9,11 +9,11 @@ import BarChart from "../chart_modules/BarChart.js";
 import GroupedBarChart from "../chart_modules/GroupedBarChart.js";
 import { formatValue, roundLegendAxisVal } from "../helper_functions/format_value.js";
 import SvgIcon from './SvgIcon';
-
+import { connect } from 'react-redux'
 
 const range = (start, end) => [...Array(end - start + 1)].map((_, i) => start + i);
 
-export default class SimpleChart extends React.Component {
+class SimpleChart extends React.Component {
 	constructor(props) {
 		super(props);
         let { data } = props;
@@ -30,7 +30,12 @@ export default class SimpleChart extends React.Component {
         for (let i = 0; i < chart1Settings.variables.length; i++) {
             let varName = chart1Settings.variables[i].variable;
             if (data[varName]) {
-                fullValList.push(varName);
+                for (let year in data[varName]) {
+                    console.log(year)
+                    if (!isNaN(data[varName][year])) {
+                        fullValList.push(varName);
+                    }
+                }
             } else {
                 // this.missingVars.push(varName);
                 chart1Settings.variables.splice(i, 1);
@@ -42,7 +47,12 @@ export default class SimpleChart extends React.Component {
             for (let i = 0; i < chart2Settings.variables.length; i++) {
                 let varName = chart2Settings.variables[i].variable;
                 if (data[varName]) {
-                    fullValList.push(varName);
+                    for (let year in data[varName]) {
+                        console.log(year)
+                        if (!isNaN(data[varName][year])) {
+                            fullValList.push(varName);
+                        }
+                    }
                 } else {
                     // this.missingVars.push(varName);
                     chart2Settings.variables.splice(i, 1);
@@ -358,8 +368,10 @@ export default class SimpleChart extends React.Component {
     }
 
 	render() {
-		const { data, settings } = this.props,
+		const { data, settings, currProfileName } = this.props,
             {chart1Settings, chart2Settings} = settings;
+
+        console.log(this.state, this.props)
 
         let content, legend, tooltip, missingVarsList, presentVarsList, fullVarsList;
         let variables = chart1Settings.variables;
@@ -373,24 +385,23 @@ export default class SimpleChart extends React.Component {
             content = this.state.chart.toReact();
             legend = <LegendCategorical variables={variables} toggleChartVals={this.toggleVals.bind(this)}/>;
             tooltip = <Tooltip settings={this.state.tooltipSettings} />
-            // presentVarsList = this.fullValList.length > 0 ? <h5 className="data-block__viz__debugging-list">Using variables: {this.fullValList.toString()}</h5> : null;
-            // missingVarsList = this.missingVars.length > 0 ? <h5 className="data-block__viz__debugging-list">Missing variables: {this.missingVars.toString()}</h5> : null;
-            // fullVarsList = this.missingVars.length > 0 ? <h5 className="data-block__viz__debugging-list">Full list of variables for this entry: {Object.keys(data).toString()}</h5> : null;
         } else {
             content = "loading chart";
         }
-		return (
-            <div className="data-block__viz__rendering-area" ref="renderingArea">
-                {this.dividingLineIcon}
-                {this.dividingLinePopup}
-                {content}
-                {legend}
-                {tooltip}
-                {/*{presentVarsList}
-                {missingVarsList}
-                {fullVarsList}*/}
-            </div>
-        )
+
+        if (this.state.valsShown.length > 0) {
+    		return (
+                <div className="data-block__viz__rendering-area" ref="renderingArea">
+                    {this.dividingLineIcon}
+                    {this.dividingLinePopup}
+                    {content}
+                    {legend}
+                    {tooltip}
+                </div>
+            )
+        } else {
+            return <h5 className="data-block__viz__no-data-placeholder">There is no data for {currProfileName} in this category</h5>
+        }
 	}
 
 	resize() {
@@ -457,3 +468,11 @@ export default class SimpleChart extends React.Component {
         return [0, d3.max(valList)];
     }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    currProfileName: state.currProfile ? state.currProfile.name : null
+  }
+}
+
+export default connect(mapStateToProps)(SimpleChart);

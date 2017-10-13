@@ -190,7 +190,7 @@ class RankingsDashboard extends React.Component {
 							currHovered={this.state.currHovered} 
 							hoverChangeFunc={this.setCurrHovered.bind(this)} 
 							width={this.state.currWidth} 
-							height={this.state.currWidth/5} />
+							height={this.state.currWidth < 600 ? 150 : this.state.currWidth/5} />
 					</div>
 				</div>
 			)

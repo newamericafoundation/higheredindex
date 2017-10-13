@@ -45,7 +45,6 @@ export default class RankChart extends React.Component {
         this.x.domain(keyList);
 
         this.initializeDataElements(nextProps)
-
     }
 
 	componentDidMount() {
@@ -73,13 +72,6 @@ export default class RankChart extends React.Component {
         let {settings} = this.props;
     	this.yAxis = this.g.append("g")
             .attr("class", "axis axis--y");
-
-        // this.yAxisLabel = this.yAxis.append("text")
-        //     .attr("class", "data-block__viz__y-axis-label")
-        //     .attr("transform", "rotate(-90)")
-        //     .attr("y", -30)
-        //     .attr("fill", "#000")
-        //     .text("Value");
 
         this.y = d3.scaleLinear()
         	.domain(this.getYExtents(this.props));
@@ -138,9 +130,6 @@ export default class RankChart extends React.Component {
         
         this.yAxis
             .call(d3.axisLeft(this.y).tickSize(-width + margin.left + margin.right, 0, 0).tickSizeOuter(0).tickPadding(10).tickFormat((d) => { return this.props.filter.format == "percent" ? formatValue(d, "percent") : roundLegendAxisVal(d, this.props.filter.format); }));
-
-        // this.yAxisLabel
-        //     .attr("x", -height/2);
     }
 
     updateXAxis() {
@@ -175,7 +164,7 @@ export default class RankChart extends React.Component {
         this.dataLabels
             .attr("x", (d) => { return this.x(d.state_id) + this.x.bandwidth()/2; })
             .attr("y", (d) => { return this.y(d[filter.variable]) + 5; })
-            .attr("display", (d) => { return width < 800 || (height - this.y(d[filter.variable])) < 15 ? "none" : "block"})
+            .style("visibility", (d) => { console.log("in data labels", d[filter.variable], this.y(d[filter.variable]), height); return width < 800 || (height - this.y(d[filter.variable])) < 15 ? "hidden" : "visible"})
             .style("fill", "white")
             .style("font-size", "10px")
             .style("font-weight", "bold")

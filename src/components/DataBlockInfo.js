@@ -34,7 +34,7 @@ export default function DataBlockInfo(props) {
       <div className="data-block__info">
       	{ calloutSettings && maxYear != 0 && <DataBlockCallout settings={calloutSettings} maxYear={maxYear} data={data} collectionName={collectionName}/> }
       	{ maxYear != 0 && <DataBlockParagraph settings={paragraphSettings} maxYear={maxYear} data={data} /> }
-      	{ source && <div className="data-block__source">Source: {source}</div> }
+      	{ source && maxYear != 0 && <div className="data-block__source">Source: {source}</div> }
       	{ indicatorLink && <Link to={"/indicator/" + indicatorLink}><div className="data-block__indicator-link">Learn More</div></Link> }
       </div>
     )

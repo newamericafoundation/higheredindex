@@ -63,6 +63,11 @@
 				position: relative;
 			}
 		}
+		&__no-data-placeholder {
+			font-size: 16px;
+			color: palette-get(na-black-30);
+			font-style: italic;
+		}
 	}
 
 	&__paragraph {
@@ -167,11 +172,11 @@
 
 	&__source {
 		color: palette-get(na-black-30);
+		margin-bottom: 15px;
 	}
 
 	&__indicator-link {
 		border: 1px solid palette-get(na-black-30);
-		margin-top: 15px;
 		padding: 10px;
 		display: inline-block;
 		color: palette-get(na-black-30);
