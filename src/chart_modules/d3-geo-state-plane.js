@@ -115,11 +115,14 @@ export const statePlane = (function() {
     };
 
     return function(state, width, height) {
+        console.log(state)
         width = width || 1000;
         height = height || 500;
         if (statePlaneDef[state]) {
             var def = statePlaneDef[state];
+            console.log(def)
             var proj = d3[prj[def.proj] || def.proj]();
+            console.log(proj)
             if (def.rotate) proj.rotate(def.rotate);
             if (def.parallels) proj.parallels(def.parallels);
             if (def.bounds) {

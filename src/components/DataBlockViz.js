@@ -35,19 +35,19 @@ export default class DataBlockViz extends React.Component {
     let currData = data;
 
     if (sector) {
-      if (settings.chart1Settings.type == "table") {
+      if (settings.chart1Settings.type == "table" || settings.chart1Settings.type == "state-map") {
         currData = data ? data.all : null
       } else {
         currData = data ? data[sector] : null
       }
     }
 
-    console.log(settings, collectionName)
+    console.log(settings, this.state, currData)
     if (currData) {
       
       return (
       	<div className="data-block__viz">
-          {sector && settings.chart1Settings.type != "table" &&
+          {sector && settings.chart1Settings.type != "table" && settings.chart1Settings.type != "state-map" &&
             <DataBlockSectorSelector fullData={data} changeFunction={this.changeSector.bind(this)} />}
           {(settings.chart1Settings.type == "line-chart" || settings.chart1Settings.type == "bar-chart" || settings.chart1Settings.type == "grouped-bar-chart") &&
             <SimpleChart settings={settings} data={currData} /> }

@@ -10,6 +10,11 @@
 	&__title {
 		font-weight: bold;
 		margin-bottom: 0px !important;
+		font-size: 25px;
+
+		@include breakpoint(medium) {
+			font-size: 30px;
+		}
 	}
 	&__subtitle, &__last-updated {
 		font-weight: normal;

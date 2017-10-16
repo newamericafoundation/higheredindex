@@ -9,10 +9,14 @@ export default class LegendQuantize extends React.Component {
 		console.log("in legend quantize!");
 
 		this.fullValList = Array.from(Array(props.filter.numBins).keys());
+
+		this.state = {
+			valsShown: this.fullValList
+		};
 	}
 
 	toggleVals(valToggled) {
-		const {valsShown} = this.props;
+		const {valsShown} = this.state;
 		const {numBins} = this.props.filter;
 		let newValsShownList = [];
 
@@ -34,11 +38,16 @@ export default class LegendQuantize extends React.Component {
 			newValsShownList = this.fullValList;
 		}
 
+		this.setState({
+			valsShown: newValsShownList
+		})
+
 		this.props.toggleChartVals(newValsShownList);
 	}
 
 	renderCells() {
-		const {colorScale, filter, toggleChartVals, valsShown} = this.props;
+		const {colorScale, filter, toggleChartVals} = this.props;
+		const {valsShown} = this.state
 		const {numBins, format} = filter;
 
 		let [dataMin, dataMax] = colorScale.domain();
@@ -54,8 +63,10 @@ export default class LegendQuantize extends React.Component {
 			} else {
 				let min = roundLegendAxisVal(Math.ceil(this.calcBinVal(i, dataMin, binInterval)), format),
 					max = roundLegendAxisVal(Math.floor(this.calcBinVal(i+1, dataMin, binInterval)), format);
-				
-				cellText = min + " to " + max;
+
+				min = min == 0 ? 1 : min;
+
+				cellText = min === max ? min : min + " to " + max;
 			}
 
 			classes="legend__cell";

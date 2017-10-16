@@ -482,15 +482,15 @@ const stVizSettings = {
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"pelldisburse", format: "price"},
-					{linkText:"Pell Grants", linkUrl:"/indicators/pell-grants"},
+					{linkText:"Pell Grants", linkUrl:"/indicator/pell-grants"},
 					{variable:"seogdisburse", format: "price" },
-					{linkText:"Federal Supplemental Education Opportunity Grants", linkUrl:"indicators/campus-based-aid"},
+					{linkText:"Federal Supplemental Education Opportunity Grants", linkUrl:"/indicator/campus-based-aid"},
 					{variable:"teachdisburse", format: "price"},
-					{linkText:"TEACH Grants", linkUrl:"indicators/teach-grants"},
+					{linkText:"TEACH Grants", linkUrl:"/indicator/teach-grants"},
 					{variable:"iraqdisburse", format: "price"},
-					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"indicators/iraq-afghanistan-service-grants"},
+					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"/indicator/iraq-afghanistan-service-grants"},
 					{variable:"workdisburse", format: "price"},
-					{linkText:"Federal Work-Study", linkUrl:"indicators/campus-based-aid"},
+					{linkText:"Federal Work-Study", linkUrl:"/indicator/campus-based-aid"},
 					{explainerText:"SEOG and Federal Work Study are campus-based aid programs. Dollars are distributed to selected schools, which then allocate awards to students at their discretion. Other grants are available to students at all institutions."},
 				]
 			},
@@ -526,15 +526,15 @@ const stVizSettings = {
 				variables: [
 					{variable:"name", format: "string"},
 					{variable:"pellrecip", format: "number"},
-					{linkText:"Pell Grants", linkUrl:"/indicators/pell-grants"},
+					{linkText:"Pell Grants", linkUrl:"/indicator/pell-grants"},
 					{variable:"seogrecip", format: "number" },
-					{linkText:"Federal Supplemental Education Opportunity Grants", linkUrl:"indicators/campus-based-aid"},
+					{linkText:"Federal Supplemental Education Opportunity Grants", linkUrl:"/indicator/campus-based-aid"},
 					{variable:"teachrecip", format: "number"},
-					{linkText:"TEACH Grants", linkUrl:"indicators/teach-grants"},
+					{linkText:"TEACH Grants", linkUrl:"/indicator/teach-grants"},
 					{variable:"iraqrecip", format: "number"},
-					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"indicators/iraq-afghanistan-service-grants"},
+					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"/indicator/iraq-afghanistan-service-grants"},
 					{variable:"workrecip", format: "number"},
-					{linkText:"Federal Work-Study", linkUrl:"indicators/campus-based-aid"},
+					{linkText:"Federal Work-Study", linkUrl:"/indicator/campus-based-aid"},
 					{explainerText:"SEOG and Federal Work Study are campus-based aid programs. Dollars are distributed to selected schools, which then allocate awards to students at their discretion. Other grants are available to students at all institutions."},
 
 
@@ -656,13 +656,13 @@ const stVizSettings = {
 					{variable:"allgraddisburse", format: "price"},
 					{variable:"allparentdisburse", format: "price"},
 					// {variable:"alltotaldisburse", format: "price"},
-					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
+					{linkText:"Perkins Loans", linkUrl:"/indicator/campus-based-aid"},
 					{explainerText: "Perkins Loans are a campus-based aid program, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other loans are available to students at all institutions."},
 					{},
 					{},
-					{linkText:"Learn more about Direct Loans.", linkUrl:"/indicators/direct-loans"},
+					{linkText:"Learn more about Direct Loans.", linkUrl:"/indicator/direct-loans"},
 					{},
-					{linkText:"Learn more about FFEL Loans.", linkUrl:"/indicators/ffel-loans"},
+					{linkText:"Learn more about FFEL Loans.", linkUrl:"/indicator/ffel-loans"},
 				]
 			},
 			source: "Federal Student Aid",
@@ -706,13 +706,13 @@ const stVizSettings = {
 					{variable:"allgradrecip", format: "number"}, 
 					{variable:"allparentrecip", format: "number"}, 
 					// {variable:"alltotalrecip", format: "number"},
-					{linkText:"Perkins Loans", linkUrl:"/indicators/campus-based-aid"},
+					{linkText:"Perkins Loans", linkUrl:"/indicator/campus-based-aid"},
 					{explainerText: "Perkins Loans are a campus-based aid program, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other loans are available to students at all institutions."},
 					{},
 					{},
-					{linkText:"Learn more about Direct Loans.", linkUrl:"/indicators/direct-loans"},
+					{linkText:"Learn more about Direct Loans.", linkUrl:"/indicator/direct-loans"},
 					{},
-					{linkText:"Learn more about FFEL Loans.", linkUrl:"/indicators/ffel-loans"},
+					{linkText:"Learn more about FFEL Loans.", linkUrl:"/indicator/ffel-loans"},
 				]
 			},
 			source: "Federal Student Aid",
@@ -1136,7 +1136,6 @@ const stVizSettings = {
 				}
 			}
 		},
-		
 	]
 }
 

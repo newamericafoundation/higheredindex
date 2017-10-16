@@ -54,7 +54,6 @@ export const indicatorTrendsSettings = {
 					]
 				},
 				source: "IPEDS",
-				indicatorLink: "enrollment",
 				vizSettings: {
 					chart1Settings: {
 						type: "line-chart",
@@ -88,7 +87,6 @@ export const indicatorTrendsSettings = {
 					]
 				},
 				source: "IPEDS",
-				indicatorLink: "enrollment",
 				vizSettings: {
 					chart1Settings: {
 						type: "bar-chart",
@@ -125,7 +123,6 @@ export const indicatorTrendsSettings = {
 					]
 				},
 				source: "IPEDS",
-				indicatorLink: "enrollment",
 				vizSettings: {
 					chart1Settings: {
 						type: "bar-chart",
@@ -155,7 +152,6 @@ export const indicatorTrendsSettings = {
 					]
 				},
 				source: "College Scorecard",
-				indicatorLink: "enrollment",
 				vizSettings: {
 					chart1Settings: {
 						type: "line-chart",
@@ -187,7 +183,6 @@ export const indicatorTrendsSettings = {
 					]
 				},
 				source: "College Scorecard",
-				indicatorLink: "enrollment",
 				vizSettings: {
 					chart1Settings: {
 						type: "line-chart",
@@ -598,7 +593,6 @@ export const indicatorTrendsSettings = {
 					]
 				},
 				source: "IPEDS",
-				indicatorLink: "student-loans",
 				vizSettings: {
 					chart1Settings: {
 						type: "line-chart",

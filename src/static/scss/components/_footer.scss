@@ -5,6 +5,7 @@
 	color: white;
 	padding: 40px 25px;
 	position: relative;
+	margin-top: 25px;
 
 	@include breakpoint(medium) {
 		display: table;

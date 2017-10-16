@@ -4,6 +4,7 @@ import {formatValue} from '../helper_functions/format_value';
 import { connect } from 'react-redux'
 import SvgIcon from './SvgIcon'
 const $ = require("jquery")
+import { Link } from 'react-router';
 
 class DataBlockParagraph extends React.Component {
 	constructor(props) {
@@ -78,7 +79,9 @@ class DataBlockParagraph extends React.Component {
 
 						if (variable) {
 							if (variable.linkText) {
-								textSection.push(<a className="data-block__paragraph__link" key={j} href={variable.linkUrl}>{variable.linkText}</a>)
+								textSection.push(
+									<Link key={j} to={variable.linkUrl}><span className="data-block__paragraph__link">{variable.linkText}</span></Link>
+								)
 							} else if (variable.congressionalDistrictAggregate) {
 								textSection.push(<span className="data-block__paragraph__data" key={j}>{this.state.congressionalDistrictAggregate}</span>)
 							} else if (variable.explainerText) {

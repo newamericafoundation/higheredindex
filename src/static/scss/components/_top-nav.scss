@@ -7,20 +7,18 @@
 
 	&__title {
 		width: 100%;
+		max-width: calc(100% - 120px);
 		text-align: center;
-		padding: 5px 60px 0px;
+		margin: 0px 60px;
 		position: absolute;
 		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		@include medium {
-			padding: 5px 50px;
-		}
+		transform: translate(0, -50%);
+		overflow: hidden;
 
 		&__decorator {
 			font-size: 25px;
 			padding-left: 3px;
-			@include medium {
+			@include breakpoint(medium) {
 				position: relative;
 				top: -3px;
 			}
@@ -34,7 +32,7 @@
 			line-height: 1.1;
 			font-size: 25px;
 
-			@include medium {
+			@include breakpoint(medium) {
 				font-size: 32px;
 			}
 
@@ -49,7 +47,7 @@
 				display: inline-block;
 				height: 17px;
 				margin-left: 10px;
-				@include medium {
+				@include breakpoint(medium) {
 					height: 22px;
 				}
 			}

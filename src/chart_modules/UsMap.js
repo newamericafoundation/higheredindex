@@ -181,7 +181,7 @@ export default class UsMap extends React.Component {
 
         let dataPoint = this.getDataPoint(d.id);
 
-        if (dataPoint) {
+        if (dataPoint && dataPoint[filter.variable] > 0) {
             let value = dataPoint[filter.variable];
             let binIndex = colorScale.range().indexOf(colorScale(value));
             if (valsShown.indexOf(binIndex) > -1) {

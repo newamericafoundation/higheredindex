@@ -147,21 +147,20 @@ class StateMap extends React.Component {
             tooltip = <Tooltip settings={this.state.tooltipSettings} />
             if (this.filterVar.numBins > 1) {
                 legend = <LegendQuantize filter={this.filterVar} colorScale={this.colorScale} toggleChartVals={this.toggleVals.bind(this)} />
-            }
-            return (
-                <div className="data-block__viz__rendering-area" ref="renderingArea">
-                    {content}
-                    {tooltip}
-                    {legend}
-                </div>
-            )
-        } else {
-            return null;
-        }
+            }  
+        } 
+        return (
+            <div className="data-block__viz__rendering-area" ref="renderingArea">
+                {content}
+                {tooltip}
+                {legend}
+            </div>
+        )
 	}
 
 	resize() {
         let w = this.getCurrWidth();
+        console.log(w)
         this.setState({
           width: w,
           height: 3*w/5
@@ -208,6 +207,8 @@ class StateMap extends React.Component {
 
 	// helper functions
 	getCurrWidth() {
+        console.log(this.refs.renderingArea)
+        console.log($(this.refs.renderingArea).width())
         return $(this.refs.renderingArea).width() - margin.left - margin.right;
     }
 
@@ -226,7 +227,8 @@ class StateMap extends React.Component {
         const {valsShown} = this.state;
         let count = this.getDistrictCount(d)
         let binIndex = this.colorScale.range().indexOf(this.colorScale(count));
-        if (valsShown == "all" || valsShown.indexOf(binIndex) > -1) {
+
+        if (count > 0 && (valsShown == "all" || valsShown.indexOf(binIndex) > -1)) {
             return this.colorScale(count);
         } else {
             return colors.grey.light;

@@ -80,7 +80,7 @@ class ProfileSection extends React.Component {
 		dataInfo.forEach((d) => {
 			if (d.collection === collectionName) {
 				if (d.last_updated) {
-					retVal = d3.timeFormat("%B %d, %Y - %I:%M %p")(new Date(d.last_updated));
+					retVal = d3.timeFormat("%B %d, %Y")(new Date(d.last_updated));
 					console.log(retVal)
 				}
 				return;
@@ -103,10 +103,12 @@ class ProfileSection extends React.Component {
 	    		<a className="profile-section__anchor" id={title.toLowerCase()} name={title.toLowerCase()} />
 	    		<div className="profile-section__title-container">
 	    			<h3 className="profile-section__title">{title}</h3>
-	    			<p>
-		    			{ subtitle && <span className="profile-section__subtitle">{subtitle}</span>}
-		    			{ lastUpdated && <span className="profile-section__last-updated">{" Last updated: " + lastUpdated}</span>}
-	    			</p>
+	    			{ (subtitle || lastUpdated) &&
+		    			<p>
+			    			{ subtitle && <span className="profile-section__subtitle">{subtitle}</span>}
+			    			{ lastUpdated && <span className="profile-section__last-updated">{" Last updated: " + lastUpdated}</span>}
+		    			</p>
+		    		}
 	    		</div>
 	    		{sectionContent}
 	    	</section>

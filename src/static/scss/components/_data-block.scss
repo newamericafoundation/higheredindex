@@ -1,7 +1,12 @@
 .data-block {
 	max-width: 1050px;
 	margin: auto;
-	padding: 20px 25px;
+	padding: 20px 15px;
+
+	@include medium {
+		padding: 20px 25px;
+	}
+
 	&__title {
 		font-weight: bold;
 		margin-bottom: 25px;
@@ -19,12 +24,14 @@
 	}
 	&__info {
 		width: 100%;
+		padding-bottom: 25px;
 		@include breakpoint(medium) {
+			padding-right: 25px;
+			padding-bottom: 0px;
 			width: 40%;
 		}
 		
 		vertical-align: top;
-		padding-right: 25px;
 	}
 
 	&__viz {

@@ -96,12 +96,21 @@
 
 
 	&__title {
-		padding: 25px 0px;
+		padding: 15px 0px;
+		@include medium {
+			padding: 25px 0px;
+			width: 300px;
+		}
 		svg {
 			fill: white;
 			stroke: white;
 			height: 50px;
-			width: 300px;
+
+			width: 200px;
+
+			@include medium {
+				width: 300px;
+			}
 		}
 	}
 

@@ -16,7 +16,7 @@ class DataBlock extends React.Component {
 
       if (settings.vizSettings.chart1Settings.type == "state-map") {
         if (!fetchedCongDistrictInfo[data.state]) {
-          getCongDistrictInfo(data.state);
+          getCongDistrictInfo(data.all.state);
         }
       }
   }

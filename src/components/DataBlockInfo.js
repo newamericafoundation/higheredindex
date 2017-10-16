@@ -24,7 +24,7 @@ function getMaxYear(variables, data) {
 
 export default function DataBlockInfo(props) {
 	const {settings, data, collectionName} = props,
-		{paragraphSettings, calloutSettings, source, indicatorLink} = settings;
+		{paragraphSettings, calloutSettings, source, indicatorLink, usesCongressionalDistrictAggregate} = settings;
 
 	if (!data) { return null; }
 
@@ -33,7 +33,7 @@ export default function DataBlockInfo(props) {
     return (
       <div className="data-block__info">
       	{ calloutSettings && maxYear != 0 && <DataBlockCallout settings={calloutSettings} maxYear={maxYear} data={data} collectionName={collectionName}/> }
-      	{ maxYear != 0 && <DataBlockParagraph settings={paragraphSettings} maxYear={maxYear} data={data} /> }
+      	{ (paragraphSettings.usesCongressionalDistrictAggregate || maxYear != 0) && <DataBlockParagraph settings={paragraphSettings} maxYear={maxYear} data={data} /> }
       	{ source && maxYear != 0 && <div className="data-block__source">Source: {source}</div> }
       	{ indicatorLink && <Link to={"/indicator/" + indicatorLink}><div className="data-block__indicator-link">Learn More</div></Link> }
       </div>
