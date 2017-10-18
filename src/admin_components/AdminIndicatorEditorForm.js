@@ -143,11 +143,14 @@ class AdminIndicatorEditorForm extends React.Component {
                                   label: 'Number (with commas)',
                                   value: 'number'
                                 }, {
-                                  label: 'Number (Without commas)',
+                                  label: 'Number (without commas)',
                                   value: 'year'
                                 }, {
                                   label: 'Percent',
                                   value: 'percent'
+                                }, {
+                                  label: 'Price',
+                                  value: 'price'
                                 }, {
                                   label: 'Text',
                                   value: 'string'
