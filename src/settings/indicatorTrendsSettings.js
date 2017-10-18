@@ -552,8 +552,8 @@ export const indicatorTrendsSettings = {
 					textSections: [["In @year, the three-year cohort default rate was ", " and the two-year cohort default rate was ", " at U.S. institutions."],
 						["The following chart depicts trends over time."]],
 					variables: [
-						{variable:"cdr2", format: "percent"},
 						{variable:"cdr3", format: "percent"},
+						{variable:"cdr2", format: "percent"},
 					]
 				},
 				source: "College Scorecard",
