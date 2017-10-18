@@ -722,7 +722,7 @@ export const indicatorTrendsSettings = {
 					textSections: [["U.S. institutions awarded ", " Iraq/Afghanistan Service Grants in @year."],
 						["The following chart depicts trends over time."]],
 					variables: [
-						{variable:"iraqrecip", format: "price"},
+						{variable:"iraqrecip", format: "number"},
 					]
 				},
 				source: "Federal Student Aid",
