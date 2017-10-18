@@ -332,7 +332,7 @@ const stVizSettings = {
 			title: "Enrollment by Race",
 			calloutSettings: null,
 			paragraphSettings: {
-				textSections: [["In @year, students at ", " institutions were ", " white, ", " black, ", " Asian, ", " Hispanic, ", " American Indian, ", " Hawaiian or Pacific Islander, ", " multiracial, ", " international, and ", " unknown."],
+				textSections: [["In @year, students at ", " institutions were ", " white, ", " black, ", " Hispanic, ", " Asian, ", " American Indian, ", " Hawaiian or Pacific Islander, ", " multiracial, ", " international, and ", " unknown."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
