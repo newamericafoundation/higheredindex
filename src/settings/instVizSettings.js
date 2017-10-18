@@ -530,7 +530,7 @@ const instVizSettings = {
 						{variable:"iraqdisburse", displayName:"Iraq/Afghanistan Service Grants", format: "price", color: colors.purple.light},
 						{variable:"acgdisburse", displayName:"Academic Competitiveness Grants", format: "price", color: colors.orange.light},
 						{variable:"smartdisburse", displayName:"SMART Grants", format: "price", color: colors.brown.light},
-						{variable:"workdisburse", displayName:"Federal Work-Study", format: "price", color: colors.yellow},
+						{variable:"workdisburse", displayName:"Federal Work-Study", format: "price", color: colors.yellow.light},
 					]
 				}
 			}
@@ -573,7 +573,7 @@ const instVizSettings = {
 						{variable:"iraqrecip", displayName:"Iraq/Afghanistan Service Grants", format: "number", color: colors.purple.light},
 						{variable:"acgrecip", displayName:"Academic Competitiveness Grants", format: "number", color: colors.orange.light},
 						{variable:"smartrecip", displayName:"SMART Grants", format: "number", color: colors.brown.light},
-						{variable:"workrecip", displayName:"Federal Work-Study", format: "number", color: colors.yellow},
+						{variable:"workrecip", displayName:"Federal Work-Study", format: "number", color: colors.yellow.light},
 					]
 				}
 			}
