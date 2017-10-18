@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import { toggleTopNavProfileName } from '../actions'
 import $ from 'jquery';
 import Footer from './Footer';
+import {Helmet} from "react-helmet";
 
 
 class IndicatorPage extends React.Component {
@@ -65,6 +66,9 @@ class IndicatorPage extends React.Component {
 
     return (
       <div className="location-profile indicator">
+        <Helmet>
+          <title>{this.props.indicatorSettings.name}</title>
+        </Helmet>
         <ProfileHeader id={ this.props.indicatorSettings.path } name={ this.props.indicatorSettings.name }/>
         { customSections.length > 1 && <SectionNav type="indicators" customSections={customSections} /> }
         <ProfileSection

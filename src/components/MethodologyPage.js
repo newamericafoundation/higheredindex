@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import SvgIcon from './SvgIcon'
 import Footer from './Footer';
 import { fetchMethodology } from '../actions'
+import {Helmet} from "react-helmet";
 let d3 = require("d3")
 
 
@@ -24,6 +25,9 @@ class MethodologyPage extends React.Component {
 
     return (
       <div className="simple-page">
+        <Helmet>
+          <title>Methodology</title>
+        </Helmet>
         <div className="simple-page__overlay"></div>
         <div className="simple-page__content" >
           <h5 className="simple-page__title">Methodology</h5>
