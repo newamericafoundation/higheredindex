@@ -104,6 +104,7 @@ class StateMap extends React.Component {
             .enter().append("path")
               .attr("stroke", "white")
               .attr("stroke-width", .5)
+              .style("cursor", "pointer")
               .on("mouseover", (d) => { return this.mouseover(d, d3.event); })
               .on("mouseout", (d) => { return this.mouseout(); })
 
