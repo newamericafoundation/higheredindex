@@ -72,7 +72,7 @@ export const indicatorTrendsSettings = {
 				title: "Enrollment by Race",
 				calloutSettings: null,
 				paragraphSettings: {
-					textSections: [["In @year, students at U.S institutions were ", " white, ", " black, ", " Asian, ", " Hispanic, ", " American Indian, ", " Hawaiian or Pacific Islander, ", " multiracial, ", " international, and ", " unknown."],
+					textSections: [["In @year, students at U.S institutions were ", " white, ", " black, ", " Hispanic, ", " Asian, ", " American Indian, ", " Hawaiian or Pacific Islander, ", " multiracial, ", " international, and ", " unknown."],
 						["The following chart depicts trends over time."]],
 					variables: [
 						{variable:"white", format: "percent"},
