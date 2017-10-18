@@ -4,6 +4,7 @@ import SvgIcon from './SvgIcon'
 import Footer from './Footer';
 import { fetchDataInfo } from '../actions'
 import sectionSettings from '../settings/sectionSettings.js';
+import {Helmet} from "react-helmet";
 let d3 = require("d3")
 
 
@@ -45,6 +46,9 @@ class DownloadHomePage extends React.Component {
 
     return (
       <div className="simple-page download-home-page">
+        <Helmet>
+          <title>Download Data</title>
+        </Helmet>
         <div className="simple-page__overlay"></div>
         <div className="simple-page__content">
           <h5 className="simple-page__title">Download Data</h5>

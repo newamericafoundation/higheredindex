@@ -11,6 +11,7 @@ import stVizSettings from '../settings/stVizSettings';
 import { connect } from 'react-redux'
 import { toggleTopNavProfileName, changeCurrProfileSection } from '../actions';
 import sectionSettings from '../settings/sectionSettings.js';
+import {Helmet} from "react-helmet";
 import $ from 'jquery';
 
 class StPage extends React.Component {
@@ -51,6 +52,9 @@ class StPage extends React.Component {
     }
     return (
       <div className="location-profile state" ref="stProfile">
+        <Helmet>
+            <title>{this.props.stData.name}</title>
+        </Helmet>
         <ProfileHeader id={ this.props.stData.path } name={ this.props.stData.name }/>
         <SectionNav type="states" />
         { sectionSettings.states.map((section, i) => {

@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import SearchBox from './SearchBox.jsx';
 import SvgIcon from './SvgIcon';
+import {Helmet} from "react-helmet";
 
 class ListingsPage extends React.Component {
 	constructor(props) {
@@ -69,6 +70,9 @@ class ListingsPage extends React.Component {
 		console.log(this.state);
 		return (
 			<div className="listings-page">
+		        <Helmet>
+		            <title>Search Results: {this.state.type.charAt(0).toUpperCase() + this.state.type.slice(1)}</title>
+		        </Helmet>
 				<div className="listings-page__top-bar">
 					<div className="listings-page__top-bar__container">
 						<div className="listings-page__top-bar__filter-label">

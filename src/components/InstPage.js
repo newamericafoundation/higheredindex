@@ -12,6 +12,7 @@ import instVizSettings from '../settings/instVizSettings';
 import { connect } from 'react-redux'
 import { toggleTopNavProfileName, changeCurrProfileSection } from '../actions';
 import $ from 'jquery';
+import {Helmet} from "react-helmet";
 import sectionSettings from '../settings/sectionSettings.js';
 
 class InstPage extends React.Component {
@@ -53,6 +54,9 @@ class InstPage extends React.Component {
     }
     return (
       <div className="location-profile state" ref="stProfile">
+        <Helmet>
+          <title>{this.props.instData.name}</title>
+        </Helmet>
         <ProfileHeader id={ this.props.instData.path } name={ this.props.instData.name }/>
         <SectionNav type="institutions" />
 
