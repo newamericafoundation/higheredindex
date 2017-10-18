@@ -940,8 +940,8 @@ const stVizSettings = {
 				textSections: [["In @year, the three-year cohort default rate was ", " and the two-year cohort default rate was ", " at ", " institutions."],
 					["The following chart depicts trends over time."]],
 				variables: [
-					{variable:"cdr2", format: "percent"},
 					{variable:"cdr3", format: "percent"},
+					{variable:"cdr2", format: "percent"},
 					{variable:"name", format: "string"},
 				]
 			},
@@ -1082,8 +1082,8 @@ const stVizSettings = {
 				textSections: [["In @year, the mean earnings 10 years after enrolling in school were ", " for independent graduates and ", " for dependent graduates of ", " institutions."],
 					["The following chart depicts trends over time."]],
 				variables: [
-					{variable:"mn_earn_wne_indep0_p10", format: "price"},
 					{variable:"mn_earn_wne_indep1_p10", format: "price"},
+					{variable:"mn_earn_wne_indep0_p10", format: "price"},
 					{variable:"name", format: "string"},
 				]
 			},
