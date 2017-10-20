@@ -4,6 +4,7 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router';
 import AdminHome from './admin_components/AdminHome';
 import AdminDataUpload from './admin_components/AdminDataUpload';
+import AdminCodebookUpload from './admin_components/AdminCodebookUpload';
 import AdminMethodology from './admin_components/AdminMethodology';
 import AdminLogin from './admin_components/AdminLogin';
 import AdminIndicatorEditor from './admin_components/AdminIndicatorEditor';
@@ -51,6 +52,7 @@ const routes = (
 		    <Route path="admin" component={AdminHome} onEnter={requireAuth}/>
 		    <Route path="admin/login" component={AdminLogin} />
 		    <Route path="admin/data-upload" component={AdminDataUpload} onEnter={requireAuth}/>
+		    <Route path="admin/codebook-upload" component={AdminCodebookUpload} onEnter={requireAuth}/>
 		    <Route path="admin/methodology" component={AdminMethodology} onEnter={requireAuth}/>
 		    <Route path="admin/indicators/:id" component={AdminIndicatorEditor} onEnter={requireAuth}/>
 		    <Route path="*" component={NotFoundPage}/>

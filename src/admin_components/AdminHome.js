@@ -31,7 +31,26 @@ class AdminHome extends React.Component {
           </Link>
           { dataInfo && dataInfo != "fetching" && dataInfo.length > 0 &&
             <ul className="admin__home__data-info-container">
-              {dataInfo.map((d, i) => {
+              {dataInfo.filter(d => d.fileType != "codebook").map((d, i) => {
+                return (
+                  <li key={i} className="admin__home__data-info">
+                    <span className="admin__home__data-info__title">{d.collection}:</span>
+                    {d.last_updated && <span className="admin__home__data-info__value">{d3.timeFormat("%B %d, %Y - %I:%M %p")(new Date(d.last_updated))}</span>}
+                  </li>
+                )
+              })}
+            </ul>
+          }
+        </div>
+        <hr></hr>
+        <div className="admin__home__section">
+          <h5 className="admin__home__heading">Codebook Upload</h5>
+          <Link to={'/admin/codebook-upload/'}>
+            <h5 className="admin__home__main-link">Upload New Codebook File</h5>
+          </Link>
+          { dataInfo && dataInfo != "fetching" && dataInfo.length > 0 &&
+            <ul className="admin__home__data-info-container">
+              {dataInfo.filter(d => d.fileType == "codebook").map((d, i) => {
                 return (
                   <li key={i} className="admin__home__data-info">
                     <span className="admin__home__data-info__title">{d.collection}:</span>

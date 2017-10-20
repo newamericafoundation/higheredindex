@@ -8,9 +8,12 @@ import {Helmet} from "react-helmet";
 let d3 = require("d3")
 
 
-const downloadFile = (collection) => {
-  console.log(process)
+const downloadDataFile = (collection) => {
    window.open('https://febp-backend.herokuapp.com/api/download_data/' + collection);
+}
+
+const downloadCodebookFile = (type) => {
+   window.open('http://localhost:3000/api/download_codebook/' + type);
 }
 
 class DownloadHomePage extends React.Component {
@@ -52,7 +55,8 @@ class DownloadHomePage extends React.Component {
         <div className="simple-page__overlay"></div>
         <div className="simple-page__content">
           <h5 className="simple-page__title">Download Data</h5>
-          <p className="download-home-page__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor at elit sed sodales. Maecenas volutpat diam ac enim tempus, nec fringilla purus interdum. Duis ut posuere sem. Curabitur lacinia neque rutrum augue dapibus fermentum. Phasellus ligula turpis, sagittis ut lacinia vel, consequat a nibh. In sodales varius consectetur. Praesent luctus eleifend quam in euismod. Ut gravida egestas feugiat. Morbi vestibulum euismod tincidunt. Proin consectetur ante at ipsum venenatis, sit amet sodales nunc accumsan. Sed nec libero a justo fermentum ornare vitae a leo. Ut blandit luctus ligula, porttitor luctus nisi cursus ac.</p>
+          <p className="download-home-page__description">Data used on this site are available for download. Institution files each contains header information for each school, including the school name and location, sector, and unique identifiers, and other pertinent institutional characteristics. The schools file contains information on graduation and retention rates, transfer rates, cost of attendance, endowments, share of students receiving aid and the average amount of aid received, as well as other miscellaneous data presented in that section. Student files contain information on total enrollment, enrollment by student level and attendance intensity, and enrollment breakdowns by race and nontraditional student factors. Loans files contain information on loan disbursements and recipients for each type of federal loan, repayment rates, and cohort default rates. Grants file contain information on recipients and disbursements of federal grant aid, including Pell grants,  and the share of students receiving Pell and other types of aid. Outcomes files contain information on post-graduation earnings, debt levels.</p>
+          <p className="download-home-page__description">State, sector, and national-level data are each based on aggregations of school level data, based on the geographic location of the headquarters of the school. Codebooks include variable names, source materials, and definitions, as well as a detailed explanation of how institution level data were aggregated to the state level. For each data file, variable names are followed by an underscore and the year to which the data refers; for the codebooks, a star is used in place of the year.</p>
           <div className="download-home-page__section-container">
             <div className="download-home-page__section">
               <div className="download-home-page__section__icon">
@@ -65,6 +69,7 @@ class DownloadHomePage extends React.Component {
                       return (
                          <li className="download-home-page__section__item" key={section.name}>
                           <h5 className="download-home-page__section__item__label">{section.name}</h5>
+                          <h5 className="download-home-page__section__item__text" onClick={() => { return downloadCodebookFile(section.dataDivision); }}>Codebook</h5>
                           <ul className="download-home-page__section__sub-list">
                             {section.subSections.map((subsection) => {
                               let lastUpdated = null;
@@ -75,8 +80,7 @@ class DownloadHomePage extends React.Component {
                                 <li className="download-home-page__section__sub-list__item" key={subsection.name}>
                                   <h5 className="download-home-page__section__sub-list__item__label">{subsection.name}</h5>
                                   { lastUpdated && <h5 className="download-home-page__section__sub-list__item__last-updated">{"Last Updated: " + lastUpdated}</h5> }
-                                  <h5 className="download-home-page__section__sub-list__item__text" onClick={() => { return downloadFile(subsection.collection); }}>Data</h5>
-                                  <h5 className="download-home-page__section__sub-list__item__text">Codebook</h5>
+                                  <h5 className="download-home-page__section__sub-list__item__text" onClick={() => { return downloadDataFile(subsection.collection); }}>Data</h5>
                                 </li>
                               )
                             })}
@@ -92,8 +96,8 @@ class DownloadHomePage extends React.Component {
                         <li className="download-home-page__section__item" key={section.name}>
                           <h5 className="download-home-page__section__item__label">{section.name}</h5>
                           { lastUpdated && <h5 className="download-home-page__section__item__last-updated">{"Last Updated: " + lastUpdated}</h5> }
-                          <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile(section.collection); }}>Data</h5>
-                          <h5 className="download-home-page__section__item__text">Codebook</h5>
+                          <h5 className="download-home-page__section__item__text" onClick={() => { return downloadDataFile(section.collection); }}>Data</h5>
+                          <h5 className="download-home-page__section__item__text" onClick={() => { return downloadCodebookFile(section.dataDivision); }}>Codebook</h5>
                         </li>
                       )
                     }
@@ -115,8 +119,8 @@ class DownloadHomePage extends React.Component {
                       <li className="download-home-page__section__item" key={section.name}>
                         <h5 className="download-home-page__section__item__label">{section.name}</h5>
                         { lastUpdated && <h5 className="download-home-page__section__item__last-updated">{"Last Updated: " + lastUpdated}</h5> }
-                        <h5 className="download-home-page__section__item__text" onClick={() => { return downloadFile(section.collection); }}>Data</h5>
-                        <h5 className="download-home-page__section__item__text">Codebook</h5>
+                        <h5 className="download-home-page__section__item__text" onClick={() => { return downloadDataFile(section.collection); }}>Data</h5>
+                        <h5 className="download-home-page__section__item__text" onClick={() => { return downloadCodebookFile(section.dataDivision); }}>Codebook</h5>
                       </li>
                     )
                   })}

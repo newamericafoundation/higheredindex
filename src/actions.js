@@ -19,6 +19,7 @@ export const RECEIVE_PROFILE_PHOTO = 'RECEIVE_PROFILE_PHOTO'
 export const TOGGLE_TOP_NAV_PROFILE_NAME = 'TOGGLE_TOP_NAV_PROFILE_NAME'
 export const SET_INDICATOR_UPDATE_STATUS = 'SET_INDICATOR_UPDATE_STATUS'
 export const UPLOAD_DATA_FILE = 'UPLOAD_DATA_FILE'
+export const UPLOAD_CODEBOOK_FILE = 'UPLOAD_CODEBOOK_FILE'
 export const SET_DATA_FILE_UPLOAD_STATUS = 'SET_DATA_FILE_UPLOAD_STATUS'
 export const SET_ADMIN_LOGIN_STATUS = 'SET_ADMIN_LOGIN_STATUS'
 export const RECEIVE_RANKING = 'RECEIVE_RANKING'
@@ -40,8 +41,8 @@ GoogleMapsLoader.load(function(google) {
   googlePlacesService = new google.maps.places.PlacesService(document.createElement('div'));
 });
 
-// const dbPath = process.env.NODE_ENV == 'production' ? 'https://febp-backend.herokuapp.com/api/' : 'http://localhost:3000/api/';
-const dbPath = 'https://febp-backend.herokuapp.com/api/';
+const dbPath = process.env.NODE_ENV == 'production' ? 'https://febp-backend.herokuapp.com/api/' : 'http://localhost:3000/api/';
+// const dbPath = 'https://febp-backend.herokuapp.com/api/';
 
 console.log(dbPath);
 
@@ -375,6 +376,30 @@ export function uploadDataFile(collection, newFile) {
     
     return { 
         type: UPLOAD_DATA_FILE, 
+    }
+  }
+}
+
+export function uploadCodebookFile(type, newFile) {
+  console.log(newFile);
+
+  return function (dispatch) {
+    dispatch(setDataFileUploadStatus("Uploading Codebook - " + newFile.length + " rows"))
+    
+    fetch(dbPath + 'update_codebook/' + type, { 
+        method: "POST", 
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        }),
+        body: JSON.stringify({"type": type, "data": newFile})
+      })
+      .then((res) => {
+        dispatch(setDataFileUploadStatus(res.status))
+      })
+    
+    return { 
+        type: UPLOAD_CODEBOOK_FILE, 
     }
   }
 }
