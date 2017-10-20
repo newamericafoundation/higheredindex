@@ -13,7 +13,7 @@ const downloadDataFile = (collection) => {
 }
 
 const downloadCodebookFile = (type) => {
-   window.open('http://localhost:3000/api/download_codebook/' + type);
+   window.open('https://febp-backend.herokuapp.com/api/download_codebook/' + type);
 }
 
 class DownloadHomePage extends React.Component {
