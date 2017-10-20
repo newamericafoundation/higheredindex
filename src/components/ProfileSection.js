@@ -103,12 +103,8 @@ class ProfileSection extends React.Component {
 	    		<a className="profile-section__anchor" id={title.toLowerCase()} name={title.toLowerCase()} />
 	    		<div className="profile-section__title-container">
 	    			<h3 className="profile-section__title">{title}</h3>
-	    			{ (subtitle || lastUpdated) &&
-		    			<p>
-			    			{ subtitle && <span className="profile-section__subtitle">{subtitle}</span>}
-			    			{ lastUpdated && <span className="profile-section__last-updated">{" Last updated: " + lastUpdated}</span>}
-		    			</p>
-		    		}
+		    		{ subtitle && <p className="profile-section__subtitle">{subtitle}</p>}
+		    		{ lastUpdated && <p className="profile-section__last-updated">{" Last updated: " + lastUpdated}</p>}
 	    		</div>
 	    		{sectionContent}
 	    	</section>

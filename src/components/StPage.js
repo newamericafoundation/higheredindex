@@ -69,7 +69,7 @@ class StPage extends React.Component {
               key={name}
               title={name}
               index={i}
-              subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
+              subtitle={section.subtitle}
               settings={stVizSettings[name]}
               collectionName={"states_" + section.dataDivision}
               data= {data} />
