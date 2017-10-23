@@ -72,6 +72,12 @@ class ListingsPage extends React.Component {
 			<div className="listings-page">
 		        <Helmet>
 		            <title>Search Results: {this.state.type.charAt(0).toUpperCase() + this.state.type.slice(1)}</title>
+		            <meta name="description" content="New America Higher Ed Index" />
+					<meta name="twitter:card" content="New America Higher Ed Index" />
+					<meta name="twitter:title" content="Higher Ed Index: Search Listings" />
+					<meta name="twitter:description" content="New America Higher Ed Index"/>
+					<meta property="og:title" content="Higher Ed Index: Search Listings" />
+					<meta property="og:description" content="New America Higher Ed Index" />
 		        </Helmet>
 				<div className="listings-page__top-bar">
 					<div className="listings-page__top-bar__container">

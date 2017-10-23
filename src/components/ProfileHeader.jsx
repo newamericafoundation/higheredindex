@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProfilePhoto } from '../actions'
+import {Helmet} from "react-helmet";
 import SvgIcon from './SvgIcon'
 let d3 = require("d3");
 
@@ -37,6 +38,10 @@ class ProfileHeader extends React.Component {
 
 		return (
 			<div className="profile-header-wrapper">
+				{this.photoUrl && <Helmet>
+					<meta name="twitter:image" content={this.photoUrl} />
+					<meta property="og:image" content={this.photoUrl} />
+				</Helmet>}
 				<div className="profile-header" style={divStyle}>
 					<div className="profile-header__content">
 						<div className="profile-header__icon"> 

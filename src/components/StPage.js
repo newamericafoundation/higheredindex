@@ -54,6 +54,12 @@ class StPage extends React.Component {
       <div className="location-profile state" ref="stProfile">
         <Helmet>
             <title>{this.props.stData.name}</title>
+            <meta name="description" content="New America Higher Ed Index" />
+            <meta name="twitter:card" content="New America Higher Ed Index" />
+            <meta name="twitter:title" content={"Higher Ed Index: " + this.props.stData.name} />
+            <meta name="twitter:description" content="New America Higher Ed Index"/>
+            <meta property="og:title" content={"Higher Ed Index: " + this.props.stData.name} />
+            <meta property="og:description" content="New America Higher Ed Index" />
         </Helmet>
         <ProfileHeader id={ this.props.stData.path } name={ this.props.stData.name }/>
         <SectionNav type="states" />

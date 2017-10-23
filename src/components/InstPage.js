@@ -56,6 +56,12 @@ class InstPage extends React.Component {
       <div className="location-profile state" ref="stProfile">
         <Helmet>
           <title>{this.props.instData.name}</title>
+          <meta name="description" content="New America Higher Ed Index" />
+          <meta name="twitter:card" content="New America Higher Ed Index" />
+          <meta name="twitter:title" content={"Higher Ed Index: " + this.props.instData.name} />
+          <meta name="twitter:description" content="New America Higher Ed Index"/>
+          <meta property="og:title" content={"Higher Ed Index: " + this.props.instData.name} />
+          <meta property="og:description" content="New America Higher Ed Index" />
         </Helmet>
         <ProfileHeader id={ this.props.instData.path } name={ this.props.instData.name }/>
         <SectionNav type="institutions" />

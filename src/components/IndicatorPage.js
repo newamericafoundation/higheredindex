@@ -68,6 +68,12 @@ class IndicatorPage extends React.Component {
       <div className="location-profile indicator">
         <Helmet>
           <title>{this.props.indicatorSettings.name}</title>
+          <meta name="description" content="New America Higher Ed Index" />
+          <meta name="twitter:card" content="New America Higher Ed Index" />
+          <meta name="twitter:title" content={"Higher Ed Index: " + this.props.indicatorSettings.name} />
+          <meta name="twitter:description" content="New America Higher Ed Index"/>
+          <meta property="og:title" content={"Higher Ed Index: " + this.props.indicatorSettings.name} />
+          <meta property="og:description" content="New America Higher Ed Index" />
         </Helmet>
         <ProfileHeader id={ this.props.indicatorSettings.path } name={ this.props.indicatorSettings.name }/>
         { customSections.length > 1 && <SectionNav type="indicators" customSections={customSections} /> }
