@@ -25,6 +25,7 @@ class IndicatorPage extends React.Component {
 
   componentWillUnmount() {
     $(".app-container").off("scroll", this.handlerFunc);
+    this.props.resetCurrProfileSection();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -92,7 +93,6 @@ class IndicatorPage extends React.Component {
         { indicatorTrendsSettings[path] && indicatorTrendsSettings[path].trendsSettings && <ProfileSection
           title="Trends"
           index={rankingVariables ? "2" : "1"}
-          subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
           settings={indicatorTrendsSettings[path].trendsSettings} 
           data= {this.props.usData} /> }
         <Footer />
@@ -112,6 +112,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     toggleTopNavProfileDisplay: (newSetting) => {
       dispatch(toggleTopNavProfileName(newSetting));
+    },
+    resetCurrProfileSection: () => {
+      dispatch(changeCurrProfileSection('none'));
     }
   }
 }

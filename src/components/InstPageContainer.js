@@ -15,8 +15,8 @@ class InstPageContainer extends React.Component {
     const { dispatch, fetchedInsts, id, dataInfo } = this.props
 
     if (fetchedInsts[id]) {
-      this.instData = fetchedInsts[id].data;
-      dispatch(changeCurrProfile(id, this.instData.name, "institution"))
+      this.instData = fetchedInsts[id];
+      dispatch(changeCurrProfile(id, this.instData.data.name, "institution"))
     } else {
       dispatch(fetchProfile(id, "institution"))
     }
@@ -31,12 +31,17 @@ class InstPageContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("in component will receive props")
     if (nextProps.id != this.props.id) {
       const { dispatch, fetchedInsts, id } = nextProps
 
+      console.log("different id")
+
       if (fetchedInsts[id]) {
+        console.log("already fetched")
         this.instData = fetchedInsts[id]
-        dispatch(changeCurrProfile(id, this.instData.name, "institution"))
+        console.log(this.instData, fetchedInsts)
+        dispatch(changeCurrProfile(id, this.instData.data.name, "institution"))
       } else {
         dispatch(fetchProfile(id, "institution"))
       }
@@ -46,6 +51,8 @@ class InstPageContainer extends React.Component {
   render() {
     const { fetchedInsts, id, dataInfo } = this.props
     this.instData = fetchedInsts[id]
+
+    console.log("in container render", this.instData, id)
 
     if (this.instData && !this.instData.isFetching && dataInfo != "fetching") {
       if (this.instData.data) {

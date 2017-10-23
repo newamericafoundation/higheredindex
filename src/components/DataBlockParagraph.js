@@ -15,16 +15,10 @@ class DataBlockParagraph extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		console.log(prevProps, this.props)
-		console.log(prevState, this.state)
 		const {settings, maxYear, data, fetchedCongDistrictInfo} = this.props;
 
-		console.log(settings.usesCongressionalDistrictAggregate, this.state, fetchedCongDistrictInfo[data.state])
-
         if (settings.usesCongressionalDistrictAggregate && this.state.congressionalDistrictAggregate == null) {
-        	console.log("here!")
         	if (fetchedCongDistrictInfo[data.state] && fetchedCongDistrictInfo[data.state] != "fetching") {
-        		console.log("updating!!!");
 	            this.districtCounts = fetchedCongDistrictInfo[data.state];
 
 	     		let average = d3.sum(this.districtCounts, (d) => { return d.count})/this.districtCounts.length;
@@ -37,20 +31,14 @@ class DataBlockParagraph extends React.Component {
     }
 
     explainerMouseOver(index) {
-    	console.log("mousing over ", index)
     	let popup = $(this.refs["explainer-popup_" + index]);
     	let hoverText = $(this.refs["explainer-text_" + index]);
-
-    	console.log(popup)
-    	console.log(hoverText[0])
 
     	popup.css("top", hoverText[0].offsetTop + 25)
     	popup.removeClass("hidden");
     }
 
     explainerMouseOut(index) {
-    	console.log("mousing out ", index)
-
     	$(this.refs["explainer-popup_" + index]).addClass("hidden");
     }
 
@@ -100,8 +88,6 @@ class DataBlockParagraph extends React.Component {
 										value = data[varName];
 									}
 
-									console.log(value)
-									
 									value = value === 0 || (value && value != "NA" && value != NaN) ? formatValue(value, variable.format) : "N/A";	
 									textSection.push(<span className={variableClass} key={j}>{value}</span>);
 

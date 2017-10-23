@@ -29,9 +29,10 @@ class InstPage extends React.Component {
     this.props.resetCurrProfileSection();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.props.currProfileName === nextProps.currProfileName ? false : true;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log("should component update: ", this.props.currProfileName, nextProps.currProfileName)
+  //   return this.props.currProfileName === nextProps.currProfileName ? false : true;
+  // }
 
   handleScroll(event) {
     const {topNavProfileNameShown, toggleTopNavProfileDisplay} = this.props;
@@ -48,7 +49,7 @@ class InstPage extends React.Component {
   }
 
   render() {
-    console.log(sectionSettings.institutions)
+    console.log("in inst render", this.props)
     if (!this.props.instData) {
       return <NotFoundPage/>;
     }

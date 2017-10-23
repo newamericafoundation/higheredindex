@@ -39,12 +39,17 @@ class ProfileSection extends React.Component {
 	    }  
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
-		if (this.dataInfo && nextProps.dataInfo && this.dataInfo.length != nextProps.dataInfo.length) {
-			return true;
-		}
-		return false;
-	}
+	// shouldComponentUpdate(nextProps, nextState) {
+	// 	console.log(this.dataInfo, nextProps.dataInfo)
+	// 	if (this.dataInfo && nextProps.dataInfo && this.dataInfo.length != nextProps.dataInfo.length) {
+	// 		console.log("in profile section, component should update")
+	// 		return true;
+	// 	}
+
+	// 	console.log("in profile section, component should not update")
+
+	// 	return false;
+	// }
 
 	getSectionContent() {
 		const {type, data, settings, text, collectionName} = this.props;

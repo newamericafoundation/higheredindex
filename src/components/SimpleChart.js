@@ -31,7 +31,6 @@ class SimpleChart extends React.Component {
             let varName = chart1Settings.variables[i].variable;
             if (data[varName]) {
                 for (let year in data[varName]) {
-                    console.log(year)
                     if (!isNaN(data[varName][year])) {
                         fullValList.push(varName);
                     }
@@ -48,7 +47,6 @@ class SimpleChart extends React.Component {
                 let varName = chart2Settings.variables[i].variable;
                 if (data[varName]) {
                     for (let year in data[varName]) {
-                        console.log(year)
                         if (!isNaN(data[varName][year])) {
                             fullValList.push(varName);
                         }
@@ -169,7 +167,6 @@ class SimpleChart extends React.Component {
 
         if (keyList.length > 0) {
             let xExtents = d3.extent(keyList);
-            console.log(xExtents)
             this.x.domain(range(+xExtents[0], +xExtents[1]));
         } else {
             this.x.domain([0,0]);
@@ -370,8 +367,6 @@ class SimpleChart extends React.Component {
 	render() {
 		const { data, settings, currProfileName } = this.props,
             {chart1Settings, chart2Settings} = settings;
-
-        console.log(this.state, this.props)
 
         let content, legend, tooltip, missingVarsList, presentVarsList, fullVarsList;
         let variables = chart1Settings.variables;
