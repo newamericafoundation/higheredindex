@@ -82,7 +82,7 @@ const stVizSettings = {
 				textSections: [["In @year, the average cost of attendance after grant aid was ", " at public institutions and ", " at private institutions; and the average for low-income students was ", " at public institutions and ", " at private institutions in ", "."],
 					["The following chart depicts trends over time."]],
 				variables: [
-					{variable:"netpricepubinc", format: "price" },
+					{variable:"netpricepub", format: "price" },
 					{variable:"netpriceincpub", format: "price"},
 					{variable:"netpricepriv", format: "price" },
 					{variable:"netpriceincpriv", format: "price"},
@@ -96,7 +96,7 @@ const stVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "Price",
 					variables: [
-						{variable:"netpricepubinc", displayName:"Public institutions", format: "price", color: colors.turquoise.light },
+						{variable:"netpricepub", displayName:"Public institutions", format: "price", color: colors.turquoise.light },
 						{variable:"netpriceincpub", displayName:"Public institutions (low-income)", format: "price", color: colors.turquoise.medium },
 						{variable:"netpricepriv", displayName:"Private institutions", format: "price", color: colors.purple.light},
 						{variable:"netpriceincpriv", displayName:"Private institutions (low-income)", format: "price", color: colors.purple.medium},
@@ -937,11 +937,10 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, the three-year cohort default rate was ", " and the two-year cohort default rate was ", " at ", " institutions."],
+				textSections: [["In @year, the three-year cohort default rate was ", " at ", " institutions."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"cdr3", format: "percent"},
-					{variable:"cdr2", format: "percent"},
 					{variable:"name", format: "string"},
 				]
 			},
@@ -952,7 +951,6 @@ const stVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "Default Rate",
 					variables: [
-						{variable:"cdr2", displayName:"Two-year default rates", format: "percent", color: colors.turquoise.light },
 						{variable:"cdr3", displayName:"Three-year default rates", format: "percent", color: colors.purple.light},
 					]
 				}

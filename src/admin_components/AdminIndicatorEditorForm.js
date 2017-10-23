@@ -53,6 +53,9 @@ class AdminIndicatorEditorForm extends React.Component {
               })
             }
             values.description = this.state.richTextDescription.toString('html');
+            if (!values.path) {
+              values.path = this.props.id
+            }
             console.log(values);
             this.props.submitHandler(values, action);
           }}

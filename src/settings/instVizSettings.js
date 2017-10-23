@@ -501,7 +501,7 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " disbursed ", " in ","; ", " in ","; ", " in ","; ", " in ","; and ", " in "," to students in @year."],
+				textSections: [["", " disbursed ", " in ","; ", " in ","; ", " in ","; ", " in ","; and ", " in ", " ", " to students in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
@@ -515,6 +515,7 @@ const instVizSettings = {
 					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"/indicator/iraq-afghanistan-service-grants"},
 					{variable:"workdisburse", format: "price"},
 					{linkText:"Federal Work-Study", linkUrl:"/indicator/campus-based-aid"},
+					{explainerText:"SEOG and Federal Work Study are campus-based aid programs. Dollars are distributed to selected schools, which then allocate awards to students at their discretion. Other grants are available to students at all institutions."},
 				]
 			},
 			source: "Federal Student Aid",
@@ -544,7 +545,7 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " awarded ", " ","; ", " ","; ", " ","; ", " ","; and ", " "," awards in @year."],
+				textSections: [["", " awarded ", " ","; ", " ","; ", " ","; ", " ","; and ", " ", " ", " awards in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
@@ -558,6 +559,7 @@ const instVizSettings = {
 					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"/indicator/iraq-afghanistan-service-grants"},
 					{variable:"workrecip", format: "number"},
 					{linkText:"Federal Work-Study", linkUrl:"/indicator/campus-based-aid"},
+					{explainerText:"SEOG and Federal Work Study are campus-based aid programs. Dollars are distributed to selected schools, which then allocate awards to students at their discretion. Other grants are available to students at all institutions."},
 				]
 			},
 			source: "Federal Student Aid",
@@ -955,11 +957,10 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, the three-year cohort default rate was ", " and the two-year cohort default rate was ", " at ", "."],
+				textSections: [["In @year, the three-year cohort default rate was ", " at ", "."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"cdr3", format: "percent"},
-					{variable:"cdr2", format: "percent"},
 					{variable:"name", format: "string"},
 				]
 			},
@@ -970,7 +971,6 @@ const instVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "Default Rate",
 					variables: [
-						{variable:"cdr2", displayName:"Two-year default rates", format: "percent", color: colors.turquoise.light },
 						{variable:"cdr3", displayName:"Three-year default rates", format: "percent", color: colors.purple.light},
 					]
 				}

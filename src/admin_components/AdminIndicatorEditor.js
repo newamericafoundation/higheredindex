@@ -47,7 +47,7 @@ class AdminIndicatorEditor extends React.Component {
               <h5 className="admin__form__main-link">Return to Admin Home</h5>
             </Link>
             
-            <AdminIndicatorEditorForm item={ this.indicatorData.data } action="update" />
+            <AdminIndicatorEditorForm id={this.props.id} item={ this.indicatorData.data } action="update" />
 
           </div>
         </div>

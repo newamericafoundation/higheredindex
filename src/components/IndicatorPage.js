@@ -94,7 +94,6 @@ class IndicatorPage extends React.Component {
           index={rankingVariables ? "2" : "1"}
           subtitle="Student data is collected from the Integrated Postsecondary Education Data System (IPEDS)"
           settings={indicatorTrendsSettings[path].trendsSettings} 
-          collectionName={"states_" + section}
           data= {this.props.usData} /> }
         <Footer />
       </div>

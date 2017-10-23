@@ -164,7 +164,7 @@ export default class RankChart extends React.Component {
         this.dataLabels
             .attr("x", (d) => { return this.x(d.state_id) + this.x.bandwidth()/2; })
             .attr("y", (d) => { return this.y(d[filter.variable]) + 5; })
-            .style("visibility", (d) => { console.log("in data labels", d[filter.variable], this.y(d[filter.variable]), height); return width < 800 || (height - this.y(d[filter.variable])) < 15 ? "hidden" : "visible"})
+            .style("visibility", (d) => { return width < 800 || (height - this.y(d[filter.variable])) < 15 ? "hidden" : "visible"})
             .style("fill", "white")
             .style("font-size", "10px")
             .style("font-weight", "bold")

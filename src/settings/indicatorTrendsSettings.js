@@ -3,9 +3,54 @@ import { colors } from './../helper_functions/colors.js';
 export const indicatorTrendsSettings = {
 	"acg-and-smart-grants": {
 		collection: "states_grants",
-		trendsSettings: [
-			
-		]
+		// trendsSettings: [
+			// {
+			// 	title: "ACG and SMART Grant Disbursments (Volume)",
+			// 	calloutSettings: {
+					
+			// 	},
+			// 	paragraphSettings: {
+
+			// 	},
+			// 	source: "Federal Student Aid",
+			// 	vizSettings: {
+			// 		chart1Settings: {
+			// 			type: "line-chart",
+			// 			yAxisLabel: "Disbursements",
+			// 			variables: [
+			// 				{variable:"acgdisburse", displayName:"Academic Competitiveness Grants", format: "price", color: colors.orange.light},
+			// 				{variable:"smartdisburse", displayName:"SMART Grants", format: "price", color: colors.brown.light},
+			// 			]
+			// 		}
+			// 	}
+			// },
+			// {
+			// 	title: "Iraq and Afghanistan Service Grant Recipients",
+			// 	calloutSettings: {
+			// 		type: "value",
+			// 		variables: [
+			// 			{variable: "iraqrecip", displayName:"Iraq and Afghanistan Service Grant recipients", format: "price"},
+			// 		]
+			// 	},
+			// 	paragraphSettings: {
+			// 		textSections: [["U.S. institutions awarded ", " Iraq/Afghanistan Service Grants in @year."],
+			// 			["The following chart depicts trends over time."]],
+			// 		variables: [
+			// 			{variable:"iraqrecip", format: "number"},
+			// 		]
+			// 	},
+			// 	source: "Federal Student Aid",
+			// 	vizSettings: {
+			// 		chart1Settings: {
+			// 			type: "line-chart",
+			// 			yAxisLabel: "Recipients",
+			// 			variables: [
+			// 				{variable:"iraqrecip", displayName:"Iraq/Afghanistan Service Grants", format: "price", color: colors.turquoise.light},
+			// 			]
+			// 		}
+			// 	}
+			// }
+		// ]
 	},
 	"enrollment": {
 		collection: "states_students",
@@ -525,11 +570,10 @@ export const indicatorTrendsSettings = {
 					]
 				},
 				paragraphSettings: {
-					textSections: [["In @year, the three-year cohort default rate was ", " and the two-year cohort default rate was ", " at U.S. institutions."],
+					textSections: [["In @year, the three-year cohort default rate was ", " at U.S. institutions."],
 						["The following chart depicts trends over time."]],
 					variables: [
 						{variable:"cdr3", format: "percent"},
-						{variable:"cdr2", format: "percent"},
 					]
 				},
 				source: "College Scorecard",
@@ -538,7 +582,6 @@ export const indicatorTrendsSettings = {
 						type: "line-chart",
 						yAxisLabel: "Default Rate",
 						variables: [
-							{variable:"cdr2", displayName:"Two-year default rates", format: "percent", color: colors.turquoise.light },
 							{variable:"cdr3", displayName:"Three-year default rates", format: "percent", color: colors.purple.light},
 						]
 					}
@@ -797,16 +840,18 @@ export const indicatorTrendsSettings = {
 				calloutSettings: {
 					type: "value",
 					variables: [
-						{variable: "netprice", displayName:"Net Price", format:"price"},
-						{variable: "netpriceinc", displayName:"Net Price for Low-income Students", format:"price"},
+						{variable: "netpricepub", displayName:"Net Price for Public Institutions", format:"price"},
+						{variable: "netpricepriv", displayName:"Net Price for Private Institutions", format:"price"},
 					]
 				},
 				paragraphSettings: {
-					textSections: [["In @year, the average cost of attendance after grant aid was ", ", and the average for low-income students was ", " at U.S. institutions."],
+					textSections: [["In @year, the average cost of attendance after grant aid was ", " at public institutions and ", " at private institutions; and the average for low-income students was ", " at public institutions and ", " at private institutions in the U.S."],
 						["The following chart depicts trends over time."]],
 					variables: [
-						{variable:"netprice", format: "price" },
-						{variable:"netpriceinc", format: "price"},
+						{variable:"netpricepub", format: "price" },
+						{variable:"netpriceincpub", format: "price"},
+						{variable:"netpricepriv", format: "price" },
+						{variable:"netpriceincpriv", format: "price"},
 					]
 				},
 				source: "IPEDS",
@@ -815,8 +860,10 @@ export const indicatorTrendsSettings = {
 						type: "line-chart",
 						yAxisLabel: "Price",
 						variables: [
-							{variable:"netprice", displayName:"Net Price", format: "price", color: colors.turquoise.light },
-							{variable:"netpriceinc", displayName:"Net Price for Low-income Students", format: "price", color: colors.purple.light },
+							{variable:"netpricepub", displayName:"Public institutions", format: "price", color: colors.turquoise.light },
+							{variable:"netpriceincpub", displayName:"Public institutions (low-income)", format: "price", color: colors.turquoise.medium },
+							{variable:"netpricepriv", displayName:"Private institutions", format: "price", color: colors.purple.light},
+							{variable:"netpriceincpriv", displayName:"Private institutions (low-income)", format: "price", color: colors.purple.medium},
 						]
 					}
 				}
