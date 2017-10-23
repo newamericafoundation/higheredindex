@@ -20,6 +20,7 @@ class SideMenuLayout extends React.Component {
           <meta property="og:site_name" content="New America Higher Ed Index" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content={window.location} />
+          <meta property="og:image" content="../static/img/school.jpg" />
         </Helmet>
         <SideMenu />
 
