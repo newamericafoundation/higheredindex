@@ -18,7 +18,9 @@
 		&__decorator {
 			font-size: 25px;
 			padding-left: 3px;
+			display: none;
 			@include breakpoint(medium) {
+				display: inline-block;
 				position: relative;
 				top: -3px;
 			}
@@ -63,16 +65,18 @@
 			padding-left: 7px;
 		}
 
-		&__left, &__right {
-			display: inline-block;
-		}
-
 		&__left {
+			display: inline-block;
 			padding-right: 3px;
 		}
 
 		&__right {
 			white-space: nowrap;
+			display: none;
+
+			@include breakpoint(medium) {
+				display: inline-block;
+			}
 		}
 	}
 
