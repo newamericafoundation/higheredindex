@@ -51,6 +51,12 @@ class DownloadHomePage extends React.Component {
       <div className="simple-page download-home-page">
         <Helmet>
           <title>Download Data</title>
+          <meta name="description" content="New America Higher Ed Index" />
+          <meta name="twitter:card" content="New America Higher Ed Index" />
+          <meta name="twitter:title" content="Higher Ed Index: Download Data" />
+          <meta name="twitter:description" content="New America Higher Ed Index"/>
+          <meta property="og:title" content="Higher Ed Index: Download Data" />
+          <meta property="og:description" content="New America Higher Ed Index" />
         </Helmet>
         <div className="simple-page__overlay"></div>
         <div className="simple-page__content">

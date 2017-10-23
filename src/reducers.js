@@ -142,7 +142,8 @@ function fetchedStPhotos(state = {}, action) {
         return Object.assign({}, state, {
           [action.id] : {
             isFetching: false,
-            photoUrl: action.photoUrl
+            photoUrl: action.photoUrl,
+            attribution: action.attribution
           }
         })
       } else {

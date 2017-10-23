@@ -188,12 +188,13 @@ export function requestProfilePhoto(id, profileType) {
    }
 }
 
-export function receiveProfilePhoto(id, profileType, photoUrl) {
+export function receiveProfilePhoto(id, profileType, photoUrl, attribution) {
   return { 
       type: RECEIVE_PROFILE_PHOTO, 
       id,
       profileType, 
-      photoUrl
+      photoUrl,
+      attribution
     }
 }
 
@@ -208,16 +209,18 @@ export function fetchProfilePhoto(id, profileType) {
     }
     return googlePlacesService.textSearch(params, (results, status) => {
       console.log(results);
-      let photoUrl;
+      let photoUrl, attribution;
       if (results && results[0] && results[0].photos) {
         let photo = results[0].photos[0];
+        console.log(photo)
         if (photo.height > 500 && photo.width > 750) {
           photoUrl = photo.getUrl({'maxWidth': 1500, 'maxHeight': 1500});
+          attribution = photo.html_attributions[0];
         }
       } else {
         photoUrl = null;
       }
-      dispatch(receiveProfilePhoto(id, profileType, photoUrl))
+      dispatch(receiveProfilePhoto(id, profileType, photoUrl, attribution))
     });
 
       // In a real world app, you also want to

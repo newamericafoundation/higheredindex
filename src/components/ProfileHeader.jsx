@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProfilePhoto } from '../actions'
+import {Helmet} from "react-helmet";
 import SvgIcon from './SvgIcon'
 let d3 = require("d3");
 
@@ -21,12 +22,15 @@ class ProfileHeader extends React.Component {
 	render() {	
 		const { fetchedPhotos, name, id, profileType } = this.props
 		let divStyle = {};
+		let attribution;
+
 		if (profileType == "indicator") {
 			divStyle.backgroundImage = 'url(' + indicatorImageUrl + (Math.random() * 30 | 0) + '.jpg)'
   		} else if (fetchedPhotos[id] && !fetchedPhotos[id].isFetching) {
   			this.photoUrl = fetchedPhotos[id].photoUrl;
   			if (this.photoUrl) {
 				divStyle.backgroundImage = 'url(' + this.photoUrl + ')';
+				attribution = fetchedPhotos[id].attribution
 		    } else {
 				divStyle.backgroundImage = 'url(' + fallbackImageUrl + (Math.random() * 2 | 0) + '.jpg)'
 		    }
@@ -34,6 +38,10 @@ class ProfileHeader extends React.Component {
 
 		return (
 			<div className="profile-header-wrapper">
+				{this.photoUrl && <Helmet>
+					<meta name="twitter:image" content={this.photoUrl} />
+					<meta property="og:image" content={this.photoUrl} />
+				</Helmet>}
 				<div className="profile-header" style={divStyle}>
 					<div className="profile-header__content">
 						<div className="profile-header__icon"> 
@@ -43,6 +51,7 @@ class ProfileHeader extends React.Component {
 					</div>
 				</div>
 				<div className="profile-header__overlay"></div>
+				{attribution && <div className="profile-header__attribution" dangerouslySetInnerHTML={{__html: attribution}} />}
 			</div>
 		)
 	}
