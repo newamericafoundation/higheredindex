@@ -1,36 +1,12 @@
 import { colors } from './../helper_functions/colors.js';
 
-export const indicatorList = [
-	"enrollment":{ name: "Enrollment", type: "indicator" },
-	"direct-loans":{ name: "Direct Loans", path: "direct_loans", type: "indicator" },
-	"ffel-loans":{ name: "FFEL Loans", path: "ffel_loans", type: "indicator" },
-
-	{ name: "Graduate PLUS Loans", path: "grad_plus_loans", type: "indicator" },
-	{ name: "Parent PLUS Loans", path: "parent_plus_loans", type: "indicator" },
-	{ name: "Perkins Loans", path: "perkins_loans", type: "indicator" },
-	{ name: "Three-year Repayment Rates", path: "three_year_repay", type: "indicator" },
-	{ name: "Cohort Default Rates", path: "cohort_default", type: "indicator" },
-	{ name: "Student Loans", path: "student_loans", type: "indicator" },
-	{ name: "Pell Grants", path: "pell_grants", type: "indicator" },
-	{ name: "Supplemental Educational Opportunity Grants", path: "seog", type: "indicator" },
-	{ name: "TEACH Grants", path: "teach_grants", type: "indicator" },
-	{ name: "Iraq and Afghanistan Service Grants", path: "iraq_afghanistan_grants", type: "indicator" },
-	{ name: "Federal Work Study", path: "fed_work_study", type: "indicator" },
-	{ name: "State and Local Aid", path: "state_local_aid", type: "indicator" },
-	{ name: "Sticker Price", path: "sticker_price", type: "indicator" },
-	{ name: "Net Price", path: "net_price", type: "indicator" },
-	{ name: "Instructional Expenses", path: "instructional_expenses", type: "indicator" },
-	{ name: "Graduation Rate", path: "grad_rate", type: "indicator" },
-	{ name: "Endowment", path: "endowment", type: "indicator" },
-	{ name: "90/10 Proportion", path: "9010_proportion", type: "indicator" },
-	{ name: "SAT/ACT Average", path: "sat_act_average", type: "indicator" },
-	{ name: "Historically Black Colleges and Universities", path: "hbcu", type: "indicator" },
-	{ name: "Student Aid", path: "student_aid", type: "indicator" },
-	{ name: "Postgraduate Earnings", path: "postgrad_earnings", type: "indicator" },
-	{ name: "Student Loan Debt", path: "student_loan_debt", type: "indicator" },
-]
-
 export const indicatorTrendsSettings = {
+	"acg-and-smart-grants": {
+		collection: "states_grants",
+		trendsSettings: [
+			
+		]
+	},
 	"enrollment": {
 		collection: "states_students",
 		trendsSettings: [

@@ -37,25 +37,22 @@ class AdminIndicatorEditor extends React.Component {
     this.indicatorData = fetchedIndicatorSettings[id]
 
     if (this.indicatorData && !this.indicatorData.isFetching) {
-      if (this.indicatorData.data) {
-        return (
-          <div>
-            <AdminStatusBar status={updateStatus} />
-            <div className="admin__form">
-              <h1 className="admin__form__title">Edit Indicator: {this.props.id}</h1>
-              <Link to={'/admin/'}>
-                <h5 className="admin__form__main-link">Return to Admin Home</h5>
-              </Link>
-              
-              <AdminIndicatorEditorForm item={ this.indicatorData.data } action="update" />
+      
+      return (
+        <div>
+          <AdminStatusBar status={updateStatus} />
+          <div className="admin__form">
+            <h1 className="admin__form__title">Edit Indicator: {this.props.id}</h1>
+            <Link to={'/admin/'}>
+              <h5 className="admin__form__main-link">Return to Admin Home</h5>
+            </Link>
+            
+            <AdminIndicatorEditorForm item={ this.indicatorData.data } action="update" />
 
-            </div>
           </div>
-        )
-      }
-      else {
-        return <NotFoundPage/>
-      }
+        </div>
+      )
+      
     }
     
     return <h1> Loading ... </h1>

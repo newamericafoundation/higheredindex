@@ -112,7 +112,9 @@ export function fetchProfile(id, profileType) {
       	console.log("this is the json response")
       	console.log(json);
 
-        dispatch(changeCurrProfile(id, json.name, profileType))
+        if (json) {
+          dispatch(changeCurrProfile(id, json.name, profileType))
+        }
         dispatch(receiveProfile(id, profileType, json))
       })
 

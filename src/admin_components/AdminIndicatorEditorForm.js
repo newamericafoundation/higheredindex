@@ -12,7 +12,7 @@ class AdminIndicatorEditorForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      richTextDescription: RichTextEditor.createValueFromString(props.item.description, 'html')
+      richTextDescription: RichTextEditor.createValueFromString(props.item ? props.item.description : "", 'html')
     }
   }
 
