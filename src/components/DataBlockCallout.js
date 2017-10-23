@@ -19,15 +19,11 @@ class DataBlockCallout extends React.Component {
     	const {settings, maxYear, data} = this.props;
 		const {type, direction, variables} = settings;
 
-		console.log(data)
-
     	{variables.map((variable) => {
       		if (type == "ranking" && isFiftyState(data.state) && data[variable.variable] && data[variable.variable][maxYear]) {
                 let value;
                 
 				let rankingKey = data.path + "_" + variable.variable;
-				console.log(this.props.fetchedRankings)
-				console.log(rankingKey)
 
 				if (!this.props.fetchedRankings[rankingKey] && !this.props.fetchedRankings[rankingKey] != "fetching") {
 					this.sendRankCalloutRequest(data, variable, direction)
@@ -67,8 +63,6 @@ class DataBlockCallout extends React.Component {
     sendRankCalloutRequest(data, variable, direction) {
         const {collectionName, maxYear} = this.props;
 
-        console.log(collectionName, direction, variable.variable, maxYear, data[variable.variable][maxYear], data.path)
-            
         this.props.fetchRanking(collectionName == "states_schools" ? "states_schools_all" : collectionName, direction, variable.variable, maxYear, data[variable.variable][maxYear], data.path)
     }
 
@@ -87,8 +81,6 @@ class DataBlockCallout extends React.Component {
       			      		value = this.getValueCallout(data, variable);
                         } else {
 							let rankingKey = data.path + "_" + variable.variable;
-							console.log(this.props.fetchedRankings)
-							console.log(rankingKey)
 
 							if (this.props.fetchedRankings[rankingKey]) {
 								value = this.props.fetchedRankings[rankingKey];

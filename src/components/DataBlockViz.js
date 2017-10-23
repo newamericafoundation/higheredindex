@@ -22,7 +22,6 @@ export default class DataBlockViz extends React.Component {
   }
 
   changeSector(newSector) {
-    console.log(newSector)
     this.setState({
       sector: newSector
     })
@@ -42,9 +41,7 @@ export default class DataBlockViz extends React.Component {
       }
     }
 
-    console.log(settings, this.state, currData)
     if (currData) {
-      
       return (
       	<div className="data-block__viz">
           {sector && settings.chart1Settings.type != "table" && settings.chart1Settings.type != "state-map" &&

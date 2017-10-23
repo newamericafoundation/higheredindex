@@ -8,7 +8,6 @@ import { fetchCongDistrictInfo } from '../actions.js';
 class DataBlock extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
   }
 
   componentWillMount() {
@@ -24,11 +23,8 @@ class DataBlock extends React.Component {
   render() {
   	let {settings, data, collectionName, fetchedCongDistrictInfo} = this.props,
       {title, paragraphSettings, vizSettings} = settings;
-      console.log(title, data)
-    if (!data) { return null }
-      console.log(title, paragraphSettings)
 
-    console.log(collectionName)
+    if (!data) { return null }
 
     return (
       <div className="data-block">
@@ -56,6 +52,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(DataBlock)
-
