@@ -477,7 +477,7 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions disbursed ", " in ", "; ", " in ","; ", " in ","; ", " in ","; and ", " in ", " ", " to students in @year."],
+				textSections: [["", " institutions disbursed ", " in ", "; ", " in ","; ", " in ","; ", " in ","; ", " in ","; ", " in ","; and ", " in ", " ", " to students in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
@@ -489,6 +489,10 @@ const stVizSettings = {
 					{linkText:"TEACH Grants", linkUrl:"/indicator/teach-grants"},
 					{variable:"iraqdisburse", format: "price"},
 					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"/indicator/iraq-afghanistan-service-grants"},
+					{variable:"acgdisburse", format: "price"},
+					{linkText:"Academic Competitiveness Grants", linkUrl:"/indicator/acg-and-smart-grants"},
+					{variable:"smartdisburse", format: "price"},
+					{linkText:"SMART Grants", linkUrl:"/indicator/acg-and-smart-grants"},
 					{variable:"workdisburse", format: "price"},
 					{linkText:"Federal Work-Study", linkUrl:"/indicator/campus-based-aid"},
 					{explainerText:"SEOG and Federal Work Study are campus-based aid programs. Dollars are distributed to selected schools, which then allocate awards to students at their discretion. Other grants are available to students at all institutions."},
@@ -521,7 +525,7 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " institutions awarded ", " ","; ", " ","; ", " ","; ", " ","; and ", " ", " ", " awards in @year."],
+				textSections: [["", " institutions awarded ", " ","; ", " ","; ", " ","; ", " ","; ", " ","; ", " ","; and ", " ", " ", " awards in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
@@ -533,6 +537,10 @@ const stVizSettings = {
 					{linkText:"TEACH Grants", linkUrl:"/indicator/teach-grants"},
 					{variable:"iraqrecip", format: "number"},
 					{linkText:"Iraq/Afghanistan Service Grants", linkUrl:"/indicator/iraq-afghanistan-service-grants"},
+					{variable:"acgrecip", format: "number"},
+					{linkText:"Academic Competitiveness Grants", linkUrl:"/indicator/acg-and-smart-grants"},
+					{variable:"smartrecip", format: "number"},
+					{linkText:"SMART Grants", linkUrl:"/indicator/acg-and-smart-grants"},
 					{variable:"workrecip", format: "number"},
 					{linkText:"Federal Work-Study", linkUrl:"/indicator/campus-based-aid"},
 					{explainerText:"SEOG and Federal Work Study are campus-based aid programs. Dollars are distributed to selected schools, which then allocate awards to students at their discretion. Other grants are available to students at all institutions."},
