@@ -20,6 +20,22 @@ class DataBlock extends React.Component {
       }
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   const {getCongDistrictInfo, fetchedCongDistrictInfo, data, settings} = nextProps;
+  //   console.log("in component will receive Props Data Block")
+  //   console.log(data.state, this.props.data.state)
+  //   console.log(fetchedCongDistrictInfo)
+    
+  //   if (settings.vizSettings.chart1Settings.type == "state-map" && data.state != this.props.data.state) {
+
+      
+
+  //     if (!fetchedCongDistrictInfo[data.state]) {
+  //       getCongDistrictInfo(data.all.state);
+  //     }
+  //   }
+  // }
+
   render() {
   	let {settings, data, collectionName, fetchedCongDistrictInfo} = this.props,
       {title, paragraphSettings, vizSettings} = settings;

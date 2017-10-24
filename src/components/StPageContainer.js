@@ -38,7 +38,7 @@ class StPageContainer extends React.Component {
 
       if (fetchedSts[id]) {
         this.stData = fetchedSts[id]
-        dispatch(changeCurrProfile(id, this.stData.name, "state"))
+        dispatch(changeCurrProfile(id, this.stData.data.name, "state"))
       } else {
         dispatch(fetchProfile(id, "state"))
       }

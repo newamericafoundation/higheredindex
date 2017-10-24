@@ -16,8 +16,8 @@ class DataBlockParagraph extends React.Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		const {settings, maxYear, data, fetchedCongDistrictInfo} = this.props;
-
-        if (settings.usesCongressionalDistrictAggregate && this.state.congressionalDistrictAggregate == null) {
+        
+        if (prevProps.data.state !== data.state) {
         	if (fetchedCongDistrictInfo[data.state] && fetchedCongDistrictInfo[data.state] != "fetching") {
 	            this.districtCounts = fetchedCongDistrictInfo[data.state];
 

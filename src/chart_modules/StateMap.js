@@ -23,13 +23,6 @@ class StateMap extends React.Component {
 
         this.resizeFunc = this.resize.bind(this);
 
-        this.districtGeom = {
-            type: "GeometryCollection",
-            geometries: congressionalDistricts.objects.cb_2016_us_cd115_500k.geometries.slice()
-        }
-
-        // this.data = props.data;
-
 		this.state = {
             width: 0,
             height: 0,
@@ -51,11 +44,19 @@ class StateMap extends React.Component {
 
     componentDidUpdate(prevProps) {
         this.districtCounts = this.props.fetchedCongDistrictInfo[this.props.data.state];
-        console.log(this.districtCounts)
+
         if (!this.state.chart && this.districtCounts && this.districtCounts != "fetching" && this.districtCounts.length > 0) {
             
-            const chart = this.initialize();
+            let chart = this.initialize();
             
+            this.setState({
+                chart: chart
+            })
+        }
+
+        if (prevProps.data.state != this.props.data.state) {
+            this.svg.remove()
+            let chart = this.initialize();
             this.setState({
                 chart: chart
             })
@@ -95,7 +96,10 @@ class StateMap extends React.Component {
 
         let stateId = String(this.districtCounts[0]._id).slice(0, -2);
 
-        this.districtGeom.geometries = this.districtGeom.geometries.filter((geoElem) => { return parseInt(geoElem.properties.STATEFP, 10) == stateId})
+        this.districtGeom = {
+            type: "GeometryCollection",
+            geometries: congressionalDistricts.objects.cb_2016_us_cd115_500k.geometries.slice().filter((geoElem) => { return parseInt(geoElem.properties.STATEFP, 10) == stateId})
+        }
 
         this.paths = this.svg.append("g")
               .attr("class", "districts")
