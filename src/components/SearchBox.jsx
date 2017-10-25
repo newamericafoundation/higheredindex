@@ -161,17 +161,22 @@ class SearchBox extends React.Component {
 	// }
 
 
-	onChange(event, { newValue }) {
-		console.log("on change");
-		this.setState({
-	        value: newValue
-	    });
+	onChange(event, { newValue, method }) {
+		console.log("on change", event, method);
+
+		if (method === "type" || method === "click") {
+			this.setState({
+		        value: newValue
+		    });
+		}
 	}
 
 		// Autosuggest will call this function every time you need to update suggestions.
 		// You already implemented this logic above, so just use it.
-	onSuggestionsFetchRequested({ value, customNumSuggestions }) {
+	onSuggestionsFetchRequested(props) {
 		console.log("onSuggestionsFetchRequested")
+		console.log(props)
+		const { value, customNumSuggestions } = props
 		if (this.props.suggestionsChangedCallback) {
 	      let counts = this.getSuggestionCounts(value, this.props);
 	      this.props.suggestionsChangedCallback(counts);
@@ -224,8 +229,8 @@ class SearchBox extends React.Component {
 		}
 	}
 
-	getSuggestionValue(suggestion) {
-		console.log("getSuggestionValue")
+	getSuggestionValue(suggestion, a, b) {
+		console.log("getSuggestionValue", suggestion, a, b)
 		return suggestion.path
 	}
 
