@@ -1,0 +1,15 @@
+.api-docs-page {
+	&__table {
+		max-width: 750px;
+		margin: auto;
+		border-collapse: collapse;
+	
+		&__row, &__cell {
+			border: 1px solid white;
+		}
+
+		&__cell {
+			padding: 5px 7px;
+		}
+	}
+}

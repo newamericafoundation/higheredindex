@@ -16,15 +16,11 @@ import StPageContainer from './components/StPageContainer';
 import InstPageContainer from './components/InstPageContainer';
 import IndicatorPageContainer from './components/IndicatorPageContainer';
 import DownloadHomePage from './components/DownloadHomePage';
+import ApiDocsPage from './components/ApiDocsPage';
 import MethodologyPage from './components/MethodologyPage';
 import NotFoundPage from './components/NotFoundPage';
 import store from './store';
 
-const loggedIn = (state) => {
-	console.log("HERE IS THE STETE", store)
-	return 
-  // ...
-}
 
 const requireAuth = (nextState, replace) => {
 	console.log(store.getState())
@@ -48,6 +44,7 @@ const routes = (
 		    <Route path="institution/:id" component={InstPageContainer}/>
 		    <Route path="indicator/:id" component={IndicatorPageContainer}/>
 		    <Route path="download" component={DownloadHomePage}/>
+		    <Route path="api-documentation" component={ApiDocsPage}/>
 		    <Route path="methodology" component={MethodologyPage}/>
 		    <Route path="admin" component={AdminHome} onEnter={requireAuth}/>
 		    <Route path="admin/login" component={AdminLogin} />

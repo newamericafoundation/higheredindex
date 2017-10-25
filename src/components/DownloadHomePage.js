@@ -5,6 +5,8 @@ import Footer from './Footer';
 import { fetchDataInfo } from '../actions'
 import sectionSettings from '../settings/sectionSettings.js';
 import {Helmet} from "react-helmet";
+import { Link } from 'react-router';
+
 let d3 = require("d3")
 
 
@@ -43,7 +45,6 @@ class DownloadHomePage extends React.Component {
     })
     return retVal;
   }
-
   render() {
     const { dataInfo } = this.props;
 
@@ -63,6 +64,7 @@ class DownloadHomePage extends React.Component {
           <h5 className="simple-page__title">Download Data</h5>
           <p className="download-home-page__description">Data used on this site are available for download. Institution files each contains header information for each school, including the school name and location, sector, and unique identifiers, and other pertinent institutional characteristics. The schools file contains information on graduation and retention rates, transfer rates, cost of attendance, endowments, share of students receiving aid and the average amount of aid received, as well as other miscellaneous data presented in that section. Student files contain information on total enrollment, enrollment by student level and attendance intensity, and enrollment breakdowns by race and nontraditional student factors. Loans files contain information on loan disbursements and recipients for each type of federal loan, repayment rates, and cohort default rates. Grants file contain information on recipients and disbursements of federal grant aid, including Pell grants,  and the share of students receiving Pell and other types of aid. Outcomes files contain information on post-graduation earnings, debt levels.</p>
           <p className="download-home-page__description">State, sector, and national-level data are each based on aggregations of school level data, based on the geographic location of the headquarters of the school. Codebooks include variable names, source materials, and definitions, as well as a detailed explanation of how institution level data were aggregated to the state level. For each data file, variable names are followed by an underscore and the year to which the data refers; for the codebooks, a star is used in place of the year.</p>
+          <p className="download-home-page__description">For API documentation <Link to={'/api-documentation'}>click here</Link></p>
           <div className="download-home-page__section-container">
             <div className="download-home-page__section">
               <div className="download-home-page__section__icon">

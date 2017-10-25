@@ -275,7 +275,7 @@ export function fetchAllStatesData(collection) {
 
     dispatch(requestAllStatesData(collection))
 
-    return fetch(dbPath + 'all-states-data/' + collection)
+    return fetch(dbPath + 'full-collection/' + collection)
       .then(response => { return response.json()})
       .then(json => {
         console.log("this is the json response")
