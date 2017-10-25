@@ -677,14 +677,14 @@ export const indicatorTrendsSettings = {
 				calloutSettings: {
 					type: "value",
 					variables: [
-						{variable: "teachrecip", displayName:"TEACH Grant recipients", format: "price"},
+						{variable: "teachrecip", displayName:"TEACH Grant recipients", format: "number"},
 					]
 				},
 				paragraphSettings: {
 					textSections: [["U.S. institutions awarded ", " TEACH Grants in @year."],
 						["The following chart depicts trends over time."]],
 					variables: [
-						{variable:"teachrecip", format: "price"},
+						{variable:"teachrecip", format: "number"},
 					]
 				},
 				source: "Federal Student Aid",
@@ -693,7 +693,7 @@ export const indicatorTrendsSettings = {
 						type: "line-chart",
 						yAxisLabel: "Recipients",
 						variables: [
-							{variable:"teachrecip", displayName:"TEACH Grants", format: "price", color: colors.turquoise.light},
+							{variable:"teachrecip", displayName:"TEACH Grants", format: "number", color: colors.turquoise.light},
 						]
 					}
 				}
@@ -734,7 +734,7 @@ export const indicatorTrendsSettings = {
 				calloutSettings: {
 					type: "value",
 					variables: [
-						{variable: "iraqrecip", displayName:"Iraq and Afghanistan Service Grant recipients", format: "price"},
+						{variable: "iraqrecip", displayName:"Iraq and Afghanistan Service Grant recipients", format: "number"},
 					]
 				},
 				paragraphSettings: {
@@ -750,7 +750,7 @@ export const indicatorTrendsSettings = {
 						type: "line-chart",
 						yAxisLabel: "Recipients",
 						variables: [
-							{variable:"iraqrecip", displayName:"Iraq/Afghanistan Service Grants", format: "price", color: colors.turquoise.light},
+							{variable:"iraqrecip", displayName:"Iraq/Afghanistan Service Grants", format: "number", color: colors.turquoise.light},
 						]
 					}
 				}
