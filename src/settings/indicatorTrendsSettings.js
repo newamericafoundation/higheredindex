@@ -3,54 +3,52 @@ import { colors } from './../helper_functions/colors.js';
 export const indicatorTrendsSettings = {
 	"acg-and-smart-grants": {
 		collection: "states_grants",
-		// trendsSettings: [
-			// {
-			// 	title: "ACG and SMART Grant Disbursments (Volume)",
-			// 	calloutSettings: {
-					
-			// 	},
-			// 	paragraphSettings: {
-
-			// 	},
-			// 	source: "Federal Student Aid",
-			// 	vizSettings: {
-			// 		chart1Settings: {
-			// 			type: "line-chart",
-			// 			yAxisLabel: "Disbursements",
-			// 			variables: [
-			// 				{variable:"acgdisburse", displayName:"Academic Competitiveness Grants", format: "price", color: colors.orange.light},
-			// 				{variable:"smartdisburse", displayName:"SMART Grants", format: "price", color: colors.brown.light},
-			// 			]
-			// 		}
-			// 	}
-			// },
-			// {
-			// 	title: "Iraq and Afghanistan Service Grant Recipients",
-			// 	calloutSettings: {
-			// 		type: "value",
-			// 		variables: [
-			// 			{variable: "iraqrecip", displayName:"Iraq and Afghanistan Service Grant recipients", format: "price"},
-			// 		]
-			// 	},
-			// 	paragraphSettings: {
-			// 		textSections: [["U.S. institutions awarded ", " Iraq/Afghanistan Service Grants in @year."],
-			// 			["The following chart depicts trends over time."]],
-			// 		variables: [
-			// 			{variable:"iraqrecip", format: "number"},
-			// 		]
-			// 	},
-			// 	source: "Federal Student Aid",
-			// 	vizSettings: {
-			// 		chart1Settings: {
-			// 			type: "line-chart",
-			// 			yAxisLabel: "Recipients",
-			// 			variables: [
-			// 				{variable:"iraqrecip", displayName:"Iraq/Afghanistan Service Grants", format: "price", color: colors.turquoise.light},
-			// 			]
-			// 		}
-			// 	}
-			// }
-		// ]
+		trendsSettings: [
+			{
+				title: "ACG and SMART Grant Disbursments (Volume)",
+				paragraphSettings: {
+					textSections: [["U.S. institutions awarded ", " in Academic Competitiveness Grants and ", " in SMART Grants in @year."],
+						["The following chart depicts trends over time."]],
+					variables: [
+						{variable:"acgdisburse", format: "price"},
+						{variable:"smartdisburse", format: "price"},
+					]
+				},
+				source: "Federal Student Aid",
+				vizSettings: {
+					chart1Settings: {
+						type: "line-chart",
+						yAxisLabel: "Disbursements",
+						variables: [
+							{variable:"acgdisburse", displayName:"Academic Competitiveness Grants", format: "price", color: colors.turquoise.light},
+							{variable:"smartdisburse", displayName:"SMART Grants", format: "price", color: colors.blue.light},
+						]
+					}
+				}
+			},
+			{
+				title: "ACG and SMART Grant Recipients",
+				paragraphSettings: {
+					textSections: [["U.S. institutions awarded ", " Academic Competitiveness Grants and ", " SMART Grants in @year."],
+						["The following chart depicts trends over time."]],
+					variables: [
+						{variable:"acgrecip", format: "number"},
+						{variable:"smartrecip", format: "number"},
+					]
+				},
+				source: "Federal Student Aid",
+				vizSettings: {
+					chart1Settings: {
+						type: "line-chart",
+						yAxisLabel: "Recipients",
+						variables: [
+							{variable:"acgrecip", displayName:"Academic Competitiveness Grants", format: "number", color: colors.turquoise.light},
+							{variable:"smartrecip", displayName:"SMART Grants", format: "number", color: colors.blue.light},
+						]
+					}
+				}
+			}
+		]
 	},
 	"enrollment": {
 		collection: "states_students",
