@@ -53,7 +53,7 @@ class StPage extends React.Component {
     return (
       <div className="location-profile state" ref="stProfile">
         <Helmet>
-            <title>{this.props.stData.name}</title>
+            <title>Higher Ed Index | {this.props.stData.name}</title>
             <meta name="description" content="New America Higher Ed Index" />
             <meta name="twitter:card" content="New America Higher Ed Index" />
             <meta name="twitter:title" content={"Higher Ed Index: " + this.props.stData.name} />

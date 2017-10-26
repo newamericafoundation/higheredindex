@@ -50,7 +50,7 @@ class ApiDocsPage extends React.Component {
     return (
       <div className="simple-page download-home-page">
         <Helmet>
-          <title>API Documentation</title>
+          <title>Higher Ed Index | API Documentation</title>
         </Helmet>
         <div className="simple-page__overlay"></div>
         <div className="simple-page__content">

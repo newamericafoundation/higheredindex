@@ -591,14 +591,14 @@ const stVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "",
 					variables: [
-						{variable:"pellperc", displayName:"Percent receiving Pell Grants", format: "percent", color: colors.turquoise.dark },
+						{variable:"avepell", displayName:"Average Pell Grant award", format: "price", color: colors.turquoise.dark },
 					]
 				},
 				chart2Settings: {
 					type: "bar-chart",
 					yAxisLabel: "",
 					variables: [
-						{variable:"avepell", displayName:"Average Pell Grant award", format: "price", color: colors.turquoise.light },
+						{variable:"pellperc", displayName:"Percent receiving Pell Grants", format: "percent", color: colors.turquoise.light },
 					]
 				}
 			}
@@ -628,14 +628,14 @@ const stVizSettings = {
 					type: "line-chart",
 					yAxisLabel: "",
 					variables: [
-						{variable:"statelocalaidperc", displayName:"Percent receiving state and local aid", format: "percent", color: colors.purple.dark },
+						{variable:"avestatelocalaid", displayName:"Average state and local aid", format: "price", color: colors.purple.dark },
 					]
 				},
 				chart2Settings: {
 					type: "bar-chart",
 					yAxisLabel: "",
 					variables: [
-						{variable:"avestatelocalaid", displayName:"Average state and local aid", format: "price", color: colors.purple.light },
+						{variable:"statelocalaidperc", displayName:"Percent receiving state and local aid", format: "percent", color: colors.purple.light },
 					]
 				}
 			}
@@ -647,14 +647,12 @@ const stVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "dltotaldisburse", displayName:"Total direct loan volume", format:"price"},
+					{variable: "alltotaldisburse", displayName:"Total direct loan volume", format:"price"},
 				]
 			},
 			paragraphSettings: {
 				textSections: [["", " institutions disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates and graduates; ", " in Graduate PLUS Loans; ", " in Parent PLUS Loans; and ", " in ", " ", " to students in @year."],
 					["The following chart depicts trends over time."],
-					["", ""],
-					["", ""]
 					],
 				variables: [
 					{variable:"name", format: "string"},
@@ -666,15 +664,10 @@ const stVizSettings = {
 					// {variable:"alltotaldisburse", format: "price"},
 					{linkText:"Perkins Loans", linkUrl:"/indicator/campus-based-aid"},
 					{explainerText: "Perkins Loans are a campus-based aid program, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other loans are available to students at all institutions."},
-					{},
-					{},
-					{linkText:"Learn more about Direct Loans.", linkUrl:"/indicator/direct-loans"},
-					{},
-					{linkText:"Learn more about FFEL Loans.", linkUrl:"/indicator/ffel-loans"},
 				]
 			},
 			source: "Federal Student Aid",
-			indicatorLink: null,
+			indicatorLink: "federal-student-loans",
 			vizSettings: {
 				dividingLine: {year: 2010, text:"Prior to 2010, the Department of Education authorized loans through Direct Lending, and guaranteed loans from private lenders through the Family Federal Education Loan program. After 2010, all loans were made through direct lending. This graphic includes both FFEL and DL prior to 2010, and DL only after that point."},
 				chart1Settings: {
@@ -697,14 +690,12 @@ const stVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "dltotalrecip", displayName:"Total direct loan recipients", format:"number"},
+					{variable: "alltotalrecip", displayName:"Total direct loan recipients", format:"number"},
 				]
 			},
 			paragraphSettings: {
 				textSections: [["", " institutions authorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates and graduates; ", " Graduate PLUS Loans; ", " Parent PLUS Loans; and ", " ", " ", " in @year."],
 					["The following chart depicts trends over time."],
-					["", ""],
-					["", ""]
 					],
 				variables: [
 					{variable:"name", format: "string"},
@@ -716,15 +707,10 @@ const stVizSettings = {
 					// {variable:"alltotalrecip", format: "number"},
 					{linkText:"Perkins Loans", linkUrl:"/indicator/campus-based-aid"},
 					{explainerText: "Perkins Loans are a campus-based aid program, dollars are distributed to selected schools who then allocate awards to students at their discretion. Other loans are available to students at all institutions."},
-					{},
-					{},
-					{linkText:"Learn more about Direct Loans.", linkUrl:"/indicator/direct-loans"},
-					{},
-					{linkText:"Learn more about FFEL Loans.", linkUrl:"/indicator/ffel-loans"},
 				]
 			},
 			source: "Federal Student Aid",
-			indicatorLink: null,
+			indicatorLink: "federal-student-loans",
 			vizSettings: {
 				dividingLine: {year: 2010, text:"Prior to 2010, the Department of Education authorized loans through Direct Lending, and guaranteed loans from private lenders through the Family Federal Education Loan program. After 2010, all loans were made through direct lending. This graphic includes both FFEL and DL prior to 2010, and DL only after that point."},
 				chart1Settings: {

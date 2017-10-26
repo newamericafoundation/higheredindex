@@ -218,7 +218,7 @@ export const indicatorTrendsSettings = {
 
 		]
 	},
-	"direct-loans": {
+	"federal-student-loans": {
 		collection: "states_loans",
 		trendsSettings: [
 			{
@@ -226,7 +226,7 @@ export const indicatorTrendsSettings = {
 				calloutSettings: {
 					type: "value",
 					variables: [
-						{variable: "dltotaldisburse", displayName:"Total direct loan volume", format:"price"},
+						{variable: "alltotaldisburse", displayName:"Total direct loan volume", format:"price"},
 					]
 				},
 				paragraphSettings: {
@@ -234,11 +234,11 @@ export const indicatorTrendsSettings = {
 						["The following chart depicts trends over time."]
 						],
 					variables: [
-						{variable:"dlsubdisburse", format: "price"},
-						{variable:"dlunsubdisburse", format: "price"},
-						{variable:"dlsubgraddisburse", format: "price"},
-						{variable:"dlgraddisburse", format: "price"},
-						{variable:"dlparentdisburse", format: "price"},
+						{variable:"allsubdisburse", format: "price"},
+						{variable:"allunsubdisburse", format: "price"},
+						{variable:"allsubgraddisburse", format: "price"},
+						{variable:"allgraddisburse", format: "price"},
+						{variable:"allparentdisburse", format: "price"},
 					]
 				},
 				source: "Federal Student Aid",
@@ -248,12 +248,12 @@ export const indicatorTrendsSettings = {
 						type: "line-chart",
 						yAxisLabel: "Students",
 						variables: [
-							{variable:"dlsubdisburse", displayName:"Subsidized Stafford", format: "price", color: colors.turquoise.light},
-							{variable:"dlunsubdisburse", displayName:"Unsubsidized Stafford", format: "price", color: colors.turquoise.medium},
-							{variable:"dlsubgraddisburse", displayName:"Graduate Stafford", format: "price", color: colors.blue.light},
-							{variable:"dlgraddisburse", displayName:"Graduate PLUS", format: "price", color: colors.blue.medium},
-							{variable:"dlparentdisburse", displayName:"Parent PLUS", format: "price", color: colors.purple.light}, 
-							{variable:"dltotaldisburse", displayName:"Total", format: "price", color: colors.grey.dark}, 
+							{variable:"allsubdisburse", displayName:"Subsidized Stafford", format: "price", color: colors.turquoise.light},
+							{variable:"allunsubdisburse", displayName:"Unsubsidized Stafford", format: "price", color: colors.turquoise.medium},
+							{variable:"allsubgraddisburse", displayName:"Graduate Stafford", format: "price", color: colors.blue.light},
+							{variable:"allgraddisburse", displayName:"Graduate PLUS", format: "price", color: colors.blue.medium},
+							{variable:"allparentdisburse", displayName:"Parent PLUS", format: "price", color: colors.purple.light}, 
+							{variable:"alltotaldisburse", displayName:"Total", format: "price", color: colors.grey.dark}, 
 						]
 					}
 
@@ -264,7 +264,7 @@ export const indicatorTrendsSettings = {
 				calloutSettings: {
 					type: "value",
 					variables: [
-						{variable: "dltotalrecip", displayName:"Total direct loan recipients", format:"number"},
+						{variable: "alltotalrecip", displayName:"Total direct loan recipients", format:"number"},
 					]
 				},
 				paragraphSettings: {
@@ -272,11 +272,11 @@ export const indicatorTrendsSettings = {
 						["The following chart depicts trends over time."]
 						],
 					variables: [
-						{variable:"dlsubrecip", format: "number"},
-						{variable:"dlunsubrecip", format: "number"},
-						{variable:"dlsubgradrecip", format: "number"},
-						{variable:"dlgradrecip", format: "number"},
-						{variable:"dlparentrecip", format: "number"},
+						{variable:"allsubrecip", format: "number"},
+						{variable:"allunsubrecip", format: "number"},
+						{variable:"allsubgradrecip", format: "number"},
+						{variable:"allgradrecip", format: "number"},
+						{variable:"allparentrecip", format: "number"},
 					]
 				},
 				source: "Federal Student Aid",
@@ -286,88 +286,75 @@ export const indicatorTrendsSettings = {
 						type: "line-chart",
 						yAxisLabel: "Students",
 						variables: [
-							{variable:"dlsubrecip", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light},
-							{variable:"dlunsubrecip", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
-							{variable:"dlsubgradrecip", displayName:"Graduate Stafford", format: "number", color: colors.blue.light},
-							{variable:"dlgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.blue.medium},
-							{variable:"dlparentrecip", displayName:"Parent PLUS", format: "number", color: colors.purple.light}, 
-							{variable:"dltotalrecip", displayName:"Total", format: "number", color: colors.grey.dark}, 
+							{variable:"allsubrecip", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light},
+							{variable:"allunsubrecip", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
+							{variable:"allsubgradrecip", displayName:"Graduate Stafford", format: "number", color: colors.blue.light},
+							{variable:"allgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.blue.medium},
+							{variable:"allparentrecip", displayName:"Parent PLUS", format: "number", color: colors.purple.light}, 
+							{variable:"alltotalrecip", displayName:"Total", format: "number", color: colors.grey.dark}, 
 						]
 					}
 				}
 			},
 		]
 	},
-	"ffel-loans": {
-		collection: "states_loans",
+	"campus-based-aid": {
+		collection: "states_loans-states_grants",
 		trendsSettings: [
 			{
-				title: "Loan Disbursements (Volume)",
+				title: "Campus-based Aid Disbursements (Volume)",
 				paragraphSettings: {
-					textSections: [["In @year, the last year of the FFEL program, U.S. institutions disbursed ", " in subsidized Stafford Loans to undergraduates; ", " in unsubsidized Stafford Loans to undergraduates; ", " in unsubsidized graduate Stafford Loans; ", " in Graduate PLUS Loans; and ", " in Parent PLUS Loans to students."],
+					textSections: [["U.S. institutions disbursed ", " in Perkins Loans; ", " in Federal Supplemental Education Opportunity Grants; and ", " in Federal Work-Study to students in @year."],
 						["The following chart depicts trends over time."]
 						],
 					variables: [
-						{variable:"flsubdisburse", format: "price"},
-						{variable:"flunsubdisburse", format: "price"},
-						{variable:"flsubgraddisburse", format: "price"},
-						{variable:"flgraddisburse", format: "price"},
-						{variable:"flparentdisburse", format: "price"},
+						{variable:"perkdisburse", format: "price"},
+						{variable:"seogdisburse", format: "price"},
+						{variable:"workdisburse", format: "price"},
 					]
 				},
 				source: "Federal Student Aid",
+				indicatorLink: null,
 				vizSettings: {
 					chart1Settings: {
 						type: "line-chart",
 						yAxisLabel: "Students",
 						variables: [
-							{variable:"flsubdisburse", displayName:"Subsidized Stafford", format: "price", color: colors.turquoise.light},
-							{variable:"flunsubdisburse", displayName:"Unsubsidized Stafford", format: "price", color: colors.turquoise.medium},
-							{variable:"flsubgraddisburse", displayName:"Graduate Stafford", format: "price", color: colors.blue.light},
-							{variable:"flgraddisburse", displayName:"Graduate PLUS", format: "price", color: colors.blue.medium},
-							{variable:"flparentdisburse", displayName:"Parent PLUS", format: "price", color: colors.purple.light}, 
-							{variable:"fltotaldisburse", displayName:"Total", format: "price", color: colors.grey.dark}, 
+							{variable:"perkdisburse", displayName:"Perkins Loans", format: "price", color: colors.turquoise.light},
+							{variable:"seogdisburse", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "price", color: colors.blue.light},
+							{variable:"workdisburse", displayName:"Federal Work-Study", format: "price", color: colors.purple.light}, 
 						]
 					}
-
 				}
 			},
 			{
-				title: "Loan Recipients",
+				title: "Campus-based Aid Recipients",
 				paragraphSettings: {
-					textSections: [["In @year, the last year of the FFEL program, U.S. institutions suthorized ", " subsidized Stafford Loans to undergraduates; ", " unsubsidized Stafford Loans to undergraduates; ", " unsubsidized graduate Stafford Loans; ", " Graduate PLUS Loans; and ", " Parent PLUS Loans."],
+					textSections: [["U.S. institutions authorized ", " Perkins Loans; and awarded ", " Federal Supplemental Education Opportunity Grants and ", " Federal Work-Study awards in @year."],
 						["The following chart depicts trends over time."]
 						],
 					variables: [
-						{variable:"flsubrecip", format: "number"},
-						{variable:"flunsubrecip", format: "number"},
-						{variable:"flsubgradrecip", format: "number"},
-						{variable:"flgradrecip", format: "number"},
-						{variable:"flparentrecip", format: "number"},
+						{variable:"perkrecip", format: "number"},
+						{variable:"seogrecip", format: "number"},
+						{variable:"workrecip", format: "number"},
 					]
 				},
 				source: "Federal Student Aid",
+				indicatorLink: null,
 				vizSettings: {
 					chart1Settings: {
 						type: "line-chart",
 						yAxisLabel: "Students",
 						variables: [
-							{variable:"flsubrecip", displayName:"Subsidized Stafford", format: "number", color: colors.turquoise.light},
-							{variable:"flunsubrecip", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
-							{variable:"flsubgradrecip", displayName:"Graduate Stafford", format: "number", color: colors.blue.light},
-							{variable:"flgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.blue.medium},
-							{variable:"flparentrecip", displayName:"Parent PLUS", format: "number", color: colors.purple.light}, 
-							{variable:"fltotalrecip", displayName:"Total", format: "number", color: colors.grey.dark}, 
+							{variable:"perkrecip", displayName:"Perkins Loans", format: "number", color: colors.turquoise.light},
+							{variable:"seogrecip", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "number", color: colors.blue.light},
+							{variable:"workrecip", displayName:"Federal Work-Study", format: "number", color: colors.purple.light}, 
 						]
 					}
 				}
 			},
 		]
 	},
-	//need to combne two collections for this one
-	// "campus-based-aid": {
-	// 	collection: "students",
-	// },
 	"three-year-repayment-rates": {
 		collection: "states_loans",
 		trendsSettings: [
@@ -634,13 +621,98 @@ export const indicatorTrendsSettings = {
 			},
 		]
 	},
-	// need to combine two collections for this one
-	// "pell-grants": {
-	// 	collection: "students",
-	// 	trendsSettings: [
-
-	// 	]
-	// },
+	"pell-grants": {
+		collection: "states_grants",
+		trendsSettings: [
+			{
+				title: "Pell Disbursments (Volume)",
+				calloutSettings: {
+					type: "value",
+					variables: [
+						{variable: "pelldisburse", displayName:"Pell Grant disbursements", format: "price"},
+					]
+				},
+				paragraphSettings: {
+					textSections: [["U.S. institutions disbursed ", " in Pell Grants to students in @year."],
+						["The following chart depicts trends over time."]],
+					variables: [
+						{variable:"pelldisburse", format: "price"},
+					]
+				},
+				source: "Federal Student Aid",
+				vizSettings: {
+					chart1Settings: {
+						type: "line-chart",
+						yAxisLabel: "Disbursements",
+						variables: [
+							{variable:"pelldisburse", displayName:"Pell Grants", format: "price", color: colors.turquoise.light},
+						]
+					}
+				}
+			},
+			{
+				title: "Pell Recipients",
+				calloutSettings: {
+					type: "value",
+					variables: [
+						{variable: "pellrecip", displayName:"pell Grant recipients", format: "number"},
+					]
+				},
+				paragraphSettings: {
+					textSections: [["U.S. institutions awarded ", " Pell Grants in @year."],
+						["The following chart depicts trends over time."]],
+					variables: [
+						{variable:"pellrecip", format: "number"},
+					]
+				},
+				source: "Federal Student Aid",
+				vizSettings: {
+					chart1Settings: {
+						type: "line-chart",
+						yAxisLabel: "Recipients",
+						variables: [
+							{variable:"pellrecip", displayName:"Pell Grants", format: "number", color: colors.turquoise.light},
+						]
+					}
+				}
+			},
+			{
+				title: "Pell Awards",
+				calloutSettings: {
+					type: "value",
+					variables: [
+						{variable: "avepell", displayName:"Average Pell award", format:"price"},
+						{variable: "pellperc", displayName:"Percent Pell recipients", format:"percent"},
+					]
+				},
+				paragraphSettings: {
+					textSections: [["In @year, the average Pell Grant award was ", ", and ", " of students received awards at U.S. institutions."],
+						["The following chart depicts trends over time."]],
+					variables: [
+						{variable:"avepell", format: "price" },
+						{variable:"pellperc", format: "percent"},
+					]
+				},
+				source: "IPEDS",
+				vizSettings: {
+					chart1Settings: {
+						type: "line-chart",
+						yAxisLabel: "",
+						variables: [
+							{variable:"avepell", displayName:"Average Pell Grant award", format: "price", color: colors.turquoise.dark },
+						]
+					},
+					chart2Settings: {
+						type: "bar-chart",
+						yAxisLabel: "",
+						variables: [
+							{variable:"pellperc", displayName:"Percent receiving Pell Grants", format: "percent", color: colors.turquoise.light },
+						]
+					}
+				}
+			},
+		]
+	},
 	"teach-grants": {
 		collection: "states_grants",
 		trendsSettings: [
@@ -781,14 +853,14 @@ export const indicatorTrendsSettings = {
 						type: "line-chart",
 						yAxisLabel: "",
 						variables: [
-							{variable:"statelocalaidperc", displayName:"Percent receiving state and local aid", format: "percent", color: colors.purple.dark },
+							{variable:"avestatelocalaid", displayName:"Average state and local aid", format: "price", color: colors.purple.dark },
 						]
 					},
 					chart2Settings: {
 						type: "bar-chart",
 						yAxisLabel: "",
 						variables: [
-							{variable:"avestatelocalaid", displayName:"Average state and local aid", format: "price", color: colors.purple.light },
+							{variable:"statelocalaidperc", displayName:"Percent receiving state and local aid", format: "percent", color: colors.purple.light },
 						]
 					}
 				}

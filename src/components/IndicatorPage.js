@@ -8,7 +8,7 @@ import ProfileHeader from './ProfileHeader.jsx';
 import DataBlock from './DataBlock';
 import { indicatorTrendsSettings } from '../settings/indicatorTrendsSettings';
 import { connect } from 'react-redux'
-import { toggleTopNavProfileName } from '../actions'
+import { toggleTopNavProfileName, changeCurrProfileSection } from '../actions'
 import $ from 'jquery';
 import Footer from './Footer';
 import {Helmet} from "react-helmet";
@@ -68,7 +68,7 @@ class IndicatorPage extends React.Component {
     return (
       <div className="location-profile indicator">
         <Helmet>
-          <title>{this.props.indicatorSettings.name}</title>
+          <title>Higher Ed Index | {this.props.indicatorSettings.name}</title>
           <meta name="description" content="New America Higher Ed Index" />
           <meta name="twitter:card" content="New America Higher Ed Index" />
           <meta name="twitter:title" content={"Higher Ed Index: " + this.props.indicatorSettings.name} />

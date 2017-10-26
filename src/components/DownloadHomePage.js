@@ -51,7 +51,7 @@ class DownloadHomePage extends React.Component {
     return (
       <div className="simple-page download-home-page">
         <Helmet>
-          <title>Download Data</title>
+          <title>Higher Ed Index | Download Data</title>
           <meta name="description" content="New America Higher Ed Index" />
           <meta name="twitter:card" content="New America Higher Ed Index" />
           <meta name="twitter:title" content="Higher Ed Index: Download Data" />
