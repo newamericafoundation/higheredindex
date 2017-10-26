@@ -71,7 +71,7 @@ class AdminDataUpload extends React.Component {
 
     if (this.state.fileData) {
       let collectionName = granularity + "_" + type;
-      collectionName += sector ? "_" + sector : "";
+      collectionName += collection_name == "states_schools" && sector ? "_" + sector : "";
       uploadFile(collectionName, this.state.fileData);
     }
   }
