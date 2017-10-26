@@ -7,7 +7,7 @@
 	position: relative;
 	margin-top: 25px;
 
-	@include breakpoint(medium) {
+	@include medium {
 		display: table;
 		padding: 50px 25px;
 	}
@@ -16,7 +16,7 @@
 		width: 100%;
 		display: block;
 
-		@include breakpoint(medium) {
+		@include medium {
 			display: table-cell;
 			width: 50%;
 			vertical-align: top;
@@ -26,7 +26,7 @@
 	&__right {
 		padding-top: 25px;
 
-		@include breakpoint(medium) {
+		@include medium {
 			padding-top: 0px;
 		}
 	}
@@ -39,7 +39,7 @@
 		display: table-cell;
 		width: 25%;
 		padding: 0px;
-		@include breakpoint(medium) {
+		@include medium {
 			padding: 0px 10%;
 		}
 

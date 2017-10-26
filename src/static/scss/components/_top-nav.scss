@@ -19,7 +19,7 @@
 			font-size: 25px;
 			padding-left: 3px;
 			display: none;
-			@include breakpoint(medium) {
+			@include medium {
 				display: inline-block;
 				position: relative;
 				top: -3px;
@@ -34,7 +34,7 @@
 			line-height: 1.1;
 			font-size: 25px;
 
-			@include breakpoint(medium) {
+			@include medium {
 				font-size: 32px;
 			}
 
@@ -49,7 +49,7 @@
 				display: inline-block;
 				height: 17px;
 				margin-left: 10px;
-				@include breakpoint(medium) {
+				@include medium {
 					height: 22px;
 				}
 			}
@@ -74,7 +74,7 @@
 			white-space: nowrap;
 			display: none;
 
-			@include breakpoint(medium) {
+			@include medium {
 				display: inline-block;
 			}
 		}

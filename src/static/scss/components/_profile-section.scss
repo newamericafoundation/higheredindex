@@ -12,7 +12,7 @@
 		margin-bottom: 3px !important;
 		font-size: 25px;
 
-		@include breakpoint(medium) {
+		@include medium {
 			font-size: 30px;
 		}
 	}
