@@ -2,37 +2,34 @@
 
 import React from 'react'
 import { Route, IndexRoute } from 'react-router';
-import AdminHome from './admin_components/AdminHome';
-import AdminDataUpload from './admin_components/AdminDataUpload';
-import AdminCodebookUpload from './admin_components/AdminCodebookUpload';
-import AdminMethodology from './admin_components/AdminMethodology';
-import AdminLogin from './admin_components/AdminLogin';
-import AdminIndicatorEditor from './admin_components/AdminIndicatorEditor';
-import SideMenuLayout from './components/SideMenuLayout';
-import TopNavLayout from './components/TopNavLayout';
-import LandingPage from './components/LandingPage.jsx';
-import ListingsPage from './components/ListingsPage.jsx';
-import StPageContainer from './components/StPageContainer';
-import InstPageContainer from './components/InstPageContainer';
-import IndicatorPageContainer from './components/IndicatorPageContainer';
-import DownloadHomePage from './components/DownloadHomePage';
-import ApiDocsPage from './components/ApiDocsPage';
-import MethodologyPage from './components/MethodologyPage';
-import NotFoundPage from './components/NotFoundPage';
+import AdminHome from './react_components/admin_components/AdminHome';
+import AdminDataUpload from './react_components/admin_components/AdminDataUpload';
+import AdminCodebookUpload from './react_components/admin_components/AdminCodebookUpload';
+import AdminMethodology from './react_components/admin_components/AdminMethodology';
+import AdminLogin from './react_components/admin_components/AdminLogin';
+import AdminIndicatorEditor from './react_components/admin_components/AdminIndicatorEditor';
+import SideMenuLayout from './react_components/pages/SideMenuLayout';
+import TopNavLayout from './react_components/pages/TopNavLayout';
+import LandingPage from './react_components/pages/LandingPage';
+import ListingsPage from './react_components/pages/ListingsPage';
+import StPageContainer from './react_components/pages/StPageContainer';
+import InstPageContainer from './react_components/pages/InstPageContainer';
+import IndicatorPageContainer from './react_components/pages/IndicatorPageContainer';
+import DownloadHomePage from './react_components/pages/DownloadHomePage';
+import ApiDocsPage from './react_components/pages/ApiDocsPage';
+import MethodologyPage from './react_components/pages/MethodologyPage';
+import NotFoundPage from './react_components/pages/NotFoundPage';
 import store from './store';
 
 
 const requireAuth = (nextState, replace) => {
-	console.log(store.getState())
-  if (!store.getState().adminLoginStatus) {
-  	console.log("redirecting")
-    replace({
-      pathname: '/admin/login'
-    })
-  } else {
-  	console.log("staying")
-  	return;
-  }
+	if (!store.getState().adminLoginStatus) {
+		replace({
+			pathname: '/admin/login'
+		})
+	} else {
+		return;
+	}
 }
 
 const routes = (
