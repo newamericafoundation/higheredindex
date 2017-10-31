@@ -63,9 +63,9 @@ class AdminMethodology extends React.Component {
                 submitHandler(values);
               }}
             >
-              {, values, addValue, removeValue}) => {
+              {({values, addValue, removeValue}) => {
                 return (
-                  <form onSubmit}>
+                  <form onSubmit={submitForm}>
                     <div className="admin__form__field">
                       <h5 className="admin__form__field-label">Description</h5>
                       <RichTextEditor

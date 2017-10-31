@@ -8,8 +8,8 @@ import AdminCodebookUpload from './react_components/admin_components/AdminCodebo
 import AdminMethodology from './react_components/admin_components/AdminMethodology';
 import AdminLogin from './react_components/admin_components/AdminLogin';
 import AdminIndicatorEditor from './react_components/admin_components/AdminIndicatorEditor';
-import SideMenuLayout from './react_components/pages/SideMenuLayout';
-import TopNavLayout from './react_components/pages/TopNavLayout';
+import SideMenuLayout from './react_components/components/SideMenuLayout';
+import TopNavLayout from './react_components/components/TopNavLayout';
 import LandingPage from './react_components/pages/LandingPage';
 import ListingsPage from './react_components/pages/ListingsPage';
 import StPageContainer from './react_components/pages/StPageContainer';

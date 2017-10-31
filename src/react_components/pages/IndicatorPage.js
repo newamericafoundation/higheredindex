@@ -4,9 +4,9 @@ import {Helmet} from "react-helmet";
 import $ from 'jquery';
 
 import NotFoundPage from './NotFoundPage';
-import SectionNav from '../components/SectionNav.jsx';
+import SectionNav from '../components/SectionNav';
 import ProfileSection from '../components/ProfileSection';
-import ProfileHeader from '../components/ProfileHeader.jsx';
+import ProfileHeader from '../components/ProfileHeader';
 import DataBlock from '../components/DataBlock';
 import { indicatorTrendsSettings } from '../../settings/indicatorTrendsSettings';
 import { toggleTopNavProfileName, changeCurrProfileSection } from '../../actions'

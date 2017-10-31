@@ -5,9 +5,9 @@ import { Helmet } from "react-helmet";
 import $ from 'jquery';
 
 import NotFoundPage from './NotFoundPage';
-import SectionNav from '../components/SectionNav.jsx';
+import SectionNav from '../components/SectionNav';
 import ProfileSection from '../components/ProfileSection';
-import ProfileHeader from '../components/ProfileHeader.jsx';
+import ProfileHeader from '../components/ProfileHeader';
 import Footer from '../components/Footer';
 import stVizSettings from '../../settings/stVizSettings';
 import { toggleTopNavProfileName, changeCurrProfileSection } from '../../actions';

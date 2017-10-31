@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 
-import SearchBox from "./SearchBox.jsx";
+import SearchBox from "./SearchBox";
 import SvgIcon from './SvgIcon';
 
 export default class ExpandableSearchBox extends React.Component {

@@ -10,24 +10,23 @@ import SvgIcon from './SvgIcon'
 class DataBlockParagraph extends React.Component {
 	constructor(props) {
 		super(props)
+
 		this.state = {
             congressionalDistrictAggregate: null
         }
 	}
 
-	componentDidUpdate(prevProps, prevState) {
+	componentWillReceiveProps(nextProps) {
 		const {settings, maxYear, data, fetchedCongDistrictInfo} = this.props;
         
-        if (prevProps.data.state !== data.state) {
-        	if (fetchedCongDistrictInfo[data.state] && fetchedCongDistrictInfo[data.state] != "fetching") {
-	            this.districtCounts = fetchedCongDistrictInfo[data.state];
+        if (nextProps.data.state !== data.state || (fetchedCongDistrictInfo[data.state] == "fetching" && nextProps.fetchedCongDistrictInfo[data.state] != "fetching")) {
+            this.districtCounts = nextProps.fetchedCongDistrictInfo[data.state];
 
-	     		let average = d3.sum(this.districtCounts, (d) => { return d.count})/this.districtCounts.length;
-	            
-	            this.setState({
-	                congressionalDistrictAggregate: Math.round(average*100)/100
-	            })
-	        }
+     		let average = d3.sum(this.districtCounts, (d) => { return d.count})/this.districtCounts.length;
+
+            this.setState({
+                congressionalDistrictAggregate: Math.round(average*100)/100
+            })
         }
     }
 
@@ -71,7 +70,9 @@ class DataBlockParagraph extends React.Component {
 									<Link key={j} to={variable.linkUrl}><span className="data-block__paragraph__link">{variable.linkText}</span></Link>
 								)
 							} else if (variable.congressionalDistrictAggregate) {
+								console.log("USES CONG DISTRICT!!!!")
 								textSection.push(<span className="data-block__paragraph__data" key={j}>{this.state.congressionalDistrictAggregate}</span>)
+								console.log(this.state.congressionalDistrictAggregate)
 							} else if (variable.explainerText) {
 								let explainerIndex = explainerPopups.length
 								textSection.push(<div className="data-block__paragraph__explainer" ref={"explainer-text_" + explainerIndex} key={j} onMouseOver={() => { return this.explainerMouseOver(explainerIndex)}} onMouseOut={() => { return this.explainerMouseOut(explainerIndex)}}><SvgIcon name="question" /></div>)

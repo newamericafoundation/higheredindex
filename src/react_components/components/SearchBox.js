@@ -131,7 +131,6 @@ class SearchBox extends React.Component {
 		          	<Autosuggest
 			            suggestions={suggestions}
 			            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-			            onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
 			            onSuggestionSelected={this.onSuggestionSelected.bind(this)}
 			            getSuggestionValue={this.getSuggestionValue}
 			            renderSuggestion={suggestionRenderer.bind(this)}
