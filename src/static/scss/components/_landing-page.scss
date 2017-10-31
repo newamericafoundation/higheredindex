@@ -49,8 +49,8 @@
 
 	&__explore-link {
 		padding: 10px 11px;
-		@include medium {
-			padding: $desktop-padding 30px;
+		@include small {
+			padding: 25px 30px;
 		}
 		&:first-child {
 			border-right: $standard-border;
@@ -71,7 +71,7 @@
 			font-size: 16px;
 			color: white;
 			line-height: 1;
-			@include medium {
+			@include small {
 				font-size: 20px;
 			}
 		}
@@ -79,7 +79,7 @@
 
 	&__methodology-link {
 		padding: 7px 15px;
-		@include medium {
+		@include small {
 			padding: 15px 25px;
 		}
 		&__primary {
@@ -98,7 +98,7 @@
 	&__title {
 		padding: 15px 0px;
 		margin: auto;
-		@include medium {
+		@include small {
 			padding: 25px 0px;
 			width: 300px;
 		}
@@ -109,7 +109,7 @@
 
 			width: 200px;
 
-			@include medium {
+			@include small {
 				width: 300px;
 			}
 		}

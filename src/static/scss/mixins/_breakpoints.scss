@@ -1,5 +1,11 @@
-@mixin medium() {
+@mixin small() {
   @media screen and (min-width: 500px) {
+    @content;
+  }
+}
+
+@mixin medium() {
+  @media screen and (min-width: 640px) {
     @content;
   }
 }

@@ -27,7 +27,7 @@
 		vertical-align: middle;
 		cursor: pointer;
 
-		@include breakpoint(medium) {
+		@include medium {
 			padding-left: 30px;
 			padding-right: 30px;
 		}

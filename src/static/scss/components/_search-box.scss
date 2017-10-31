@@ -1,5 +1,4 @@
 .search-box {
-	
 	position: relative;
 	
    	&.expandable {
@@ -11,7 +10,6 @@
 	    transition: $transition;
    		
 	    width: 300px;
-
    		&.hidden {
 			width: 0px;
 			input {
@@ -19,7 +17,6 @@
 				border: none;
 			}
 		}
-
    	}
 
    	.react-autosuggest__load-more {
