@@ -29,7 +29,7 @@ export function formatValue(value, format) {
 		case "percent":
 			return d3.format(".0%")(value);
 		case "string":
-			return value ? value.replace(/<\/?[^>]+(>|$)/g, "") : "";
+			return value ? String(value).replace(/<\/?[^>]+(>|$)/g, "") : "";
 		case "rank":
 		    let s = ["th","st","nd","rd"];
 			let v = value%100;

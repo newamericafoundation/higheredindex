@@ -7,6 +7,14 @@ const d3 = require("d3");
 import {formatValue} from '../../helper_functions/format_value';
 import SvgIcon from './SvgIcon'
 
+const sectorOptions = {
+  "all": "",
+  "public2": "2-year public",
+  "public4": "4-year public",
+  "nonprofit": "private nonprofit",
+  "forprofit": "private for-profit",
+}
+
 class DataBlockParagraph extends React.Component {
 	constructor(props) {
 		super(props)
@@ -43,7 +51,7 @@ class DataBlockParagraph extends React.Component {
     }
 
 	render() {
-		const {settings, maxYear, data} = this.props,
+		const {settings, maxYear, data, sector} = this.props,
 			{textSections, variables} = settings;
 
 		if (data) {
@@ -61,6 +69,7 @@ class DataBlockParagraph extends React.Component {
 					section.map((text, j) => {
 						let variable = variables[variableCounter];
 						text = text.replace("@year", maxYear);
+						text = text.replace("@sector", sectorOptions[sector]);
 						
 						textSection.push(<span key={j + "_text"} >{text}</span>);
 
@@ -75,8 +84,8 @@ class DataBlockParagraph extends React.Component {
 								console.log(this.state.congressionalDistrictAggregate)
 							} else if (variable.explainerText) {
 								let explainerIndex = explainerPopups.length
-								textSection.push(<div className="data-block__paragraph__explainer" ref={"explainer-text_" + explainerIndex} key={j} onMouseOver={() => { return this.explainerMouseOver(explainerIndex)}} onMouseOut={() => { return this.explainerMouseOut(explainerIndex)}}><SvgIcon name="question" /></div>)
-								explainerPopups.push(<div className="data-block__paragraph__explainer-popup hidden" ref={"explainer-popup_" + explainerIndex}>{variable.explainerText}</div>)
+								textSection.push(<span className="data-block__paragraph__explainer" ref={"explainer-text_" + explainerIndex} key={j} onMouseOver={() => { return this.explainerMouseOver(explainerIndex)}} onMouseOut={() => { return this.explainerMouseOut(explainerIndex)}}><SvgIcon name="question" /></span>)
+								explainerPopups.push(<span className="data-block__paragraph__explainer-popup hidden" ref={"explainer-popup_" + explainerIndex}>{variable.explainerText}</span>)
 							} else if (variable.variable) {
 							 	if (data[variable.variable]) {
 							 		let value;

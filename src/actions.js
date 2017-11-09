@@ -228,7 +228,7 @@ export function fetchProfilePhoto(id, profileType) {
   }
 }
 
-export function requestRanking(variable, profilePath) {
+export function requestRanking(collection, variable, profilePath) {
   return { 
     type: REQUEST_RANKING,
     variable,
@@ -236,9 +236,10 @@ export function requestRanking(variable, profilePath) {
   }
 }
 
-export function receiveRanking(variable, profilePath, rank) {
+export function receiveRanking(collection, variable, profilePath, rank) {
   return { 
     type: RECEIVE_RANKING,
+    collection,
     variable,
     profilePath,
     rank
@@ -247,12 +248,14 @@ export function receiveRanking(variable, profilePath, rank) {
 
 export function fetchRanking(collection, direction, variable, year, value, profilePath) {
   return function (dispatch) {
-    dispatch(requestRanking(variable, profilePath))
+    dispatch(requestRanking(collection, variable, profilePath))
+
+    console.log(dbPath + 'get-ranking/' + collection + "/" + direction + "/" + variable + "/" + year + "/" + value)
 
     return fetch(dbPath + 'get-ranking/' + collection + "/" + direction + "/" + variable + "/" + year + "/" + value)
       .then(response => { return response.json()})
       .then(json => {
-        dispatch(receiveRanking(variable, profilePath, json))
+        dispatch(receiveRanking(collection, variable, profilePath, json))
       })
   }
 }

@@ -49,8 +49,15 @@ export function getColorScale(data, filterVar) {
 
 	} else if (scaleType == "quantize") {
 		scale = d3.scaleQuantize();
-		range = setColorBins(numBins, customRange);
 		domain = customDomain ? customDomain : setQuantizeDomain(filterVar, data);
+		let extent = domain[1] - domain[0] + 1;
+		if (extent < numBins) {
+			numBins = extent
+		}
+
+		console.log(numBins, extent)
+
+		range = setColorBins(numBins, customRange);
 		console.log(range, domain);
 		
 	} else if (scaleType == "linear") {

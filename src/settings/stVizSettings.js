@@ -42,11 +42,11 @@ const stVizSettings = {
 				type: "ranking",
 				direction: "lowest",
 				variables: [
-					{variable: "instateprice", displayName:"Rank among all states for lowest average in-state tuition"},
+					{variable: "instateprice", displayName:"Rank among all states for lowest average in-state tuition @sector"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, the average in-district tuition was ", ", the average in-state tuition was ", ", and the average out-of-state tuition was ", " at ", " institutions."],
+				textSections: [["In @year, the average in-district tuition was ", ", the average in-state tuition was ", ", and the average out-of-state tuition was ", " at ", " @sector institutions."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"indistprice", format: "price" },
@@ -110,11 +110,11 @@ const stVizSettings = {
 				type: "ranking",
 				direction: "highest",
 				variables: [
-					{variable: "fedaidperc", displayName:"Rank among all states for greatest share of students receiving federal grant aid"},
+					{variable: "fedaidperc", displayName:"Rank among all states for greatest share of students receiving federal grant aid @sector"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, the average amount of federal aid received was ", ", and ", " of students received federal aid; and the average amount of total aid was ", ", and ", " of students received total aid at ", " institutions."],
+				textSections: [["In @year, the average amount of federal aid received was ", ", and ", " of students received federal aid; and the average amount of total aid was ", ", and ", " of students received total aid at ", " @sector institutions."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"avefedaid", format: "price" },
@@ -153,11 +153,11 @@ const stVizSettings = {
 				type: "ranking",
 				direction: "highest",
 				variables: [
-					{variable: "gradtot", displayName:"Rank among all states for highest graduation rate"},
+					{variable: "gradtot", displayName:"Rank among all states for highest graduation rate @sector"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["", " of students graduated, and ", " of bachelor’s degree students graduated at ", " institutions in @year."],
+				textSections: [["", " of students graduated, and ", " of bachelor’s degree students graduated at ", " @sector institutions in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"gradtot", format: "percent" },
@@ -184,11 +184,11 @@ const stVizSettings = {
 				type: "ranking",
 				direction: "highest",
 				variables: [
-					{variable: "retrate", displayName:"Rank among all states for highest average retention rate"},
+					{variable: "retrate", displayName:"Rank among all states for highest average retention rate @sector"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["Retention rates averaged ", " at ", " institutions in @year."],
+				textSections: [["Retention rates averaged ", " at ", " @sector institutions in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"retrate", format: "percent" },
@@ -212,11 +212,11 @@ const stVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "transfer", displayName:"Share of all students who transferred institutions", format:"percent"},
+					{variable: "transfer", displayName:"Share of all students at who transferred institutions @sector", format:"percent"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, ", " of students at ", " institutions were transfer students."],
+				textSections: [["In @year, ", " of students at ", " @sector institutions were transfer students."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"transfer", format: "percent" },
@@ -240,11 +240,11 @@ const stVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "endowment", displayName:"Average endowment of state’s institutions", format: "price"},
+					{variable: "endowment", displayName:"Average endowment of state’s institutions @sector", format: "price"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["Endowment averaged ", " at ", " institutions in @year."],
+				textSections: [["Endowment averaged ", " at ", " @sector institutions in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"endowment", format: "price" },

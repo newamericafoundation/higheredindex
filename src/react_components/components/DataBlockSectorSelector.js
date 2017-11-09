@@ -1,9 +1,6 @@
 import React from 'react';
 
-import DataBlockInfo from "./DataBlockInfo";
-import DataBlockViz from "./DataBlockViz";
-
-const displayOptions = {
+const sectorOptions = {
   "all": "All Sectors",
   "public2": "2-Year Public",
   "public4": "4-Year Public",
@@ -20,18 +17,15 @@ class DataBlockSectorSelector extends React.Component {
     const {fullData, changeFunction} = this.props;
 
     let selectVals = Object.keys(fullData)
-    console.log(selectVals)
 
     return (
-      <div className="data-block__viz__sector-selector-container">
-        <select className="data-block__viz__sector-selector" ref="selectRef" onChange={() => { return changeFunction(this.refs["selectRef"].value)}}>
-          {selectVals.map((optionName, i) => {
-            return (
-              <option key={optionName} value={optionName}>{displayOptions[optionName]}</option>
-            )
-          })}
-        </select>
-      </div>
+      <select className="data-block__sector-selector" ref="selectRef" onChange={() => { return changeFunction(this.refs["selectRef"].value)}}>
+        {selectVals.map((optionName, i) => {
+          return (
+            <option key={optionName} value={optionName}>{sectorOptions[optionName]}</option>
+          )
+        })}
+      </select>
     )
   }
 }

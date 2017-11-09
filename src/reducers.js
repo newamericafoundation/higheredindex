@@ -249,11 +249,11 @@ function fetchedRankings(state = {}, action) {
   switch (action.type) {
     case REQUEST_RANKING:
       return Object.assign({}, state, {
-        [action.profilePath + "_" + action.variable] : "fetching"
+        [action.collection + "_" + action.profilePath + "_" + action.variable] : "fetching"
       })
     case RECEIVE_RANKING:
       return Object.assign({}, state, {
-        [action.profilePath + "_" + action.variable] : action.rank
+        [action.collection + "_" + action.profilePath + "_" + action.variable] : action.rank
       })
     default:
       return state

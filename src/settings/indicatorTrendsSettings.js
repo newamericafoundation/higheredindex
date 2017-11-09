@@ -1100,130 +1100,130 @@ export const indicatorTrendsSettings = {
 	"postgraduate-earnings": {
 		collection: "states_outcomes",
 		trendsSettings: [
-			{
-				title: "Median Earnings",
-				calloutSettings: {
-					type: "value",
-					variables: [
-						{variable:"md_earn_wne_p10", displayName: "10-year", format:"price"},
-						{variable:"md_earn_wne_p8", displayName: "8-year", format:"price"},
-						{variable:"md_earn_wne_p6", displayName: "6-year", format:"price"},
-					]
-				},
-				paragraphSettings: {
-					textSections: [["In @year, median earnings six years after enrolling in school were ", ", median earnings after eight years were ", ", and median earnings after 10 years were ", " for graduates of U.S. institutions."],
-						["The following chart depicts trends over time."]],
-					variables: [
-						{variable:"md_earn_wne_p6", format: "price"},
-						{variable:"md_earn_wne_p8", format: "price"},
-						{variable:"md_earn_wne_p10", format: "price"},
-					]
-				},
-				source: "College Scorecard",
-				vizSettings: {
-					chart1Settings: {
-						type: "line-chart",
-						yAxisLabel: "",
-						variables: [
-							{variable:"md_earn_wne_p6", displayName: "6-year", format: "price", color: colors.turquoise.light },
-							{variable:"md_earn_wne_p8", displayName: "8-year", format: "price", color: colors.turquoise.medium},
-							{variable:"md_earn_wne_p10", displayName: "10-year", format: "price", color: colors.turquoise.dark},
-						]
-					}
-				}
-			},
-			{
-				title: "Mean Earnings by Gender",
-				calloutSettings: {
-					type: "value",
-					variables: [
-						{variable:"mn_earn_wne_male1_p10", displayName: "Male", format:"price"},
-						{variable:"mn_earn_wne_male0_p10", displayName: "Female", format:"price"},
-					]
-				},
-				paragraphSettings: {
-					textSections: [["In @year, the mean earnings 10 years after enrolling in school were ", " for men and ", " for women at ", " institutions."],
-						["The following chart depicts trends over time."]],
-					variables: [
-						{variable:"mn_earn_wne_male1_p10", format: "price"},
-						{variable:"mn_earn_wne_male0_p10", format: "price"},
-					]
-				},
-				source: "College Scorecard",
-				vizSettings: {
-					chart1Settings: {
-						type: "line-chart",
-						yAxisLabel: "",
-						variables: [
-							{variable:"mn_earn_wne_male1_p10", displayName:"Male", format: "price", color: colors.turquoise.light},
-							{variable:"mn_earn_wne_male0_p10", displayName:"Female", format: "price", color: colors.purple.light},
-							{variable:"mn_earn_wne_p10", displayName:"Overall", format: "price", color: colors.grey.dark },
-						]
-					}
-				}
-			},
-			{
-				title: "Mean Earnings by Dependency Status",
-				calloutSettings: {
-					type: "value",
-					variables: [
-						{variable: "mn_earn_wne_indep0_p10", displayName:"Dependent", format:"price"},
-						{variable: "mn_earn_wne_indep1_p10", displayName:"Independent", format:"price"},
-					]
-				},
-				paragraphSettings: {
-					textSections: [["In @year, the mean earnings 10 years after enrolling in school were ", " for independent graduates and ", " for dependent graduates of U.S. institutions."],
-						["The following chart depicts trends over time."]],
-					variables: [
-						{variable:"mn_earn_wne_indep0_p10", format: "price"},
-						{variable:"mn_earn_wne_indep1_p10", format: "price"},
-					]
-				},
-				source: "College Scorecard",
-				vizSettings: {
-					chart1Settings: {
-						type: "line-chart",
-						yAxisLabel: "",
-						variables: [
-							{variable:"mn_earn_wne_indep0_p10", displayName:"Dependent", format: "price", color: colors.turquoise.light},
-							{variable:"mn_earn_wne_indep1_p10", displayName:"Independent", format: "price", color: colors.purple.light},
-							{variable:"mn_earn_wne_p10", displayName:"Overall", format: "price", color: colors.grey.dark },
-						]
-					}
-				}
-			},
-			{
-				title: "Share Earning Over $25,000",
-				calloutSettings: {
-					type: "value",
-					variables: [
-						{variable: "gt_25k_p10", displayName:"Share of students earning more than $25,000 per year", format: "percent"},
-					]
-				},
-				paragraphSettings: {
-					textSections: [["In @year, the share of former students of U.S. institutions earning over $25,000 was ", " seven years after entry, ", " eight years after entry, ", " nine years after entry, and ", " 10 years after initially enrolling in school."],
-						["The following chart depicts trends over time."]],
-					variables: [
-						{variable:"gt_25k_p7", format: "percent"},
-						{variable:"gt_25k_p8", format: "percent"},
-						{variable:"gt_25k_p9", format: "percent"},
-						{variable:"gt_25k_p10", format: "percent"},
-					]
-				},
-				source: "College Scorecard",
-				vizSettings: {
-					chart1Settings: {
-						type: "line-chart",
-						yAxisLabel: "",
-						variables: [
-							{variable:"gt_25k_p7", displayName:"7 years out", format: "percent", color: colors.turquoise.light},
-							{variable:"gt_25k_p8", displayName:"8 years out", format: "percent", color: colors.turquoise.medium},
-							{variable:"gt_25k_p9", displayName:"9 years out", format: "percent", color: colors.turquoise.dark},
-							{variable:"gt_25k_p10", displayName:"10 years out", format: "percent", color: colors.black},
-						]
-					}
-				}
-			},
+			// {
+			// 	title: "Median Earnings",
+			// 	calloutSettings: {
+			// 		type: "value",
+			// 		variables: [
+			// 			{variable:"md_earn_wne_p10", displayName: "10-year", format:"price"},
+			// 			{variable:"md_earn_wne_p8", displayName: "8-year", format:"price"},
+			// 			{variable:"md_earn_wne_p6", displayName: "6-year", format:"price"},
+			// 		]
+			// 	},
+			// 	paragraphSettings: {
+			// 		textSections: [["In @year, median earnings six years after enrolling in school were ", ", median earnings after eight years were ", ", and median earnings after 10 years were ", " for graduates of U.S. institutions."],
+			// 			["The following chart depicts trends over time."]],
+			// 		variables: [
+			// 			{variable:"md_earn_wne_p6", format: "price"},
+			// 			{variable:"md_earn_wne_p8", format: "price"},
+			// 			{variable:"md_earn_wne_p10", format: "price"},
+			// 		]
+			// 	},
+			// 	source: "College Scorecard",
+			// 	vizSettings: {
+			// 		chart1Settings: {
+			// 			type: "line-chart",
+			// 			yAxisLabel: "",
+			// 			variables: [
+			// 				{variable:"md_earn_wne_p6", displayName: "6-year", format: "price", color: colors.turquoise.light },
+			// 				{variable:"md_earn_wne_p8", displayName: "8-year", format: "price", color: colors.turquoise.medium},
+			// 				{variable:"md_earn_wne_p10", displayName: "10-year", format: "price", color: colors.turquoise.dark},
+			// 			]
+			// 		}
+			// 	}
+			// },
+			// {
+			// 	title: "Mean Earnings by Gender",
+			// 	calloutSettings: {
+			// 		type: "value",
+			// 		variables: [
+			// 			{variable:"mn_earn_wne_male1_p10", displayName: "Male", format:"price"},
+			// 			{variable:"mn_earn_wne_male0_p10", displayName: "Female", format:"price"},
+			// 		]
+			// 	},
+			// 	paragraphSettings: {
+			// 		textSections: [["In @year, the mean earnings 10 years after enrolling in school were ", " for men and ", " for women at ", " institutions."],
+			// 			["The following chart depicts trends over time."]],
+			// 		variables: [
+			// 			{variable:"mn_earn_wne_male1_p10", format: "price"},
+			// 			{variable:"mn_earn_wne_male0_p10", format: "price"},
+			// 		]
+			// 	},
+			// 	source: "College Scorecard",
+			// 	vizSettings: {
+			// 		chart1Settings: {
+			// 			type: "line-chart",
+			// 			yAxisLabel: "",
+			// 			variables: [
+			// 				{variable:"mn_earn_wne_male1_p10", displayName:"Male", format: "price", color: colors.turquoise.light},
+			// 				{variable:"mn_earn_wne_male0_p10", displayName:"Female", format: "price", color: colors.purple.light},
+			// 				{variable:"mn_earn_wne_p10", displayName:"Overall", format: "price", color: colors.grey.dark },
+			// 			]
+			// 		}
+			// 	}
+			// },
+			// {
+			// 	title: "Mean Earnings by Dependency Status",
+			// 	calloutSettings: {
+			// 		type: "value",
+			// 		variables: [
+			// 			{variable: "mn_earn_wne_indep0_p10", displayName:"Dependent", format:"price"},
+			// 			{variable: "mn_earn_wne_indep1_p10", displayName:"Independent", format:"price"},
+			// 		]
+			// 	},
+			// 	paragraphSettings: {
+			// 		textSections: [["In @year, the mean earnings 10 years after enrolling in school were ", " for independent graduates and ", " for dependent graduates of U.S. institutions."],
+			// 			["The following chart depicts trends over time."]],
+			// 		variables: [
+			// 			{variable:"mn_earn_wne_indep0_p10", format: "price"},
+			// 			{variable:"mn_earn_wne_indep1_p10", format: "price"},
+			// 		]
+			// 	},
+			// 	source: "College Scorecard",
+			// 	vizSettings: {
+			// 		chart1Settings: {
+			// 			type: "line-chart",
+			// 			yAxisLabel: "",
+			// 			variables: [
+			// 				{variable:"mn_earn_wne_indep0_p10", displayName:"Dependent", format: "price", color: colors.turquoise.light},
+			// 				{variable:"mn_earn_wne_indep1_p10", displayName:"Independent", format: "price", color: colors.purple.light},
+			// 				{variable:"mn_earn_wne_p10", displayName:"Overall", format: "price", color: colors.grey.dark },
+			// 			]
+			// 		}
+			// 	}
+			// },
+			// {
+			// 	title: "Share Earning Over $25,000",
+			// 	calloutSettings: {
+			// 		type: "value",
+			// 		variables: [
+			// 			{variable: "gt_25k_p10", displayName:"Share of students earning more than $25,000 per year", format: "percent"},
+			// 		]
+			// 	},
+			// 	paragraphSettings: {
+			// 		textSections: [["In @year, the share of former students of U.S. institutions earning over $25,000 was ", " seven years after entry, ", " eight years after entry, ", " nine years after entry, and ", " 10 years after initially enrolling in school."],
+			// 			["The following chart depicts trends over time."]],
+			// 		variables: [
+			// 			{variable:"gt_25k_p7", format: "percent"},
+			// 			{variable:"gt_25k_p8", format: "percent"},
+			// 			{variable:"gt_25k_p9", format: "percent"},
+			// 			{variable:"gt_25k_p10", format: "percent"},
+			// 		]
+			// 	},
+			// 	source: "College Scorecard",
+			// 	vizSettings: {
+			// 		chart1Settings: {
+			// 			type: "line-chart",
+			// 			yAxisLabel: "",
+			// 			variables: [
+			// 				{variable:"gt_25k_p7", displayName:"7 years out", format: "percent", color: colors.turquoise.light},
+			// 				{variable:"gt_25k_p8", displayName:"8 years out", format: "percent", color: colors.turquoise.medium},
+			// 				{variable:"gt_25k_p9", displayName:"9 years out", format: "percent", color: colors.turquoise.dark},
+			// 				{variable:"gt_25k_p10", displayName:"10 years out", format: "percent", color: colors.black},
+			// 			]
+			// 		}
+			// 	}
+			// },
 		]
 	},
 	"cumulative-loan-debt": {

@@ -1,5 +1,6 @@
 import React from 'react';
 const d3 = require("d3")
+import { formatValue } from "../../helper_functions/format_value.js";
 
 const Table = ({settings, data}) => {
   const {tableSettingsList} = settings.chart1Settings;
@@ -19,6 +20,12 @@ const Table = ({settings, data}) => {
                   if (typeof dataVal === "object") {
                     let maxYear = d3.max(Object.keys(dataVal));
                     dataVal = dataVal[maxYear]
+                  }
+
+                  dataVal = formatValue(dataVal, d.format)
+
+                  if (d.isCongDist) {
+                    dataVal = dataVal.slice(2,4) === "00" ? data.state + "-At-Large" : data.state + "-" + dataVal.slice(2,4)
                   }
 
                   let label;

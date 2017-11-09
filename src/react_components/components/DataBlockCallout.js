@@ -11,27 +11,45 @@ const getOrdinal = (n) => {
     return n+(s[(v-20)%10]||s[v]||s[0]);
 }
 
+const sectorOptions = {
+  "all": "",
+  "public2": "(2-Year Public)",
+  "public4": "(4-Year Public)",
+  "nonprofit": "(Private Nonprofit)",
+  "forprofit": "(Private For-Profit)",
+}
+
 class DataBlockCallout extends React.Component {
     constructor() {
         super();
     }
 
     componentWillMount() {
-    	const {settings, maxYear, data} = this.props;
-		const {type, direction, variables} = settings;
+    	this.fetchNewRankings(this.props);
+    }
 
+    componentWillReceiveProps(nextProps) {
+    	if (nextProps.sector != this.props.sector) {
+    		this.fetchNewRankings(nextProps)
+    	}
+    }
+
+    fetchNewRankings(propsObject) {
+    	const {collectionName, settings, maxYear, data, sector} = propsObject;
+		const {type, direction, variables} = settings;
     	{variables.map((variable) => {
       		if (type == "ranking" && isFiftyState(data.state) && data[variable.variable] && data[variable.variable][maxYear]) {
                 let value;
+
+                let collection = sector ? collectionName + "_" + sector : collectionName
                 
-				let rankingKey = data.path + "_" + variable.variable;
+				let rankingKey = collection + "_" + data.path + "_" + variable.variable;
 
 				if (!this.props.fetchedRankings[rankingKey] && !this.props.fetchedRankings[rankingKey] != "fetching") {
-					this.sendRankCalloutRequest(data, variable, direction)
+					this.sendRankCalloutRequest(data, collection, variable, direction)
 				}
 	      	} 
-	      	return null;
-	      	
+	      	return null; 	
       	})}
     }
 
@@ -61,14 +79,14 @@ class DataBlockCallout extends React.Component {
 	    return value;
 	}
 
-    sendRankCalloutRequest(data, variable, direction) {
-        const {collectionName, maxYear} = this.props;
+    sendRankCalloutRequest(data, collection, variable, direction) {
+        const {collectionName, maxYear, sector} = this.props;
 
-        this.props.fetchRanking(collectionName == "states_schools" ? "states_schools_all" : collectionName, direction, variable.variable, maxYear, data[variable.variable][maxYear], data.path)
+        this.props.fetchRanking(collection, direction, variable.variable, maxYear, data[variable.variable][maxYear], data.path)
     }
 
     render() {
-	    const {settings, maxYear, data} = this.props;
+	    const {collectionName, settings, maxYear, data, sector} = this.props;
 		const {type, direction, variables} = settings;
 
 		if (!data) { return null; }
@@ -81,7 +99,9 @@ class DataBlockCallout extends React.Component {
                         if (type == "value") {
       			      		value = this.getValueCallout(data, variable);
                         } else {
-							let rankingKey = data.path + "_" + variable.variable;
+							let collection = sector ? collectionName + "_" + sector : collectionName
+                
+							let rankingKey = collection + "_" + data.path + "_" + variable.variable;
 
 							if (this.props.fetchedRankings[rankingKey]) {
 								value = this.props.fetchedRankings[rankingKey];
@@ -96,7 +116,7 @@ class DataBlockCallout extends React.Component {
 		    	      		return (
 		    	      			<div className="data-block__callout" key={variable.variable}>
 		    	      				<h5 className="data-block__callout__value">{value}</h5>
-		    	      				<h5 className="data-block__callout__label">{variable.displayName}</h5>
+		    	      				<h5 className="data-block__callout__label">{variable.displayName.replace("@sector", sectorOptions[sector])}</h5>
 		    	      			</div>
 		    	      		)
 		    	      	}

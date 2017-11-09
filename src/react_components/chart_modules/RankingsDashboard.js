@@ -97,7 +97,7 @@ class RankingsDashboard extends React.Component {
 		let fullStatesData = data.filter(d => d.state != "US")
 		let sampleDataPoint = fullStatesData[0][currFilterVar]
 		
-		if (sampleDataPoint && typeof sampleDataPoint === 'object') {
+		if ((sampleDataPoint  || sampleDataPoint === 0) && typeof sampleDataPoint === 'object') {
 		 	this.currMaxYear = Object.keys(sampleDataPoint).reduce((a, b) => {
 		 		if (isNaN(sampleDataPoint[b])) {
 		 			return a
@@ -111,7 +111,7 @@ class RankingsDashboard extends React.Component {
 
 		let currData = fullStatesData.map((d) => {
 			let dataVal = d[currFilterVar]
-			
+
 			if (typeof dataVal === 'object') {
 				dataVal = dataVal[this.currMaxYear]
 			}
@@ -128,7 +128,6 @@ class RankingsDashboard extends React.Component {
 			return retVal;
 		})
 
-
 		return currData;
 	}
 
@@ -143,6 +142,7 @@ class RankingsDashboard extends React.Component {
 							filters={this.props.filters} 
 							filterChangedFunc={this.filterChanged.bind(this)} 
 							width={this.state.currWidth} />
+						<h5 className="rankings-dashboard__max-year">{"This map reflects data for " + this.currMaxYear + ", the most recent year available for this category."}</h5>
 						<UsMap 
 							filter={this.state.currFilter} 
 							data={this.state.currData}

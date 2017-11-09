@@ -7,7 +7,7 @@ export default class LegendQuantize extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.fullValList = Array.from(Array(props.filter.numBins).keys());
+		this.fullValList = Array.from(Array(props.colorScale.range().length).keys());
 
 		this.state = {
 			valsShown: this.fullValList
@@ -16,10 +16,11 @@ export default class LegendQuantize extends React.Component {
 
 	toggleVals(valToggled) {
 		const {valsShown} = this.state;
-		const {numBins} = this.props.filter;
+		const {colorScale} = this.props;
+
 		let newValsShownList = [];
 
-		if (valsShown.length == numBins) {
+		if (valsShown.length == colorScale.range().length) {
 			newValsShownList.push(valToggled);
 		} else {
 			let index = valsShown.indexOf(valToggled);
@@ -47,16 +48,16 @@ export default class LegendQuantize extends React.Component {
 	renderCells() {
 		const {colorScale, filter, toggleChartVals} = this.props;
 		const {valsShown} = this.state
-		const {numBins, format} = filter;
+		const {format} = filter;
 
 		let [dataMin, dataMax] = colorScale.domain();
 		let dataSpread = dataMax - dataMin;
-		let binInterval = dataSpread/numBins;
+		let binInterval = dataSpread/colorScale.range().length;
 
 		let cells = [];
 		let currCell, cellText, classes;
 
-		for(let i = 0; i < numBins; i++) {
+		for(let i = 0; i < colorScale.range().length; i++) {
 			if (format == "percent") {
 				cellText = formatValue(Math.ceil(100*this.calcBinVal(i, dataMin, binInterval))/100, format) + " to " + formatValue(Math.floor(100*this.calcBinVal(i+1, dataMin, binInterval))/100, format);
 			} else {
@@ -90,9 +91,6 @@ export default class LegendQuantize extends React.Component {
 	}
 
 	render() {
-		const {colorScale, filter, toggleVals} = this.props;
-		const {numBins} = filter;
-
 		return (
 			<div className="legend map-legend">
 				<ul className="legend__cell-list">
