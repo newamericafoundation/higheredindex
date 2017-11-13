@@ -1,6 +1,9 @@
 {
   "name": "febp",
   "version": "1.0.0",
+  "engines": {
+    "node": "7.4.0"
+  },
   "description": "Simple application to showcase how to achieve universal rendering and routing with React and Express.",
   "main": "src/server.js",
   "repository": {
