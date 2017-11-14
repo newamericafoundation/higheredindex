@@ -230,6 +230,28 @@ $top-bar-height: 55px;
 		}
 	}
 
+	&__subfilter {
+		&__radio-entry {
+			display: block;
+		}
+
+		&__label, &__radio {
+			display: inline-block;
+		}
+
+		&__label {
+			color: palette-get(na-black-10);
+			font-size: 18px;
+		}
+
+		&__radio {
+			width: auto;
+			height: auto;
+			margin: 0px;
+			padding: 0px;
+		}
+	}
+
 	&__filter-link {
 
 		&.active {

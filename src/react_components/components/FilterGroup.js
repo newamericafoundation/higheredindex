@@ -21,9 +21,6 @@ export default class FilterGroup extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		const {width} = this.props;
-		console.log(this.refs)
-		console.log($(this.refs.contentsDiv).width())
-		console.log(nextProps.width)
 
 		if (nextProps.width != this.props.width) {
 			if (this.state.displayDirection == "horizontal" && $(this.refs.contentsDiv).width() > nextProps.width) {

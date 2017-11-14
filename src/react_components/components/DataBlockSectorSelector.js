@@ -19,13 +19,15 @@ class DataBlockSectorSelector extends React.Component {
     let selectVals = Object.keys(fullData)
 
     return (
-      <select className="data-block__sector-selector" ref="selectRef" onChange={() => { return changeFunction(this.refs["selectRef"].value)}}>
-        {selectVals.map((optionName, i) => {
-          return (
-            <option key={optionName} value={optionName}>{sectorOptions[optionName]}</option>
-          )
-        })}
-      </select>
+      <div className="data-block__sector-selector-container">
+        <select className="data-block__sector-selector" ref="selectRef" onChange={() => { return changeFunction(this.refs["selectRef"].value)}}>
+          {selectVals.map((optionName, i) => {
+            return (
+              <option key={optionName} value={optionName}>{sectorOptions[optionName]}</option>
+            )
+          })}
+        </select>
+      </div>
     )
   }
 }
