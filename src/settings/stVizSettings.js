@@ -153,7 +153,7 @@ const stVizSettings = {
 				type: "ranking",
 				direction: "highest",
 				variables: [
-					{variable: "gradtot", displayName:"Rank among all states for highest graduation rate @sector"},
+					{variable: "gradtot", displayName:"Rank among all states for highest overall graduation rate @sector"},
 				]
 			},
 			paragraphSettings: {
