@@ -147,7 +147,7 @@ const instVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "gradtot", displayName:"Graduation rate", format: "percent"},
+					{variable: "gradtot", displayName:"Overall graduation rate", format: "percent"},
 					{variable: "gradbach", displayName:"Bachelor's graduation rate", format: "percent"},
 				]
 			},
@@ -429,12 +429,12 @@ const instVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "loan_ever", displayName:"Ever borrowed federal loans", format: "percent"},
-					{variable: "pell_ever", displayName:"Ever received a Pell Grant", format: "percent"},
+					{variable: "loan_ever", displayName:"Aid recipients who ever borrowed federal loans", format: "percent"},
+					{variable: "pell_ever", displayName:"Aid recipients who ever received a Pell Grant", format: "percent"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, ", " of students had taken out at least one federal student loan and ", " of students had ever received Pell Grants at ", "."],
+				textSections: [["In @year, ", " of aid recipients had taken out at least one federal student loan and ", " of aid recipients had ever received Pell Grants at ", "."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"loan_ever", format: "percent"},
@@ -1121,13 +1121,11 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, the share of former students of ", " earning over $25,000 was ", " seven years after entry, ", " eight years after entry, ", " nine years after entry, and ", " 10 years after initially enrolling in school."],
+				textSections: [["In @year, the share of former students of ", " earning over $25,000 was ", " eight years after entry and ", " 10 years after initially enrolling in school."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
-					{variable:"gt_25k_p7", format: "percent"},
 					{variable:"gt_25k_p8", format: "percent"},
-					{variable:"gt_25k_p9", format: "percent"},
 					{variable:"gt_25k_p10", format: "percent"},
 				]
 			},

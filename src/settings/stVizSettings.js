@@ -82,9 +82,9 @@ const stVizSettings = {
 				textSections: [["In @year, the average cost of attendance after grant aid was ", " at public institutions and ", " at private institutions; and the average for low-income students was ", " at public institutions and ", " at private institutions in ", "."],
 					["The following chart depicts trends over time."]],
 				variables: [
-					{variable:"netpricepub", format: "price" },
+					{variable:"netpricepub", format: "price"},
+					{variable:"netpricepriv", format: "price"},
 					{variable:"netpriceincpub", format: "price"},
-					{variable:"netpricepriv", format: "price" },
 					{variable:"netpriceincpriv", format: "price"},
 					{variable:"name", format: "string"},
 				]
@@ -153,7 +153,7 @@ const stVizSettings = {
 				type: "ranking",
 				direction: "highest",
 				variables: [
-					{variable: "gradtot", displayName:"Rank among all states for highest graduation rate @sector"},
+					{variable: "gradtot", displayName:"Rank among all states for highest overall graduation rate @sector"},
 				]
 			},
 			paragraphSettings: {
@@ -240,11 +240,11 @@ const stVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "endowment", displayName:"Average endowment of state’s institutions @sector", format: "price"},
+					{variable: "endowment", displayName:"Total endowment of state’s institutions @sector", format: "price"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["Endowment averaged ", " at ", " @sector institutions in @year."],
+				textSections: [["Endowment totaled ", " at ", " @sector institutions in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"endowment", format: "price" },
@@ -403,12 +403,12 @@ const stVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "loan_ever", displayName:"Ever borrowed federal loans", format: "percent"},
-					{variable: "pell_ever", displayName:"Ever received a Pell Grant", format: "percent"},
+					{variable: "loan_ever", displayName:"Aid recipients who ever borrowed federal loans", format: "percent"},
+					{variable: "pell_ever", displayName:"Aid recipients who ever received a Pell Grant", format: "percent"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, ", " of students had taken out at least one federal student loan and ", " of students had ever received Pell Grants at ", " institutions."],
+				textSections: [["In @year, ", " of aid recipients had taken out at least one federal student loan and ", " of aid recipients had ever received Pell Grants at ", " institutions."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"loan_ever", format: "percent"},
@@ -1103,13 +1103,11 @@ const stVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, the share of former students of ", " institutions earning over $25,000 was ", " seven years after entry, ", " eight years after entry, ", " nine years after entry, and ", " 10 years after initially enrolling in school."],
+				textSections: [["In @year, the share of former students of ", " institutions earning over $25,000 was ", " eight years after entry and ", " 10 years after initially enrolling in school."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"name", format: "string"},
-					{variable:"gt_25k_p7", format: "percent"},
 					{variable:"gt_25k_p8", format: "percent"},
-					{variable:"gt_25k_p9", format: "percent"},
 					{variable:"gt_25k_p10", format: "percent"},
 				]
 			},
