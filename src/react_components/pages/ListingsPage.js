@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import {Helmet} from "react-helmet";
-import { Form, Text, Select, Radio, RadioGroup, submitForm } from 'react-form'
 
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+
 import SearchBox from '../components/SearchBox';
 import SvgIcon from '../components/SvgIcon';
 
 const stateOptions = [
+	{label: "All States", value: "all"},
 	{label: "Alabama", value: "AL"},
 	{label: "Alaska", value: "AK"},
 	{label: "Arizona", value: "AZ"},
@@ -61,6 +62,9 @@ const stateOptions = [
 	{label: "Wyoming", value: "WY"}
 ]
 
+const yearOptions = ["Less than Two-Year", "Two-Year", "Four-Year"]
+const sectorOptions = ["Public", "Nonprofit", "For-Profit"]
+
 class ListingsPage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -68,8 +72,9 @@ class ListingsPage extends React.Component {
 		this.state = {
 	    	counts: null,
 	    	type: props.type,
-	    	yearSubfilters: ["Less than Two-Year", "Two-Year", "Four-Year"],
-	    	sectorSubfilters: ["Public", "Nonprofit", "For-Profit"]
+	    	yearSubfilters: yearOptions,
+	    	sectorSubfilters: sectorOptions,
+	    	stateSubfilter: "all"
 	    };
 	}
 
@@ -94,9 +99,18 @@ class ListingsPage extends React.Component {
 	}
 
 	changeFilter(newFilter) {
-		this.setState({
-			type: newFilter
-		});
+		if (this.state.type == "institutions") {
+			this.setState({
+				type: newFilter,
+				yearSubfilters: yearOptions,
+	    		sectorSubfilters: sectorOptions,
+	    		stateSubfilter: "all"
+			});
+		} else {
+			this.setState({
+				type: newFilter
+			});
+		}
 		window.location.hash = "#" + newFilter;
 	}
 
@@ -111,6 +125,13 @@ class ListingsPage extends React.Component {
 		console.log(props)
 		this.setState({
 			sectorSubfilters: props
+		});
+	}
+
+	changeStateSubfilter(props) {
+		console.log(props)
+		this.setState({
+			stateSubfilter: props
 		});
 	}
 
@@ -132,6 +153,8 @@ class ListingsPage extends React.Component {
 	}
 
 	render() {
+		let filterSecondaryClassList = "listings-page__filter-container__secondary";
+		filterSecondaryClassList += this.state.type == "institutions" ? "" : " hidden";
 		return (
 			<div className="listings-page">
 		        <Helmet>
@@ -148,7 +171,7 @@ class ListingsPage extends React.Component {
 						<div className="listings-page__top-bar__filter-label">
 							<h5 className="listings-page__top-bar__filter-label__text">Filters</h5>
 						</div>
-						<SearchBox alwaysRenderSuggestions={true} suggestionsChangedCallback={this.listingsChangedCallback.bind(this)} filter={this.state.type} yearSubfilters={this.state.yearSubfilters} sectorSubfilters={this.state.sectorSubfilters} />
+						<SearchBox alwaysRenderSuggestions={true} suggestionsChangedCallback={this.listingsChangedCallback.bind(this)} filter={this.state.type} yearSubfilters={this.state.yearSubfilters} sectorSubfilters={this.state.sectorSubfilters} stateSubfilter={this.state.stateSubfilter} />
 						<SvgIcon name="search" />
 					</div>
 				</div>
@@ -162,27 +185,49 @@ class ListingsPage extends React.Component {
 								{this.renderCountBox("indicators")}
 								{this.renderCountBox("all")}
 							</div>
-							{this.state.type === "institutions" && 
-								<div className="listings-page__filter-container__secondary">
-									<CheckboxGroup
-								        name="year"
-								        value={this.state.yearSubfilters}
-								        onChange={(props) => this.changeYearSubfilter(props)}>
-								        <div className="listings-page__subfilter" ><label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value="Less than Two-Year"/>Less than Two-Year</label></div>
-								        <div className="listings-page__subfilter" ><label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value="Two-Year"/>Two-Year</label></div>
-								        <div className="listings-page__subfilter" ><label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value="Four-Year"/>Four-Year</label></div>
-								    </CheckboxGroup>
-								        
-								    <CheckboxGroup
-								        name="sector"
-								        value={this.state.sectorSubfilters}
-								        onChange={(props) => this.changeSectorSubfilter(props)}>
-								        <div className="listings-page__subfilter" ><label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value="Public"/>Public</label></div>
-								        <div className="listings-page__subfilter" ><label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value="Nonprofit"/>Nonprofit</label></div>
-								        <div className="listings-page__subfilter" ><label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value="For-Profit"/>For-Profit</label></div>
-								    </CheckboxGroup>
-								</div>	
-							}
+							 
+							<div className={filterSecondaryClassList}>
+								<CheckboxGroup
+							        name="year"
+							        value={this.state.yearSubfilters}
+							        onChange={(props) => this.changeYearSubfilter(props)}
+							        className="listings-page__subfilter-container">
+							        { yearOptions.map(year => {
+							        	let classList = "listings-page__subfilter";
+							        	classList += this.state.yearSubfilters.indexOf(year) > -1 ? " active" : "";
+							        	return (
+							        		<div className={classList}>
+							        			<label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value={year}/>{year}</label>
+							        		</div>
+							        	)
+							        })}
+							    </CheckboxGroup>
+							        
+							    <CheckboxGroup
+							        name="sector"
+							        value={this.state.sectorSubfilters}
+							        onChange={(props) => this.changeSectorSubfilter(props)}
+							        className="listings-page__subfilter-container">
+							        { sectorOptions.map(sector => {
+							        	let classList = "listings-page__subfilter";
+							        	classList += this.state.sectorSubfilters.indexOf(sector) > -1 ? " active" : "";
+							        	return (
+							        		<div className={classList}>
+							        			<label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value={sector}/>{sector}</label>
+							        		</div>
+							        	)
+							        })}
+							    </CheckboxGroup>
+
+ 
+								<select ref="selectRef" onChange={() => { return this.changeStateSubfilter(this.refs["selectRef"].value)}}>
+						          {stateOptions.map((stateOption, i) => {
+						            return (
+						              <option key={stateOption.value} value={stateOption.value}>{stateOption.label}</option>
+						            )
+						          })}
+						        </select>
+							</div>	
 						</div>
 						<div className="listings-page__results-container">
 						</div>

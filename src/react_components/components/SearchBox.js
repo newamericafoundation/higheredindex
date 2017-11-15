@@ -21,93 +21,78 @@ class SearchBox extends React.Component {
   	}
 
   	componentWillMount() {
-		const { dispatch, stList, indicatorList, instList, filter, suggestionsChangedCallback } = this.props;
-		let newSuggestions = [],
-			forceUpdate = false;
+		const { dispatch, stList, indicatorList, instList, suggestionsChangedCallback } = this.props;
 
 		if (stList.length == 0) {
 			dispatch(fetchProfileList("state"))
-		} else {
-			if (filter == "states" || filter == "all") {
-				newSuggestions = this.getSuggestions(this.state.value, this.props); 
-			}
 		}
-
 		if (indicatorList.length == 0) {
 			dispatch(fetchProfileList("indicator"))
-		} else {
-			if (filter == "indicators" || filter == "all") {
-				newSuggestions = [...newSuggestions, ...this.getSuggestions(this.state.value, this.props)]; 
-			}
 		}
-
 		if (instList.length == 0) {
 			dispatch(fetchProfileList("institution"))
-		} else {
-			if (filter == "institutions" || filter == "all") {
-				newSuggestions = [...newSuggestions, ...this.getSuggestions(this.state.value, this.props)]; 
-			}
 		}
 
-		if (newSuggestions.length > 0 || forceUpdate) {
+		let initialSuggestions = this.getSuggestions('', this.props) 
+
+		if (initialSuggestions.length > 0) {
 			if (suggestionsChangedCallback) {
 		      	let counts = this.getSuggestionCounts(this.state.value, this.props);
-		      	this.props.suggestionsChangedCallback(counts);
+		      	suggestionsChangedCallback(counts);
 		    }
 			this.setState({
-				suggestions: newSuggestions.sort(sortAlpha)
+				suggestions: initialSuggestions
 			})
 		}
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { stList, indicatorList, instList, filter, sectorSubfilters, suggestionsChangedCallback } = this.props;
+		const { stList, indicatorList, instList, filter, suggestionsChangedCallback } = this.props;
 		
-		let newSuggestions = [],
-			updateCounts = false,
-			updateState = false;
+		let suggestions = this.state.suggestions,
+			suggestionsUpdated = false;
 
-		if (stList != nextProps.stList || filter != nextProps.filter) {
-			if (nextProps.filter == "states" || nextProps.filter == "all") {
-				newSuggestions = this.getSuggestions(this.state.value, nextProps);
-				updateState = true;
-			}
-			updateCounts = true;
+		if (stList.length != nextProps.stList.length || instList.length != nextProps.instList.length || indicatorList.length != nextProps.indicatorList.length || filter != nextProps.filter) {
+			suggestions = this.getSuggestions(this.state.value, nextProps);
+			suggestionsUpdated = true;
 		}
 
-		if (indicatorList != nextProps.indicatorList || filter != nextProps.filter) {
-			if (nextProps.filter == "indicators" || nextProps.filter == "all") {
-				newSuggestions = [...newSuggestions, ...this.getSuggestions(this.state.value, nextProps)];
-				updateState = true;
-			}
-			updateCounts = true;
+		console.log("testing!!!", this.subfiltersChanged(nextProps))
+
+		if (!suggestionsUpdated && this.subfiltersChanged(nextProps)) {
+			console.log("getting new suggestions!")
+			console.log(suggestions.length)
+			suggestions = this.getSuggestions(this.state.value, nextProps);
+			console.log(suggestions.length)
+			suggestionsUpdated = true;
 		}
 
-		if (instList != nextProps.instList || filter != nextProps.filter) {
-			if (nextProps.filter == "institutions" || nextProps.filter == "all") {
-				newSuggestions = [...newSuggestions, ...this.getSuggestions(this.state.value, nextProps)];
-				updateState = true;
-			}
-			updateCounts = true;
-		}
-
-		if (sectorSubfilters && (nextProps.sectorSubfilters.length != sectorSubfilters.length)) {
-			newSuggestions = newSuggestions.length > 0 ? newSuggestions : this.getSuggestions(this.state.value, nextProps);
-			newSuggestions = this.applySubfilters(newSuggestions, nextProps);
-			updateState = true;
-			updateCounts = true;
-		}
-
-		if (updateCounts && suggestionsChangedCallback) {
+		if (suggestionsChangedCallback && suggestionsUpdated) {
 	        let counts = this.getSuggestionCounts(this.state.value, nextProps);
-	        this.props.suggestionsChangedCallback(counts);
+	        suggestionsChangedCallback(counts);
 	    }
 
-		if (updateState) {
+		if (suggestionsUpdated) {
 			this.setState({
-				suggestions: newSuggestions.sort(sortAlpha)
+				suggestions: suggestions
 			})
 		}
+	}
+
+	subfiltersChanged(nextProps) {
+		const { yearSubfilters, sectorSubfilters, stateSubfilter} = this.props;
+
+		if (yearSubfilters && (yearSubfilters.length != nextProps.yearSubfilters.length)) {
+			return true;
+		}
+		if (sectorSubfilters && (sectorSubfilters.length != nextProps.sectorSubfilters.length)) {
+			return true;
+		}
+		if (stateSubfilter && (stateSubfilter !== nextProps.stateSubfilter)) {
+			return true;
+		}
+
+		return false;
 	}
 
   	render() {
@@ -187,22 +172,33 @@ class SearchBox extends React.Component {
 	    const currList = this.getCurrList(propContainer);
 
 	    let retList = currList.filter(listElem => {
-	        return listElem && listElem.name ? listElem.name.toLowerCase().includes(inputValue) : null
+	        return this.shouldShowSuggestion(propContainer, listElem, inputValue, inputLength)
 	    });
-	    retList = this.state.filter == "institutions" ? this.applySubfilters(retList, propContainer) : retList
 
-	    return retList.sort((a, b) => {
+	    retList = retList.sort((a, b) => {
 	   		return a.name.toLowerCase().indexOf(inputValue) - b.name.toLowerCase().indexOf(inputValue);
 	   	}).slice(0, customNumSuggestions || 100);
+
+	   	return retList.sort(sortAlpha)
 	}
 
-	applySubfilters(suggestionsList, propContainer) {
-		const {sectorSubfilters} = propContainer
-		console.log(sectorSubfilters)
-		return suggestionsList.filter(listElem => {
-			return sectorSubfilters.indexOf(listElem.sector) > -1
-		})
-	}
+	shouldShowSuggestion(propContainer, suggestion, inputValue, inputLength) {
+		const { yearSubfilters, sectorSubfilters, stateSubfilter } = propContainer
+		let shouldShow = suggestion && suggestion.name ? suggestion.name.toLowerCase().includes(inputValue) : false
+        if (suggestion.type == "institution" && yearSubfilters && sectorSubfilters && shouldShow) {
+        	if (suggestion.sector) {
+	        	let sectorSplitPieces = suggestion.sector.split(", ")
+	    		shouldShow = (yearSubfilters.indexOf(sectorSplitPieces[1]) > -1) && (sectorSubfilters.indexOf(sectorSplitPieces[0]) > -1)
+	    		if (shouldShow && stateSubfilter != "all") {
+	    			shouldShow = stateSubfilter == suggestion.state
+	    		}
+	    	} else {
+	    		shouldShow = false
+	    	}
+        }
+
+        return shouldShow;
+    }
 
 	getCurrList(propContainer) {
 		const { filter, stList, indicatorList, instList } = propContainer;
@@ -289,15 +285,9 @@ class SearchBox extends React.Component {
 	    const { stList, indicatorList, instList} = propContainer;
 	    let counts = {};
 
-	    counts.states = stList.filter(listElem => 
-		        listElem && listElem.name && listElem.name.toLowerCase().includes(inputValue)
-		    ).length;
-	   	counts.institutions = this.applySubfilters(instList.filter(listElem => 
-		        listElem && listElem.name && listElem.name.toLowerCase().includes(inputValue)
-		    ), propContainer).length;
-	   	counts.indicators = indicatorList.filter(listElem => 
-		        listElem && listElem.name && listElem.name.toLowerCase().includes(inputValue)
-		    ).length;
+	    counts.states = stList.filter(listElem => this.shouldShowSuggestion(propContainer, listElem, inputValue, inputLength)).length;
+	   	counts.institutions = instList.filter(listElem => this.shouldShowSuggestion(propContainer, listElem, inputValue, inputLength)).length;
+	   	counts.indicators = indicatorList.filter(listElem => this.shouldShowSuggestion(propContainer, listElem, inputValue, inputLength)).length;
 	   	counts.all = counts.states + counts.institutions + counts.indicators;
 
 	    return counts;

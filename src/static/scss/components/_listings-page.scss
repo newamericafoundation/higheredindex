@@ -176,10 +176,19 @@ $top-bar-height: 55px;
 		@include large {
 			width: 30%;
 			display: block;
-			position: fixed;
+			overflow-y: scroll;
+    		max-height: calc(100vh - 125px) !important;
 		}
 		background-color: rgba(59, 61, 67, .9);
 		padding: 15px 25px;
+
+		&__secondary {
+			border-top: 2px solid palette-get(na-black-40);
+
+			&.hidden {
+				display: none;
+			}
+		}
 	}
 
 	&__results-container {
@@ -231,24 +240,31 @@ $top-bar-height: 55px;
 	}
 
 	&__subfilter {
-		&__radio-entry {
-			display: block;
+		&-container {
+			margin: 17px 0px;
 		}
-
 		&__label, &__checkbox {
 			display: inline-block;
 		}
 
 		&__label {
-			color: palette-get(na-black-10);
+			color: white;
 			font-size: 18px;
+			opacity: .3;
 		}
 
 		&__checkbox {
 			width: auto;
 			height: auto;
 			margin: 0px;
+			margin-right: 10px;
 			padding: 0px;
+		}
+
+		&.active {
+			.listings-page__subfilter__label {
+				opacity: 1;
+			}
 		}
 	}
 
