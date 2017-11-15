@@ -147,7 +147,7 @@ const instVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "gradtot", displayName:"Graduation rate", format: "percent"},
+					{variable: "gradtot", displayName:"Overall graduation rate", format: "percent"},
 					{variable: "gradbach", displayName:"Bachelor's graduation rate", format: "percent"},
 				]
 			},
