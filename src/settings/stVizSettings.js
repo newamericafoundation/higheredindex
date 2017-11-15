@@ -240,11 +240,11 @@ const stVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "endowment", displayName:"Average endowment of state’s institutions @sector", format: "price"},
+					{variable: "endowment", displayName:"Total endowment of state’s institutions @sector", format: "price"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["Endowment averaged ", " at ", " @sector institutions in @year."],
+				textSections: [["Endowment totaled ", " at ", " @sector institutions in @year."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"endowment", format: "price" },
