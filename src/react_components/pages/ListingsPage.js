@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {Helmet} from "react-helmet";
 import { Form, Text, Select, Radio, RadioGroup, submitForm } from 'react-form'
 
-
+import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 import SearchBox from '../components/SearchBox';
 import SvgIcon from '../components/SvgIcon';
 
@@ -68,7 +68,8 @@ class ListingsPage extends React.Component {
 		this.state = {
 	    	counts: null,
 	    	type: props.type,
-	    	subfilter: null
+	    	yearSubfilters: ["Less than Two-Year", "Two-Year", "Four-Year"],
+	    	sectorSubfilters: ["Public", "Nonprofit", "For-Profit"]
 	    };
 	}
 
@@ -97,6 +98,20 @@ class ListingsPage extends React.Component {
 			type: newFilter
 		});
 		window.location.hash = "#" + newFilter;
+	}
+
+	changeYearSubfilter(props) {
+		console.log(props)
+		this.setState({
+			yearSubfilters: props
+		});
+	}
+
+	changeSectorSubfilter(props) {
+		console.log(props)
+		this.setState({
+			sectorSubfilters: props
+		});
 	}
 
 	renderCountBox(type) {
@@ -133,7 +148,7 @@ class ListingsPage extends React.Component {
 						<div className="listings-page__top-bar__filter-label">
 							<h5 className="listings-page__top-bar__filter-label__text">Filters</h5>
 						</div>
-						<SearchBox alwaysRenderSuggestions={true} suggestionsChangedCallback={this.listingsChangedCallback.bind(this)} filter={this.state.type} subfilter={this.state.subfilter} />
+						<SearchBox alwaysRenderSuggestions={true} suggestionsChangedCallback={this.listingsChangedCallback.bind(this)} filter={this.state.type} yearSubfilters={this.state.yearSubfilters} sectorSubfilters={this.state.sectorSubfilters} />
 						<SvgIcon name="search" />
 					</div>
 				</div>
@@ -149,35 +164,23 @@ class ListingsPage extends React.Component {
 							</div>
 							{this.state.type === "institutions" && 
 								<div className="listings-page__filter-container__secondary">
-									<Form
-							            onChange={(internalState) => {
-							            	console.log(internalState)
-							              // this.onChange(internalState.values);
-							            }} >
-							            {({submitForm}) => {
-							              return (
-							                <form onSubmit={submitForm}>
-							                    <RadioGroup field="sector">
-								                  { group => (
-								                    <div className="listings-page__subfilter">
-								                    	<Radio className="listings-page__subfilter__radio" group={group} value="all" id="all" />
-								                      	<label className="listings-page__subfilter__label" htmlFor="all" >All Sectors</label>
-								                      	<Radio className="listings-page__subfilter__radio" group={group} value="pub2" id="pub2" />
-								                      	<label className="listings-page__subfilter__label" htmlFor="pub2" >Public, Two-Year</label>
-								                      	<Radio className="listings-page__subfilter__radio" group={group} value="pub4" id="pub4" />
-								                      	<label className="listings-page__subfilter__label" htmlFor="pub4" >Public, Four-Year</label>
-								                      	<Radio className="listings-page__subfilter__radio" group={group} value="nonprofit2" id="nonprofit2" />
-								                      	<label className="listings-page__subfilter__label" htmlFor="nonprofit2" >Nonprofit, Less than Two-Year</label>
-								                      	<Radio className="listings-page__subfilter__radio" group={group} value="nonprofit4" id="nonprofit4" />
-								                      	<label className="listings-page__subfilter__label" htmlFor="nonprofit4" >Nonprofit, Four-Year</label>
-								                    </div>
-								                  )}
-								                </RadioGroup>
-								                 <Select field="status" id="status" className="listings-page__subfilter" options={stateOptions} />
-							                </form>
-							              )
-							            }}
-							        </Form>
+									<CheckboxGroup
+								        name="year"
+								        value={this.state.yearSubfilters}
+								        onChange={(props) => this.changeYearSubfilter(props)}>
+								        <div className="listings-page__subfilter" ><label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value="Less than Two-Year"/>Less than Two-Year</label></div>
+								        <div className="listings-page__subfilter" ><label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value="Two-Year"/>Two-Year</label></div>
+								        <div className="listings-page__subfilter" ><label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value="Four-Year"/>Four-Year</label></div>
+								    </CheckboxGroup>
+								        
+								    <CheckboxGroup
+								        name="sector"
+								        value={this.state.sectorSubfilters}
+								        onChange={(props) => this.changeSectorSubfilter(props)}>
+								        <div className="listings-page__subfilter" ><label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value="Public"/>Public</label></div>
+								        <div className="listings-page__subfilter" ><label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value="Nonprofit"/>Nonprofit</label></div>
+								        <div className="listings-page__subfilter" ><label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value="For-Profit"/>For-Profit</label></div>
+								    </CheckboxGroup>
 								</div>	
 							}
 						</div>

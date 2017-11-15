@@ -61,7 +61,7 @@ class SearchBox extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { stList, indicatorList, instList, filter, suggestionsChangedCallback } = this.props;
+		const { stList, indicatorList, instList, filter, sectorSubfilters, suggestionsChangedCallback } = this.props;
 		
 		let newSuggestions = [],
 			updateCounts = false,
@@ -88,6 +88,13 @@ class SearchBox extends React.Component {
 				newSuggestions = [...newSuggestions, ...this.getSuggestions(this.state.value, nextProps)];
 				updateState = true;
 			}
+			updateCounts = true;
+		}
+
+		if (sectorSubfilters && (nextProps.sectorSubfilters.length != sectorSubfilters.length)) {
+			newSuggestions = newSuggestions.length > 0 ? newSuggestions : this.getSuggestions(this.state.value, nextProps);
+			newSuggestions = this.applySubfilters(newSuggestions, nextProps);
+			updateState = true;
 			updateCounts = true;
 		}
 
@@ -179,12 +186,22 @@ class SearchBox extends React.Component {
 	    const inputLength = inputValue.length;
 	    const currList = this.getCurrList(propContainer);
 
-	    return currList.filter(listElem => {
+	    let retList = currList.filter(listElem => {
 	        return listElem && listElem.name ? listElem.name.toLowerCase().includes(inputValue) : null
-	    }).sort((a, b) => {
-	    	
+	    });
+	    retList = this.state.filter == "institutions" ? this.applySubfilters(retList, propContainer) : retList
+
+	    return retList.sort((a, b) => {
 	   		return a.name.toLowerCase().indexOf(inputValue) - b.name.toLowerCase().indexOf(inputValue);
 	   	}).slice(0, customNumSuggestions || 100);
+	}
+
+	applySubfilters(suggestionsList, propContainer) {
+		const {sectorSubfilters} = propContainer
+		console.log(sectorSubfilters)
+		return suggestionsList.filter(listElem => {
+			return sectorSubfilters.indexOf(listElem.sector) > -1
+		})
 	}
 
 	getCurrList(propContainer) {
@@ -275,9 +292,9 @@ class SearchBox extends React.Component {
 	    counts.states = stList.filter(listElem => 
 		        listElem && listElem.name && listElem.name.toLowerCase().includes(inputValue)
 		    ).length;
-	   	counts.institutions = instList.filter(listElem => 
+	   	counts.institutions = this.applySubfilters(instList.filter(listElem => 
 		        listElem && listElem.name && listElem.name.toLowerCase().includes(inputValue)
-		    ).length;
+		    ), propContainer).length;
 	   	counts.indicators = indicatorList.filter(listElem => 
 		        listElem && listElem.name && listElem.name.toLowerCase().includes(inputValue)
 		    ).length;

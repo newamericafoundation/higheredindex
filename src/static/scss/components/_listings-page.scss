@@ -235,7 +235,7 @@ $top-bar-height: 55px;
 			display: block;
 		}
 
-		&__label, &__radio {
+		&__label, &__checkbox {
 			display: inline-block;
 		}
 
@@ -244,7 +244,7 @@ $top-bar-height: 55px;
 			font-size: 18px;
 		}
 
-		&__radio {
+		&__checkbox {
 			width: auto;
 			height: auto;
 			margin: 0px;
