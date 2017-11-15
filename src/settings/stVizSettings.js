@@ -403,12 +403,12 @@ const stVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "loan_ever", displayName:"Ever borrowed federal loans", format: "percent"},
-					{variable: "pell_ever", displayName:"Ever received a Pell Grant", format: "percent"},
+					{variable: "loan_ever", displayName:"Aid recipients who ever borrowed federal loans", format: "percent"},
+					{variable: "pell_ever", displayName:"Aid recipients who ever received a Pell Grant", format: "percent"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, ", " of students had taken out at least one federal student loan and ", " of students had ever received Pell Grants at ", " institutions."],
+				textSections: [["In @year, ", " of aid recipients had taken out at least one federal student loan and ", " of aid recipients had ever received Pell Grants at ", " institutions."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"loan_ever", format: "percent"},
