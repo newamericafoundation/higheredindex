@@ -175,11 +175,9 @@ class SearchBox extends React.Component {
 	        return this.shouldShowSuggestion(propContainer, listElem, inputValue, inputLength)
 	    });
 
-	    retList = retList.sort((a, b) => {
+	    return retList.sort(sortAlpha).sort((a, b) => {
 	   		return a.name.toLowerCase().indexOf(inputValue) - b.name.toLowerCase().indexOf(inputValue);
 	   	}).slice(0, customNumSuggestions || 100);
-
-	   	return retList.sort(sortAlpha)
 	}
 
 	shouldShowSuggestion(propContainer, suggestion, inputValue, inputLength) {

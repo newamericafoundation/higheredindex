@@ -25,7 +25,8 @@
 		@include center-vertical;
 
 		.icon__new-america {
-			height: 30px;
+			height: 38px;
+			margin-bottom: 15px;
 			width: auto;
 			fill: white;
 		}
@@ -48,7 +49,7 @@
 	}
 
 	&__explore-link {
-		padding: 10px 11px;
+		padding: 25px 40px;
 		@include small {
 			padding: 25px 30px;
 		}
@@ -59,16 +60,21 @@
 			border-left: $standard-border;
 		}
 
+		.icon {
+			height: 46px;
+			width: 46px;
+		}
+
 		&__secondary {
-			font-size: 13px;
+			font-size: 15px;
 			margin-bottom: 0px;
 			color: white;
-			line-height: 1;
+			line-height: 1.4;
 			padding-top: 5px;
 		}
 		&__primary {
 			font-weight: bold;
-			font-size: 16px;
+			font-size: 23px;
 			color: white;
 			line-height: 1;
 			@include small {
@@ -78,15 +84,23 @@
 	}
 
 	&__methodology-link {
-		padding: 7px 15px;
+		padding: 25px 40px;
 		@include small {
 			padding: 15px 25px;
 		}
+
+		.icon {
+			height: 40px;
+			width: 40px;
+		}
+
 		&__primary {
 			font-weight: bold;
-			font-size: 18px;
+			font-size: 19px;
 			color: white;
-			padding-left: 15px;
+			position: relative;
+			bottom: 8px;
+			padding-left: 20px;
 		}
 
 		&__primary, .icon {
@@ -100,7 +114,7 @@
 		margin: auto;
 		@include small {
 			padding: 25px 0px;
-			width: 300px;
+			width: 400px;
 		}
 		svg {
 			fill: white;
@@ -110,14 +124,15 @@
 			width: 200px;
 
 			@include small {
-				width: 300px;
+				width: 400px;
+				height: 70px;
 			}
 		}
 	}
 
 	.search-box {
 		margin: auto;
-		max-width: 600px;
+		max-width: 800px;
 
 		.react-autosuggest__suggestions-container {
 			max-height: 50vh !important;

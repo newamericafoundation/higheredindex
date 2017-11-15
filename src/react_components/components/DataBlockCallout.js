@@ -29,9 +29,9 @@ class DataBlockCallout extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-    	if (nextProps.sector != this.props.sector) {
-    		this.fetchNewRankings(nextProps)
-    	}
+    	// if (nextProps.sector != this.props.sector) {
+    	// 	this.fetchNewRankings(nextProps)
+    	// }
     }
 
     fetchNewRankings(propsObject) {
@@ -41,12 +41,21 @@ class DataBlockCallout extends React.Component {
       		if (type == "ranking" && isFiftyState(data.state) && data[variable.variable] && data[variable.variable][maxYear]) {
                 let value;
 
-                let collection = sector ? collectionName + "_" + sector : collectionName
-                
-				let rankingKey = collection + "_" + data.path + "_" + variable.variable;
+                if (sector) {
+	                Object.keys(sectorOptions).forEach(sectorKey => {
+	                	let collection = collectionName + "_" + sectorKey
+						let rankingKey = collection + "_" + sectorKey + "_" + data.path + "_" + variable.variable;
 
-				if (!this.props.fetchedRankings[rankingKey] && !this.props.fetchedRankings[rankingKey] != "fetching") {
-					this.sendRankCalloutRequest(data, collection, variable, direction)
+						if (!this.props.fetchedRankings[rankingKey] && !this.props.fetchedRankings[rankingKey] != "fetching") {
+							this.sendRankCalloutRequest(data, collection, variable, direction)
+						}
+					})
+				} else {
+					let rankingKey = collectionName + "_" + data.path + "_" + variable.variable;
+
+					if (!this.props.fetchedRankings[rankingKey] && !this.props.fetchedRankings[rankingKey] != "fetching") {
+						this.sendRankCalloutRequest(data, collectionName, variable, direction)
+					}
 				}
 	      	} 
 	      	return null; 	
@@ -108,7 +117,7 @@ class DataBlockCallout extends React.Component {
 								if (isNaN(value)) { return null; }
 								value = getOrdinal(value);
 							} else if (this.props.fetchedRankings[rankingKey] == "fetching") {
-								value = null
+								value = "Loading..."
 							}
                         }
 
