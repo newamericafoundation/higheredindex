@@ -82,9 +82,9 @@ const stVizSettings = {
 				textSections: [["In @year, the average cost of attendance after grant aid was ", " at public institutions and ", " at private institutions; and the average for low-income students was ", " at public institutions and ", " at private institutions in ", "."],
 					["The following chart depicts trends over time."]],
 				variables: [
-					{variable:"netpricepub", format: "price" },
+					{variable:"netpricepub", format: "price"},
+					{variable:"netpricepriv", format: "price"},
 					{variable:"netpriceincpub", format: "price"},
-					{variable:"netpricepriv", format: "price" },
 					{variable:"netpriceincpriv", format: "price"},
 					{variable:"name", format: "string"},
 				]
