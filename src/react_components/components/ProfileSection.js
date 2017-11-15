@@ -77,9 +77,10 @@ class ProfileSection extends React.Component {
 	}
 
 	render() {
-		const {title, subtitle, data, settings, collectionName, dataInfo} = this.props;
+		const {title, subtitle, data, settings, collectionName, dataInfo, showLastUpdated} = this.props;
 
-		let lastUpdated = dataInfo && collectionName ? this.getLastUpdated(dataInfo, collectionName) : null;
+		console.log(showLastUpdated, dataInfo, collectionName)
+		let lastUpdated = showLastUpdated && dataInfo && collectionName ? this.getLastUpdated(dataInfo, collectionName) : null;
 		let sectionContent = this.getSectionContent();
 
 		return (

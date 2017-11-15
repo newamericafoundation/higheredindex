@@ -74,7 +74,8 @@ class StPage extends React.Component {
               subtitle={section.subtitle}
               settings={stVizSettings[name]}
               collectionName={"states_" + section.dataDivision}
-              data= {data} />
+              data= {data} 
+              showLastUpdated={true} />
           )
         })}
         <Footer />

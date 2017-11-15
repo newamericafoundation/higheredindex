@@ -76,19 +76,22 @@ class IndicatorPage extends React.Component {
           title="About"
           index="0"
           type="description"
-          text={description} />
+          text={description} 
+          showLastUpdated={false} />
         { rankingVariables && <ProfileSection 
           title="Rankings"
           index="1"
           type="rankingDashboard"
           settings={rankingVariables} 
           collectionName={"states_" + section} 
-          data= {this.props.statesData} /> }
+          data= {this.props.statesData} 
+          showLastUpdated={false} /> }
         { indicatorTrendsSettings[path] && indicatorTrendsSettings[path].trendsSettings && <ProfileSection
           title="Trends"
           index={rankingVariables ? "2" : "1"}
           settings={indicatorTrendsSettings[path].trendsSettings} 
-          data= {this.props.usData} /> }
+          data= {this.props.usData} 
+          showLastUpdated={false} /> }
         <Footer />
       </div>
     )

@@ -22,7 +22,7 @@ class InstPageContainer extends React.Component {
     }
 
     if (!dataInfo) {
-      dispatch(fetchDataInfo)
+      dispatch(fetchDataInfo())
     }
   }
 

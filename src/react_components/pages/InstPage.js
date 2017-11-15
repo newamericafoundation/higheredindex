@@ -71,7 +71,8 @@ class InstPage extends React.Component {
               subtitle={section.subtitle}
               settings={instVizSettings[name]}
               collectionName={"inst_" + section.dataDivision}
-              data= {this.props.instData[section.dataDivision] }/>
+              data= {this.props.instData[section.dataDivision] }
+              showLastUpdated={true} />
           )
         })}
         <Footer />
