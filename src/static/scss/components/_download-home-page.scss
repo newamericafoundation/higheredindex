@@ -5,6 +5,17 @@
 		line-height: 1.5;
 		margin: auto;
 		text-align: left;
+
+		a {
+			color: palette-get(na-black-30);
+			border-bottom: palette-get(na-black-30) solid 2px;
+			font-weight: bold;
+
+			&:hover {
+				color: palette-get(na-turquoise);
+				border-color: palette-get(na-turquoise);
+			}
+		}
 	}
 	&__section-container {
 		@include small {

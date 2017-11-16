@@ -63,27 +63,6 @@ class AdminIndicatorEditorForm extends React.Component {
                   <Text field='name' />
                 </div>
                 <div className="admin__form__field">
-                  <h5 className="admin__form__field-label">Section</h5>
-                  <Select
-                    field='section'
-                    options={[{
-                      label: 'Grants',
-                      value: 'grants'
-                    }, {
-                      label: 'Loans',
-                      value: 'loans'
-                    }, {
-                      label: 'Outcomes',
-                      value: 'outcomes'
-                    }, {
-                      label: 'Schools',
-                      value: 'schools'
-                    }, {
-                      label: 'Students',
-                      value: 'students'
-                    }]} />
-                </div>
-                <div className="admin__form__field">
                   <h5 className="admin__form__field-label">Description</h5>
                   <RichTextEditor
                     value={this.state.richTextDescription}
