@@ -11,14 +11,6 @@ const getOrdinal = (n) => {
     return n+(s[(v-20)%10]||s[v]||s[0]);
 }
 
-const sectorOptions = {
-  "all": "",
-  "public2": "(2-Year Public)",
-  "public4": "(4-Year Public)",
-  "nonprofit": "(Private Nonprofit)",
-  "forprofit": "(Private For-Profit)",
-}
-
 class DataBlockCallout extends React.Component {
     constructor() {
         super();
@@ -28,20 +20,14 @@ class DataBlockCallout extends React.Component {
     	this.fetchNewRankings(this.props);
     }
 
-    componentWillReceiveProps(nextProps) {
-    	// if (nextProps.sector != this.props.sector) {
-    	// 	this.fetchNewRankings(nextProps)
-    	// }
-    }
-
     fetchNewRankings(propsObject) {
-    	const {collectionName, settings, maxYear, data, sector} = propsObject;
+    	const {collectionName, settings, maxYear, data, sectorOptions} = propsObject;
 		const {type, direction, variables} = settings;
     	{variables.map((variable) => {
       		if (type == "ranking" && isFiftyState(data.state) && data[variable.variable] && data[variable.variable][maxYear]) {
                 let value;
 
-                if (sector) {
+                if (sectorOptions) {
 	                Object.keys(sectorOptions).forEach(sectorKey => {
 	                	let collection = collectionName + "_" + sectorKey
 						let rankingKey = collection + "_" + sectorKey + "_" + data.path + "_" + variable.variable;
@@ -89,13 +75,13 @@ class DataBlockCallout extends React.Component {
 	}
 
     sendRankCalloutRequest(data, collection, variable, direction) {
-        const {collectionName, maxYear, sector} = this.props;
+        const {maxYear} = this.props;
 
         this.props.fetchRanking(collection, direction, variable.variable, maxYear, data[variable.variable][maxYear], data.path)
     }
 
     render() {
-	    const {collectionName, settings, maxYear, data, sector} = this.props;
+	    const {collectionName, settings, maxYear, data, sectorOptions, sector} = this.props;
 		const {type, direction, variables} = settings;
 
 		if (!data) { return null; }
@@ -122,10 +108,15 @@ class DataBlockCallout extends React.Component {
                         }
 
                         if (value) {
+                        	let sectorLabel;
+                        	if (sectorOptions) {
+                        		sectorLabel = sector == "all" ? "" : "(" + sectorOptions[sector] + ")"
+                        	}
+
 		    	      		return (
 		    	      			<div className="data-block__callout" key={variable.variable}>
 		    	      				<h5 className="data-block__callout__value">{value}</h5>
-		    	      				<h5 className="data-block__callout__label">{variable.displayName.replace("@sector", sectorOptions[sector])}</h5>
+		    	      				<h5 className="data-block__callout__label">{variable.displayName.replace("@sector", sectorLabel)}</h5>
 		    	      			</div>
 		    	      		)
 		    	      	}

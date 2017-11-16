@@ -16,11 +16,11 @@ const stVizSettings = {
 						{
 							headingLabels: ["Category", "Count"],
 							variables: [
-								{variable:"pub4yr", displayName:"Public Four-Year", format: "number" },
-								{variable:"twoyrlesspublic", displayName:"Public Two-Year or Less", format: "number"},
-								{variable:"nonprof4yr", displayName:"Non-Profit Four-Year", format: "number"},
-								{variable:"nonprof2yrorless", displayName:"Non-Profit Two-Year", format: "number"},
-								{variable:"forprofit", displayName:"For-Profit", format: "number"},
+								{variable:"pub4yr", displayName:"4-Year Public", format: "number" },
+								{variable:"twoyrlesspublic", displayName:"2-Year Public", format: "number"},
+								{variable:"nonprof4yr", displayName:"Private Nonprofit 4-Year", format: "number"},
+								{variable:"nonprof2yrorless", displayName:"Private Nonprofit 2-Year", format: "number"},
+								{variable:"forprofit", displayName:"Private For-Profit", format: "number"},
 								{variable:"schools", displayName:"Total", format: "number", bold: true},
 							],
 						},
@@ -38,6 +38,7 @@ const stVizSettings = {
 		},
 		{
 			title: "Sticker Price",
+			sectorOptions: { "all": "All Sectors", "public4": "4-Year Public", "public2": "2-Year Public", "nonprofit": "Private Nonprofit", "forprofit": "Private For-Profit"},
 			calloutSettings: {
 				type: "ranking",
 				direction: "lowest",
@@ -106,6 +107,7 @@ const stVizSettings = {
 		},
 		{
 			title: "Student Aid",
+			sectorOptions: { "all": "All Sectors", "public4": "4-Year Public", "public2": "2-Year Public", "nonprofit": "Private Nonprofit", "forprofit": "Private For-Profit"},
 			calloutSettings: {
 				type: "ranking",
 				direction: "highest",
@@ -149,6 +151,7 @@ const stVizSettings = {
 		},
 		{
 			title: "Graduation Rates",
+			sectorOptions: { "all": "All Sectors", "public4": "4-Year Public", "public2": "2-Year Public", "nonprofit": "Private Nonprofit", "forprofit": "Private For-Profit"},
 			calloutSettings: {
 				type: "ranking",
 				direction: "highest",
@@ -180,6 +183,7 @@ const stVizSettings = {
 		},
 		{
 			title: "Retention Rates",
+			sectorOptions: { "all": "All Sectors", "public4": "4-Year Public", "public2": "2-Year Public", "nonprofit": "Private Nonprofit", "forprofit": "Private For-Profit"},
 			calloutSettings: {
 				type: "ranking",
 				direction: "highest",
@@ -209,6 +213,7 @@ const stVizSettings = {
 		},
 		{
 			title: "Transfer Students",
+			sectorOptions: { "all": "All Sectors", "public4": "4-Year Public", "public2": "2-Year Public", "nonprofit": "Private Nonprofit", "forprofit": "Private For-Profit"},
 			calloutSettings: {
 				type: "value",
 				variables: [
@@ -237,6 +242,7 @@ const stVizSettings = {
 		},
 		{
 			title: "Endowment",
+			sectorOptions: { "all": "All Sectors", "public4": "4-Year Public", "public2": "2-Year Public", "nonprofit": "Private Nonprofit"},
 			calloutSettings: {
 				type: "value",
 				variables: [

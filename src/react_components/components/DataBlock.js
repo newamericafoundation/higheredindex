@@ -6,13 +6,6 @@ import DataBlockViz from "./DataBlockViz";
 import DataBlockSectorSelector from "./DataBlockSectorSelector";
 import { fetchCongDistrictInfo } from '../../actions.js';
 
-const sectorOptions = {
-  "all": "",
-  "public2": "2-year public",
-  "public4": "4-year public",
-  "nonprofit": "private nonprofit",
-  "forprofit": "private for-profit",
-}
 
 class DataBlock extends React.Component {
   constructor(props) {
@@ -41,7 +34,7 @@ class DataBlock extends React.Component {
 
   render() {
   	let {settings, data, collectionName, fetchedCongDistrictInfo} = this.props,
-      {title, paragraphSettings, vizSettings} = settings;
+      {title, sectorOptions, paragraphSettings, vizSettings} = settings;
 
     const {sector} = this.state;
 
@@ -49,11 +42,11 @@ class DataBlock extends React.Component {
       showSectorSelector = false;
 
     if (sector) {
-      if (vizSettings.chart1Settings.type == "table" || vizSettings.chart1Settings.type == "state-map") {
-        currData = data ? data.all : null
-      } else {
+      if (sectorOptions) {
         currData = data ? data[sector] : null
         showSectorSelector = true
+      } else {
+        currData = data ? data.all : null
       }
     }
 
@@ -64,10 +57,10 @@ class DataBlock extends React.Component {
         <div className="data-block__title-container">
       	  <h5 className="data-block__title">{title}</h5>
           {showSectorSelector &&
-            <DataBlockSectorSelector fullData={data} changeFunction={this.changeSector.bind(this)} />}
+            <DataBlockSectorSelector sectorOptions={sectorOptions} changeFunction={this.changeSector.bind(this)} />}
         </div>
       	<div className="data-block__content">
-	      	{ paragraphSettings && <DataBlockInfo settings={settings} data={currData} collectionName={collectionName} sector={sector} /> }
+	      	{ paragraphSettings && <DataBlockInfo settings={settings} data={currData} collectionName={collectionName} sectorOptions={sectorOptions} sector={sector} /> }
           { vizSettings && <DataBlockViz settings={vizSettings} data={currData} collectionName={collectionName}/> }
         </div>
       </div>

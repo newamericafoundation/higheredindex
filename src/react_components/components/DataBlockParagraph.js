@@ -7,14 +7,6 @@ const d3 = require("d3");
 import {formatValue} from '../../helper_functions/format_value';
 import SvgIcon from './SvgIcon'
 
-const sectorOptions = {
-  "all": "",
-  "public2": "2-year public",
-  "public4": "4-year public",
-  "nonprofit": "private nonprofit",
-  "forprofit": "private for-profit",
-}
-
 class DataBlockParagraph extends React.Component {
 	constructor(props) {
 		super(props)
@@ -51,7 +43,7 @@ class DataBlockParagraph extends React.Component {
     }
 
 	render() {
-		const {settings, maxYear, data, sector} = this.props,
+		const {settings, maxYear, data, sectorLabel} = this.props,
 			{textSections, variables} = settings;
 
 		if (data) {
@@ -69,7 +61,7 @@ class DataBlockParagraph extends React.Component {
 					section.map((text, j) => {
 						let variable = variables[variableCounter];
 						text = text.replace("@year", maxYear);
-						text = text.replace("@sector", sectorOptions[sector]);
+						text = text.replace("@sector", sectorLabel);
 						
 						textSection.push(<span key={j + "_text"} >{text}</span>);
 
