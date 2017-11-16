@@ -31,6 +31,16 @@
 		padding: 0px 20px;
 		margin: auto;
 		margin-bottom: 20px;
-		
+		color: palette-get(na-black-40);
+
+		a {
+			color: palette-get(na-black-30);
+			border-bottom: palette-get(na-black-30) solid 2px;
+			font-weight: bold;
+			&:hover {
+				color: palette-get(na-turquoise);
+     			border-color: palette-get(na-turquoise)
+			}
+		}
 	}
 }

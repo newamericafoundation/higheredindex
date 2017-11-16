@@ -62,7 +62,9 @@
 			margin-bottom: 0px;
 			height: 15px;
 			line-height: 15px;
-			padding-left: 7px;
+			padding: 0 7px;
+			position: relative;
+			bottom: 6px;
 		}
 
 		&__left {
@@ -92,7 +94,7 @@
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
-		right: 50px;
+		right: 65px;
 
 		input {
 			background-color: palette-get(na-black);

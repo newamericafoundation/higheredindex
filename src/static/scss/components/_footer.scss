@@ -3,9 +3,9 @@
 	z-index: 100;
 	background-color: palette-get(na-black);
 	color: white;
-	padding: 40px 25px;
+	padding: 55px 25px;
 	position: relative;
-	margin-top: 25px;
+	margin-top: 100px;
 
 	&__contents {
 		@include large {
@@ -16,8 +16,12 @@
 	}
 
 	&__left {
+		padding-bottom: 20px;
+		border-bottom: 2px solid palette-get(na-black-30);
 		@include large {
 			padding-right: 5%;
+			border-bottom: none;
+			padding-bottom: 0px;
 			border-right: 2px solid palette-get(na-black-30);
 		}
 	}
@@ -62,6 +66,7 @@
 		}
 
 		&__title {
+			font-size: 16px;
 			font-weight: bold;
 			text-transform: uppercase;
 			letter-spacing: 1.3px;
@@ -70,8 +75,8 @@
 
 		&__link {
 			line-height: 1.3;
-			margin-bottom: 15px;
-			font-size: 18px;
+			margin-bottom: 10px;
+			font-size: 16px;
 
 			& > a {
 				color: white;
@@ -84,8 +89,10 @@
 	}
 
 	&__license {
+		font-size: 14px;
 		line-height: 1.3;
 	}
+
 	&__last-updated {
 		&__label {
 			font-weight: bold;
@@ -106,23 +113,36 @@
 			position: relative;
 			left: 0;
 			svg {
-				width: 260px;
+				width: 225px;
 				height: 50px;
 			}
 		}
 
 		&__right {
-			@media screen and (min-width: 775px) {
+			@media screen and (max-width: 750px) {
 			    display: inline-block;
 				position: absolute;
 				right: 0;
-				top: 0;
-			} 
+				top: 5px;
+			}
+
+			@media screen and (min-width: 800px) {
+			    display: inline-block;
+				position: absolute;
+				right: 0;
+				top: 5px;
+			}
 
 			svg {
-				height: 50px;
+				height: 40px;
 				width: 40px;
-				margin-right: 15px;
+				margin-right: 10px;
+
+				&:hover {
+					path {
+						fill: palette-get(na-turquoise) !important;
+					}
+				}
 			}
 		}
 	}

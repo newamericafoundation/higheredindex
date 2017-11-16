@@ -50,12 +50,16 @@ export function getColorScale(data, filterVar) {
 	} else if (scaleType == "quantize") {
 		scale = d3.scaleQuantize();
 		domain = customDomain ? customDomain : setQuantizeDomain(filterVar, data);
-		let extent = domain[1] - domain[0] + 1;
-		if (extent < numBins) {
-			numBins = extent
-		}
 
-		console.log(numBins, extent)
+		if (filterVar.format != "percent") {
+			let extent = domain[1] - domain[0] + 1;
+			console.log(extent)
+			if (extent < numBins) {
+				numBins = extent
+			}
+
+			console.log(numBins, extent)
+		}
 
 		range = setColorBins(numBins, customRange);
 		console.log(range, domain);

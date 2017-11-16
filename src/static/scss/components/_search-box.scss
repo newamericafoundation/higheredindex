@@ -10,6 +10,7 @@
 	    transition: $transition;
    		
 	    width: 300px;
+	    max-width: calc(100% - 140px);
    		&.hidden {
 			width: 0px;
 			input {
