@@ -460,12 +460,12 @@ const instVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "first_gen", displayName:"First generation", format: "percent"},
-					{variable: "independent", displayName:"Independent", format: "percent"},
+					{variable: "first_gen", displayName:"First generation aid recipients", format: "percent"},
+					{variable: "independent", displayName:"Independent aid recipients", format: "percent"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, ", " of students were the first in their families to go to college; ", " of students were married; ", " of students were financially independent from their parents or other family; and ", " of students were veterans at ", "."],
+				textSections: [["In @year, ", " of aid recipients were the first in their families to go to college; ", " of aid recipients were married; ", " of aid recipients were financially independent from their parents or other family; and ", " of aid recipients were veterans at ", "."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"first_gen", format: "percent"},
