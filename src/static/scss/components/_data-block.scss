@@ -1,7 +1,12 @@
 .data-block {
 	max-width: 1050px;
 	margin: auto;
+	margin-bottom: 20px;
 	padding: 20px 15px;
+
+	/*&:last-child {
+		margin-bottom: 100px;
+	}*/
 
 	@include small {
 		padding: 25px 25px;
@@ -102,6 +107,7 @@
 			font-size: 16px;
 		}
 		&__data {
+			font-family: Simplon;
 			font-weight: bold;
 			color: palette-get(na-black);
 		}
@@ -109,9 +115,12 @@
 		&__link {
 			color: palette-get(na-black-30) !important;
 			font-weight: bold;
+			font-family: Simplon;
+     		border-bottom: palette-get(na-black-30) solid 2px;
 
 			&:hover {
 				color: palette-get(na-turquoise) !important;
+				border-color: palette-get(na-turquoise) !important;
 			}
 		}
 
@@ -197,6 +206,8 @@
 	&__source {
 		color: palette-get(na-black-40);
 		margin-bottom: 15px;
+		margin: 30px 0 15px 0;
+     	font-size: 15px;
 	}
 
 	&__indicator-link {
@@ -214,14 +225,15 @@
 
 .tick {
 	& > line {
-		stroke: palette-get(na-black-10) !important;
-		stroke-dasharray: 5, 5;
+		stroke: #d0d0d0 !important;
+		stroke-dasharray: 1, 4;
 	}
 	& > path {
 		stroke-width: 0;
 	}
 
 	& > text {
+		font-family: Simplon;
 		fill: palette-get(na-black-70);
 	}
 }

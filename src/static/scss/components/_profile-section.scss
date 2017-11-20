@@ -9,8 +9,8 @@
 	}
 	&__title {
 		font-weight: bold;
-		margin-bottom: 3px !important;
-		font-size: 25px;
+		margin-bottom: 5px !important;
+		font-size: 36px;
 
 		@include medium {
 			font-size: 30px;
@@ -19,15 +19,17 @@
 	&__subtitle, &__last-updated {
 		font-weight: normal;
 		color: palette-get(na-black-40);
-		font-size: 14px;
+		font-size: 15px;
+		line-height: 1.6;
 	}
 
 	&__subtitle {
-		margin-bottom: 10px;
+		margin-bottom: 15px;
 	}
 
 	&__last-updated {
 		margin-bottom: 0px;
+		font-style: italic;
 	}
 
 	&__anchor {

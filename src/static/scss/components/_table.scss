@@ -41,6 +41,19 @@ $side-padding: 25px;
 			line-height: 1.3
 		}
 
+		&__label {
+			a {
+				font-weight: bold;
+				color: palette-get(na-black-40);
+				border-bottom: palette-get(na-black-40) solid 2px;
+
+				&:hover {
+					color: palette-get(na-turquoise);
+					border-color: palette-get(na-turquoise);
+				}
+			}
+		}
+
 		&__value {
 			font-weight: bold;
 			border-left: 1px solid palette-get(na-black-10);

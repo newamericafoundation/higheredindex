@@ -71,9 +71,7 @@ class DataBlockParagraph extends React.Component {
 									<Link key={j} to={variable.linkUrl}><span className="data-block__paragraph__link">{variable.linkText}</span></Link>
 								)
 							} else if (variable.congressionalDistrictAggregate) {
-								console.log("USES CONG DISTRICT!!!!")
 								textSection.push(<span className="data-block__paragraph__data" key={j}>{this.state.congressionalDistrictAggregate}</span>)
-								console.log(this.state.congressionalDistrictAggregate)
 							} else if (variable.explainerText) {
 								let explainerIndex = explainerPopups.length
 								textSection.push(<span className="data-block__paragraph__explainer" ref={"explainer-text_" + explainerIndex} key={j} onMouseOver={() => { return this.explainerMouseOver(explainerIndex)}} onMouseOut={() => { return this.explainerMouseOut(explainerIndex)}}><SvgIcon name="question" /></span>)
