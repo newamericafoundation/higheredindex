@@ -210,7 +210,7 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, ", " of students at ", " were transfer students."],
+				textSections: [["In @year, ", " of students at ", " were transfer students. (Unlike graduation rates, disclosure of transfer-out rates is not required under federal law, these are instead voluntarily reported by institutions.)"],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"transfer", format: "percent"},
