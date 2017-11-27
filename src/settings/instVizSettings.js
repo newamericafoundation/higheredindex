@@ -54,7 +54,7 @@ const instVizSettings = {
 					{variable:"name", format: "string"},
 				]
 			},
-			source: "College Scorecard",
+			source: "IPEDS",
 			indicatorLink: "sticker-price",
 			vizSettings: {
 				chart1Settings: {
@@ -217,7 +217,7 @@ const instVizSettings = {
 					{variable:"name", format: "string"},
 				]
 			},
-			source: "College Scorecard",
+			source: "IPEDS",
 			indicatorLink: null,
 			vizSettings: {
 				chart1Settings: {
@@ -245,7 +245,7 @@ const instVizSettings = {
 					{variable:"sat_avg", format: "year"},
 				]
 			},
-			source: "IPEDS",
+			source: "College Scorecard",
 			indicatorLink: "sat-act-average",
 			vizSettings: {
 				chart1Settings: {
@@ -304,7 +304,7 @@ const instVizSettings = {
 					{variable:"name", format: "string"},
 				]
 			},
-			source: "College Scorecard",
+			source: "IPEDS",
 			indicatorLink: "endowment",
 			vizSettings: {
 				chart1Settings: {

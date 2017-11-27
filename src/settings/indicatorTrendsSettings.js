@@ -887,7 +887,7 @@ export const indicatorTrendsSettings = {
 						{variable:"outstateprice", format: "price"},
 					]
 				},
-				source: "College Scorecard",
+				source: "IPEDS",
 				vizSettings: {
 					chart1Settings: {
 						type: "line-chart",
@@ -1026,7 +1026,7 @@ export const indicatorTrendsSettings = {
 						{variable:"endowment", format: "price" },
 					]
 				},
-				source: "College Scorecard",
+				source: "IPEDS",
 				vizSettings: {
 					chart1Settings: {
 						type: "bar-chart",

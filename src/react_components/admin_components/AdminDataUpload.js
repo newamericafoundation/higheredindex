@@ -46,6 +46,7 @@ class AdminDataUpload extends React.Component {
   }
 
   onChange({type, granularity, sector}) {
+    console.log("changed!!!")
     this.setState({
       type: type,
       granularity: granularity, 
@@ -101,10 +102,13 @@ class AdminDataUpload extends React.Component {
             }}
 
             onChange={(internalState) => {
+              console.log(internalState)
               this.onChange(internalState.values);
             }}
           >
             {({submitForm}) => {
+              console.log("HELLOOOOOO")
+              console.log(this.state)
               return (
                 <form onSubmit={submitForm}>
                   <div className="admin__form__field">

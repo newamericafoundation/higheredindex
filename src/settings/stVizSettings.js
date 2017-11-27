@@ -56,7 +56,7 @@ const stVizSettings = {
 					{variable:"name", format: "string"},
 				]
 			},
-			source: "College Scorecard",
+			source: "IPEDS",
 			indicatorLink: "sticker-price",
 			vizSettings: {
 				chart1Settings: {
@@ -228,7 +228,7 @@ const stVizSettings = {
 					{variable:"name", format: "string"},
 				]
 			},
-			source: "College Scorecard",
+			source: "IPEDS",
 			indicatorLink: null,
 			vizSettings: {
 				chart1Settings: {
@@ -257,7 +257,7 @@ const stVizSettings = {
 					{variable:"name", format: "string"},
 				]
 			},
-			source: "College Scorecard",
+			source: "IPEDS",
 			indicatorLink: "endowment",
 			vizSettings: {
 				chart1Settings: {
