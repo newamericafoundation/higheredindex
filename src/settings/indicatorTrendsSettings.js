@@ -183,7 +183,7 @@ export const indicatorTrendsSettings = {
 				}
 			},
 			{
-				title: "Enrollment by Nontraditional Students",
+				title: "Enrollment by Student Characteristics",
 				calloutSettings: {
 					type: "value",
 					variables: [
