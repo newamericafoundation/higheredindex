@@ -456,7 +456,7 @@ const instVizSettings = {
 			}
 		},
 		{
-			title: "Enrollment by Non-traditional Students",
+			title: "Enrollment by Student Characteristics",
 			calloutSettings: {
 				type: "value",
 				variables: [
