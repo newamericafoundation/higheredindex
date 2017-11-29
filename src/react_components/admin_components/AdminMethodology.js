@@ -63,7 +63,7 @@ class AdminMethodology extends React.Component {
                 submitHandler(values);
               }}
             >
-              {({values, addValue, removeValue}) => {
+              {({submitForm, values, addValue, removeValue}) => {
                 return (
                   <form onSubmit={submitForm}>
                     <div className="admin__form__field">
