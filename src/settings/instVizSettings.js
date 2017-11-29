@@ -24,7 +24,14 @@ const instVizSettings = {
 						{
 							headingLabels: ["Category", "Info"],
 							variables: [
-								{variable:"hbcu", displayName:"HBCU/MSI", format: "string", linkTo: "/indicator/hbcu-msi"},
+								{variable:"degree", displayName:"Degree Granting", format: "number"},
+								{variable:"hbcu", displayName:"Historically Black College/University", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"pbi", displayName:"Predominantly Black Institution", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"aanhi", displayName:"Alaska Native Native Hawaiian Serving Institution", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"tribal", displayName:"Tribal College/University", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"aanapii", displayName:"Asian American Native American Pacific Islander Serving Institution", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"hsi", displayName:"Hispanic Serving Institution", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"nanti", displayName:"Native American (Non-Tribal) Institution", format: "number", linkTo: "/indicator/hbcu-msi"},
 								{variable:"hcm2", displayName:"HCM2", format: "string", linkTo: "/indicator/hcm2"},
 								{variable:"accredagency", displayName:"Accrediting Agency", format: "string"},
 								{variable:"sector", displayName:"Sector", format: "string"},

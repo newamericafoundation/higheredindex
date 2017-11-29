@@ -265,7 +265,7 @@ class SearchBox extends React.Component {
 
 	renderSuggestionsContainer({ containerProps, children }) {
 	  	return (
-		    <div {... containerProps} ref="itemsContainer" className="react-autosuggest__suggestions-container">
+		    <div {...containerProps} ref="itemsContainer" className="react-autosuggest__suggestions-container">
 		      	{children}
 		      	{this.props.alwaysRenderSuggestions && this.state.suggestions.length == this.state.numSuggestions &&
 		      	<div className="react-autosuggest__load-more" onClick={() => { return this.loadMoreResults() }}>Load More Results</div>}

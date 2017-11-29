@@ -28,8 +28,14 @@ const stVizSettings = {
 							headingLabels: ["Category", "Count"],
 							variables: [
 								{variable:"degree", displayName:"Degree Granting", format: "number"},
-								{variable:"hbcu", displayName:"HBCU/MSI", format: "number", linkTo: "/indicator/hbcu-msi"},
-								{variable:"prop_9010", displayName:"90/10 Proportion", format: "number", linkTo: "/indicator/90-10-proportion"},
+								{variable:"hbcu", displayName:"Historically Black Colleges/Universities", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"pbi", displayName:"Predominantly Black Institutions", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"aanhi", displayName:"Alaska Native Native Hawaiian Serving Institutions", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"tribal", displayName:"Tribal Colleges/Universities", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"aanapii", displayName:"Asian American Native American Pacific Islander Serving Institutions", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"hsi", displayName:"Hispanic Serving Institutions", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"nanti", displayName:"Native American (Non-Tribal) Institutions", format: "number", linkTo: "/indicator/hbcu-msi"},
+								{variable:"prop9010", displayName:"90/10 Proportion", format: "number", linkTo: "/indicator/90-10-proportion"},
 							],
 						}
 					]
