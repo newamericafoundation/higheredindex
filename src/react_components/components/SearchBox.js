@@ -174,9 +174,27 @@ class SearchBox extends React.Component {
 	        return this.shouldShowSuggestion(propContainer, listElem, inputValue, inputLength)
 	    });
 
-	    return retList.sort(sortAlpha).sort((a, b) => {
-	   		return a.name.toLowerCase().indexOf(inputValue) - b.name.toLowerCase().indexOf(inputValue);
-	   	}).slice(0, customNumSuggestions || 100);
+	    return retList
+	    	// .sort(sortAlpha)
+	    	.sort((a, b) => {
+		   		let aIndex = a.name.toLowerCase().indexOf(inputValue),
+		   			bIndex = b.name.toLowerCase().indexOf(inputValue);
+
+		   		if (aIndex < bIndex) {
+		   			return -1
+		   		} else if (aIndex > bIndex) {
+		   			return 1
+		   		} else {
+		   			if ((a.type == "state" || a.type == "indicator") && (b.type != "state" && b.type != "indicator")) {
+		   				return -1
+		   			} else if ((b.type == "state" || b.type == "indicator") && (a.type != "state" && a.type != "indicator")) {
+		   				return 1
+		   			} else {
+		   				return 0
+		   			}
+		   		}
+		   	})
+		   	.slice(0, customNumSuggestions || 100);
 	}
 
 	shouldShowSuggestion(propContainer, suggestion, inputValue, inputLength) {
