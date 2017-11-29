@@ -127,7 +127,6 @@ class SearchBox extends React.Component {
 			            onSuggestionsClearRequested={() => {}}
 			            getSuggestionValue={this.getSuggestionValue}
 			            renderSuggestion={suggestionRenderer.bind(this)}
-			            renderSuggestionsContainer={this.renderSuggestionsContainer.bind(this)}
 			            focusFirstSuggestion = {true}
 			            alwaysRenderSuggestions = {alwaysRenderSuggestions}
 			            inputProps={inputProps} />
