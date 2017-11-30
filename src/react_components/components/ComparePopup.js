@@ -17,7 +17,7 @@ class ComparePopup extends React.Component {
     this.collectionName = this.collectionName == "states_schools" ? "states_schools_all" : this.collectionName
 
     this.chart1FilterList = props.settings.chart1Settings.variables;
-    this.chart2FilterList = [];
+    this.chart2FilterList = props.settings.chart2Settings ? props.settings.chart2Settings.variables : [];
 
     // if (props.settings.chart1Settings) {
     //   this.chilterVarList = [...this.filterVarList, ...props.settings.chart1Settings.variables];
@@ -97,8 +97,11 @@ class ComparePopup extends React.Component {
     }
 
     if (currProfile.type === "institution") {
+      console.log(data)
       let instState = data.state
       let currStateData = this.statesData.filter(d => d.state === instState)[0]
+
+      console.log(this.statesData, instState, currStateData)
 
       combinedData.state = currStateData[currFilter.variable];
 
@@ -152,6 +155,11 @@ class ComparePopup extends React.Component {
               let classList = "compare-popup__filter";
               classList += d.variable === currFilter.variable ? " active" : ""
               return <li key={d.variable} className={classList} onClick={() => this.changeFilter(d, settings.chart1Settings)}>{d.displayName}</li>
+            })}
+            {this.chart2FilterList.map(d => {
+              let classList = "compare-popup__filter";
+              classList += d.variable === currFilter.variable ? " active" : ""
+              return <li key={d.variable} className={classList} onClick={() => this.changeFilter(d, settings.chart2Settings)}>{d.displayName}</li>
             })}
           </ul>
         </div>

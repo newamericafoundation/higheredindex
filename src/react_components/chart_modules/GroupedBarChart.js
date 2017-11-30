@@ -4,6 +4,8 @@ export default class GroupedBarChart {
     constructor(settings) {
       Object.assign(this, settings)
 
+      this.numVars = this.variables.length;
+
       this.initializeDataBars();
     }
 
@@ -51,10 +53,10 @@ export default class GroupedBarChart {
         let varName = variable.variable;
 
         this.dataBars[varName]
-          .attr("x", (d) => { return x(d.year) + i*(x.bandwidth()/2); })
+          .attr("x", (d) => { return x(d.year) + i*(x.bandwidth()/this.numVars); })
           .attr("y", (d) => { return y(d.value); })
           .attr("height", (d) => { return height - y(d.value); })
-          .attr("width", x.bandwidth()/2)
+          .attr("width", x.bandwidth()/this.numVars)
           .attr("opacity", (d) => {
             if (currHovered && d.year == currHovered) {
               return .7;

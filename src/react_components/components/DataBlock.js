@@ -48,7 +48,9 @@ class DataBlock extends React.Component {
     const {sector} = this.state;
 
     let currData = data,
-      showSectorSelector = false;
+      showSectorSelector = false,
+      showCompareButton = false,
+      compareButtonText;
 
     if (sector) {
       if (sectorOptions) {
@@ -61,16 +63,27 @@ class DataBlock extends React.Component {
 
     if (!currData) { return null }
 
-    let compareButtonText = this.state.comparePopupVisible ? "Close Comparison" : "Compare";
+    if (vizSettings.chart1Settings.type != "table" && vizSettings.chart1Settings.type != "state-map") {
+      compareButtonText = this.state.comparePopupVisible ? "Close Comparison" : "Compare";
+      showCompareButton = true;
+    }
+
+    
 
     return (
       <div className="data-block">
         <div className="data-block__title-container">
       	  <h5 className="data-block__title">{title}</h5>
-          {showSectorSelector &&
-            <DataBlockSectorSelector sectorOptions={sectorOptions} changeFunction={this.changeSector.bind(this)} />
+          {(showSectorSelector || showCompareButton) &&
+            <div className="data-block__filter-container">
+              {showSectorSelector &&
+                <DataBlockSectorSelector sectorOptions={sectorOptions} changeFunction={this.changeSector.bind(this)} />
+              }
+              {showCompareButton &&
+                <div className="data-block__compare-button" onClick={() => this.toggleComparePopup()}>{compareButtonText}</div>
+              }
+            </div>
           }
-          <div className="data-block__compare-button" onClick={() => this.toggleComparePopup()}>{compareButtonText}</div>
           {this.state.comparePopupVisible &&
             <ComparePopup settings={vizSettings} data={currData} collection={collectionName} />
           }

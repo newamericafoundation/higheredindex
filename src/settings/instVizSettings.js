@@ -400,68 +400,68 @@ const instVizSettings = {
 		// 		}
 		// 	}
 		// },
-		// {
-		// 	title: "Enrollment by Gender",
-		// 	calloutSettings: {
-		// 		type: "value",
-		// 		variables: [
-		// 			{variable: "men", displayName:"Male", format: "percent"},
-		// 			{variable: "fem", displayName:"Female", format: "percent"},
-		// 		]
-		// 	},
-		// 	paragraphSettings: {
-		// 		textSections: [["In @year, ", " of students identified as male and ", " as female at ", "."],
-		// 			["The following chart depicts trends over time."]],
-		// 		variables: [
-		// 			{variable:"men", format: "percent"},
-		// 			{variable:"fem", format: "percent"},
-		// 			{variable:"name", format: "string"},
-		// 		]
-		// 	},
-		// 	source: "IPEDS",
-		// 	indicatorLink: "enrollment",
-		// 	vizSettings: {
-		// 		chart1Settings: {
-		// 			type: "bar-chart",
-		// 			yAxisLabel: "Students",
-		// 			variables: [
-		// 				{variable:"men", displayName:"Male", format: "percent", color: colors.turquoise.light},
-		// 				{variable:"fem", displayName:"Female", format: "percent", color: colors.purple.light },
-		// 			]
-		// 		}
-		// 	}
-		// },
 		{
-			title: "Enrollment by Financial Need",
+			title: "Enrollment by Gender",
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "loan_ever", displayName:"Aid recipients who ever borrowed federal loans", format: "percent"},
-					{variable: "pell_ever", displayName:"Aid recipients who ever received a Pell Grant", format: "percent"},
+					{variable: "men", displayName:"Male", format: "percent"},
+					{variable: "fem", displayName:"Female", format: "percent"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, ", " of aid recipients had taken out at least one federal student loan and ", " of aid recipients had ever received Pell Grants at ", "."],
+				textSections: [["In @year, ", " of students identified as male and ", " as female at ", "."],
 					["The following chart depicts trends over time."]],
 				variables: [
-					{variable:"loan_ever", format: "percent"},
-					{variable:"pell_ever", format: "percent"},
+					{variable:"men", format: "percent"},
+					{variable:"fem", format: "percent"},
 					{variable:"name", format: "string"},
 				]
 			},
-			source: "College Scorecard",
+			source: "IPEDS",
 			indicatorLink: "enrollment",
 			vizSettings: {
 				chart1Settings: {
-					type: "line-chart",
+					type: "bar-chart",
 					yAxisLabel: "Students",
 					variables: [
-						{variable:"loan_ever", displayName:"Ever borrowed federal loans", format: "percent", color: colors.turquoise.light },
-						{variable:"pell_ever", displayName:"Ever received Pell Grant", format: "percent", color: colors.purple.light},
+						{variable:"men", displayName:"Male", format: "percent", color: colors.turquoise.light},
+						{variable:"fem", displayName:"Female", format: "percent", color: colors.purple.light },
 					]
 				}
 			}
 		},
+		// {
+		// 	title: "Enrollment by Financial Need",
+		// 	calloutSettings: {
+		// 		type: "value",
+		// 		variables: [
+		// 			{variable: "loan_ever", displayName:"Aid recipients who ever borrowed federal loans", format: "percent"},
+		// 			{variable: "pell_ever", displayName:"Aid recipients who ever received a Pell Grant", format: "percent"},
+		// 		]
+		// 	},
+		// 	paragraphSettings: {
+		// 		textSections: [["In @year, ", " of aid recipients had taken out at least one federal student loan and ", " of aid recipients had ever received Pell Grants at ", "."],
+		// 			["The following chart depicts trends over time."]],
+		// 		variables: [
+		// 			{variable:"loan_ever", format: "percent"},
+		// 			{variable:"pell_ever", format: "percent"},
+		// 			{variable:"name", format: "string"},
+		// 		]
+		// 	},
+		// 	source: "College Scorecard",
+		// 	indicatorLink: "enrollment",
+		// 	vizSettings: {
+		// 		chart1Settings: {
+		// 			type: "line-chart",
+		// 			yAxisLabel: "Students",
+		// 			variables: [
+		// 				{variable:"loan_ever", displayName:"Ever borrowed federal loans", format: "percent", color: colors.turquoise.light },
+		// 				{variable:"pell_ever", displayName:"Ever received Pell Grant", format: "percent", color: colors.purple.light},
+		// 			]
+		// 		}
+		// 	}
+		// },
 		// {
 		// 	title: "Enrollment by Student Characteristics",
 		// 	calloutSettings: {
