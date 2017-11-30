@@ -1,14 +1,19 @@
-$side-padding: 25px;
+$side-padding: 12px;
 .table {
 	display: table;
-
 	width: 100%;
 	padding-bottom: 25px;
 
 	@include small {
 		float: left;
-		margin-right: $side-padding;
 		width: calc(50% - #{$side-padding});
+
+		&:first-child {
+			margin-right: $side-padding;
+		}
+		&:last-child {
+			margin-left: $side-padding;
+		}
 	}
 
 	&-container {

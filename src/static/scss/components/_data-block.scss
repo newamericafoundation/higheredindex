@@ -16,20 +16,25 @@
 		display: inline-block;
 		font-weight: bold;
 		margin-bottom: 25px;
+		max-width: calc(100% - 100px);
 	}
 
 	&__title-container {
 		position: relative;
 	}
 
-	&__sector-selector-container {
+	&__filter-container {
 		position: absolute;
 		top: 0;
 		right: 0;
+		display: table;
+	}
+
+	&__sector-selector, &__compare-button {
+		display: table-cell;
 	}
 
 	&__sector-selector {
-		display: inline-block;
 		width: 200px;
 		height: 48px !important;
 		margin: 0px 0px 0px 25px;
@@ -37,10 +42,25 @@
 	    padding: 10px !important;
 	    color: palette-get(na-black-40) !important;
 	    background-position-x: 93% !important;
+	    margin-right: 15px;
 
 	    &:hover {
 	    	background-color: rgba(44,47,53,0.03);
 	    }
+	}
+
+	&__compare-button {
+		padding: 10px;
+		border: 1px solid palette-get(na-black-30);
+	    padding: 10px;
+	    color: palette-get(na-black-40);
+	    cursor: pointer;
+	    height: 48px;
+	    background-color: white;
+
+		&:hover {
+			background-color: rgba(44, 47, 53, 0.03);
+		}
 	}
 
 	&__content {

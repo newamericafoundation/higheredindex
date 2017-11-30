@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import DataBlockInfo from "./DataBlockInfo";
 import DataBlockViz from "./DataBlockViz";
 import DataBlockSectorSelector from "./DataBlockSectorSelector";
+import ComparePopup from "./ComparePopup";
+
 import { fetchCongDistrictInfo } from '../../actions.js';
 
 
@@ -12,7 +14,8 @@ class DataBlock extends React.Component {
     super(props);
 
     this.state = {
-      sector: props.collectionName == "states_schools" ? "all" : null
+      sector: props.collectionName == "states_schools" ? "all" : null,
+      comparePopupVisible: false
     }
   }
 
@@ -23,23 +26,31 @@ class DataBlock extends React.Component {
   }
 
   componentWillMount() {
-      const {getCongDistrictInfo, fetchedCongDistrictInfo, data, settings} = this.props;
+    const {getCongDistrictInfo, fetchedCongDistrictInfo, data, settings} = this.props;
 
-      if (settings.vizSettings.chart1Settings.type == "state-map") {
-        if (!fetchedCongDistrictInfo[data.state]) {
-          getCongDistrictInfo(data.all.state);
-        }
+    if (settings.vizSettings.chart1Settings.type == "state-map") {
+      if (!fetchedCongDistrictInfo[data.state]) {
+        getCongDistrictInfo(data.all.state);
       }
+    }
+  }
+
+  toggleComparePopup() {
+    this.setState({
+      comparePopupVisible: !this.state.comparePopupVisible
+    })
   }
 
   render() {
-  	let {settings, data, collectionName, fetchedCongDistrictInfo} = this.props,
+  	let {settings, data, collectionName, fetchedCongDistrictInfo, currProfile} = this.props,
       {title, sectorOptions, paragraphSettings, vizSettings} = settings;
 
     const {sector} = this.state;
 
     let currData = data,
-      showSectorSelector = false;
+      showSectorSelector = false,
+      showCompareButton = false,
+      compareButtonText;
 
     if (sector) {
       if (sectorOptions) {
@@ -52,12 +63,28 @@ class DataBlock extends React.Component {
 
     if (!currData) { return null }
 
+    if (currProfile.type != "indicator" && vizSettings.chart1Settings.type != "table" && vizSettings.chart1Settings.type != "state-map") {
+      compareButtonText = this.state.comparePopupVisible ? "Close Comparison" : "Compare";
+      showCompareButton = true;
+    }
+
     return (
       <div className="data-block">
         <div className="data-block__title-container">
       	  <h5 className="data-block__title">{title}</h5>
-          {showSectorSelector &&
-            <DataBlockSectorSelector sectorOptions={sectorOptions} changeFunction={this.changeSector.bind(this)} />}
+          {(showSectorSelector || showCompareButton) &&
+            <div className="data-block__filter-container">
+              {showSectorSelector &&
+                <DataBlockSectorSelector sectorOptions={sectorOptions} changeFunction={this.changeSector.bind(this)} />
+              }
+              {showCompareButton &&
+                <div className="data-block__compare-button" onClick={() => this.toggleComparePopup()}>{compareButtonText}</div>
+              }
+            </div>
+          }
+          {this.state.comparePopupVisible &&
+            <ComparePopup settings={vizSettings} data={currData} collection={collectionName} />
+          }
         </div>
       	<div className="data-block__content">
 	      	{ paragraphSettings && <DataBlockInfo settings={settings} data={currData} collectionName={collectionName} sectorOptions={sectorOptions} sector={sector} /> }
@@ -70,6 +97,7 @@ class DataBlock extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    currProfile: state.currProfile,
     fetchedCongDistrictInfo: state.fetchedCongDistrictInfo
   }
 }

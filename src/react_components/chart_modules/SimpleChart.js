@@ -16,6 +16,7 @@ const range = (start, end) => [...Array(end - start + 1)].map((_, i) => start + 
 
 class SimpleChart extends React.Component {
 	constructor(props) {
+        console.log("in simple chart constructor!")
 		super(props);
         let { data } = props;
         let { chart1Settings, chart2Settings } = props.settings;
@@ -84,7 +85,7 @@ class SimpleChart extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.data != nextProps.data) {
+        if (this.props.data != nextProps.data || this.props.settings != nextProps.settings) {
             this.svg
                 .remove()
             this.initializeChart(nextProps.data);
@@ -430,6 +431,16 @@ class SimpleChart extends React.Component {
         }
 
         return [0, d3.max(valList)];
+    }
+
+    reInitializeChart() {
+        this.svg
+            .remove()
+        this.initializeChart(nextProps.data);
+
+        this.setState({
+            chart: this.fauxDiv
+        })
     }
 }
 
