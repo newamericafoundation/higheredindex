@@ -196,7 +196,7 @@ class ListingsPage extends React.Component {
 							        	let classList = "listings-page__subfilter";
 							        	classList += this.state.yearSubfilters.indexOf(year) > -1 ? " active" : "";
 							        	return (
-							        		<div className={classList}>
+							        		<div key={year} className={classList}>
 							        			<label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value={year}/>{year}</label>
 							        		</div>
 							        	)
@@ -212,7 +212,7 @@ class ListingsPage extends React.Component {
 							        	let classList = "listings-page__subfilter";
 							        	classList += this.state.sectorSubfilters.indexOf(sector) > -1 ? " active" : "";
 							        	return (
-							        		<div className={classList}>
+							        		<div key={sector} className={classList}>
 							        			<label className="listings-page__subfilter__label"><Checkbox className="listings-page__subfilter__checkbox" value={sector}/>{sector}</label>
 							        		</div>
 							        	)

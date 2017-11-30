@@ -26,13 +26,13 @@ class DataBlock extends React.Component {
   }
 
   componentWillMount() {
-      const {getCongDistrictInfo, fetchedCongDistrictInfo, data, settings} = this.props;
+    const {getCongDistrictInfo, fetchedCongDistrictInfo, data, settings} = this.props;
 
-      if (settings.vizSettings.chart1Settings.type == "state-map") {
-        if (!fetchedCongDistrictInfo[data.state]) {
-          getCongDistrictInfo(data.all.state);
-        }
+    if (settings.vizSettings.chart1Settings.type == "state-map") {
+      if (!fetchedCongDistrictInfo[data.state]) {
+        getCongDistrictInfo(data.all.state);
       }
+    }
   }
 
   toggleComparePopup() {
@@ -42,7 +42,7 @@ class DataBlock extends React.Component {
   }
 
   render() {
-  	let {settings, data, collectionName, fetchedCongDistrictInfo} = this.props,
+  	let {settings, data, collectionName, fetchedCongDistrictInfo, currProfile} = this.props,
       {title, sectorOptions, paragraphSettings, vizSettings} = settings;
 
     const {sector} = this.state;
@@ -63,12 +63,10 @@ class DataBlock extends React.Component {
 
     if (!currData) { return null }
 
-    if (vizSettings.chart1Settings.type != "table" && vizSettings.chart1Settings.type != "state-map") {
+    if (currProfile.type != "indicator" && vizSettings.chart1Settings.type != "table" && vizSettings.chart1Settings.type != "state-map") {
       compareButtonText = this.state.comparePopupVisible ? "Close Comparison" : "Compare";
       showCompareButton = true;
     }
-
-    
 
     return (
       <div className="data-block">
@@ -99,6 +97,7 @@ class DataBlock extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    currProfile: state.currProfile,
     fetchedCongDistrictInfo: state.fetchedCongDistrictInfo
   }
 }

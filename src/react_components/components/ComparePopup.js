@@ -91,6 +91,8 @@ class ComparePopup extends React.Component {
 
     let vizVariables;
 
+    if (!data[currFilter.variable]) { return <h5 className="data-block__viz__no-data-placeholder">There is no data for {currProfile.name} in this category</h5>; }
+
     let combinedData = {
       profile: data[currFilter.variable],
       us: this.usData[currFilter.variable]
@@ -99,6 +101,9 @@ class ComparePopup extends React.Component {
     if (currProfile.type === "institution") {
       console.log(data)
       let instState = data.state
+
+      if (!instState) { return <h5 className="data-block__viz__no-data-placeholder">There is no state listed for {currProfile.name} in this category</h5>; }
+
       let currStateData = this.statesData.filter(d => d.state === instState)[0]
 
       console.log(this.statesData, instState, currStateData)
