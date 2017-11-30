@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import DataBlockInfo from "./DataBlockInfo";
 import DataBlockViz from "./DataBlockViz";
 import DataBlockSectorSelector from "./DataBlockSectorSelector";
+import ComparePopup from "./ComparePopup";
+
 import { fetchCongDistrictInfo } from '../../actions.js';
 
 
@@ -12,7 +14,8 @@ class DataBlock extends React.Component {
     super(props);
 
     this.state = {
-      sector: props.collectionName == "states_schools" ? "all" : null
+      sector: props.collectionName == "states_schools" ? "all" : null,
+      comparePopupVisible: false
     }
   }
 
@@ -30,6 +33,12 @@ class DataBlock extends React.Component {
           getCongDistrictInfo(data.all.state);
         }
       }
+  }
+
+  toggleComparePopup() {
+    this.setState({
+      comparePopupVisible: !this.state.comparePopupVisible
+    })
   }
 
   render() {
@@ -52,12 +61,19 @@ class DataBlock extends React.Component {
 
     if (!currData) { return null }
 
+    let compareButtonText = this.state.comparePopupVisible ? "Close Comparison" : "Compare";
+
     return (
       <div className="data-block">
         <div className="data-block__title-container">
       	  <h5 className="data-block__title">{title}</h5>
           {showSectorSelector &&
-            <DataBlockSectorSelector sectorOptions={sectorOptions} changeFunction={this.changeSector.bind(this)} />}
+            <DataBlockSectorSelector sectorOptions={sectorOptions} changeFunction={this.changeSector.bind(this)} />
+          }
+          <div className="data-block__compare-button" onClick={() => this.toggleComparePopup()}>{compareButtonText}</div>
+          {this.state.comparePopupVisible &&
+            <ComparePopup settings={vizSettings} data={currData} collection={collectionName} />
+          }
         </div>
       	<div className="data-block__content">
 	      	{ paragraphSettings && <DataBlockInfo settings={settings} data={currData} collectionName={collectionName} sectorOptions={sectorOptions} sector={sector} /> }

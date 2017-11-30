@@ -18,6 +18,22 @@
 		margin-bottom: 25px;
 	}
 
+	&__compare-button {
+		position: absolute;
+		top: -12.5px;
+		right: 0;
+		padding: 10px;
+		border: 1px solid palette-get(na-black-10);
+	    padding: 10px;
+	    color: palette-get(na-black-40);
+	    cursor: pointer;
+	    height: 48px;
+
+		&:hover {
+			background-color: rgba(44, 47, 53, 0.03);
+		}
+	}
+
 	&__title-container {
 		position: relative;
 	}
