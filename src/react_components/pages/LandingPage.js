@@ -8,7 +8,7 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <div className="landing-page__content">
-     	  <a href={'https://www.newamerica.org/'}><SvgIcon name='new-america' /></a>
+     	  <div className="landing-page__home-link"><a href={'https://www.newamerica.org/'}><SvgIcon name='new-america' /></a></div>
       	<div className="landing-page__title"><SvgIcon name='higher-ed-index' /></div>
       	<SearchBox filter="all" />
       	<div className="landing-page__explore-links">

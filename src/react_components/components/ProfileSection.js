@@ -64,8 +64,9 @@ class ProfileSection extends React.Component {
 
 	getLastUpdated(dataInfo, collectionName) {
 		let retVal = null;
+		let collection = collectionName == "states_schools" ? "states_schools_all" : collectionName
 		dataInfo.forEach((d) => {
-			if (d.collection === collectionName) {
+			if (d.collection === collection) {
 				if (d.last_updated) {
 					retVal = d3.timeFormat("%B %d, %Y")(new Date(d.last_updated));
 					console.log(retVal)

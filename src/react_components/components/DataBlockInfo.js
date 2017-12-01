@@ -32,6 +32,7 @@ export default function DataBlockInfo(props) {
 	console.log(sectorOptions, sector)
 
 	let sectorLabel = sectorOptions ? sectorOptions[sector].toLowerCase() : null
+	sectorLabel = sectorLabel === "all sectors" ? "" : sectorLabel;
 
 	const maxYear = getMaxYear(paragraphSettings.variables, data);
     return (
