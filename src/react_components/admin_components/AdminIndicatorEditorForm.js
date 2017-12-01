@@ -164,7 +164,7 @@ class AdminIndicatorEditorForm extends React.Component {
                             </div>
                             <div className="admin__form__sub-field">
                               <h5 className="admin__form__sub-field-label">Profile Section Anchor</h5>
-                              <Text field={['rankingVariables', i, 'profile-anchor']} />
+                              <Text field={['rankingVariables', i, 'profileAnchor']} />
                             </div>
                             <button className="admin__form__sub-field__button" type="button" onClick={() => removeValue('rankingVariables', i)} >Remove Variable</button>
                           </div>

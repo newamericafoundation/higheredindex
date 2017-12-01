@@ -50,8 +50,12 @@ export default class UsMap extends React.Component {
             .attr("class", "us-map__state")
             .attr("stroke", "white")
             .on("mouseover", (d, index, paths) => { return this.mouseover(d, paths[index], d3.event) })
-            .on("mouseout", (d, index, paths) => { return this.mouseout(paths[index]) })
-            .on("click", (d) => { browserHistory.push("/state/" + d.properties.path) })
+            .on("mouseout", (d, index, paths) => { console.log(d); return this.mouseout(paths[index]) })
+            .on("click", (d) => { 
+                let url = "/state/" + d.properties.path
+                url += this.props.filter.profileAnchor ? "#" + this.props.filter.profileAnchor : ""
+                browserHistory.push(url)
+            })
     }
 
     update() {

@@ -99,7 +99,11 @@ export default class RankChart extends React.Component {
             .style("cursor", "pointer")
             .on("mouseover", (d, index, paths) => { return this.mouseoverFunc(d, paths[index], d3.event); })
             .on("mouseout", () => this.mouseoutFunc())
-            .on("click", (d) => { console.log(d); browserHistory.push("/state/" + d.path) })
+            .on("click", (d) => {
+                let url = "/state/" + d.path;
+                url += filter.profileAnchor ? "#" + filter.profileAnchor : "";
+                browserHistory.push(url);
+            })
 
         this.dataLabels = this.g.selectAll("text")
             .data(data.filter((d) => { return !isNaN(d[filter.variable])}))
