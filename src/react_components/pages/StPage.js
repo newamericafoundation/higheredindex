@@ -23,10 +23,7 @@ class StPage extends React.Component {
 
     let anchor = window.location.hash;
 
-    console.log("ANCHOR", anchor)
-
     if (anchor) {
-      console.log($(anchor).offset(), $(".app-container").scrollTop())
       $(".app-container").animate(
         {'scrollTop':$(anchor).offset().top},
         500

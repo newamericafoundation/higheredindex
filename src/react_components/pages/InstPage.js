@@ -21,6 +21,15 @@ class InstPage extends React.Component {
   }
   componentDidMount() {
     $(".app-container").scroll(this.handlerFunc);
+
+    let anchor = window.location.hash;
+
+    if (anchor) {
+      $(".app-container").animate(
+        {'scrollTop':$(anchor).offset().top},
+        500
+      );
+    }
   }
 
   componentWillUnmount() {
