@@ -29,8 +29,6 @@ export default function DataBlockInfo(props) {
 
 	if (!data) { return null; }
 
-	console.log(sectorOptions, sector)
-
 	let sectorLabel = sectorOptions ? sectorOptions[sector].toLowerCase() : null
 	sectorLabel = sectorLabel === "all sectors" ? "" : sectorLabel;
 
