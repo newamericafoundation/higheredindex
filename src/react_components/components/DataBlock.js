@@ -70,6 +70,7 @@ class DataBlock extends React.Component {
 
     return (
       <div className="data-block">
+        <a className="data-block__anchor" name={title.toLowerCase().replace(/ /g, "-")}></a>
         <div className="data-block__title-container">
       	  <h5 className="data-block__title">{title}</h5>
           {(showSectorSelector || showCompareButton) &&

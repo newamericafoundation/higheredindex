@@ -3,6 +3,7 @@
 	margin: auto;
 	margin-bottom: 20px;
 	padding: 20px 15px;
+	position: relative;
 
 	/*&:last-child {
 		margin-bottom: 100px;
@@ -241,6 +242,11 @@
 		&:hover {
 	    	background-color: rgba(44,47,53,0.03);
 	    }
+	}
+
+	&__anchor {
+		position: absolute;
+		top: -2*$top-nav-height;
 	}
 }
 
