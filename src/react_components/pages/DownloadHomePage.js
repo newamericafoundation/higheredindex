@@ -10,11 +10,11 @@ import { fetchDataInfo } from '../../actions'
 import sectionSettings from '../../settings/sectionSettings.js';
 
 const downloadDataFile = (collection) => {
-   window.open('https://higheredindex-backend.newamerica.org/api/download_data/' + collection);
+   window.open('http://higheredindex-backend.newamerica.org/api/download_data/' + collection);
 }
 
 const downloadCodebookFile = (type) => {
-   window.open('https://higheredindex-backend.newamerica.org/api/download_codebook/' + type);
+   window.open('http://higheredindex-backend.newamerica.org/api/download_codebook/' + type);
 }
 
 class DownloadHomePage extends React.Component {
