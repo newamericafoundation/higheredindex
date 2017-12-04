@@ -36,7 +36,14 @@ export default class RankChart extends React.Component {
         this.y.domain(this.getYExtents(nextProps))
 
         let keyList = [];
-        let sortedData = data.sort((a, b) => { return a[filter.variable] - b[filter.variable]; });
+        let sortedData = data.sort((a, b) => {
+            if (a[filter.variable] === b[filter.variable]) {
+                console.log(a, b)
+                return a.state_id - b.state_id
+            } else {
+                return a[filter.variable] - b[filter.variable]; 
+            }
+        });
 
         sortedData.map((d) => {
             keyList.push(d.state_id);
@@ -131,9 +138,27 @@ export default class RankChart extends React.Component {
         const {width, height} = this.props;
         
         this.y.range([height, 0]);
+
+        let axis = d3.axisLeft(this.y)
+            .tickSize(-width + margin.left + margin.right, 0, 0)
+            .tickSizeOuter(0)
+            .tickPadding(10)
+            .tickFormat((d) => { 
+                if (this.props.filter.format == "percent") {
+                    return formatValue(d, "percent");
+                } else if (this.props.filter.format === "integer") {
+                    return d3.format("d")(d)
+                } else {
+                    return roundLegendAxisVal(d, this.props.filter.format); 
+                }
+            })
+
+        if (this.props.filter.format === "integer") {
+            axis.ticks(this.y.domain()[1] + 1)
+        }
         
         this.yAxis
-            .call(d3.axisLeft(this.y).tickSize(-width + margin.left + margin.right, 0, 0).tickSizeOuter(0).tickPadding(10).tickFormat((d) => { return this.props.filter.format == "percent" ? formatValue(d, "percent") : roundLegendAxisVal(d, this.props.filter.format); }));
+            .call(axis);
     }
 
     updateXAxis() {
@@ -141,7 +166,13 @@ export default class RankChart extends React.Component {
         this.x.range([0, width - margin.left - margin.right]);
 
         let keyList = [];
-        let sortedData = data.sort((a, b) => { return a[filter.variable] - b[filter.variable]; });
+        let sortedData = data.sort((a, b) => {
+            if (a[filter.variable] === b[filter.variable]) {
+                return a.state_id - b.state_id
+            } else {
+                return a[filter.variable] - b[filter.variable]; 
+            }
+        });
 
         sortedData.map((d) => {
             keyList.push(d.state_id);

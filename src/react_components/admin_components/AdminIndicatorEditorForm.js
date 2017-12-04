@@ -116,6 +116,9 @@ class AdminIndicatorEditorForm extends React.Component {
                               <Select
                                 field={['rankingVariables', i, 'format']}
                                 options={[{
+                                  label: 'Integer',
+                                  value: 'integer'
+                                }, {
                                   label: 'Number (with commas)',
                                   value: 'number'
                                 }, {
