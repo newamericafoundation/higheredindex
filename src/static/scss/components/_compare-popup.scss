@@ -1,15 +1,32 @@
+
 .compare-popup {
 	position: absolute;
-	background-color: white;
-	z-index: 7;
-	padding: 20px;
-	border: 1px solid palette-get(na-black-10);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 101;
 	width: 100%;
 	max-width: 1000px;
-	box-shadow: 0px 0px 5px 2px palette-get(na-black-10);
+	border: 1px solid palette-get(na-black-10);
+	background-color: white;
+	padding: 20px;
 
-	@include medium {
-		display: table;
+	&__title-container {
+
+	}
+
+	&__title {
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+
+	&__contents {
+		width: 100%;
+
+		@include medium {
+			display: table;
+		}
 	}
 
 	&__filter-list-container, &__chart-container {
@@ -69,7 +86,7 @@
 		}
 	}
 
-	&__title {
+	&__chart-title {
 		text-align: center;
 		font-weight: bold;
 		font-size: 16px;

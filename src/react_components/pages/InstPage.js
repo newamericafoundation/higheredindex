@@ -13,6 +13,8 @@ import Footer from '../components/Footer';
 import instVizSettings from '../../settings/instVizSettings';
 import { toggleTopNavProfileName, changeCurrProfileSection } from '../../actions';
 import sectionSettings from '../../settings/sectionSettings.js';
+import ComparePopup from "../components/ComparePopup";
+
 
 class InstPage extends React.Component {
   constructor() {
@@ -84,6 +86,9 @@ class InstPage extends React.Component {
               showLastUpdated={true} />
           )
         })}
+        {this.props.comparePopupSettings &&
+          <ComparePopup {...this.props.comparePopupSettings} />
+        }
         <Footer />
       </div>
     );
@@ -93,7 +98,8 @@ class InstPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     topNavProfileNameShown: state.topNavProfileNameShown,
-    currProfileName: state.currProfile.name
+    currProfileName: state.currProfile.name,
+    comparePopupSettings: state.comparePopupSettings
   }
 }
 

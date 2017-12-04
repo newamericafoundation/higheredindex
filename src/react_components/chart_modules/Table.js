@@ -6,9 +6,9 @@ const Table = ({settings, data}) => {
   const {tableSettingsList} = settings.chart1Settings;
   return (
     <div className="table-container">
-      { tableSettingsList.map((tableSettings) => {
+      { tableSettingsList.map((tableSettings, i) => {
           return (
-            <div className="table">
+            <div key={i} className="table">
               <div className="table__row heading">
                 <div className="table__row__heading-label">{tableSettings.headingLabels[0]}</div>
                 <div className="table__row__heading-label">{tableSettings.headingLabels[1]}</div>

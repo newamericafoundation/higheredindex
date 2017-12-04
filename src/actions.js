@@ -6,6 +6,7 @@ import { validateData, nestYears, addFullStateNames, addPathKeys} from './helper
  */
 
 export const TOGGLE_MENU_EXPANSION = 'TOGGLE_MENU_EXPANSION'
+export const SET_COMPARE_POPUP_SETTINGS = 'SET_COMPARE_POPUP_SETTINGS'
 export const CHANGE_CURR_PROFILE = 'CHANGE_CURR_PROFILE'
 export const CHANGE_CURR_PROFILE_SECTION = 'CHANGE_CURR_PROFILE_SECTION'
 export const REQUEST_PROFILE = 'REQUEST_PROFILE'
@@ -52,6 +53,13 @@ export function toggleMenuExpansion(setExpansionState) {
   return { 
     type: TOGGLE_MENU_EXPANSION, 
     setExpansionState: setExpansionState
+  }
+}
+
+export function setComparePopupSettings(settings) {
+  return { 
+    type: SET_COMPARE_POPUP_SETTINGS,
+    settings
   }
 }
 

@@ -6,6 +6,8 @@ import { stateIdMappings } from "../../helper_functions/state_id_mappings.js";
 
 import { fetchAllStatesData, fetchUsData } from '../../actions'
 import SimpleChart from "../chart_modules/SimpleChart";
+import SvgIcon from './SvgIcon'
+
 
 
 class ComparePopup extends React.Component {
@@ -147,47 +149,49 @@ class ComparePopup extends React.Component {
   }
 
   render() {
-    const {settings, data, currProfile} = this.props;
+    const {settings, data, currProfile, title} = this.props;
     const {currChartSettings, currFilter, additionalStateComparison} = this.state;
 
     console.log(this.usData)
 
     return (
       <div className="compare-popup">
-        <div className="compare-popup__filter-list-container">
-          <ul className="compare-popup__filter-list">
-            {this.chart1FilterList.map(d => {
-              let classList = "compare-popup__filter";
-              classList += d.variable === currFilter.variable ? " active" : ""
-              return <li key={d.variable} className={classList} onClick={() => this.changeFilter(d, settings.chart1Settings)}>{d.displayName}</li>
-            })}
-            {this.chart2FilterList.map(d => {
-              let classList = "compare-popup__filter";
-              classList += d.variable === currFilter.variable ? " active" : ""
-              return <li key={d.variable} className={classList} onClick={() => this.changeFilter(d, settings.chart2Settings)}>{d.displayName}</li>
-            })}
-          </ul>
-        </div>
-        <div className="compare-popup__chart-container">
-          <h5 className="compare-popup__title">{currFilter.displayName}</h5>
-          <div className="compare-popup__chart" key={currFilter.variable + "_" + additionalStateComparison}>
-            {this.usData && this.statesData && this.renderChart()}
+        <div className="compare-popup__contents">
+          <div className="compare-popup__filter-list-container">
+            <ul className="compare-popup__filter-list">
+              {this.chart1FilterList.map(d => {
+                let classList = "compare-popup__filter";
+                classList += d.variable === currFilter.variable ? " active" : ""
+                return <li key={d.variable} className={classList} onClick={() => this.changeFilter(d, settings.chart1Settings)}>{d.displayName}</li>
+              })}
+              {this.chart2FilterList.map(d => {
+                let classList = "compare-popup__filter";
+                classList += d.variable === currFilter.variable ? " active" : ""
+                return <li key={d.variable} className={classList} onClick={() => this.changeFilter(d, settings.chart2Settings)}>{d.displayName}</li>
+              })}
+            </ul>
           </div>
-          {currProfile.type === "state" && 
-            <div className="compare-popup__additional-state-selector">
-              <label className="compare-popup__additional-state-selector__label">Add additional state to comparison: </label>
-              <div className="compare-popup__additional-state-selector__select">
-                <select ref="selectRef" onChange={() => this.changeAdditionalStateSelector(this.refs["selectRef"].value)}>
-                  <option key={"none"} value={null}>None</option>
-                  {Object.keys(stateIdMappings).filter(d => d != data.state).map((stateId, i) => {
-                    return (
-                      <option key={stateId} value={stateId}>{stateIdMappings[stateId]}</option>
-                    )
-                  })}
-                </select>
-              </div>
+          <div className="compare-popup__chart-container">
+            <h5 className="compare-popup__chart-title">{currFilter.displayName}</h5>
+            <div className="compare-popup__chart" key={currFilter.variable + "_" + additionalStateComparison}>
+              {this.usData && this.statesData && this.renderChart()}
             </div>
-          }
+            {currProfile.type === "state" && 
+              <div className="compare-popup__additional-state-selector">
+                <label className="compare-popup__additional-state-selector__label">Add additional state to comparison: </label>
+                <div className="compare-popup__additional-state-selector__select">
+                  <select ref="selectRef" onChange={() => this.changeAdditionalStateSelector(this.refs["selectRef"].value)}>
+                    <option key={"none"} value={null}>None</option>
+                    {Object.keys(stateIdMappings).filter(d => d != data.state).map((stateId, i) => {
+                      return (
+                        <option key={stateId} value={stateId}>{stateIdMappings[stateId]}</option>
+                      )
+                    })}
+                  </select>
+                </div>
+              </div>
+            }
+          </div>
         </div>
       </div>
     )

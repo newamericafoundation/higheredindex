@@ -12,9 +12,11 @@ import Footer from '../components/Footer';
 import stVizSettings from '../../settings/stVizSettings';
 import { toggleTopNavProfileName, changeCurrProfileSection } from '../../actions';
 import sectionSettings from '../../settings/sectionSettings.js';
+import ComparePopup from "../components/ComparePopup";
 
 class StPage extends React.Component {
   constructor() {
+    console.log("RENDERINEFINEIFNIENFOKJNDFNEFINEIF")
     super();
     this.handlerFunc = this.handleScroll.bind(this);
   }
@@ -34,10 +36,6 @@ class StPage extends React.Component {
   componentWillUnmount() {
     $(".app-container").off("scroll", this.handlerFunc);
     this.props.resetCurrProfileSection();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.props.currProfileName === nextProps.currProfileName ? false : true;
   }
 
   handleScroll(event) {
@@ -87,6 +85,9 @@ class StPage extends React.Component {
               showLastUpdated={true} />
           )
         })}
+        {this.props.comparePopupSettings &&
+          <ComparePopup {...this.props.comparePopupSettings} />
+        }
         <Footer />
       </div>
     );
@@ -96,7 +97,8 @@ class StPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     topNavProfileNameShown: state.topNavProfileNameShown,
-    currProfileName: state.currProfile.name
+    currProfileName: state.currProfile.name,
+    comparePopupSettings: state.comparePopupSettings
   }
 }
 

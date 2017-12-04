@@ -1,4 +1,4 @@
-$vertical-padding: 1.4em;
+$vertical-padding: 1.7em;
 
 .landing-page {
 	height: 100%;
@@ -33,7 +33,7 @@ $vertical-padding: 1.4em;
 		@include center-vertical;
 
 		.icon__new-america {
-			width: 7em;
+			width: 8em;
 			min-width: 90px;
 			fill: white;
 			height: auto;
@@ -82,14 +82,14 @@ $vertical-padding: 1.4em;
 		}
 
 		&__secondary {
-			font-size: .7em;
+			font-size: 1em;
 			margin-bottom: 0;
 			color: white;
 			line-height: 1.4;
 		}
 		&__primary {
 			font-weight: bold;
-			font-size: .9em;
+			font-size: 1.5em;
 			color: white;
 			line-height: 1;
 		}
@@ -107,7 +107,7 @@ $vertical-padding: 1.4em;
 
 		&__primary {
 			font-weight: bold;
-			font-size: .9em;
+			font-size: 1.3em;
 			color: white;
 			position: relative;
 			bottom: .1em;
@@ -129,7 +129,7 @@ $vertical-padding: 1.4em;
 			stroke: white;
 			/*height: 2em;*/
 			height: auto;
-			width: 19em;
+			width: 23em;
 			min-width: 230px;
 		}
 	}
@@ -137,7 +137,7 @@ $vertical-padding: 1.4em;
 	.search-box {
 		margin: auto;
 		width: 70%;
-		min-width: 300px;
+		min-width: 350px;
 		max-width: 700px;
 
 		.react-autosuggest__suggestions-container {
@@ -146,9 +146,7 @@ $vertical-padding: 1.4em;
 		}
 
 		input {
-			min-height: 40px;
-			max-height: 50px;
-			height: 3em;
+			height: 53px;
 			margin: $vertical-padding 0;
 		}
 	}

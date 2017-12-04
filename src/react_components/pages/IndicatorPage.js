@@ -54,6 +54,8 @@ class IndicatorPage extends React.Component {
   }
 
   render() {
+
+
     if (!this.props.indicatorSettings) {
       return <NotFoundPage/>;
     }
@@ -110,7 +112,7 @@ class IndicatorPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     topNavProfileNameShown: state.topNavProfileNameShown,
-    currProfileName: state.currProfile.name
+    currProfileName: state.currProfile.name,
   }
 }
 
@@ -121,7 +123,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     resetCurrProfileSection: () => {
       dispatch(changeCurrProfileSection('none'));
-    }
+    },
   }
 }
 

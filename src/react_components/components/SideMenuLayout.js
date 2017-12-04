@@ -5,12 +5,16 @@ import { Helmet } from "react-helmet";
 
 import TopNav from './TopNav';
 import SideMenu from './SideMenu';
-import { toggleMenuExpansion } from '../../actions'
+import { toggleMenuExpansion, setComparePopupSettings } from '../../actions'
 
 class SideMenuLayout extends React.Component {
   render() {
     let contentClasses = "main-content";
     contentClasses += this.props.contentShifted ? " shifted" : "";
+
+    let overlayClasses = "main-content__overlay";
+    overlayClasses += this.props.contentShifted || this.props.popupVisible ? " visible" : "";
+
     return (
       <div className="app-container">
         <Helmet>
@@ -28,7 +32,7 @@ class SideMenuLayout extends React.Component {
         <div className={contentClasses}>
           {this.props.children}
         </div>
-        <div className="main-content__overlay" onClick={this.props.clearSidemenu} />
+        <div className={overlayClasses} onClick={() => {this.props.clearSidemenu(); this.props.hideComparePopup();}} />
       </div>
     );
   }
@@ -36,7 +40,8 @@ class SideMenuLayout extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    contentShifted: state.menuExpanded
+    contentShifted: state.menuExpanded,
+    popupVisible: state.comparePopupSettings !== null
   }
 }
 
@@ -44,6 +49,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     clearSidemenu: () => {
       dispatch(toggleMenuExpansion(false))
+    },
+    hideComparePopup: () => {
+      dispatch(setComparePopupSettings(null))
     }
   }
 }

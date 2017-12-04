@@ -13,10 +13,6 @@
 		transform: translateX($sidemenu-width);
 		pointer-events: none;
 		overflow: hidden;
-
-		&+.main-content__overlay {
-			display: block;
-		}
 	}
 
 	&__overlay {
@@ -30,5 +26,9 @@
 	    background-color: rgba(0, 0, 0, .5);
 	    z-index: 100;
 	    overflow: hidden;
+
+	    &.visible {
+	    	display: block;
+	    }
 	}
 }

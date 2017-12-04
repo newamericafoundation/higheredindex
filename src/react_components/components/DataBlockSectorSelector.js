@@ -5,8 +5,15 @@ class DataBlockSectorSelector extends React.Component {
     super(props);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.sector != this.props.sector) {
+      this.refs["selectRef"].value = nextProps.sector
+    }
+    
+  }
+
   render() {
-    const {sectorOptions, changeFunction} = this.props;
+    const {sector, sectorOptions, changeFunction} = this.props;
 
     return (
       <div className="data-block__sector-selector-container">
