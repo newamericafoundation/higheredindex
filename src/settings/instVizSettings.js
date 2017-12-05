@@ -52,12 +52,13 @@ const instVizSettings = {
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, the in-district tuition was ", ", the in-state tuition was ", ", and the out-of-state tuition was ", " at ", "."],
+				textSections: [["In @year, the in-district tuition was ", ", the in-state tuition was ", ", and the out-of-state tuition was ", " per ", " at ", "."],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"indistprice", format: "price"},
 					{variable:"instateprice", format: "price"},
 					{variable:"outstateprice", format: "price"},
+					{variable:"py", format: "string"},
 					{variable:"name", format: "string"},
 				]
 			},
