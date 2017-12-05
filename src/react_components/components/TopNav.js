@@ -9,11 +9,33 @@ import ExpandableSearchBox from './ExpandableSearchBox';
 class TopNav extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            searchBoxVisible: true
+        }
+    }
+
+    componentDidMount() {
+        console.log($(".listings-page"))
+        if ($(".listings-page") != null && $(".listings-page").length > 0) {
+            this.setState({
+                searchBoxVisible: false
+            })
+        }
     }
 
     render() {
         const {topNavProfileNameShown} = this.props;
+
+        let overrideSearchBoxVisibilityValue;
+
         let titleTextDecorator = topNavProfileNameShown ? <span className="top-nav__title__decorator">:</span> : "";
+        if ($(".listings-page") != null && $(".listings-page").length > 0) {
+            overrideSearchBoxVisibilityValue = false;
+        } else {
+            overrideSearchBoxVisibilityValue = true;
+        }
+
     	return (
             <header>
             	<nav className="top-nav">
@@ -35,7 +57,7 @@ class TopNav extends React.Component {
                             </div>
                         }
             		</div>
-            		<ExpandableSearchBox filter="all"/>
+                    {overrideSearchBoxVisibilityValue && <ExpandableSearchBox filter="all"/>}
             	</nav>
             </header>
         );

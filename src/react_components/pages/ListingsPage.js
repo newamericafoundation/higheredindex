@@ -78,6 +78,15 @@ class ListingsPage extends React.Component {
 	    };
 	}
 
+	componentWillReceiveProps(nextProps) {
+		console.log(nextProps)
+		if (nextProps.type != this.props.type) {
+			this.setState({
+				type: nextProps.type
+			})
+		}
+	}
+
 	listingsChangedCallback(counts) {
 		this.setState({
 			counts

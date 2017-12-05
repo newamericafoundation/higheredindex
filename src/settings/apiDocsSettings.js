@@ -45,7 +45,7 @@ const apiDocsSettings = [
 		method:"GET",
 		path: "/full-collection/:collection",
 		parameters: "collection - the collection ID (see list above for options)",
-		description: "Returns data for all states for a given collection"
+		description: "Returns data for all states or institutions for a given collection"
 	},
 	{
 		method:"GET",

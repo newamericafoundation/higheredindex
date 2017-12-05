@@ -18,6 +18,7 @@
 		font-weight: bold;
 		margin-bottom: 25px;
 		max-width: calc(100% - 100px);
+		font-size: 25px;
 	}
 
 	&__title-container {
@@ -25,10 +26,16 @@
 	}
 
 	&__filter-container {
-		position: absolute;
-		top: 0;
-		right: 0;
 		display: table;
+		margin-bottom: 25px;
+
+		@include medium {
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin-bottom: 0px;
+		}
+		
 	}
 
 	&__sector-selector, &__compare-button {
@@ -38,12 +45,15 @@
 	&__sector-selector {
 		width: 200px;
 		height: 48px !important;
-		margin: 0px 0px 0px 25px;
 		border: 1px solid palette-get(na-black-30) !important;
 	    padding: 10px !important;
 	    color: palette-get(na-black-40) !important;
 	    background-position-x: 93% !important;
-	    margin-right: 15px;
+	    margin: 0px 15px 0px 0px;
+
+	    @include medium {
+	    	margin: 0px 15px 0px 25px;
+	    }
 
 	    &:hover {
 	    	background-color: rgba(44,47,53,0.03);
@@ -53,7 +63,6 @@
 	&__compare-button {
 		padding: 10px;
 		border: 1px solid palette-get(na-black-30);
-	    padding: 10px;
 	    color: palette-get(na-black-40);
 	    cursor: pointer;
 	    height: 48px;

@@ -1,23 +1,37 @@
 .side-menu {
+	&__menu {
+		overflow-y: scroll;
+    	max-height: 100%;
+	}
+
 	&__menu-icon {
 		position: absolute;
 		top: 22px;
-		left: 25px;
-		z-index: 10000;
+		left: 20px;
+		z-index: 102;
+
+		@include medium {
+			left: 25px;
+		}
 
 		svg {
 			height: 25px;
 			width: 25px;
 		}
+
+		svg.icon__close {
+			height: 22px;
+			width: 22px;
+		}
 	}
 
 	&__menu-container {
 		position: fixed;
-		z-index: 1000;
+		z-index: 101;
 		height: 100%;
 		width: $sidemenu-width;
 		background-color: palette-get(na-black);
-		padding: 70px 30px 25px;
+		padding: 70px 25px 25px;
 		transform: translateX(-$sidemenu-width);
 		-webkit-transition: $sidemenu-transition;
 	    -moz-transition: $sidemenu-transition;

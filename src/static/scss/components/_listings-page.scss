@@ -19,7 +19,7 @@ $top-bar-height: 55px;
 			margin: auto;
 			max-width: 900px;
 			position: relative;
-			/*display: table;*/
+			height: $top-bar-height;
 
 			.search-box {
 				@include large {
