@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 import { colors } from "../../helper_functions/colors.js";
 import { stateIdMappings } from "../../helper_functions/state_id_mappings.js";
 
-
-import { fetchAllStatesData, fetchUsData } from '../../actions'
+import { fetchAllStatesData, fetchUsData, setComparePopupSettings } from '../../actions'
 import SimpleChart from "../chart_modules/SimpleChart";
 import SvgIcon from './SvgIcon'
-
-
 
 class ComparePopup extends React.Component {
   constructor(props) {
@@ -21,30 +18,22 @@ class ComparePopup extends React.Component {
     this.chart1FilterList = props.settings.chart1Settings.variables;
     this.chart2FilterList = props.settings.chart2Settings ? props.settings.chart2Settings.variables : [];
 
-    // if (props.settings.chart1Settings) {
-    //   this.chilterVarList = [...this.filterVarList, ...props.settings.chart1Settings.variables];
-    // }
-    // if (props.settings.chart2Settings) {
-    //   this.filterVarList = [...this.filterVarList, ...props.settings.chart2Settings.variables]
-    // }
-
     this.state = {
       currFilter: this.chart1FilterList[0],
       currChartSettings: props.settings.chart1Settings,
       additionalStateComparison: null
-      // currChart: this.setChart(this.chart1FilterList[0], props.settings.chart1Settings)
     }
   }
 
   componentWillMount() {
-    const { dispatch, fetchedAllStatesData, fetchedUsData} = this.props
+    const { fetchedAllStatesData, fetchedUsData } = this.props
 
     if (fetchedAllStatesData[this.collectionName]) {
       if (fetchedAllStatesData[this.collectionName] != "fetching") {
         this.statesData = fetchedAllStatesData[this.collectionName];
       }
     } else {
-      dispatch(fetchAllStatesData(this.collectionName))
+     this.props.fetchAllStatesData(this.collectionName)
     }
 
     if (fetchedUsData[this.collectionName]) {
@@ -52,7 +41,7 @@ class ComparePopup extends React.Component {
         this.usData = fetchedUsData[this.collectionName];
       }
     } else {
-      dispatch(fetchUsData(this.collectionName))
+      this.props.fetchUsData(this.collectionName)
     }
 
   }
@@ -149,13 +138,16 @@ class ComparePopup extends React.Component {
   }
 
   render() {
-    const {settings, data, currProfile, title} = this.props;
+    const {settings, data, currProfile, title, hideComparePopup} = this.props;
     const {currChartSettings, currFilter, additionalStateComparison} = this.state;
 
     console.log(this.usData)
 
     return (
       <div className="compare-popup">
+        <a className="compare-popup__close-icon" onClick={hideComparePopup}>
+          <SvgIcon name='close' />
+        </a>
         <div className="compare-popup__contents">
           <div className="compare-popup__filter-list-container">
             <ul className="compare-popup__filter-list">
@@ -206,5 +198,19 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(ComparePopup)
+const mapDispatchToProps = (dispatch) => { 
+  return {
+    fetchAllStatesData: (collection) => {
+      dispatch(fetchAllStatesData(collection))
+    },
+    fetchUsData: (collection) => {
+      dispatch(fetchUsData(collection))
+    },
+    hideComparePopup: () => {
+      dispatch(setComparePopupSettings(null))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ComparePopup)
 

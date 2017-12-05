@@ -13,8 +13,19 @@
 	max-height: 100%;
 	overflow-y: scroll;
 
-	&__title-container {
+	&__close-icon {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		svg {
+			stroke: palette-get(na-black-40) !important;
+			width: 18px;
+			height: 18px;
 
+			&:hover {
+				stroke: palette-get(na-black) !important;
+			}
+		}
 	}
 
 	&__title {
@@ -40,6 +51,7 @@
 
 	&__filter-list-container {
 		padding-bottom: 20px;
+		padding-right: 40px;
 		border-bottom: 1px solid palette-get(na-black-10);
 
 		@include medium {
