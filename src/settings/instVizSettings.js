@@ -214,11 +214,11 @@ const instVizSettings = {
 			calloutSettings: {
 				type: "value",
 				variables: [
-					{variable: "transfer", displayName:"Share of transfer students", format: "percent"},
+					{variable: "transfer", displayName:"Share of students who transfer out", format: "percent"},
 				]
 			},
 			paragraphSettings: {
-				textSections: [["In @year, ", " of students at ", " were transfer students. (Unlike graduation rates, disclosure of transfer-out rates is not required under federal law, these are instead voluntarily reported by institutions.)"],
+				textSections: [["In @year, ", " of ", " students transferred to another institution prior to receiving their degree. (Unlike graduation rates, disclosure of transfer-out rates is not required under federal law, these are instead voluntarily reported by institutions.)"],
 					["The following chart depicts trends over time."]],
 				variables: [
 					{variable:"transfer", format: "percent"},
@@ -232,7 +232,7 @@ const instVizSettings = {
 					type: "bar-chart",
 					yAxisLabel: "",
 					variables: [
-						{variable:"transfer", displayName:"Share of transfer students", format: "percent", color: colors.turquoise.light },
+						{variable:"transfer", displayName:"Share of students who transfer out", format: "percent", color: colors.turquoise.light },
 					]
 				}
 			}
