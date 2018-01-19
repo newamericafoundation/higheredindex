@@ -869,38 +869,38 @@ export const indicatorTrendsSettings = {
 	},
 	"sticker-price": {
 		collection: "states_schools_all",
-		trendsSettings: [
-			{
-				title: "Sticker Price",
-				calloutSettings: {
-					type: "value",
-					variables: [
-						{variable: "instateprice", displayName:"In-state price", format:"price"},
-					]
-				},
-				paragraphSettings: {
-					textSections: [["In @year, the average in-district tuition was ", ", the average in-state tuition was ", ", and the average out-of-state tuition was ", " at U.S. institutions."],
-						["The following chart depicts trends over time."]],
-					variables: [
-						{variable:"indistprice", format: "price" },
-						{variable:"instateprice", format: "price"},
-						{variable:"outstateprice", format: "price"},
-					]
-				},
-				source: "IPEDS",
-				vizSettings: {
-					chart1Settings: {
-						type: "line-chart",
-						yAxisLabel: "Price",
-						variables: [
-							{variable:"indistprice", displayName:"In-district", format: "price", color: colors.turquoise.light },
-							{variable:"instateprice", displayName:"In-state", format: "price", color: colors.turquoise.medium},
-							{variable:"outstateprice", displayName:"Out-of-state", format: "price", color: colors.turquoise.dark},
-						]
-					}
-				}
-			},
-		]
+		// trendsSettings: [
+		// 	{
+		// 		title: "Sticker Price",
+		// 		calloutSettings: {
+		// 			type: "value",
+		// 			variables: [
+		// 				{variable: "instateprice", displayName:"In-state price", format:"price"},
+		// 			]
+		// 		},
+		// 		paragraphSettings: {
+		// 			textSections: [["In @year, the average in-district tuition was ", ", the average in-state tuition was ", ", and the average out-of-state tuition was ", " at U.S. institutions."],
+		// 				["The following chart depicts trends over time."]],
+		// 			variables: [
+		// 				{variable:"indistprice", format: "price" },
+		// 				{variable:"instateprice", format: "price"},
+		// 				{variable:"outstateprice", format: "price"},
+		// 			]
+		// 		},
+		// 		source: "IPEDS",
+		// 		vizSettings: {
+		// 			chart1Settings: {
+		// 				type: "line-chart",
+		// 				yAxisLabel: "Price",
+		// 				variables: [
+		// 					{variable:"indistprice", displayName:"In-district", format: "price", color: colors.turquoise.light },
+		// 					{variable:"instateprice", displayName:"In-state", format: "price", color: colors.turquoise.medium},
+		// 					{variable:"outstateprice", displayName:"Out-of-state", format: "price", color: colors.turquoise.dark},
+		// 				]
+		// 			}
+		// 		}
+		// 	},
+		// ]
 	},
 	"net-price": {
 		collection: "states_schools_all",

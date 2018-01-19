@@ -42,6 +42,7 @@ class SideMenu extends React.Component {
                 <li className="side-menu__menu-item"><Link to={'/api-documentation'}>API Documentation</Link></li>
                 <li className="side-menu__menu-item"><Link to={'/methodology'}>Methodology</Link></li>
             </ul>
+            <p className="side-menu__contact">For any questions or feedback related to this project, please send an email to communications@newamerica.org.</p>
         </div>
       </div>
     );

@@ -141,28 +141,28 @@ class ComparePopup extends React.Component {
     const {settings, data, currProfile, title, hideComparePopup} = this.props;
     const {currChartSettings, currFilter, additionalStateComparison} = this.state;
 
-    console.log(this.usData)
-
     return (
       <div className="compare-popup">
         <a className="compare-popup__close-icon" onClick={hideComparePopup}>
           <SvgIcon name='close' />
         </a>
         <div className="compare-popup__contents">
-          <div className="compare-popup__filter-list-container">
-            <ul className="compare-popup__filter-list">
-              {this.chart1FilterList.map(d => {
-                let classList = "compare-popup__filter";
-                classList += d.variable === currFilter.variable ? " active" : ""
-                return <li key={d.variable} className={classList} onClick={() => this.changeFilter(d, settings.chart1Settings)}>{d.displayName}</li>
-              })}
-              {this.chart2FilterList.map(d => {
-                let classList = "compare-popup__filter";
-                classList += d.variable === currFilter.variable ? " active" : ""
-                return <li key={d.variable} className={classList} onClick={() => this.changeFilter(d, settings.chart2Settings)}>{d.displayName}</li>
-              })}
-            </ul>
-          </div>
+          { (this.chart1FilterList.length + this.chart2FilterList.length) > 1 && 
+            <div className="compare-popup__filter-list-container">
+              <ul className="compare-popup__filter-list">
+                {this.chart1FilterList.map(d => {
+                  let classList = "compare-popup__filter";
+                  classList += d.variable === currFilter.variable ? " active" : ""
+                  return <li key={d.variable} className={classList} onClick={() => this.changeFilter(d, settings.chart1Settings)}>{d.displayName}</li>
+                })}
+                {this.chart2FilterList.map(d => {
+                  let classList = "compare-popup__filter";
+                  classList += d.variable === currFilter.variable ? " active" : ""
+                  return <li key={d.variable} className={classList} onClick={() => this.changeFilter(d, settings.chart2Settings)}>{d.displayName}</li>
+                })}
+              </ul>
+            </div>
+          }
           <div className="compare-popup__chart-container">
             <h5 className="compare-popup__chart-title">{currFilter.displayName}</h5>
             <div className="compare-popup__chart" key={currFilter.variable + "_" + additionalStateComparison}>

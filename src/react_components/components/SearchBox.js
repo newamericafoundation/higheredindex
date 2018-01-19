@@ -177,8 +177,10 @@ class SearchBox extends React.Component {
 	    return retList
 	    	// .sort(sortAlpha)
 	    	.sort((a, b) => {
-		   		let aIndex = a.name.toLowerCase().indexOf(inputValue),
-		   			bIndex = b.name.toLowerCase().indexOf(inputValue);
+		   		let aName = a.name.toLowerCase(),
+		   			bName = b.name.toLowerCase(),
+		   			aIndex = aName.indexOf(inputValue),
+		   			bIndex = bName.indexOf(inputValue);
 
 		   		if (aIndex < bIndex) {
 		   			return -1
@@ -190,7 +192,11 @@ class SearchBox extends React.Component {
 		   			} else if ((b.type == "state" || b.type == "indicator") && (a.type != "state" && a.type != "indicator")) {
 		   				return 1
 		   			} else {
-		   				return 0
+		   				if (aName < bName){
+							return -1;
+						} else {
+							return  1;
+						} 
 		   			}
 		   		}
 		   	})

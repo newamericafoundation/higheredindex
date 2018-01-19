@@ -37,8 +37,13 @@ export default class RankChart extends React.Component {
 
         let keyList = [];
         let sortedData = data.sort((a, b) => {
+            if (isNaN(a[filter.variable])) {
+                return -1
+            }
+            if (isNaN(b[filter.variable])) {
+                return 1
+            }
             if (a[filter.variable] === b[filter.variable]) {
-                console.log(a, b)
                 return a.state_id - b.state_id
             } else {
                 return a[filter.variable] - b[filter.variable]; 
@@ -167,6 +172,12 @@ export default class RankChart extends React.Component {
 
         let keyList = [];
         let sortedData = data.sort((a, b) => {
+            if (isNaN(a[filter.variable])) {
+                return -1
+            }
+            if (isNaN(b[filter.variable])) {
+                return 1
+            }
             if (a[filter.variable] === b[filter.variable]) {
                 return a.state_id - b.state_id
             } else {
@@ -263,7 +274,7 @@ export default class RankChart extends React.Component {
         if (filter.format == "percent") {
             return [0,1];
         }
-        let extents = d3.extent(data, (d) => { return d[filter.variable]; });
+        let extents = d3.extent(data.filter(d => !isNaN(d[filter.variable])), (d) => { return d[filter.variable]; });
         return [0, extents[1]];
     }
 

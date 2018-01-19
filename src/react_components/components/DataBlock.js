@@ -51,13 +51,12 @@ class DataBlock extends React.Component {
 
   render() {
   	let {settings, data, collectionName, fetchedCongDistrictInfo, currProfile} = this.props,
-      {title, sectorOptions, paragraphSettings, vizSettings} = settings;
+      {title, sectorOptions, paragraphSettings, vizSettings, showCompareButton} = settings;
 
     const {sector} = this.state;
 
     let currData = data,
       showSectorSelector = false,
-      showCompareButton = false,
       compareButtonText;
 
     if (sector) {
@@ -70,11 +69,6 @@ class DataBlock extends React.Component {
     }
 
     if (!currData) { return null }
-
-    if (currProfile.type != "indicator" && vizSettings.chart1Settings.type != "table" && vizSettings.chart1Settings.type != "state-map") {
-      // compareButtonText = this.state.comparePopupVisible ? "Close Comparison" : "Compare";
-      showCompareButton = true;
-    }
 
     return (
       <div className="data-block">

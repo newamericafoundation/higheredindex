@@ -8,6 +8,7 @@ const instVizSettings = {
 			paragraphSettings: null,
 			source: "",
 			indicatorLink: null,
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "table",
@@ -64,6 +65,7 @@ const instVizSettings = {
 			},
 			source: "IPEDS",
 			indicatorLink: "sticker-price",
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -96,6 +98,7 @@ const instVizSettings = {
 			},
 			source: "IPEDS",
 			indicatorLink: "net-price",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -129,6 +132,7 @@ const instVizSettings = {
 			},
 			source: "IPEDS",
 			indicatorLink: "student-aid",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -170,6 +174,7 @@ const instVizSettings = {
 			},
 			source: "IPEDS",
 			indicatorLink: "graduation-rate",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -199,6 +204,7 @@ const instVizSettings = {
 			},
 			source: "IPEDS",
 			indicatorLink: "retention-rate",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "bar-chart",
@@ -227,6 +233,7 @@ const instVizSettings = {
 			},
 			source: "IPEDS",
 			indicatorLink: null,
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "bar-chart",
@@ -255,6 +262,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "sat-act-average",
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "bar-chart",
@@ -285,6 +293,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "instructional-expenses",
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -314,6 +323,7 @@ const instVizSettings = {
 			},
 			source: "IPEDS",
 			indicatorLink: "endowment",
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "bar-chart",
@@ -348,6 +358,7 @@ const instVizSettings = {
 			},
 			source: "IPEDS",
 			indicatorLink: "enrollment",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -383,6 +394,7 @@ const instVizSettings = {
 			},
 			source: "IPEDS",
 			indicatorLink: "enrollment",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "bar-chart",
@@ -421,6 +433,7 @@ const instVizSettings = {
 			},
 			source: "IPEDS",
 			indicatorLink: "enrollment",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "bar-chart",
@@ -452,6 +465,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "enrollment",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -485,6 +499,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "enrollment",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -532,6 +547,7 @@ const instVizSettings = {
 			},
 			source: "Federal Student Aid",
 			indicatorLink: null,
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -580,6 +596,7 @@ const instVizSettings = {
 			},
 			source: "Federal Student Aid",
 			indicatorLink: null,
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -616,6 +633,7 @@ const instVizSettings = {
 			},
 			source: "IPEDS",
 			indicatorLink: "pell-grants",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -653,6 +671,7 @@ const instVizSettings = {
 			},
 			source: "IPEDS",
 			indicatorLink: "state-local-aid",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -697,6 +716,7 @@ const instVizSettings = {
 			},
 			source: "Federal Student Aid",
 			indicatorLink: "federal-student-loans",
+			showCompareButton: true,
 			vizSettings: {
 				dividingLine: {year: 2010, text:"Prior to 2010, the Department of Education authorized loans through Direct Lending, and guaranteed loans from private lenders through the Family Federal Education Loan program. After 2010, all loans were made through direct lending. This graphic includes both FFEL and DL prior to 2010, and DL only after that point."},
 				chart1Settings: {
@@ -739,6 +759,7 @@ const instVizSettings = {
 			},
 			source: "Federal Student Aid",
 			indicatorLink: "federal-student-loans",
+			showCompareButton: true,
 			vizSettings: {
 				dividingLine: {year: 2010, text:"Prior to 2010, the Department of Education authorized loans through Direct Lending, and guaranteed loans from private lenders through the Family Federal Education Loan program. After 2010, all loans were made through direct lending. This graphic includes both FFEL and DL prior to 2010, and DL only after that point."},
 				chart1Settings: {
@@ -775,6 +796,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "three-year-repayment-rates",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -807,6 +829,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "three-year-repayment-rates",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -839,6 +862,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "three-year-repayment-rates",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -871,6 +895,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "three-year-repayment-rates",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -905,6 +930,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "three-year-repayment-rates",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -938,6 +964,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "three-year-repayment-rates",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -968,6 +995,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "cohort-default-rates",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -1000,6 +1028,7 @@ const instVizSettings = {
 			},
 			source: "IPEDS",
 			indicatorLink: "student-loans",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -1044,6 +1073,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "postgraduate-earnings",
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -1076,6 +1106,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "postgraduate-earnings",
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -1108,6 +1139,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "postgraduate-earnings",
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -1139,6 +1171,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "postgraduate-earnings",
+			showCompareButton: true,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -1172,6 +1205,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "cumulative-loan-debt",
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -1204,6 +1238,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "cumulative-loan-debt",
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -1236,6 +1271,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "cumulative-loan-debt",
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -1268,6 +1304,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "cumulative-loan-debt",
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -1302,6 +1339,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "cumulative-loan-debt",
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",
@@ -1335,6 +1373,7 @@ const instVizSettings = {
 			},
 			source: "College Scorecard",
 			indicatorLink: "cumulative-loan-debt",
+			showCompareButton: false,
 			vizSettings: {
 				chart1Settings: {
 					type: "line-chart",

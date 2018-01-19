@@ -55,4 +55,11 @@
 			}
 		}
 	}
+	&__contact {
+		border-top: 2px solid palette-get(na-black-30);
+		color: palette-get(na-black-10);
+		margin-top: 12px;
+		padding-top: 20px;
+		font-size: 12px;
+	}
 }

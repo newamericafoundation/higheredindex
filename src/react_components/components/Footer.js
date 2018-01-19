@@ -40,6 +40,7 @@ export default function Footer() {
 						</div>
 					</div>
 					<p className="footer__license">This site carries a Creative Commons (CC BY 4.0) license, which permits re-use of New America content when proper attribution is provided.</p>
+					<p className="footer__license">For any questions or feedback related to this project, please send an email to communications@newamerica.org.</p>
 				</div>
 			</div>
 		</div>
