@@ -13,7 +13,7 @@ import { changeCurrProfileSection } from '../../actions';
 class ProfileSection extends React.Component {
 	constructor() {
 		super()
-		
+
 		this.state = {
 			fixed: false
 		}
@@ -33,7 +33,7 @@ class ProfileSection extends React.Component {
 
 	    if (this.props.currProfileSection != this.props.index && sectionCoords.top < 140 && sectionCoords.bottom > 140) {
 	    	this.props.changeCurrSection(this.props.index);
-	    }  
+	    }
 	}
 
 	getSectionContent() {
@@ -59,7 +59,7 @@ class ProfileSection extends React.Component {
 			          })}
 			        </div>
 				)
-		}	
+		}
 	}
 
 	getLastUpdated(dataInfo, collectionName) {

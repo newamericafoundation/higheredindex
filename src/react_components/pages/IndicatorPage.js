@@ -54,8 +54,6 @@ class IndicatorPage extends React.Component {
   }
 
   render() {
-
-
     if (!this.props.indicatorSettings) {
       return <NotFoundPage/>;
     }
@@ -63,11 +61,11 @@ class IndicatorPage extends React.Component {
     const {path, name, description, rankingVariables, section} = this.props.indicatorSettings;
 
     let customSections = [{name:"About", dataDivision:"about"}]
-    if (rankingVariables) { 
+    if (rankingVariables && rankingVariables.length > 0) {
       customSections.push({name:"Rankings", dataDivision:"rankings"})
     }
-    if (indicatorTrendsSettings[path] && indicatorTrendsSettings[path].trendsSettings) { 
-      customSections.push({name:"Trends", dataDivision:"trends"}) 
+    if (indicatorTrendsSettings[path] && indicatorTrendsSettings[path].trendsSettings) {
+      customSections.push({name:"Trends", dataDivision:"trends"})
     }
 
     return (
@@ -87,21 +85,21 @@ class IndicatorPage extends React.Component {
           title="About"
           index="0"
           type="description"
-          text={description} 
+          text={description}
           showLastUpdated={false} />
-        { rankingVariables && <ProfileSection 
+        { rankingVariables && rankingVariables.length > 0 && <ProfileSection
           title="Rankings"
           index="1"
           type="rankingDashboard"
-          settings={rankingVariables} 
-          collectionName={"states_" + section} 
-          data= {this.props.statesData} 
+          settings={rankingVariables}
+          collectionName={"states_" + section}
+          data= {this.props.statesData}
           showLastUpdated={false} /> }
         { indicatorTrendsSettings[path] && indicatorTrendsSettings[path].trendsSettings && <ProfileSection
           title="Trends"
-          index={rankingVariables ? "2" : "1"}
-          settings={indicatorTrendsSettings[path].trendsSettings} 
-          data= {this.props.usData} 
+          index={rankingVariables && rankingVariables.length > 0 ? "2" : "1"}
+          settings={indicatorTrendsSettings[path].trendsSettings}
+          data= {this.props.usData}
           showLastUpdated={false} /> }
         <Footer />
       </div>
