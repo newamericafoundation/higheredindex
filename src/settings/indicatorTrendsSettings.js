@@ -163,7 +163,7 @@ export const indicatorTrendsSettings = {
 					]
 				},
 				paragraphSettings: {
-					textSections: [["In @year, ", " of students had taken out at least one federal student loan and ", " of students had ever received Pell Grants at U.S institutions."],
+					textSections: [["In @year, ", " of aid recipients had taken out at least one federal student loan and ", " of aid recipients had ever received Pell Grants at U.S institutions."],
 						["The following chart depicts trends over time."]],
 					variables: [
 						{variable:"loan_ever", format: "percent"},
@@ -192,7 +192,7 @@ export const indicatorTrendsSettings = {
 					]
 				},
 				paragraphSettings: {
-					textSections: [["In @year, ", " of students were the first in their families to go to college; ", " of students were married; ", " of students were financially independent from their parents or other family; and ", " of students were veterans at U.S institutions."],
+					textSections: [["In @year, ", " of aid recipients were the first in their families to go to college; ", " of aid recipients were married; ", " of aid recipients were financially independent from their parents or other family; and ", " of aid recipients were veterans at U.S institutions."],
 						["The following chart depicts trends over time."]],
 					variables: [
 						{variable:"first_gen", format: "percent" },
@@ -252,8 +252,8 @@ export const indicatorTrendsSettings = {
 							{variable:"allunsubdisburse", displayName:"Unsubsidized Stafford", format: "price", color: colors.turquoise.medium},
 							{variable:"allsubgraddisburse", displayName:"Graduate Stafford", format: "price", color: colors.blue.light},
 							{variable:"allgraddisburse", displayName:"Graduate PLUS", format: "price", color: colors.blue.medium},
-							{variable:"allparentdisburse", displayName:"Parent PLUS", format: "price", color: colors.purple.light}, 
-							{variable:"alltotaldisburse", displayName:"Total", format: "price", color: colors.grey.dark}, 
+							{variable:"allparentdisburse", displayName:"Parent PLUS", format: "price", color: colors.purple.light},
+							{variable:"alltotaldisburse", displayName:"Total", format: "price", color: colors.grey.dark},
 						]
 					}
 
@@ -290,8 +290,8 @@ export const indicatorTrendsSettings = {
 							{variable:"allunsubrecip", displayName:"Unsubsidized Stafford", format: "number", color: colors.turquoise.medium},
 							{variable:"allsubgradrecip", displayName:"Graduate Stafford", format: "number", color: colors.blue.light},
 							{variable:"allgradrecip", displayName:"Graduate PLUS", format: "number", color: colors.blue.medium},
-							{variable:"allparentrecip", displayName:"Parent PLUS", format: "number", color: colors.purple.light}, 
-							{variable:"alltotalrecip", displayName:"Total", format: "number", color: colors.grey.dark}, 
+							{variable:"allparentrecip", displayName:"Parent PLUS", format: "number", color: colors.purple.light},
+							{variable:"alltotalrecip", displayName:"Total", format: "number", color: colors.grey.dark},
 						]
 					}
 				}
@@ -322,7 +322,7 @@ export const indicatorTrendsSettings = {
 						variables: [
 							{variable:"perkdisburse", displayName:"Perkins Loans", format: "price", color: colors.turquoise.light},
 							{variable:"seogdisburse", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "price", color: colors.blue.light},
-							{variable:"workdisburse", displayName:"Federal Work-Study", format: "price", color: colors.purple.light}, 
+							{variable:"workdisburse", displayName:"Federal Work-Study", format: "price", color: colors.purple.light},
 						]
 					}
 				}
@@ -348,7 +348,7 @@ export const indicatorTrendsSettings = {
 						variables: [
 							{variable:"perkrecip", displayName:"Perkins Loans", format: "number", color: colors.turquoise.light},
 							{variable:"seogrecip", displayName:"Supplemental Educational Opportunity Grants (SEOG)", format: "number", color: colors.blue.light},
-							{variable:"workrecip", displayName:"Federal Work-Study", format: "number", color: colors.purple.light}, 
+							{variable:"workrecip", displayName:"Federal Work-Study", format: "number", color: colors.purple.light},
 						]
 					}
 				}
@@ -616,7 +616,7 @@ export const indicatorTrendsSettings = {
 
 						]
 					},
-					
+
 				}
 			},
 		]
@@ -1092,7 +1092,7 @@ export const indicatorTrendsSettings = {
 
 						]
 					},
-					
+
 				}
 		},
 		]
