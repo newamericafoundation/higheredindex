@@ -43,7 +43,7 @@ GoogleMapsLoader.load(function(google) {
 });
 
 // const dbPath = process.env.NODE_ENV == 'production' ? 'https://higheredindex-backend.newamerica.org/api/' : 'http://localhost:3000/api/';
-const dbPath = 'http://higheredindex-backend.newamerica.org/api/';
+const dbPath = 'https://higheredindex-backend.newamerica.org/api/';
 
 /*
  * action creators
